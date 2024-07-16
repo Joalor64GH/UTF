@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xmlns="http://lime.openfl.org/project/1.0.4"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/xsd/project-1.0.4.xsd">
+
+	<!--Application Settings-->
+
+	<meta title="UTF" packageName="com.majigsaw77.utf" package="com.majigsaw77.utf" version="1.0.0" company="MAJigsaw77" />
+
+	<app file="UTF" main="Main" path="export" preloader="flixel.system.FlxPreloader" />
+
+	<!--Architecture Settings-->
+
+	<architecture exclude="armv7" if="android" />
+
+	<!--Icon Settings -->
+
+	<icon path="icon.png" />
+
+	<!--Window Settings -->
+
+	<window width="640" height="480" fps="60" orientation="landscape" background="#000000" hardware="true" vsync="false" resizable="false" />
+
+	<window allow-high-dpi="true" unless="web" />
+
+	<window fullscreen="true" if="mobile || switch" />
+
+	<!--Path Settings-->
+
+	<assets path="assets" />
+
+	<source name="source" />
+
+	<!--Defines-->
+
+	<section if="cpp">
+		<define name="DISCORD" if="desktop" />
+	</section>
+
+	<define name="MODS" unless="web" />
+
+	<!--Libraries-->
+
+	<haxelib name="flixel" />
+	<haxelib name="flixel-addons" />
+
+	<haxelib name="haxeui-core" />
+	<haxelib name="haxeui-flixel" />
+
+	<haxelib name="hscript" />
+	<haxelib name="hxdiscord_rpc" if="DISCORD" />
+	<haxelib name="polymod" if="MODS" />
+
+	<haxelib name="extension-androidtools" if="android" />
+
+	<!--Libraries Settings-->
+
+	<haxedef name="hscriptPos" />
+
+	<haxedef name="FLX_NO_DEBUG" unless="debug" />
+	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
+	<haxedef name="FLX_NO_MOUSE" if="mobile" />
+	<haxedef name="FLX_NO_TOUCH" if="desktop" />
+
+	<section if="cpp">
+		<haxedef name="HXCPP_CHECK_POINTER" />
+		<haxedef name="HXCPP_STACK_LINE" />
+		<haxedef name="HXCPP_STACK_TRACE" />
+	</section>
+
+	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="DISCORD" />
+
+	<section if="MODS">
+		<haxedef name="POLYMOD_DEBUG" value="true" if="debug" />
+		<haxedef name="POLYMOD_MOD_METADATA_FILE" value="meta.json" />
+		<haxedef name="POLYMOD_MOD_PACK_FILE" value="pack.txt" />
+		<haxedef name="POLYMOD_MOD_ICON_FILE" value="icon.png" />
+	</section>
+
+	<haxeflag name="-dce" value="no" />
+
+	<haxeflag name="--macro" value="backend.Macros.includePackages()" />
+
+	<!--DPI Awareness-->
+
+	<haxedef name="openfl_dpi_aware" unless="web" />
+
+	<!--Enable Handle Error-->
+
+	<haxedef name="openfl_enable_handle_error" if="${openfl &ge; 9.4.0}" />
+
+	<!--Undefinitions-->
+
+	<undefine name="openfl-disable-handle-error" if="debug" unless="${openfl &ge; 9.4.0}" />
+
+	<!--Platforms Config-->
+
+	<section if="android">
+		<config>
+			<!--Gradle-->
+			<android gradle-version="7.4.2" gradle-plugin="7.3.1" />
+
+			<!--Target SDK-->
+			<android target-sdk-version="29" if="${lime &lt; 8.1.0}" />
+		</config>
+	</section>
+</project>
