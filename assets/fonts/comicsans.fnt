@@ -5,7 +5,7 @@
 	<pages>
 		<page id="0" file="comicsans.png" />
 	</pages>
-	<chars count="95">
+	<chars count="96">
 		<char id="32" x="50" y="23" width="6" height="19" xoffset="0" yoffset="0" xadvance="6" page="0" chnl="15" />
 		<char id="33" x="30" y="65" width="2" height="15" xoffset="1" yoffset="1" xadvance="3" page="0" chnl="15" />
 		<char id="34" x="7" y="65" width="5" height="9" xoffset="1" yoffset="1" xadvance="6" page="0" chnl="15" />
