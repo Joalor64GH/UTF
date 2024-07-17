@@ -60,7 +60,6 @@
 
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
-	<haxedef name="FLX_NO_MOUSE" if="mobile" />
 	<haxedef name="FLX_NO_TOUCH" if="desktop" />
 
 	<section if="cpp">
@@ -93,16 +92,4 @@
 	<!--Undefinitions-->
 
 	<undefine name="openfl-disable-handle-error" if="debug" unless="${openfl &ge; 9.4.0}" />
-
-	<!--Platforms Config-->
-
-	<section if="android">
-		<config>
-			<!--Gradle-->
-			<android gradle-version="7.4.2" gradle-plugin="7.3.1" />
-
-			<!--Target SDK-->
-			<android target-sdk-version="29" if="${lime &lt; 8.1.0}" />
-		</config>
-	</section>
 </project>
