@@ -1,0 +1,17 @@
+registerClass('backend.AssetPaths');
+registerClass('backend.Typers');
+registerClass('flixel.FlxG');
+
+this.loadGraphic(AssetPaths.sprite(this.name));
+this.immovable = true;
+this.solid = true;
+
+function interact()
+{
+	this.interacting = true;
+
+	FlxG.state.startDialogue([{typer: Typers.data.get(this.name), text: '* [redacted]'}], function()
+	{
+		this.interacting = false;
+	});
+}
