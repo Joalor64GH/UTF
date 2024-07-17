@@ -109,7 +109,7 @@ class Main extends Sprite
 		FlxG.game.addChild(fps);
 	}
 
-	private inline function onUncaughtError(event:UncaughtErrorEvent):Void
+	private static inline function onUncaughtError(event:UncaughtErrorEvent):Void
 	{
 		event.preventDefault();
 		event.stopImmediatePropagation();
@@ -159,7 +159,7 @@ class Main extends Sprite
 		System.exit(1);
 	}
 
-	private inline function onCriticalError(error:Dynamic):Void
+	private static inline function onCriticalError(error:Dynamic):Void
 	{
 		final log:Array<String> = [Std.isOfType(error, String) ? error : Std.string(error)];
 
