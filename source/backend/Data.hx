@@ -10,7 +10,7 @@ import openfl.Lib;
 
 class Data
 {
-	public static var settings(default, null):Map<String, Dynamic> = ['fps-overlay' => false, 'border' => 'none', 'filter' => 'none'];
+	public static var settings(default, null):Map<String, Dynamic> = ['fps-overlay' => false, 'filter' => 'none'];
 
 	public static var filters(default, null):Map<String, BitmapFilter> = [
 		'deuteranopia' => new ColorMatrixFilter([
@@ -21,12 +21,20 @@ class Data
 		]),
 		'tritanopia' => new ColorMatrixFilter([
 			0.97, 0.11, -.08, 0, 0, 0.02, 0.82, 0.16, 0, 0, 0.06, 0.88, 0.18, 0, 0, 0, 0, 0, 1, 0
+		]),
+		'achromatomaly' => new ColorMatrixFilter([
+			0.618, 0.32, 0.062, 0, 0, 0.163, 0.775, 0.062, 0, 0, 0.163, 0.32, 0.518, 0, 0, 0, 0, 0, 1, 0
+		]),
+		'deuteranomaly' => new ColorMatrixFilter([0.8, 0.2, 0, 0, 0, 0.258, 0.742, 0, 0, 0, 0, 0.142, 0.858, 0, 0, 0, 0, 0, 1, 0]),
+		'protanomaly' => new ColorMatrixFilter([
+			0.817, 0.183, 0, 0, 0, 0.333, 0.667, 0, 0, 0, 0, 0.125, 0.875, 0, 0, 0, 0, 0, 1, 0
+		]),
+		'tritanomaly' => new ColorMatrixFilter([
+			0.967, 0.033, 0, 0, 0, 0, 0.733, 0.267, 0, 0, 0, 0.183, 0.817, 0, 0, 0, 0, 0, 1, 0
 		])
 	];
 
 	public static var binds(default, null):Map<String, FlxKey> = ['confirm' => FlxKey.Z, 'cancel' => FlxKey.X, 'menu' => FlxKey.C];
-
-	public static var borders(default, null):Map<String, String> = ['dynamic' => AssetPaths.border('ruins'), 'simple' => AssetPaths.border('line')];
 
 	public static function save():Void
 	{
