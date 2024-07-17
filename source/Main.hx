@@ -13,14 +13,14 @@ import flixel.FlxG;
 import flixel.FlxGame;
 import flixel.FlxState;
 import haxe.io.Path;
-import haxe.ui.themes.Theme;
-import haxe.ui.Toolkit;
 import haxe.CallStack;
 import haxe.Exception;
 import haxe.Log;
 #if hl
 import hl.Api;
 #end
+import lime.ui.KeyCode;
+import lime.ui.KeyModifier;
 import openfl.display.Bitmap;
 import openfl.display.Sprite;
 import openfl.errors.Error;
@@ -44,13 +44,10 @@ using StringTools;
 
 class Main extends Sprite
 {
-	public static var border:Bitmap;
 	public static var fps:FPS;
 
-	public function new():Void
+	public static function main():Void
 	{
-		super();
-
 		#if android
 		Sys.setCwd(Path.addTrailingSlash(VERSION.SDK_INT > 30 ? Context.getObbDir() : Context.getExternalFilesDir()));
 		#elseif (ios || switch)
@@ -65,9 +62,12 @@ class Main extends Sprite
 		untyped __global__.__hxcpp_set_critical_error_handler(onCriticalError);
 		#end
 
-		Toolkit.autoScale = false;
-		Toolkit.theme = Theme.DARK;
-		Toolkit.init();
+		Lib.current.addChild(new Main());
+	}
+
+	public function new():Void
+	{
+		super();
 
 		#if debug
 		FlxG.log.redirectTraces = true;
@@ -81,8 +81,18 @@ class Main extends Sprite
 		FlxG.signals.postUpdate.add(onPostUpdate);
 		#end
 
-		border = new Bitmap();
-		addChild(border);
+		#if desktop
+		Lib.application.window.onKeyDown.add(function(keyCode:KeyCode, keyModifier:KeyModifier):Void
+		{
+			#if (windows || linux)
+			if (keyCode == KeyCode.RETURN && keyModifier.altKey && (!keyModifier.ctrlKey && !keyModifier.shiftKey && !keyModifier.metaKey))
+				window.onKeyDown.cancel();
+			#elseif mac
+			if (keyCode == KeyCode.F && (keyModifier.ctrlKey && keyModifier.metaKey) && (!keyModifier.altKey && !keyModifier.shiftKey))
+				window.onKeyDown.cancel();
+			#end
+		});
+		#end
 
 		addChild(new FlxGame(640, 480, Startup, 60, 60));
 
@@ -93,15 +103,6 @@ class Main extends Sprite
 		#if FLX_MOUSE
 		FlxG.mouse.useSystemCursor = true;
 		#end
-
-		if (Data.settings.get('border') != 'none')
-		{
-			border.bitmapData = Assets.getBitmapData(Data.borders.get(Data.settings.get('border')));
-
-			FlxG.scaleMode = new PercentOfHeightScaleMode(0.88);
-		}
-		else
-			FlxG.scaleMode = new PercentOfHeightScaleMode(1);
 
 		fps = new FPS(10, 10, FlxColor.RED);
 		fps.visible = Data.settings.get('fps-overlay');
@@ -200,16 +201,6 @@ class Main extends Sprite
 
 	private inline function onResizeGame(width:Int, height:Int):Void
 	{
-		if (border != null && border.bitmapData != null)
-		{
-			final scale:Float = height / 1080;
-
-			border.scaleX = scale;
-			border.scaleY = scale;
-
-			border.x = (width - border.width) * 0.5;
-		}
-
 		if (fps != null)
 		{
 			final scale:Float = Math.min(width / FlxG.width, height / FlxG.height);
