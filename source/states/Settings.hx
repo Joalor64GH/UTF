@@ -189,31 +189,6 @@ class Settings extends FlxTransitionableState
 						Main.fps.visible = Data.settings.get('fps-overlay');
 				case 'Button Config':
 					FlxG.switchState(() -> new ButtonConfig());
-				case 'Border':
-					switch (Data.settings.get('border'))
-					{
-						case 'none':
-							Data.settings.set('border', 'dynamic');
-						case 'dynamic':
-							Data.settings.set('border', 'simple');
-						case 'simple':
-							Data.settings.set('border', 'none');
-					}
-
-					if (Data.settings.get('border') != 'none' && Data.borders.exists(Data.settings.get('border')))
-					{
-						Main.border.bitmapData = Assets.getBitmapData(Data.borders.get(Data.settings.get('border')));
-
-						FlxG.scaleMode = new PercentOfHeightScaleMode(0.88);
-					}
-					else
-						FlxG.scaleMode = new PercentOfHeightScaleMode(1);
-
-					items.forEach(function(spr:FlxText):Void
-					{
-						if (options[spr.ID] == 'Border')
-							spr.text = 'Border: ${Data.settings.get('border')}'.toUpperCase();
-					});
 				case 'Filter':
 					switch (Data.settings.get('filter'))
 					{
@@ -246,8 +221,8 @@ class Settings extends FlxTransitionableState
 
 		super.update(elapsed);
 
-		tobdogLine.offset.x = ((tobdogLine.frameWidth - tobdogLine.width) * 0.5) + Math.sin(siner / 6);
-		tobdogLine.offset.y = ((tobdogLine.frameHeight - tobdogLine.height) * 0.5) + Math.cos(siner / 6);
+		tobdogLine.offset.x = ((tobdogLine.frameWidth - tobdogLine.width) * 0.5) + Math.sin(siner / 12);
+		tobdogLine.offset.y = ((tobdogLine.frameHeight - tobdogLine.height) * 0.5) + Math.cos(siner / 12);
 	}
 
 	private function changeOption(num:Int = 0):Void
