@@ -106,7 +106,6 @@ class RoomEditor extends FlxTransitionableState
 		ui.setPosition(0, 0);
 		ui.setSize(300, 250);
 		ui.camera = camHud;
-		ui.draggable = false;
 		ui.padding = 5;
 
 		addTabs();
@@ -158,13 +157,6 @@ class RoomEditor extends FlxTransitionableState
 		{
 			// Nothing for now
 		}));
-
-		var checkBox:CheckBox = createCheckBox('Drag Editor', false);
-		checkBox.onClick = function(event:MouseEvent):Void
-		{
-			ui.draggable = cast(event.target, CheckBox).selected;
-		}
-		vBox.addComponent(checkBox);
 
 		var hBoxOptions:HBox = new HBox();
 
