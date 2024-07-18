@@ -1,12 +1,6 @@
 package utf.states;
 
-import utf.backend.AssetPaths;
-import utf.backend.Controls;
-import utf.backend.Data;
-import utf.backend.Global;
-import utf.backend.Typers;
 import flixel.addons.display.shapes.FlxShapeBox;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -15,6 +9,11 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import utf.backend.AssetPaths;
+import utf.backend.Controls;
+import utf.backend.Data;
+import utf.backend.Global;
+import utf.backend.Typers;
 import utf.objects.battle.Monster;
 import utf.objects.dialogue.Writer;
 import utf.states.GameOver;
@@ -41,9 +40,6 @@ class Battle extends FlxTransitionableState
 	{
 		Typers.reloadFiles();
 
-		FlxTransitionableState.skipNextTransIn = true;
-		FlxTransitionableState.skipNextTransOut = true;
-
 		persistentUpdate = true;
 
 		stats = new FlxText(30, 400, 0, Global.name + '   LV ' + Global.lv, 22);
@@ -58,7 +54,7 @@ class Battle extends FlxTransitionableState
 
 		hpBar = new FlxBar(hpName.x + 35, hpName.y - 5, LEFT_TO_RIGHT, Std.int(Global.maxHp * 1.2), 20, Global, 'hp', 0, Global.maxHp);
 		hpBar.createFilledBar(FlxColor.RED, FlxColor.YELLOW);
-		hpBar.emptyCallback = () -> FlxG.switchState(() -> new GameOver());
+		hpBar.emptyCallback = () -> openSubState(new GameOver());
 		hpBar.scrollFactor.set();
 		add(hpBar);
 
