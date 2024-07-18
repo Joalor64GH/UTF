@@ -99,4 +99,8 @@
 	<!--Undefinitions-->
 
 	<undefine name="openfl-disable-handle-error" if="debug" unless="${openfl &ge; 9.4.0}" />
+
+	<!--Pretty Message Reporting-->
+
+	<haxedef name="message.reporting" value="pretty" />
 </project>
