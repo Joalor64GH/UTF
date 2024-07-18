@@ -42,10 +42,19 @@ import sys.FileSystem;
 
 using StringTools;
 
+/**
+ * This class serves as the entry point for the application.
+ */
 class Main extends Sprite
 {
+	/**
+	 * Tracks frames per second (FPS).
+	 */
 	public static var fps:FPS;
 
+	/**
+	 * The entry point of the application.
+	 */
 	public static function main():Void
 	{
 		#if android
@@ -62,9 +71,25 @@ class Main extends Sprite
 		untyped __global__.__hxcpp_set_critical_error_handler(onCriticalError);
 		#end
 
+		#if desktop
+		Lib.application.window.onKeyDown.add(function(keyCode:KeyCode, keyModifier:KeyModifier):Void
+		{
+			#if (windows || linux)
+			if (keyCode == KeyCode.RETURN && keyModifier.altKey && (!keyModifier.ctrlKey && !keyModifier.shiftKey && !keyModifier.metaKey))
+				window.onKeyDown.cancel();
+			#elseif mac
+			if (keyCode == KeyCode.F && (keyModifier.ctrlKey && keyModifier.metaKey) && (!keyModifier.altKey && !keyModifier.shiftKey))
+				window.onKeyDown.cancel();
+			#end
+		});
+		#end
+
 		Lib.current.addChild(new Main());
 	}
 
+	/**
+	 * Initializes the main game instance and sets up the application.
+	 */
 	public function new():Void
 	{
 		super();
@@ -79,19 +104,6 @@ class Main extends Sprite
 
 		#if (!mobile || !switch)
 		FlxG.signals.postUpdate.add(onPostUpdate);
-		#end
-
-		#if desktop
-		Lib.application.window.onKeyDown.add(function(keyCode:KeyCode, keyModifier:KeyModifier):Void
-		{
-			#if (windows || linux)
-			if (keyCode == KeyCode.RETURN && keyModifier.altKey && (!keyModifier.ctrlKey && !keyModifier.shiftKey && !keyModifier.metaKey))
-				window.onKeyDown.cancel();
-			#elseif mac
-			if (keyCode == KeyCode.F && (keyModifier.ctrlKey && keyModifier.metaKey) && (!keyModifier.altKey && !keyModifier.shiftKey))
-				window.onKeyDown.cancel();
-			#end
-		});
 		#end
 
 		addChild(new FlxGame(640, 480, Startup, 60, 60));
