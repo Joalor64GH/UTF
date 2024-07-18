@@ -1,15 +1,15 @@
 package utf.states;
 
-import utf.backend.AssetPaths;
-import utf.backend.Controls;
-import utf.backend.Data;
-import utf.backend.Global;
-import utf.backend.Typers;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
+import utf.backend.AssetPaths;
+import utf.backend.Controls;
+import utf.backend.Data;
+import utf.backend.Global;
+import utf.backend.Typers;
 import utf.objects.dialogue.Writer;
 import utf.states.Room;
 
