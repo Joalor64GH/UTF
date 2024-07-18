@@ -66,7 +66,7 @@ class GameOver extends FlxSubState
 		if (Controls.instance.justPressed('confirm') && !members.contains(writer) && bg.alpha == 1)
 		{
 			FlxTween.tween(bg, {alpha: 0}, 1.5, {
-				onComplete: (twn:FlxTween) -> close())
+				onComplete: (twn:FlxTween) -> close()
 			});
 
 			FlxG.sound.music.fadeOut(1.5);
