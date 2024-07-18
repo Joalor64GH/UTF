@@ -3,69 +3,79 @@ package utf.objects.battle;
 import flixel.FlxG;
 import haxe.io.Path;
 import haxe.Exception;
-import haxe.Json;
-import utf.backend.AssetPaths;
 import utf.objects.battle.Monster;
 
 /**
- * Handles the loading and management of monster data and scripted monster classes.
+ * Handles the loading and management of scripted monster classes.
  */
 class MonsterRegistery
 {
 	/**
-	 * Cache to store loaded monster data.
-	 */
-	private static final monsterCache:Map<String, MonsterData> = [];
-
-	/**
 	 * Map to store associations between monster IDs and scripted monster classes.
 	 */
-	private static final monsterScriptedClass:Map<String, String> = [];
+	private static final monsterScriptedClasses:Map<String, String> = [];
 
 	/**
-	 * Loads monster data from JSON files and initializes scripted monster classes.
+	 * Loads and initializes scripted monster classes.
 	 */
 	public static function loadMonsters():Void
 	{
 		clearMonsters();
 
-		for (file in AssetPaths.list('assets/data/monsters', 'json'))
+		final scriptedMonsters:Array<String> = ScriptedMonster.listScriptClasses();
+
+		if (scriptedMonsters.length > 0)
 		{
-			if (file == null || file.length <= 0)
-				continue;
+			FlxG.log.notice('Initiating ${scriptedMonsters.length} scripted monsters...');
 
-			try
+			for (scriptedMonster in scriptedMonsters)
 			{
-				final content:String = Assets.getText(file);
+				var monster:Monster = ScriptedMonster.init(scriptedMonster, 'unknown');
 
-				if (content != null && content.length > 0)
-				{
-					final parsedData:MonsterData = Json.parse(content);
+				if (monster == null)
+					continue;
 
-					if (parsedData == null)
-						throw 'Unable to parse the file content!';
+				FlxG.log.notice('Initialized monster "${monster.monsterName}"!');
 
-					monsterCache.set(new Path(file).file, parsedData);
-				}
-				else
-					throw 'No data to parse!';
-			}
-			catch (e:Exception)
-			{
-				FlxG.log.error('Unable to parse monster attributes file located at "$file", ${e.message}');
-				continue;
+				monsterScriptedClasses.set(monster.monsterId, scriptedMonster);
 			}
 		}
 
-		for (scriptedMonster in ScriptedMonster.listScriptClasses())
+		FlxG.log.notice('Successfully loaded ${Lambda.count(monsterScriptedClasses)} monsters!');
+	}
+
+	/**
+	 * Fetches a scripted monster by its ID.
+	 *
+	 * @param monsterID The ID of the monster.
+	 * @return The monster or null if not found.
+	 */
+	public static function fetchMonster(monsterID:String):Null<Monster>
+	{
+		if (!monsterScriptedClasses.exists(monsterID))
 		{
-			var monster:Monster = ScriptedMonster.init(scriptedMonster, 'unknown');
+			FlxG.log.error('Unable to load "${monsterID}", not found in cache');
+
+			return null;
+		}
+
+		final monsterScriptedClass:String = monsterScriptedClasses.get(monsterID);
+
+		if (monsterScriptedClass != null)
+		{
+			final monster:Monster = ScriptedMonster.init(monsterScriptedClass, monsterID);
 
 			if (monster == null)
-				continue;
+			{
+				FlxG.log.error('Unable to initiate "${monsterID}"');
 
-			monsterScriptedClass.set(monster.monsterId, scriptedMonster);
+				return null;
+			}
+
+			return monster;
 		}
+
+		return null;
 	}
 
 	/**
@@ -73,10 +83,7 @@ class MonsterRegistery
 	 */
 	public static function clearMonsters():Void
 	{
-		if (monsterCache != null)
-			monsterCache.clear();
-
-		if (monsterScriptedClass != null)
-			monsterScriptedClass.clear();
+		if (monsterScriptedClasses != null)
+			monsterScriptedClasses.clear();
 	}
 }
