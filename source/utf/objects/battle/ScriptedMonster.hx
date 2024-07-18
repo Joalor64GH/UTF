@@ -1,7 +1,10 @@
 package utf.objects.battle;
 
+import polymod.hscript.HScriptedClass;
+import utf.objects.battle.Monster;
+
 /**
  * A monster that can be controlled by scripts.
  */
 @:hscriptClass
-class ScriptedMonster extends utf.objects.battle.Monster implements polymod.hscript.HScriptedClass {}
+class ScriptedMonster extends Monster implements HScriptedClass {}
