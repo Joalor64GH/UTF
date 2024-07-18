@@ -1,8 +1,5 @@
 package utf.states;
 
-import utf.backend.AssetPaths;
-import utf.backend.Controls;
-import utf.backend.Data;
 import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.input.keyboard.FlxKey;
 import flixel.group.FlxGroup;
@@ -10,18 +7,19 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxG;
-import flixel.FlxState;
+import flixel.FlxSubState;
+import utf.backend.AssetPaths;
+import utf.backend.Controls;
+import utf.backend.Data;
 import utf.states.Settings;
 
-class ButtonConfig extends FlxState
+class ButtonConfig extends FlxSubState
 {
 	var selected:Int = 0;
 	var items:FlxTypedGroup<FlxText>;
 
 	override function create():Void
 	{
-		FlxG.sound.playMusic(AssetPaths.music('star'));
-
 		var settings:FlxText = new FlxText(0, 40, 0, 'BUTTON CONFIG', 64);
 		settings.font = AssetPaths.font('DTM-Sans');
 		settings.screenCenter(X);
@@ -91,12 +89,7 @@ class ButtonConfig extends FlxState
 			FlxG.sound.play(AssetPaths.sound('menuconfirm'));
 		}
 		else if (Controls.instance.justPressed('cancel') && !keySelected)
-		{
-			if (FlxG.sound.music.playing)
-				FlxG.sound.music.stop();
-
-			FlxG.switchState(() -> new Settings());
-		}
+			close();
 
 		super.update(elapsed);
 	}
