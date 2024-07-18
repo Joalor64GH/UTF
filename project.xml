@@ -46,7 +46,7 @@
 		<haxelib name="hxdiscord_rpc" if="desktop" />
 	</section>
 
-	<haxelib name="polymod" unless="web" />
+	<haxelib name="polymod" />
 
 	<haxelib name="extension-androidtools" if="android" />
 
@@ -73,9 +73,17 @@
 		<haxedef name="POLYMOD_MOD_ICON_FILE" value="icon.png" />
 	</section>
 
-	<haxeflag name="-dce" value="no" />
+	<!--Scripting Settings-->
 
-	<haxeflag name="--macro" value="include('flixel', true, ['flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*'])" />
+	<section if="polymod">
+		<haxeflag name="-dce" value="no" />
+
+		<haxeflag name="--macro" value="include('flixel', true, ['flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*'])" />
+	</section>
+
+	<section unless="polymod">
+		<haxeflag name="-dce" value="full" />
+	</section>
 
 	<!--DPI Awareness-->
 
