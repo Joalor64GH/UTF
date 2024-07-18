@@ -1,4 +1,4 @@
-package utf.states;
+package utf.substates;
 
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;

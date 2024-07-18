@@ -1,4 +1,4 @@
-package utf.states;
+package utf.substates;
 
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;

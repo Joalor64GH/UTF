@@ -1,4 +1,4 @@
-package utf.states;
+package utf.substates;
 
 import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.input.keyboard.FlxKey;
