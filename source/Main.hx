@@ -4,10 +4,6 @@ package;
 import android.content.Context;
 import android.os.Build;
 #end
-import utf.backend.debug.Overlay;
-import utf.backend.AssetPaths;
-import utf.backend.Data;
-import utf.backend.PercentOfHeightScaleMode;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -34,6 +30,9 @@ import openfl.Lib;
 #if polymod
 import polymod.Polymod;
 #end
+import utf.backend.debug.Overlay;
+import utf.backend.AssetPaths;
+import utf.backend.Data;
 import utf.states.Startup;
 #if sys
 import sys.io.File;
