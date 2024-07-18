@@ -159,4 +159,25 @@ class AssetPaths
 
 		return null;
 	}
+
+	/**
+	 * Lists all files in a specified directory with a specific extension.
+	 * @param directory The directory to search within.
+	 * @param extension The file extension to filter by.
+	 * @return An array of file paths matching the criteria, sorted alphabetically.
+	 */
+	public static function list(directory:String, extension:String):Array<String>
+	{
+		final files:Array<String> = Assets.list(TEXT).filter(function(file:String):Bool
+		{
+			return Path.directory(file) == directory && Path.extension(file) == extension;
+		});
+
+		files.sort(function(a:String, b:String):Int
+		{
+			return (a < b) ? -1 : (a > b) ? 1 : 0;
+		});
+
+		return files;
+	}
 }
