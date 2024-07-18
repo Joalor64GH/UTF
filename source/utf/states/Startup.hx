@@ -7,7 +7,7 @@ import utf.backend.Discord;
 #end
 import utf.backend.Global;
 #if polymod
-import utf.moddimg.PolymodHandler;
+import utf.modding.PolymodHandler;
 #end
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
