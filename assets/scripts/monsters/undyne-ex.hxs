@@ -19,6 +19,14 @@ class UndyneEx extends Monster
 	{
 		super('undyne-ex');
 
+		monsterName = 'Undyne The Undying';
+		monsterHp = 23000;
+		monsterMaxHp = 23000;
+		monsterAttack = 12;
+		monsterDefense = 5;
+		monsterXpReward = 0;
+		monsterGoldReward = 0;
+
 		legs = new FlxSprite(0, 274, AssetPaths.sprite('anim/legs'));
 		add(legs);
 
