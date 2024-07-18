@@ -7,7 +7,7 @@ import utf.backend.Discord;
 #end
 import utf.backend.Global;
 #if polymod
-import utf.backend.Mods;
+import utf.moddimg.PolymodHandler;
 #end
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
@@ -34,7 +34,8 @@ class Startup extends FlxState
 		Global.load();
 
 		#if polymod
-		Mods.load();
+		PolymodHandler.reloadMods();
+		PolymodHandler.reloadRegisteries();
 		#end
 
 		FlxG.game.focusLostFramerate = FlxG.updateFramerate;
