@@ -17,8 +17,8 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import openfl.filters.BitmapFilter;
 import openfl.utils.Assets;
-import utf.states.ButtonConfig;
 import utf.states.Intro;
+import utf.substates.ButtonConfig;
 
 using StringTools;
 
