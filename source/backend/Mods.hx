@@ -1,6 +1,6 @@
 package backend;
 
-#if MODS
+#if polymod
 import flixel.util.FlxSave;
 import flixel.FlxG;
 import polymod.backends.PolymodAssets;

@@ -6,7 +6,7 @@ import backend.Data;
 import backend.Discord;
 #end
 import backend.Global;
-#if MODS
+#if polymod
 import backend.Mods;
 #end
 import flixel.addons.transition.FlxTransitionableState;
@@ -33,7 +33,7 @@ class Startup extends FlxState
 
 		Global.load();
 
-		#if MODS
+		#if polymod
 		Mods.load();
 		#end
 

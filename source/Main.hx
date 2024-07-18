@@ -31,7 +31,7 @@ import openfl.system.System;
 import openfl.utils.AssetCache;
 import openfl.utils.Assets;
 import openfl.Lib;
-#if MODS
+#if polymod
 import polymod.Polymod;
 #end
 import states.Startup;
@@ -261,7 +261,7 @@ class Main extends Sprite
 		for (key in cache.font.keys())
 			cache.font.remove(key);
 
-		#if MODS
+		#if polymod
 		Polymod.clearCache();
 		#end
 	}
