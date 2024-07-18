@@ -17,7 +17,6 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import openfl.Lib;
 #if debug
-import utf.states.debug.RoomEditor;
 import utf.states.Battle;
 #end
 import utf.states.Room;
@@ -205,7 +204,7 @@ class Intro extends FlxState
 				case 'Continue':
 					FlxG.switchState(() -> new Room(272));
 				case 'Begin Game':
-					FlxG.switchState(() -> new Naming());
+					openSubState(new Naming());
 				case 'Settings':
 					FlxG.switchState(() -> new Settings());
 			}
@@ -217,15 +216,7 @@ class Intro extends FlxState
 			if (FlxG.sound.music != null && FlxG.sound.music.playing)
 				FlxG.sound.music.stop();
 
-			FlxG.switchState(() -> new Battle());
-		}
-
-		if (FlxG.keys.justPressed.R)
-		{
-			if (FlxG.sound.music != null && FlxG.sound.music.playing)
-				FlxG.sound.music.stop();
-
-			FlxG.switchState(() -> new RoomEditor());
+			openSubState(new Battle());
 		}
 		#end
 
