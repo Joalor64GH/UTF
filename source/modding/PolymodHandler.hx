@@ -14,7 +14,7 @@ import sys.FileSystem;
 /**
  * @see https://github.com/FunkinCrew/Funkin/blob/main/source/funkin/modding/PolymodHandler.hx
  */
-class Mods
+class PolymodHandler
 {
 	public static var data(default, null):Map<String, ModMetadata> = [];
 
