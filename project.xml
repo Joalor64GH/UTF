@@ -78,6 +78,8 @@
 	<section if="polymod">
 		<haxeflag name="-dce" value="no" />
 
+		<haxeflag name="--macro" value="include('utf')" />
+
 		<haxeflag name="--macro" value="include('flixel', true, ['flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*'])" />
 	</section>
 

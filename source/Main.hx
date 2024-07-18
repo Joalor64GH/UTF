@@ -4,10 +4,10 @@ package;
 import android.content.Context;
 import android.os.Build;
 #end
-import backend.debug.FPS;
-import backend.AssetPaths;
-import backend.Data;
-import backend.PercentOfHeightScaleMode;
+import utf.backend.debug.Overlay;
+import utf.backend.AssetPaths;
+import utf.backend.Data;
+import utf.backend.PercentOfHeightScaleMode;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -34,7 +34,7 @@ import openfl.Lib;
 #if polymod
 import polymod.Polymod;
 #end
-import states.Startup;
+import utf.states.Startup;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
@@ -48,9 +48,9 @@ using StringTools;
 class Main extends Sprite
 {
 	/**
-	 * Tracks frames per second (FPS).
+	 * Tracks frames per second (Overlay).
 	 */
-	public static var fps:FPS;
+	public static var overlay:Overlay;
 
 	/**
 	 * The entry point of the application.
@@ -116,9 +116,9 @@ class Main extends Sprite
 		FlxG.mouse.useSystemCursor = true;
 		#end
 
-		fps = new FPS(10, 10, FlxColor.RED);
-		fps.visible = Data.settings.get('fps-overlay');
-		FlxG.game.addChild(fps);
+		overlay = new Overlay(10, 10, FlxColor.RED);
+		overlay.visible = Data.settings.get('overlay-overlay');
+		FlxG.game.addChild(overlay);
 	}
 
 	private static inline function onUncaughtError(event:UncaughtErrorEvent):Void
@@ -213,12 +213,12 @@ class Main extends Sprite
 
 	private inline function onResizeGame(width:Int, height:Int):Void
 	{
-		if (fps != null)
+		if (overlay != null)
 		{
 			final scale:Float = Math.min(width / FlxG.width, height / FlxG.height);
 
-			fps.scaleX = (scale > 1 ? scale : 1);
-			fps.scaleY = (scale > 1 ? scale : 1);
+			overlay.scaleX = (scale > 1 ? scale : 1);
+			overlay.scaleY = (scale > 1 ? scale : 1);
 		}
 
 		if (FlxG.cameras != null && (FlxG.cameras.list != null && FlxG.cameras.list.length > 0))
