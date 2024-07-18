@@ -2,7 +2,7 @@ package states;
 
 import backend.Controls;
 import backend.Data;
-#if DISCORD
+#if hxdiscord_rpc
 import backend.Discord;
 #end
 import backend.Global;
@@ -27,7 +27,7 @@ class Startup extends FlxState
 
 		Data.load();
 
-		#if DISCORD
+		#if hxdiscord_rpc
 		Discord.load();
 		#end
 

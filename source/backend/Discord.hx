@@ -1,6 +1,6 @@
 package backend;
 
-#if DISCORD
+#if hxdiscord_rpc
 import flixel.FlxG;
 import hxdiscord_rpc.Discord as RichPresence;
 import hxdiscord_rpc.Types;
