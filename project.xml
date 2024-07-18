@@ -32,14 +32,6 @@
 
 	<source name="source" />
 
-	<!--Defines-->
-
-	<section if="cpp">
-		<define name="DISCORD" if="desktop" />
-	</section>
-
-	<define name="MODS" unless="web" />
-
 	<!--Libraries-->
 
 	<haxelib name="flixel" />
@@ -49,8 +41,12 @@
 	<haxelib name="haxeui-flixel" />
 
 	<haxelib name="hscript" />
-	<haxelib name="hxdiscord_rpc" if="DISCORD" />
-	<haxelib name="polymod" if="MODS" />
+
+	<section if="cpp">
+		<haxelib name="hxdiscord_rpc" if="desktop" />
+	</section>
+
+	<haxelib name="polymod" unless="web" />
 
 	<haxelib name="extension-androidtools" if="android" />
 
@@ -68,9 +64,9 @@
 		<haxedef name="HXCPP_STACK_TRACE" />
 	</section>
 
-	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="DISCORD" />
+	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="hxdiscord_rpc" />
 
-	<section if="MODS">
+	<section if="polymod">
 		<haxedef name="POLYMOD_DEBUG" value="true" if="debug" />
 		<haxedef name="POLYMOD_MOD_METADATA_FILE" value="meta.json" />
 		<haxedef name="POLYMOD_MOD_PACK_FILE" value="pack.txt" />
@@ -79,7 +75,7 @@
 
 	<haxeflag name="-dce" value="no" />
 
-	<haxeflag name="--macro" value="backend.Macros.includePackages()" />
+	<haxeflag name="--macro" value="include('flixel', true, ['flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*'])" />
 
 	<!--DPI Awareness-->
 
