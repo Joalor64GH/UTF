@@ -16,7 +16,7 @@ import utf.backend.Global;
 import utf.backend.Typers;
 import utf.objects.battle.Monster;
 import utf.objects.dialogue.Writer;
-import utf.states.GameOver;
+import utf.substates.GameOver;
 
 class Battle extends FlxTransitionableState
 {

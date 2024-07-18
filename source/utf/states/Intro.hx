@@ -17,7 +17,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import openfl.Lib;
 #if debug
-import utf.states.Battle;
+import utf.substates.Battle;
 #end
 import utf.states.Room;
 import utf.states.Settings;

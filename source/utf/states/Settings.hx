@@ -4,7 +4,6 @@ import utf.backend.AssetPaths;
 import utf.backend.Controls;
 import utf.backend.Data;
 import utf.backend.Global;
-import utf.backend.PercentOfHeightScaleMode;
 import utf.backend.Util;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.effects.particles.FlxEmitter;
