@@ -11,7 +11,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.FlxState;
+import flixel.FlxSubState;
 
 typedef Name =
 {
@@ -32,7 +32,7 @@ typedef SpecialDelta =
 	end:Int
 }
 
-class Naming extends FlxState
+class Naming extends FlxSubState
 {
 	static var curName:String = '';
 
@@ -240,7 +240,7 @@ class Naming extends FlxState
 						switch (spr.text)
 						{
 							case 'Quit':
-								FlxG.switchState(() -> new Intro());
+								close();
 							case 'Backspace':
 								if (curName.length > 0)
 									curName = curName.substring(0, curName.length - 1);
