@@ -1,0 +1,84 @@
+package;
+
+import flixel.FlxSprite;
+import utf.backend.AssetPaths;
+import utf.objects.battle.Monster;
+
+class UndyneEx extends Monster
+{
+	var legs:FlxSprite;
+	var pants:FlxSprite;
+	var torso:FlxSprite;
+	var larm:FlxSprite;
+	var rarm:FlxSprite;
+	var head:FlxSprite;
+	var hair:FlxSprite;
+	var beam:FlxSprite;
+
+	public function new():Void
+	{
+		super('undyne-ex');
+
+		legs = new FlxSprite(0, 274, AssetPaths.sprite('anim/legs'));
+		add(legs);
+
+		pants = new FlxSprite(0, 0, AssetPaths.sprite('anim/pants'));
+		add(pants);
+
+		torso = new FlxSprite(-53, 120, AssetPaths.sprite('anim/torso'));
+		add(torso);
+
+		larm = new FlxSprite(0, 0, AssetPaths.sprite('anim/larm'));
+		add(larm);
+
+		rarm = new FlxSprite(0, 0, AssetPaths.sprite('anim/rarm'));
+		add(rarm);
+
+		head = new FlxSprite(0, 0, AssetPaths.sprite('anim/face'));
+		add(head);
+
+		hair = new FlxSprite(0, 0, AssetPaths.sprite('anim/hair'));
+		add(hair);
+
+		beam = new FlxSprite(9, 0, AssetPaths.sprite('anim/beam'));
+		beam.alpha = 0;
+		add(beam);
+
+		screenCenter();
+	}
+
+	var timeElapsed:Int;
+
+	public override function update(elapsed:Float):Void
+	{
+		pants.angle = Math.sin(timeElapsed * 6.5) * 3;
+		pants.setPosition(10, 54 + (Math.sin(0 - timeElapsed * 6.5)));
+
+		torso.angle = 0 - Math.sin(timeElapsed * 6.5) * 4;
+
+		head.setPosition(2, 160 + (Math.sin(0 - timeElapsed * 6.5)) * 3);
+		rarm.setPosition(48 + (Math.sin(0 - (timeElapsed * 6.5) * 2) * 4), 75 + (Math.sin(0 - timeElapsed * 6.5)) * 7);
+		larm.setPosition(-58 + (Math.sin(timeElapsed * 6.5) * 5), 40 + (Math.sin(0 - timeElapsed * 6.5) * 5));
+
+		hair.angle = 60 - (Math.sin(timeElapsed * 6.5) * 10);
+		hair.setPosition(-12, head.y + 22);
+
+		beam.angle = Math.sin(timeElapsed * 3) * 35;
+
+		if (timeElapsed % 150 == 0)
+		{
+			beam.alpha = 1;
+			beam.scale.x = 0.5;
+		}
+
+		if (beam.alpha > 0)
+		{
+			beam.alpha -= 0.015;
+			beam.scale.x += 0.05;
+		}
+
+		timeElapsed++;
+
+		super.update(elapsed);
+	}
+}
