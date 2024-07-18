@@ -1,7 +1,6 @@
 package utf.backend;
 
 #if polymod
-import utf.backend.Util;
 import flixel.math.FlxPoint;
 import flixel.util.FlxSave;
 import flixel.util.FlxStringUtil;
@@ -12,22 +11,32 @@ import polymod.util.VersionUtil;
 import polymod.Polymod;
 import openfl.Lib;
 import sys.FileSystem;
+import utf.backend.Util;
+import utf.objects.battle.MonsterRegistery;
 
 /**
+ * Handles the initialization and management of mods using the Polymod framework.
+ *
  * @see https://github.com/FunkinCrew/Funkin/blob/main/source/funkin/modding/PolymodHandler.hx
  */
 class PolymodHandler
 {
+	/**
+	 * Stores metadata for the loaded mods.
+	 */
 	public static var data(default, null):Map<String, ModMetadata> = [];
 
-	public static function load():Void
+	/**
+	 * Reloads and initializes the mods.
+	 */
+	public static function reloadMods():Void
 	{
 		Polymod.onError = function(error:PolymodError)
 		{
 			switch (error.code)
 			{
 				case FRAMEWORK_INIT, FRAMEWORK_AUTODETECT, SCRIPT_PARSING:
-				// Do nothing.
+					// Do nothing.
 				case MOD_LOAD_PREPARE, MOD_LOAD_DONE:
 					FlxG.log.notice('Loading mod ${error.message}');
 				case MISSING_ICON:
@@ -49,7 +58,6 @@ class PolymodHandler
 					Util.showAlert('Polymod Script Import Error', msg);
 				case SCRIPT_CLASS_MODULE_BLACKLISTED:
 					FlxG.log.error(error.message);
-
 					Util.showAlert('Polymod Script Blacklist Violation', error.message);
 				default:
 					switch (error.severity)
@@ -82,6 +90,26 @@ class PolymodHandler
 			loadScriptsAsync: #if html5 true #else false #end,
 			apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version'))
 		});
+	}
+
+	/**
+	 * Reloads all scripts and registers them.
+	 */
+	public static function reloadScripts():Void
+	{
+		Polymod.clearScripts();
+		PolymodHandler.reloadMods();
+		Polymod.registerAllScriptClasses();
+
+		reloadRegisteries();
+	}
+
+	/**
+	 * Reloads registries.
+	 */
+	public static function reloadRegisteries():Void
+	{
+		MonsterRegistery.loadMonsters();
 	}
 
 	private static function getModDirs():Array<String>
