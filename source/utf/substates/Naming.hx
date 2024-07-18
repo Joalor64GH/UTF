@@ -1,10 +1,5 @@
 package utf.states;
 
-import utf.backend.AssetPaths;
-import utf.backend.Controls;
-import utf.backend.Data;
-import utf.backend.Global;
-import utf.backend.Util;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -12,6 +7,11 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
+import utf.backend.AssetPaths;
+import utf.backend.Controls;
+import utf.backend.Data;
+import utf.backend.Global;
+import utf.backend.Util;
 
 typedef Name =
 {
