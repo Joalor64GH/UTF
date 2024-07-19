@@ -1,4 +1,4 @@
-package utf.backend;
+package utf.modding;
 
 #if polymod
 import flixel.util.FlxSave;
