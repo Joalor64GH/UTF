@@ -10,9 +10,9 @@ import polymod.util.VersionUtil;
 import polymod.Polymod;
 import openfl.Lib;
 import sys.FileSystem;
-import utf.backend.Util;
 import utf.objects.battle.MonsterRegistery;
 import utf.util.macro.ClassMacro;
+import utf.util.WindowUtil;
 
 /**
  * Handles the initialization and management of mods using the Polymod framework.
@@ -33,45 +33,18 @@ class PolymodHandler
 	{
 		Polymod.onError = function(error:PolymodError)
 		{
-			switch (error.code)
+			final code:String = Std.string(error.code);
+
+			switch (error.severity)
 			{
-				case FRAMEWORK_INIT, FRAMEWORK_AUTODETECT, SCRIPT_PARSING:
-					// Do nothing.
-				case MOD_LOAD_PREPARE, MOD_LOAD_DONE:
-					FlxG.log.notice('Loading mod ${error.message}');
-				case MISSING_ICON:
-					FlxG.log.warn('A mod is missing an icon. Please add one.');
-				case SCRIPT_PARSE_ERROR:
-					FlxG.log.error(error.message);
+				case NOTICE:
+					FlxG.log.notice('(${code.toUpperCase()}) ${error.message}');
+				case WARNING:
+					FlxG.log.warn('(${code.toUpperCase()}) ${error.message}');
+				case ERROR:
+					FlxG.log.error('(${code.toUpperCase()}) ${error.message}');
 
-					Util.showAlert('Polymod Script Parsing Error', error.message);
-				case SCRIPT_RUNTIME_EXCEPTION:
-					FlxG.log.error(error.message);
-
-					Util.showAlert('Polymod Script Exception', error.message);
-				case SCRIPT_CLASS_MODULE_NOT_FOUND:
-					FlxG.log.error(error.message);
-
-					var msg:String = 'Import error in ${error.origin}';
-					msg += '\nCould not import class: ${error.message.split(' ').pop()}';
-					msg += '\nEnsure the class exists and is spelled correctly.';
-					Util.showAlert('Polymod Script Import Error', msg);
-				case SCRIPT_CLASS_MODULE_BLACKLISTED:
-					FlxG.log.error(error.message);
-
-					Util.showAlert('Polymod Script Blacklist Violation', error.message);
-				default:
-					switch (error.severity)
-					{
-						case NOTICE:
-							FlxG.log.notice(error.message);
-						case WARNING:
-							FlxG.log.warn(error.message);
-						case ERROR:
-							FlxG.log.error(error.message);
-
-							Util.showAlert(FlxStringUtil.toTitleCase(Std.string(error.code)), error.message);
-					}
+					WindowUtil.showAlert(FlxStringUtil.toTitleCase(code.split('_').join(' ')), error.message);
 			}
 		}
 
