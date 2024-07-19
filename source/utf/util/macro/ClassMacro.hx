@@ -138,7 +138,7 @@ class ClassMacro
 			case 'extend':
 				return MacroUtil.implementsInterface(classType, MacroUtil.getClassType(splitRequest[1])) || MacroUtil.isSubclassOf(classType, MacroUtil.getClassType(splitRequest[1]));
 			default:
-				throw 'Unknown request type: ${requestType}';
+				throw 'Unknown request type: ${splitRequest[0]}';
 		}
 	}
 
