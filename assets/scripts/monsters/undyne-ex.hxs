@@ -1,6 +1,7 @@
 import flixel.FlxSprite;
 import utf.backend.AssetPaths;
 import utf.objects.battle.Monster;
+import flixel.FlxG;
 
 class UndyneEx extends Monster
 {
@@ -12,6 +13,9 @@ class UndyneEx extends Monster
 	var head:FlxSprite;
 	var hair:FlxSprite;
 	var beam:FlxSprite;
+
+	var beamtimer:Int = 0;
+	var visibeam:Bool = true;
 
 	public function new():Void
 	{
@@ -25,13 +29,22 @@ class UndyneEx extends Monster
 		monsterXpReward = 0;
 		monsterGoldReward = 0;
 
-		legs = new FlxSprite(0, 274, AssetPaths.sprite('undyne_anim/legs'));
+		createSprites();
+		setPivots();
+		setInitialOffsets();
+
+		screenCenter();
+	}
+
+	private function createSprites():Void
+	{
+		legs = new FlxSprite(0, 0, AssetPaths.sprite('undyne_anim/legs'));
 		add(legs);
 
 		pants = new FlxSprite(0, 0, AssetPaths.sprite('undyne_anim/pants'));
 		add(pants);
 
-		torso = new FlxSprite(-53, 120, AssetPaths.sprite('undyne_anim/torso'));
+		torso = new FlxSprite(0, 0, AssetPaths.sprite('undyne_anim/torso'));
 		add(torso);
 
 		larm = new FlxSprite(0, 0, AssetPaths.sprite('undyne_anim/larm'));
@@ -46,32 +59,67 @@ class UndyneEx extends Monster
 		hair = new FlxSprite(0, 0, AssetPaths.sprite('undyne_anim/hair'));
 		add(hair);
 
-		beam = new FlxSprite(9, 0, AssetPaths.sprite('undyne_anim/beam'));
+		beam = new FlxSprite(0, 0, AssetPaths.sprite('undyne_anim/beam'));
 		beam.alpha = 0;
 		add(beam);
-
-		screenCenter();
 	}
 
-	var timeElapsed:Int;
+	private function setPivots():Void
+	{
+		pants.origin.set(pants.frameWidth * 0.6, pants.frameHeight * 0.8);
+		torso.origin.set(torso.frameWidth * 0.15, torso.frameHeight * 0.6);
+		hair.origin.set(hair.frameWidth * 0.92, hair.frameHeight * 0.02);
+		beam.origin.set(beam.frameWidth * 0, beam.frameHeight * 0.5);
+	}
+
+	private function setInitialOffsets():Void
+	{
+		legs.setPosition(0, 274);
+		pants.setPosition(10, 54);
+		torso.setPosition(-53, 120);
+		larm.setPosition(-58, 40);
+		rarm.setPosition(48, 75);
+		head.setPosition(2, 160);
+		hair.setPosition(-12, head.y + 22);
+		beam.setPosition(9, 0);
+	}
+
+	var timeElapsed:Float = 0;
 
 	public override function update(elapsed:Float):Void
 	{
-		pants.angle = Math.sin(timeElapsed * 6.5) * 3;
-		pants.setPosition(10, 54 + (Math.sin(0 - timeElapsed * 6.5)));
+		super.update(elapsed);
 
-		torso.angle = 0 - Math.sin(timeElapsed * 6.5) * 4;
+		timeElapsed += elapsed;
 
-		head.setPosition(2, 160 + (Math.sin(0 - timeElapsed * 6.5)) * 3);
-		rarm.setPosition(48 + (Math.sin(0 - (timeElapsed * 6.5) * 2) * 4), 75 + (Math.sin(0 - timeElapsed * 6.5)) * 7);
-		larm.setPosition(-58 + (Math.sin(timeElapsed * 6.5) * 5), 40 + (Math.sin(0 - timeElapsed * 6.5) * 5));
+		animateUndyne(1, true);
+	}
 
-		hair.angle = 60 - (Math.sin(timeElapsed * 6.5) * 10);
-		hair.setPosition(-12, head.y + 22);
+	public function animateUndyne(givenspeed:Float, eyebeamcheck:Bool):Void
+	{
+		var speed = givenspeed * 6.5;
+		pants.angle = Math.sin(timeElapsed * speed) * 3;
+		pants.offset.set(10, 54 + (Math.sin(-timeElapsed * speed)));
+
+		torso.angle = -Math.sin(timeElapsed * speed) * 4;
+
+		head.offset.set(2, 160 + (Math.sin(-timeElapsed * speed)) * 3);
+
+		rarm.offset.set(48 + (Math.sin(-timeElapsed * speed * 2) * 4), 75 + (Math.sin(-timeElapsed * speed)) * 7);
+		larm.offset.set(-58 + (Math.sin(timeElapsed * speed) * 5), 40 + (Math.sin(-timeElapsed * speed) * 5));
+
+		hair.angle = 60 - (Math.sin(timeElapsed * speed) * 10);
+		hair.offset.set(-12, head.y + 22);
 
 		beam.angle = Math.sin(timeElapsed * 3) * 35;
 
-		if (timeElapsed % 150 == 0)
+		if (eyebeamcheck && visibeam)
+			animateBeam(150);
+	}
+
+	private function animateBeam(freq:Int):Void
+	{
+		if (beamtimer % freq == 0)
 		{
 			beam.alpha = 1;
 			beam.scale.x = 0.5;
@@ -83,8 +131,40 @@ class UndyneEx extends Monster
 			beam.scale.x += 0.05;
 		}
 
-		timeElapsed++;
+		beamtimer++;
+	}
 
-		super.update(elapsed);
+	public function hideUndyne():Void
+	{
+		legs.alpha = 0;
+		pants.alpha = 0;
+		torso.alpha = 0;
+		larm.alpha = 0;
+		rarm.alpha = 0;
+		head.alpha = 0;
+		hair.alpha = 0;
+		visibeam = false;
+	}
+
+	public function showUndyne():Void
+	{
+		legs.alpha = 1;
+		pants.alpha = 1;
+		torso.alpha = 1;
+		larm.alpha = 1;
+		rarm.alpha = 1;
+		head.alpha = 1;
+		hair.alpha = 1;
+		visibeam = true;
+	}
+
+	public function moveUndyne(leggyx:Float, leggyy:Float):Void
+	{
+		legs.setPosition(leggyx, leggyy + 274);
+	}
+
+	public function undyneHead(headstring:String):Void
+	{
+		head.loadGraphic(headstring);
 	}
 }
