@@ -34,6 +34,7 @@ import utf.backend.AssetPaths;
 import utf.backend.Data;
 import utf.objects.debug.Overlay;
 import utf.states.Startup;
+import utf.util.WindowUtil;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
@@ -165,7 +166,7 @@ class Main extends Sprite
 			FlxG.log.warn('Couldn\'t save error message "${e.message}"');
 		#end
 
-		Lib.application.window.alert(msg, 'Uncaught an Error!');
+		WindowUtil.showAlert('Uncaught an Error!', msg);
 
 		System.exit(1);
 	}
@@ -205,7 +206,7 @@ class Main extends Sprite
 			FlxG.log.warn('Couldn\'t save error message "${e.message}"');
 		#end
 
-		Lib.application.window.alert(msg, 'Critical Error!');
+		WindowUtil.showAlert('Critical Error!', msg);
 
 		System.exit(1);
 	}
