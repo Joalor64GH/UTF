@@ -16,11 +16,12 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import openfl.Lib;
+import utf.states.Room;
+import utf.states.Settings;
 #if debug
 import utf.substates.Battle;
 #end
-import utf.states.Room;
-import utf.states.Settings;
+import utf.substates.Naming;
 
 enum Scroll
 {
