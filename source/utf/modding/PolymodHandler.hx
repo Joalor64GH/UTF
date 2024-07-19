@@ -57,6 +57,7 @@ class PolymodHandler
 					Util.showAlert('Polymod Script Import Error', msg);
 				case SCRIPT_CLASS_MODULE_BLACKLISTED:
 					FlxG.log.error(error.message);
+
 					Util.showAlert('Polymod Script Blacklist Violation', error.message);
 				default:
 					switch (error.severity)
