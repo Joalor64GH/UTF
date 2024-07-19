@@ -158,14 +158,14 @@ class Battle extends FlxSubState
 				switch (choices[selected])
 				{
 					case 'Fight' | 'Talk':
-						writer.startDialogue([{typer: Typers.data.get('battle'), text: '* ${monster.data.name}'}]);
+						writer.startDialogue([{typer: Typers.data.get('battle'), text: '* ${monster.monsterName}'}]);
 
-					/*var monsterHpBar:FlxBar = new FlxBar(box.x + 158 + (monster.data.name.length * 16), writer.y, LEFT_TO_RIGHT,
-							Std.int(monster.data.hp / monster.data.maxHp * 100), 16, monster.data, 'hp', 0, monster.data.maxHp);
+						var monsterHpBar:FlxBar = new FlxBar(box.x + 158 + (monster.monsterName.length * 16), writer.y, LEFT_TO_RIGHT,
+							Std.int(monster.monsterHp / monster.monsterMaxHp * 100), 16, monster, 'monsterHp', 0, monster.monsterMaxHp);
 						monsterHpBar.createFilledBar(FlxColor.RED, FlxColor.LIME);
 						monsterHpBar.emptyCallback = () -> FlxG.log.notice('YOU WON!');
 						monsterHpBar.scrollFactor.set();
-						add(monsterHpBar); */
+						add(monsterHpBar);
 					case 'Item':
 						writer.startDialogue([{typer: Typers.data.get('battle'), text: '* Item Selected...'}]);
 					case 'Spare':
