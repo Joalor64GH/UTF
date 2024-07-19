@@ -1,7 +1,6 @@
 package utf.backend;
 
 #if polymod
-import flixel.math.FlxPoint;
 import flixel.util.FlxSave;
 import flixel.util.FlxStringUtil;
 import flixel.FlxG;
@@ -133,7 +132,15 @@ class PolymodHandler
 
 	private static function buildImports():Void
 	{
-		Polymod.addImportAlias('flixel.math.FlxPoint', .FlxBasePoint);
+		Polymod.addImportAlias('flixel.effects.particles.FlxEmitter', flixel.effects.particles.FlxEmitter);
+		Polymod.addImportAlias('flixel.group.FlxContainer', flixel.group.FlxContainer);
+		Polymod.addImportAlias('flixel.group.FlxGroup', flixel.group.FlxGroup);
+		Polymod.addImportAlias('flixel.group.FlxSpriteContainer', flixel.group.FlxSpriteContainer);
+		Polymod.addImportAlias('flixel.group.FlxSpriteGroup', flixel.group.FlxSpriteGroup);
+		Polymod.addImportAlias('flixel.math.FlxPoint', flixel.math.FlxPoint.FlxBasePoint);
+
+		Polymod.blacklistImport('haxe.Serializer');
+		Polymod.blacklistImport('haxe.Unserializer');
 
 		Polymod.blacklistImport('Sys');
 		Polymod.blacklistImport('Reflect');
