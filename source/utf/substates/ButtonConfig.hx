@@ -20,6 +20,11 @@ class ButtonConfig extends FlxSubState
 
 	override function create():Void
 	{
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		bg.screenCenter();
+		bg.active = false;
+		add(bg);
+
 		var settings:FlxText = new FlxText(0, 40, 0, 'BUTTON CONFIG', 64);
 		settings.font = AssetPaths.font('DTM-Sans');
 		settings.screenCenter(X);
