@@ -27,28 +27,28 @@ class UndyneEx extends Monster
 		monsterXpReward = 0;
 		monsterGoldReward = 0;
 
-		legs = new FlxSprite(0, 274, AssetPaths.sprite('anim/legs'));
+		legs = new FlxSprite(0, 274, AssetPaths.sprite('undyne_anim/legs'));
 		add(legs);
 
-		pants = new FlxSprite(0, 0, AssetPaths.sprite('anim/pants'));
+		pants = new FlxSprite(0, 0, AssetPaths.sprite('undyne_anim/pants'));
 		add(pants);
 
-		torso = new FlxSprite(-53, 120, AssetPaths.sprite('anim/torso'));
+		torso = new FlxSprite(-53, 120, AssetPaths.sprite('undyne_anim/torso'));
 		add(torso);
 
-		larm = new FlxSprite(0, 0, AssetPaths.sprite('anim/larm'));
+		larm = new FlxSprite(0, 0, AssetPaths.sprite('undyne_anim/larm'));
 		add(larm);
 
-		rarm = new FlxSprite(0, 0, AssetPaths.sprite('anim/rarm'));
+		rarm = new FlxSprite(0, 0, AssetPaths.sprite('undyne_anim/rarm'));
 		add(rarm);
 
-		head = new FlxSprite(0, 0, AssetPaths.sprite('anim/face'));
+		head = new FlxSprite(0, 0, AssetPaths.sprite('undyne_anim/face'));
 		add(head);
 
-		hair = new FlxSprite(0, 0, AssetPaths.sprite('anim/hair'));
+		hair = new FlxSprite(0, 0, AssetPaths.sprite('undyne_anim/hair'));
 		add(hair);
 
-		beam = new FlxSprite(9, 0, AssetPaths.sprite('anim/beam'));
+		beam = new FlxSprite(9, 0, AssetPaths.sprite('undyne_anim/beam'));
 		beam.alpha = 0;
 		add(beam);
 
