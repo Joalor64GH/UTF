@@ -43,6 +43,11 @@ class Battle extends FlxSubState
 
 		persistentUpdate = true;
 
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		bg.screenCenter();
+		bg.active = false;
+		add(bg);
+
 		stats = new FlxText(30, 400, 0, Global.name + '   LV ' + Global.lv, 22);
 		stats.font = AssetPaths.font('Small');
 		stats.scrollFactor.set();
