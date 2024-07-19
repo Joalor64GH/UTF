@@ -15,7 +15,7 @@ import utf.states.Room;
 
 class GameOver extends FlxSubState
 {
-	var bg:FlxSprite;
+	var gameoverbg:FlxSprite;
 	var writer:Writer;
 
 	override function create():Void
@@ -24,12 +24,17 @@ class GameOver extends FlxSubState
 
 		FlxG.sound.playMusic(AssetPaths.music('gameover'));
 
-		bg = new FlxSprite(0, 30, AssetPaths.sprite('gameoverbg'));
-		bg.alpha = 0;
-		bg.screenCenter(X);
-		bg.scrollFactor.set();
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		bg.screenCenter();
 		bg.active = false;
 		add(bg);
+
+		gameoverbg = new FlxSprite(0, 30, AssetPaths.sprite('gameovergameoverbg'));
+		gameoverbg.alpha = 0;
+		gameoverbg.screenCenter(X);
+		gameoverbg.scrollFactor.set();
+		gameoverbg.active = false;
+		add(gameoverbg);
 
 		writer = new Writer(120, 320);
 		writer.skippable = false;
@@ -39,7 +44,7 @@ class GameOver extends FlxSubState
 
 		super.create();
 
-		FlxTween.tween(bg, {alpha: 1}, 1.5, {
+		FlxTween.tween(gameoverbg, {alpha: 1}, 1.5, {
 			onComplete: function(twn:FlxTween)
 			{
 				new FlxTimer().start(1, function(tmr:FlxTimer)
@@ -63,9 +68,9 @@ class GameOver extends FlxSubState
 
 	override function update(elapsed:Float):Void
 	{
-		if (Controls.instance.justPressed('confirm') && !members.contains(writer) && bg.alpha == 1)
+		if (Controls.instance.justPressed('confirm') && !members.contains(writer) && gameoverbg.alpha == 1)
 		{
-			FlxTween.tween(bg, {alpha: 0}, 1.5, {
+			FlxTween.tween(gameoverbg, {alpha: 0}, 1.5, {
 				onComplete: (twn:FlxTween) -> close()
 			});
 
