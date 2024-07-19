@@ -1,6 +1,7 @@
 package utf.substates;
 
 import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.FlxG;
 import flixel.FlxSprite;
