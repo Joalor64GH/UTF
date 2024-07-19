@@ -79,6 +79,8 @@
 	<!--Scripting Settings-->
 
 	<section if="polymod">
+		<haxedef name="hscriptPos" />
+
 		<haxeflag name="-dce" value="no" />
 
 		<haxeflag name="--macro" value="include('utf')" />
