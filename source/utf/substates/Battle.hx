@@ -15,6 +15,7 @@ import utf.backend.Data;
 import utf.backend.Global;
 import utf.backend.Typers;
 import utf.objects.battle.Monster;
+import utf.objects.battle.MonsterRegistery;
 import utf.objects.dialogue.Writer;
 import utf.substates.GameOver;
 
@@ -90,7 +91,7 @@ class Battle extends FlxTransitionableState
 
 		add(items);
 
-		monster = new Monster(0, 0, 'default');
+		monster = MonsterRegistery.fetchMonster('undyne-ex');
 		monster.scrollFactor.set();
 		add(monster);
 
