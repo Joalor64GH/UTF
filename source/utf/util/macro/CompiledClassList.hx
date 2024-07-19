@@ -5,6 +5,8 @@ import lime.util.Log;
 
 /**
  * Utility class for managing and retrieving lists of compiled classes.
+ *
+ * @see https://github.com/FunkinCrew/Funkin/blob/main/source/funkin/util/macro/CompiledClassList.hx
  */
 class CompiledClassList
 {
