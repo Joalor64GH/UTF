@@ -6,6 +6,8 @@ import haxe.macro.Type;
 
 /**
  * Utility class for various macro operations.
+ *
+ * @see https://github.com/FunkinCrew/Funkin/blob/main/source/funkin/util/macro/MacroUtil.hx
  */
 class MacroUtil
 {
