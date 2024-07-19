@@ -1,7 +1,7 @@
 package utf.util.macro;
 
 import haxe.rtti.Meta;
-import lime.util.Log;
+import lime.utils.Log;
 
 /**
  * Utility class for managing and retrieving lists of compiled classes.
