@@ -82,6 +82,11 @@ class Naming extends FlxSubState
 
 	override function create():Void
 	{
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		bg.screenCenter();
+		bg.active = false;
+		add(bg);
+
 		var namingText:FlxText = new FlxText(0, 60, 0, 'Name the fallen human.', 32);
 		namingText.font = AssetPaths.font('DTM-Sans');
 		namingText.screenCenter(X);
