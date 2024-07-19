@@ -3,7 +3,6 @@ package utf.util.macro;
 import haxe.macro.Context;
 import haxe.macro.Expr;
 import haxe.macro.Type;
-import utf.util.macro.CompiledClassList;
 import utf.util.macro.MacroUtil;
 
 /**
@@ -33,7 +32,7 @@ class ClassMacro
 
 		classListsToGenerate.push(request);
 
-		return macro CompiledClassList.get($v{request});
+		return macro utf.util.macro.CompiledClassList.get($v{request});
 	}
 
 	/**
@@ -62,7 +61,7 @@ class ClassMacro
 
 		classListsToGenerate.push(request);
 
-		return macro CompiledClassList.getTyped($v{request}, ${targetClassExpr});
+		return macro utf.util.macro.CompiledClassList.getTyped($v{request}, ${targetClassExpr});
 	}
 
 	#if macro
