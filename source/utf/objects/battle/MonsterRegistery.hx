@@ -37,7 +37,7 @@ class MonsterRegistery
 
 				FlxG.log.notice('Initialized monster "${monster.monsterName}"!');
 
-				monsterScriptedClasses.set(monster.monsterId, scriptedMonster);
+				monsterScriptedClasses.set(monster.monsterID, scriptedMonster);
 			}
 		}
 
