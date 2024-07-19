@@ -28,7 +28,7 @@ class ClassMacro
 			Context.onGenerate(onGenerate);
 		}
 
-		final request:String = 'package~$targetPackage~${includeSubPackages ? "recursive" : "nonrecursive"}';
+		final request:String = 'package~$targetPackage~${includeSubPackages ? 'recursive' : 'nonrecursive'}';
 
 		classListsToGenerate.push(request);
 
@@ -98,10 +98,10 @@ class ClassMacro
 
 	private static function compileClassLists():Void
 	{
-		final compiledClassList:ClassType = MacroUtil.getClassType("funkin.util.macro.CompiledClassList");
+		final compiledClassList:ClassType = MacroUtil.getClassType('utf.util.macro.CompiledClassList');
 
 		if (compiledClassList == null)
-			throw "Could not find CompiledClassList class.";
+			throw 'Could not find CompiledClassList class.';
 
 		if (compiledClassList.meta.has('classLists'))
 			compiledClassList.meta.remove('classLists');
