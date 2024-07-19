@@ -8,7 +8,7 @@ import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.FlxState;
+import flixel.FlxSubState;
 import utf.backend.AssetPaths;
 import utf.backend.Controls;
 import utf.backend.Data;
@@ -19,7 +19,7 @@ import utf.objects.battle.MonsterRegistery;
 import utf.objects.dialogue.Writer;
 import utf.substates.GameOver;
 
-class Battle extends FlxTransitionableState
+class Battle extends FlxSubState
 {
 	var selected:Int = 0;
 	final choices:Array<String> = ['Fight', 'Talk', 'Item', 'Spare'];
