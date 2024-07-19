@@ -30,9 +30,9 @@ import openfl.Lib;
 #if polymod
 import polymod.Polymod;
 #end
-import utf.backend.debug.Overlay;
 import utf.backend.AssetPaths;
 import utf.backend.Data;
+import utf.objects.debug.Overlay;
 import utf.states.Startup;
 #if sys
 import sys.io.File;
