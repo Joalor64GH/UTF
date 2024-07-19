@@ -12,6 +12,7 @@ import openfl.Lib;
 import sys.FileSystem;
 import utf.backend.Util;
 import utf.objects.battle.MonsterRegistery;
+import utf.util.macro.ClassMacro;
 
 /**
  * Handles the initialization and management of mods using the Polymod framework.
