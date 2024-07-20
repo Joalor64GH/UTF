@@ -117,7 +117,6 @@ class Main extends Sprite
 		#end
 
 		overlay = new Overlay(10, 10, FlxColor.RED);
-		overlay.visible = Data.settings.get('overlay-overlay');
 		FlxG.game.addChild(overlay);
 	}
 
