@@ -1,0 +1,16 @@
+import flixel.FlxG;
+import utf.backend.AssetPaths;
+import utf.objects.dialogue.Typer;
+
+class Battle extends Typer
+{
+	public function new():Void
+	{
+		super('battle');
+
+		fontName = AssetPaths.font('DTM-Mono');
+		fontSize = 32;
+		typerSounds = [FlxG.sound.load(AssetPaths.sound('txt2'), 0.86)];
+		typerDelay = 0.05;
+	}
+}
