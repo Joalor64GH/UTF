@@ -6,7 +6,7 @@ import flixel.FlxSprite;
 /**
  * Represents an object within a room.
  */
-class RoomObject extends FlxSprite
+class Object extends FlxSprite
 {
 	/**
 	 * The ID of the object.

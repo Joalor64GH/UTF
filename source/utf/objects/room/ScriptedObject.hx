@@ -1,10 +1,10 @@
 package utf.objects.room;
 
 import polymod.hscript.HScriptedClass;
-import utf.objects.room.RoomObject;
+import utf.objects.room.Object;
 
 /**
  * A room object that can be controlled by scripts.
  */
 @:hscriptClass
-class ScriptedRoomObject extends RoomObject implements HScriptedClass {}
+class ScriptedObject extends Object implements HScriptedClass {}
