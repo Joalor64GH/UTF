@@ -6,11 +6,13 @@ import flixel.util.FlxStringUtil;
 import flixel.FlxG;
 import polymod.backends.PolymodAssets;
 import polymod.format.ParseRules;
+import polymod.fs.ZipFileSystem;
 import polymod.util.VersionUtil;
 import polymod.Polymod;
 import openfl.Lib;
 import sys.FileSystem;
-import utf.objects.battle.MonsterRegistery;
+import utf.modding.registries.MonsterRegistery;
+import utf.modding.registries.ObjectRegistery;
 import utf.util.macro.ClassMacro;
 import utf.util.WindowUtil;
 
@@ -31,7 +33,7 @@ class PolymodHandler
 	 */
 	public static function reloadMods():Void
 	{
-		Polymod.onError = function(error:PolymodError)
+		Polymod.onError = function(error:PolymodError):Void
 		{
 			final code:String = Std.string(error.code);
 
@@ -62,7 +64,8 @@ class PolymodHandler
 			parseRules: buildParseRules(),
 			useScriptedClasses: true,
 			loadScriptsAsync: #if html5 true #else false #end,
-			apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version'))
+			apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version')),
+			customFilesystem: buildFileSystem(),
 		});
 	}
 
@@ -84,8 +87,10 @@ class PolymodHandler
 	public static function reloadRegisteries():Void
 	{
 		MonsterRegistery.loadMonsters();
+		ObjectRegistery.loadObjects();
 	}
 
+	@:noCompletion
 	private static function getModDirs():Array<String>
 	{
 		if (data != null && Lambda.count(data) > 0)
@@ -93,7 +98,7 @@ class PolymodHandler
 
 		final packs:Array<String> = [];
 
-		for (pack in Polymod.scan({modRoot: 'mods'}))
+		for (pack in Polymod.scan({modRoot: 'mods', apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version'))}))
 		{
 			data.set(pack.id, pack);
 
@@ -105,6 +110,7 @@ class PolymodHandler
 		return packs;
 	}
 
+	@:noCompletion
 	private static function buildImports():Void
 	{
 		Polymod.addImportAlias('flixel.effects.particles.FlxEmitter', flixel.effects.particles.FlxEmitter);
@@ -144,9 +150,16 @@ class PolymodHandler
 		#end
 	}
 
+	@:noCompletion
+	private static function buildFileSystem():ZipFileSystem
+	{
+		return new ZipFileSystem({modRoot: 'mods', autoScan: true});
+	}
+
+	@:noCompletion
 	private static function buildParseRules():ParseRules
 	{
-		final output:polymod.format.ParseRules = polymod.format.ParseRules.getDefault();
+		final output:ParseRules = ParseRules.getDefault();
 		output.addType('txt', TextFileFormat.LINES);
 		output.addType('hxs', TextFileFormat.PLAINTEXT);
 		return output;
