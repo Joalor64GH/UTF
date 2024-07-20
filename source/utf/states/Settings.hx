@@ -230,6 +230,7 @@ class Settings extends FlxTransitionableState
 		super.update(elapsed);
 
 		tobdogLine.centerOffsets();
+
 		tobdogLine.offset.add(Math.sin(siner / 12), Math.cos(siner / 12));
 	}
 
