@@ -1,4 +1,4 @@
-package utf.backend;
+package utf.util.github;
 
 import flixel.FlxG;
 import haxe.Exception;
