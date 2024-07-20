@@ -1,0 +1,25 @@
+import flixel.FlxG;
+import utf.backend.AssetPaths;
+import utf.objects.dialogue.Typer;
+
+class Redacted_A extends Typer
+{
+	public function new():Void
+	{
+		super('redacted_a');
+
+		fontName = AssetPaths.font('Wingdings');
+		fontSize = 24;
+		fontSpacing = 1.6;
+		typerSounds = [
+			FlxG.sound.load(AssetPaths.sound('wngdng7'), 0.9),
+			FlxG.sound.load(AssetPaths.sound('wngdng6'), 0.83),
+			FlxG.sound.load(AssetPaths.sound('wngdng5'), 0.85),
+			FlxG.sound.load(AssetPaths.sound('wngdng4'), 0.84),
+			FlxG.sound.load(AssetPaths.sound('wngdng3'), 0.81),
+			FlxG.sound.load(AssetPaths.sound('wngdng2'), 0.99),
+			FlxG.sound.load(AssetPaths.sound('wngdng1'), 1.0)
+		];
+		typerDelay = 0.06;
+	}
+}
