@@ -80,7 +80,7 @@ class MonsterRegistery
 	}
 
 	/**
-	 * Clears all loaded monster data and associations.
+	 * Clears all loaded monster scripted classes.
 	 */
 	public static function clearMonsters():Void
 	{
