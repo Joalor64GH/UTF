@@ -39,7 +39,7 @@ class Overlay extends FPS
 	}
 
 	@:noCompletion
-	private override function __enterFrame(deltaTime:Int):Void
+	private override function __enterFrame(deltaTime:Float):Void
 	{
 		currentTime += deltaTime;
 
