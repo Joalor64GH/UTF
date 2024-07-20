@@ -1,0 +1,14 @@
+import utf.backend.AssetPaths;
+import utf.objects.room.Object;
+
+class SolidExTall_2 extends Object
+{
+	public function new():Void
+	{
+		super('solidextall_2');
+
+		loadGraphic(AssetPaths.sprite(objectID));
+		immovable = true;
+		solid = true;
+	}
+}

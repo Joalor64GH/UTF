@@ -1,0 +1,14 @@
+import utf.backend.AssetPaths;
+import utf.objects.room.Object;
+
+class SolidThin_X extends Object
+{
+	public function new():Void
+	{
+		super('solidthin_x');
+
+		loadGraphic(AssetPaths.sprite(objectID));
+		immovable = true;
+		solid = true;
+	}
+}

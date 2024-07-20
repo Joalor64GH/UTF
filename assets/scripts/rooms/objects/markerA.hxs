@@ -1,0 +1,14 @@
+import utf.backend.AssetPaths;
+import utf.objects.room.Object;
+
+class MarkerA extends Object
+{
+	public function new():Void
+	{
+		super('markerA');
+
+		loadGraphic(AssetPaths.sprite(objectID));
+		immovable = true;
+		solid = false;
+	}
+}
