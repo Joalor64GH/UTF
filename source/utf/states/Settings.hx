@@ -18,7 +18,7 @@ import utf.backend.Data;
 import utf.backend.Global;
 import utf.states.Intro;
 import utf.substates.ButtonConfig;
-import utf.util.DateDateUtil;
+import utf.util.DateUtil;
 
 using StringTools;
 
@@ -38,7 +38,7 @@ class Settings extends FlxTransitionableState
 
 		var weatherMusic:String = AssetPaths.music('options_fall');
 
-		switch (DateDateUtil.getWeather())
+		switch (DateUtil.getWeather())
 		{
 			case 1:
 				weatherMusic = AssetPaths.music('options_winter');
@@ -48,7 +48,7 @@ class Settings extends FlxTransitionableState
 
 		FlxG.sound.cache(weatherMusic);
 
-		if (DateDateUtil.getWeather() != 3)
+		if (DateUtil.getWeather() != 3)
 		{
 			var particles:FlxEmitter = new FlxEmitter(0, 0);
 			particles.loadParticles(AssetPaths.sprite(DateUtil.getWeather() == 1 ? 'christmasflake' : 'fallleaf'), 120);
