@@ -1,10 +1,5 @@
 package utf.states;
 
-import utf.backend.AssetPaths;
-import utf.backend.Controls;
-import utf.backend.Data;
-import utf.backend.Global;
-import utf.backend.Util;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.effects.particles.FlxEmitter;
 import flixel.group.FlxGroup;
@@ -17,8 +12,13 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import openfl.filters.BitmapFilter;
 import openfl.utils.Assets;
+import utf.backend.AssetPaths;
+import utf.backend.Controls;
+import utf.backend.Data;
+import utf.backend.Global;
 import utf.states.Intro;
 import utf.substates.ButtonConfig;
+import utf.util.DateUtil;
 
 using StringTools;
 
@@ -38,7 +38,7 @@ class Settings extends FlxTransitionableState
 
 		var weatherMusic:String = AssetPaths.music('options_fall');
 
-		switch (Util.getWeather())
+		switch (DateUtil.getWeather())
 		{
 			case 1:
 				weatherMusic = AssetPaths.music('options_winter');
@@ -48,7 +48,7 @@ class Settings extends FlxTransitionableState
 
 		FlxG.sound.cache(weatherMusic);
 
-		if (Util.getWeather() != 3)
+		if (DateUtil.getWeather() != 3)
 		{
 			var particles:FlxEmitter = new FlxEmitter(0, 0);
 			particles.loadParticles(AssetPaths.sprite(Util.getWeather() == 1 ? 'christmasflake' : 'fallleaf'), 120);
@@ -95,10 +95,7 @@ class Settings extends FlxTransitionableState
 			opt.font = AssetPaths.font('DTM-Sans');
 			opt.ID = i;
 			opt.scrollFactor.set();
-
-			if (options[i] != 'Border' && options[i] != 'Filter')
-				opt.active = false;
-
+			opt.active = false;
 			items.add(opt);
 		}
 
@@ -187,7 +184,7 @@ class Settings extends FlxTransitionableState
 					if (Main.overlay != null)
 						Main.overlay.visible = Data.settings.get('overlay-overlay');
 				case 'Button Config':
-					FlxG.switchState(() -> new ButtonConfig());
+					openSubState(new ButtonConfig());
 				case 'Filter':
 					switch (Data.settings.get('filter'))
 					{
@@ -219,7 +216,11 @@ class Settings extends FlxTransitionableState
 					items.forEach(function(spr:FlxText):Void
 					{
 						if (options[spr.ID] == 'Filter')
+						{
+							spr.active = true;
 							spr.text = 'Filter: ${Data.settings.get('filter')}'.toUpperCase();
+							spr.active = false;
+						}
 					});
 			}
 
@@ -228,8 +229,8 @@ class Settings extends FlxTransitionableState
 
 		super.update(elapsed);
 
-		tobdogLine.offset.x = ((tobdogLine.frameWidth - tobdogLine.width) * 0.5) + Math.sin(siner / 12);
-		tobdogLine.offset.y = ((tobdogLine.frameHeight - tobdogLine.height) * 0.5) + Math.cos(siner / 12);
+		tobdogLine.centerOffsets();
+		tobdogLine.offset.add(Math.sin(siner / 12), Math.cos(siner / 12));
 	}
 
 	private function changeOption(num:Int = 0):Void
