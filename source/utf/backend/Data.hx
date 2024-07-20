@@ -10,7 +10,9 @@ import openfl.Lib;
 
 class Data
 {
-	public static var settings(default, null):Map<String, Dynamic> = ['overlay-overlay' => false, 'filter' => 'none'];
+	public static var settings(default, null):Map<String, Dynamic> = [
+		'filter' => 'none'
+	];
 
 	public static var filters(default, null):Map<String, BitmapFilter> = [
 		'deuteranopia' => new ColorMatrixFilter([
@@ -34,7 +36,11 @@ class Data
 		])
 	];
 
-	public static var binds(default, null):Map<String, FlxKey> = ['confirm' => FlxKey.Z, 'cancel' => FlxKey.X, 'menu' => FlxKey.C];
+	public static var binds(default, null):Map<String, FlxKey> = [
+		'confirm' => FlxKey.Z,
+		'cancel' => FlxKey.X,
+		'menu' => FlxKey.C
+	];
 
 	public static function save():Void
 	{
