@@ -18,7 +18,7 @@ import utf.backend.Data;
 import utf.backend.Global;
 import utf.states.Intro;
 import utf.substates.ButtonConfig;
-import utf.util.DateUtil;
+import utf.util.DateDateUtil;
 
 using StringTools;
 
@@ -38,7 +38,7 @@ class Settings extends FlxTransitionableState
 
 		var weatherMusic:String = AssetPaths.music('options_fall');
 
-		switch (DateUtil.getWeather())
+		switch (DateDateUtil.getWeather())
 		{
 			case 1:
 				weatherMusic = AssetPaths.music('options_winter');
@@ -48,14 +48,14 @@ class Settings extends FlxTransitionableState
 
 		FlxG.sound.cache(weatherMusic);
 
-		if (DateUtil.getWeather() != 3)
+		if (DateDateUtil.getWeather() != 3)
 		{
 			var particles:FlxEmitter = new FlxEmitter(0, 0);
-			particles.loadParticles(AssetPaths.sprite(Util.getWeather() == 1 ? 'christmasflake' : 'fallleaf'), 120);
+			particles.loadParticles(AssetPaths.sprite(DateUtil.getWeather() == 1 ? 'christmasflake' : 'fallleaf'), 120);
 			particles.alpha.set(0.5, 0.5);
 			particles.scale.set(2, 2);
 
-			switch (Util.getWeather())
+			switch (DateUtil.getWeather())
 			{
 				case 2:
 					particles.color.set(FlxColor.interpolate(FlxColor.RED, FlxColor.WHITE, 0.5));
@@ -103,7 +103,7 @@ class Settings extends FlxTransitionableState
 
 		var tobdogWeather:FlxSprite = new FlxSprite(500, 436);
 
-		switch (Util.getWeather())
+		switch (DateUtil.getWeather())
 		{
 			case 1:
 				tobdogWeather.loadGraphic(AssetPaths.sprite('tobdog_winter'));
@@ -123,14 +123,14 @@ class Settings extends FlxTransitionableState
 		tobdogWeather.updateHitbox();
 		tobdogWeather.scrollFactor.set();
 
-		if (Util.getWeather() != 2 && Util.getWeather() != 3)
+		if (DateUtil.getWeather() != 2 && DateUtil.getWeather() != 3)
 			tobdogWeather.active = false;
 
 		add(tobdogWeather);
 
 		tobdogLine = new FlxText(420, 260, 0, '', 32);
 
-		switch (Util.getWeather())
+		switch (DateUtil.getWeather())
 		{
 			case 1:
 				tobdogLine.text = 'cold outside\nbut stay warm\ninside of you';
