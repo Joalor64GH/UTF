@@ -4,6 +4,7 @@ import flixel.FlxG;
 import haxe.io.Path;
 import haxe.Exception;
 import utf.objects.battle.Monster;
+import utf.objects.battle.ScriptedMonster;
 
 /**
  * Handles the loading and management of scripted monster classes.
