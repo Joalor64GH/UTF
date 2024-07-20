@@ -1,0 +1,14 @@
+import utf.backend.AssetPaths;
+import utf.objects.room.Object;
+
+class Event extends Object
+{
+	public function new():Void
+	{
+		super('event');
+
+		loadGraphic(AssetPaths.sprite(objectID));
+		immovable = true;
+		solid = false;
+	}
+}
