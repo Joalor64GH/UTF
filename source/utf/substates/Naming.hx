@@ -11,7 +11,7 @@ import utf.backend.AssetPaths;
 import utf.backend.Controls;
 import utf.backend.Data;
 import utf.backend.Global;
-import utf.backend.Util;
+import utf.util.MathUtil;
 
 typedef Name =
 {
@@ -107,7 +107,6 @@ class Naming extends FlxSubState
 		var row:Int = 0;
 		var line:Int = 0;
 
-		// UpperCase letters.
 		for (i in 0...upLetters.length)
 		{
 			var letter:FlxText = new FlxText(120 + line * 64, 150 + row * 28, 0, String.fromCharCode(upLetters[i]), 32);
@@ -132,7 +131,6 @@ class Naming extends FlxSubState
 		var row:Int = 0;
 		var line:Int = 0;
 
-		// LowerCase letters.
 		for (i in 0...lowLetters.length)
 		{
 			var letter:FlxText = new FlxText(120 + line * 64, 270 + row * 28, 0, String.fromCharCode(lowLetters[i]), 32);
@@ -156,7 +154,6 @@ class Naming extends FlxSubState
 
 		final choiceNames:Array<String> = ['Quit', 'Backspace', 'Done'];
 
-		// Choices.
 		for (i in 0...choiceNames.length)
 		{
 			var choice:FlxText = new FlxText(0, 0, 0, choiceNames[i], 32);
@@ -200,9 +197,9 @@ class Naming extends FlxSubState
 		else
 		{
 			if (FlxG.keys.justPressed.RIGHT)
-				selectedChoice = Util.mod(selectedChoice + 1, 3);
+				selectedChoice = MathUtil.mod(selectedChoice + 1, 3);
 			else if (FlxG.keys.justPressed.LEFT)
-				selectedChoice = Util.mod(selectedChoice - 1, 3);
+				selectedChoice = MathUtil.mod(selectedChoice - 1, 3);
 
 			if (FlxG.keys.justPressed.DOWN)
 			{
@@ -282,8 +279,9 @@ class Naming extends FlxSubState
 			if (spr.color != color)
 				spr.color = color;
 
-			spr.offset.x = ((spr.frameWidth - spr.width) * 0.5) + FlxG.random.float(-0.5, 0.5);
-			spr.offset.y = ((spr.frameHeight - spr.height) * 0.5) + FlxG.random.float(-0.5, 0.5);
+			spr.centerOffsets();
+			
+			spr.offset.add(FlxG.random.float(-0.5, 0.5), FlxG.random.float(-0.5, 0.5));
 		});
 
 		choices.forEach(function(spr:FlxText):Void
