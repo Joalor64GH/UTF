@@ -7,6 +7,8 @@ import haxe.macro.Expr;
 #end
 import sys.io.Process;
 
+using StringTools;
+
 /**
  * Utility class for Git operations.
  */
@@ -104,7 +106,7 @@ class GitUtil
 		{
 			final proc:Process = new Process('git', ['status', '--porcelain']);
 			proc.exitCode(true);
-			return macro $v{proc.stdout.readAll().trim().length > 0};
+			return macro $v{cast(proc.stdout.readAll(), String).trim().length > 0};
 		}
 		catch (e:Dynamic) {}
 		#end
