@@ -7,6 +7,8 @@ import haxe.Json;
 import openfl.Lib;
 import utf.util.github.Contributor;
 
+using StringTools;
+
 /**
  * Utility class for interacting with the GitHub API.
  */
