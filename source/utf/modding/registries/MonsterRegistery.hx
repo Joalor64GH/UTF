@@ -1,4 +1,4 @@
-package utf.objects.battle;
+package utf.modding.registries;
 
 import flixel.FlxG;
 import haxe.io.Path;
