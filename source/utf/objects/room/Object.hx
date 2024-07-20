@@ -1,6 +1,7 @@
 package utf.objects.room;
 
 import utf.backend.AssetPaths;
+import flixel.FlxG;
 import flixel.FlxSprite;
 
 /**
@@ -19,6 +20,11 @@ class Object extends FlxSprite
 	public var objectName:String;
 
 	/**
+	 * Indicates whether the object is interactable.
+	 */
+	public var objectInteractable:Bool;
+
+	/**
 	 * Constructor to initialize the object with a specified ID.
 	 *
 	 * @param objectID The ID of the object.
@@ -28,5 +34,18 @@ class Object extends FlxSprite
 		super();
 
 		this.objectID = objectID;
+	}
+
+	/**
+	 * Function to interact with the object.
+	 */
+	public function interact():Void
+	{
+		if (!objectInteractable)
+			return;
+		#if debug
+		else
+			FlxG.log.notice('"$objectID" object is not interactable');
+		#end
 	}
 }
