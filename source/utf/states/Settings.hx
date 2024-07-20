@@ -25,7 +25,7 @@ using StringTools;
 class Settings extends FlxTransitionableState
 {
 	var selected:Int = 0;
-	final options:Array<String> = ['Exit', 'Overlay Overlay', 'Button Config', 'Border', 'Filter'];
+	final options:Array<String> = ['Exit', 'Button Config', 'Filter'];
 	var items:FlxTypedGroup<FlxText>;
 
 	var tobdogLine:FlxText;
@@ -86,8 +86,6 @@ class Settings extends FlxTransitionableState
 
 			switch (options[i])
 			{
-				case 'Border':
-					opt.text += ': ${Data.settings.get('filter')}'.toUpperCase();
 				case 'Filter':
 					opt.text += ': ${Data.settings.get('filter')}'.toUpperCase();
 			}
@@ -178,11 +176,6 @@ class Settings extends FlxTransitionableState
 			{
 				case 'Exit':
 					FlxG.switchState(() -> new Intro());
-				case 'Overlay Overlay':
-					Data.settings.set('overlay-overlay', !Data.settings.get('overlay-overlay'));
-
-					if (Main.overlay != null)
-						Main.overlay.visible = Data.settings.get('overlay-overlay');
 				case 'Button Config':
 					openSubState(new ButtonConfig());
 				case 'Filter':
