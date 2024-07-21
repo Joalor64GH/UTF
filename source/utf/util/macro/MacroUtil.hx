@@ -1,8 +1,10 @@
 package utf.util.macro;
 
+#if macro
 import haxe.macro.Context;
 import haxe.macro.Expr;
 import haxe.macro.Type;
+#end
 
 /**
  * Utility class for various macro operations.
@@ -20,12 +22,14 @@ class MacroUtil
 	 */
 	public static macro function getDefine(key:String, defaultValue:String = null):Expr
 	{
+		#if !display
 		var value:String = Context.definedValue(key);
 
-		if (value == null)
-			value = defaultValue;
+		if (value != null && value.length > 0)
+			return macro $v{value};
+		#end
 
-		return macro $v{value};
+		return macro $v{defaultValue};
 	}
 
 	#if macro
