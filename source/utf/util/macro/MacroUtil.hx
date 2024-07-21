@@ -40,8 +40,6 @@ class MacroUtil
 	 */
 	public static function getClassTypeFromExpr(e:Expr):ClassType
 	{
-		var classType:ClassType = null;
-
 		final parts:Array<String> = [];
 
 		var nextSection:ExprDef = e.expr;
@@ -58,14 +56,14 @@ class MacroUtil
 					switch (c)
 					{
 						case CIdent(cn):
-							if (cn != 'null') parts.unshift(cn);
+							if (cn != 'null')
+								parts.unshift(cn);
 						default:
 					}
 				case EField(exp, field):
 					nextSection = exp.expr;
 
 					parts.unshift(field);
-
 				default:
 			}
 		}
@@ -74,10 +72,7 @@ class MacroUtil
 
 		if (fullClassName.length > 0)
 		{
-			var classType:Type = Context.getType(fullClassName);
-			var classTypeParsed:Type = Context.follow(classType, false);
-
-			switch (classTypeParsed)
+			switch (Context.follow(Context.getType(fullClassName), false))
 			{
 				case TInst(t, params):
 					return t.get();
