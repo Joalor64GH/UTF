@@ -58,7 +58,7 @@ class CompiledClassList
 
 		if (!classLists.exists(request))
 		{
-			#if !display
+			#if macro
 			Context.warning('Class list $request not properly generated. Please debug the build macro.');
 			#end
 
