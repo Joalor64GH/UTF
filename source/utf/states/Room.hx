@@ -11,7 +11,6 @@ import flixel.util.FlxColor;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import utf.objects.dialogue.Writer;
 import utf.objects.room.Object;
 
 using StringTools;
