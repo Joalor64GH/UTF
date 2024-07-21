@@ -1,4 +1,4 @@
-package utf.modding.registries;
+package utf.backend.registries;
 
 import flixel.FlxG;
 import haxe.io.Path;

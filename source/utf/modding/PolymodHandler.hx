@@ -11,9 +11,9 @@ import polymod.util.VersionUtil;
 import polymod.Polymod;
 import openfl.Lib;
 import sys.FileSystem;
-import utf.modding.registries.MonsterRegistery;
-import utf.modding.registries.ObjectRegistery;
-import utf.modding.registries.TyperRegistery;
+import utf.backend.registries.MonsterRegistery;
+import utf.backend.registries.ObjectRegistery;
+import utf.backend.registries.TyperRegistery;
 import utf.util.macro.ClassMacro;
 import utf.util.WindowUtil;
 

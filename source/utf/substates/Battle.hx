@@ -14,7 +14,7 @@ import utf.backend.Controls;
 import utf.backend.Data;
 import utf.backend.Global;
 import utf.objects.battle.Monster;
-import utf.objects.battle.MonsterRegistery;
+import utf.objects.registries.MonsterRegistery;
 // import utf.objects.dialogue.Writer;
 import utf.substates.GameOver;
 
