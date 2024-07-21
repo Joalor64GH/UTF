@@ -1,6 +1,6 @@
 import flixel.FlxG;
 import utf.backend.AssetPaths;
-import utf.objects.dialogue.Typer;
+import utf.objects.dialogue.typers.Typer;
 
 class Redacted_A extends Typer
 {
