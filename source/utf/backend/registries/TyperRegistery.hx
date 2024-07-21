@@ -36,7 +36,7 @@ class TyperRegistery
 				if (typer == null)
 					continue;
 
-				FlxG.log.notice('Initialized dialogue typer "${typer.typerName}"!');
+				FlxG.log.notice('Initialized dialogue typer "${typer.typerID}"!');
 
 				typerScriptedClasses.set(typer.typerID, scriptedTyper);
 			}
