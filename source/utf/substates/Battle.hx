@@ -16,7 +16,7 @@ import utf.backend.Global;
 import utf.backend.Typers;
 import utf.objects.battle.Monster;
 import utf.objects.battle.MonsterRegistery;
-import utf.objects.dialogue.Writer;
+// import utf.objects.dialogue.Writer;
 import utf.substates.GameOver;
 
 class Battle extends FlxSubState
@@ -33,7 +33,7 @@ class Battle extends FlxSubState
 	var monster:Monster;
 	var box:FlxShapeBox;
 	var heart:FlxSprite;
-	var writer:Writer;
+	// var writer:Writer;
 
 	var bullets:FlxTypedGroup<FlxSprite>;
 
@@ -111,11 +111,11 @@ class Battle extends FlxSubState
 		heart.active = false;
 		add(heart);
 
-		writer = new Writer(box.x + 14, box.y + 14);
+		/*writer = new Writer(box.x + 14, box.y + 14);
 		writer.skippable = false;
 		writer.startDialogue([{typer: Typers.data.get('battle'), text: '* You feel like you\'re going to\n  have a bad time.'}]);
 		writer.scrollFactor.set();
-		add(writer);
+		add(writer);*/
 
 		bullets = new FlxTypedGroup<FlxSprite>();
 		add(bullets);
@@ -134,7 +134,7 @@ class Battle extends FlxSubState
 		else if (FlxG.keys.justPressed.LEFT && !choiceSelected)
 			changeChoice(-1);
 
-		if (Controls.instance.justPressed('confirm'))
+		/*if (Controls.instance.justPressed('confirm'))
 		{
 			FlxG.sound.play(AssetPaths.sound('menuconfirm'));
 
@@ -185,7 +185,7 @@ class Battle extends FlxSubState
 			writer.visible = true;
 
 			writer.startDialogue([{typer: Typers.data.get('battle'), text: '* You feel like you\'re going to\n  have a bad time.'}]);
-		}
+		}*/
 
 		#if debug
 		if (FlxG.keys.justPressed.G)
