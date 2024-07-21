@@ -13,6 +13,7 @@ import openfl.Lib;
 import sys.FileSystem;
 import utf.modding.registries.MonsterRegistery;
 import utf.modding.registries.ObjectRegistery;
+import utf.modding.registries.TyperRegistery;
 import utf.util.macro.ClassMacro;
 import utf.util.WindowUtil;
 
@@ -88,6 +89,7 @@ class PolymodHandler
 	{
 		MonsterRegistery.loadMonsters();
 		ObjectRegistery.loadObjects();
+		TyperRegistery.loadTypers();
 	}
 
 	@:noCompletion
