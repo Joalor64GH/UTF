@@ -1,4 +1,4 @@
-package utf.objects.dialogue;
+package utf.objects.dialogue.typers;
 
 import flixel.FlxG;
 import flixel.sound.FlxSound;
