@@ -36,7 +36,7 @@ class ObjectRegistery
 				if (object == null)
 					continue;
 
-				FlxG.log.notice('Initialized object "${object.objectName}"!');
+				FlxG.log.notice('Initialized object "${object.objectID}"!');
 
 				objectScriptedClasses.set(object.objectID, scriptedObject);
 			}
