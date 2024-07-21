@@ -1,7 +1,9 @@
 package utf.util.macro;
 
+#if macro
+import haxe.macro.Context:
 import haxe.rtti.Meta;
-import lime.utils.Log;
+#end
 
 /**
  * Utility class for managing and retrieving lists of compiled classes.
@@ -10,6 +12,7 @@ import lime.utils.Log;
  */
 class CompiledClassList
 {
+	#if macro
 	private static var classLists:Map<String, List<Class<Dynamic>>>;
 
 	private static function init():Void
@@ -56,7 +59,7 @@ class CompiledClassList
 
 		if (!classLists.exists(request))
 		{
-			Log.warn('Class list $request not properly generated. Please debug the build macro.');
+			Context.warning('Class list $request not properly generated. Please debug the build macro.');
 
 			classLists.set(request, new List());
 		}
@@ -75,4 +78,5 @@ class CompiledClassList
 	{
 		return cast get(request);
 	}
+	#end
 }
