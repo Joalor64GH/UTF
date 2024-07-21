@@ -13,7 +13,6 @@ import utf.backend.AssetPaths;
 import utf.backend.Controls;
 import utf.backend.Data;
 import utf.backend.Global;
-import utf.backend.Typers;
 import utf.objects.battle.Monster;
 import utf.objects.battle.MonsterRegistery;
 // import utf.objects.dialogue.Writer;
