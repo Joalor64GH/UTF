@@ -2,8 +2,8 @@ package utf.util.macro;
 
 #if macro
 import haxe.macro.Context:
-import haxe.rtti.Meta;
 #end
+import haxe.rtti.Meta;
 
 /**
  * Utility class for managing and retrieving lists of compiled classes.
@@ -12,7 +12,6 @@ import haxe.rtti.Meta;
  */
 class CompiledClassList
 {
-	#if macro
 	private static var classLists:Map<String, List<Class<Dynamic>>>;
 
 	private static function init():Void
@@ -59,7 +58,9 @@ class CompiledClassList
 
 		if (!classLists.exists(request))
 		{
+			#if !display
 			Context.warning('Class list $request not properly generated. Please debug the build macro.');
+			#end
 
 			classLists.set(request, new List());
 		}
@@ -78,5 +79,4 @@ class CompiledClassList
 	{
 		return cast get(request);
 	}
-	#end
 }
