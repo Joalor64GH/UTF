@@ -23,7 +23,7 @@ jobs:
           haxe-version: 4.3.5
 
       - name: Installing Libraries
-        run: haxelib install hmm && haxelib run hmm install
+        run: haxelib install hmm --quiet && haxelib run hmm install --quiet
 
       - name: Setup Git hxcpp
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp
