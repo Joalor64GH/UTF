@@ -38,8 +38,6 @@ class Battle extends FlxSubState
 
 	override function create():Void
 	{
-		Typers.reloadFiles();
-
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
