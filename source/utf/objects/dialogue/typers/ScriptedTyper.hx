@@ -1,7 +1,7 @@
-package utf.objects.battle;
+package utf.objects.dialogue.typers;
 
 import polymod.hscript.HScriptedClass;
-import utf.objects.dialogue.Typer;
+import utf.objects.dialogue.typers.Typer;
 
 /**
  * A dialogue typer that can be controlled by scripts.
