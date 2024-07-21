@@ -10,19 +10,16 @@ import utf.backend.AssetPaths;
 import utf.backend.Controls;
 import utf.backend.Data;
 import utf.backend.Global;
-import utf.backend.Typers;
-import utf.objects.dialogue.Writer;
+// import utf.objects.dialogue.Writer;
 import utf.states.Room;
 
 class GameOver extends FlxSubState
 {
 	var gameoverbg:FlxSprite;
-	var writer:Writer;
+	//var writer:Writer;
 
 	override function create():Void
 	{
-		Typers.reloadFiles();
-
 		FlxG.sound.playMusic(AssetPaths.music('gameover'));
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -37,11 +34,11 @@ class GameOver extends FlxSubState
 		gameoverbg.active = false;
 		add(gameoverbg);
 
-		writer = new Writer(120, 320);
+		/*writer = new Writer(120, 320);
 		writer.skippable = false;
 		writer.finishCallback = () -> remove(writer);
 		writer.scrollFactor.set();
-		add(writer);
+		add(writer);*/
 
 		super.create();
 
@@ -58,10 +55,10 @@ class GameOver extends FlxSubState
 						'  It cannot end\n  now!'
 					];
 
-					writer.startDialogue([
+					/*writer.startDialogue([
 						{typer: Typers.data.get('gameover'), text: FlxG.random.getObject(lines)},
 						{typer: Typers.data.get('gameover'), text: '  ${Global.name}!^1\n  Stay determined...'}
-					]);
+					]);*/
 				});
 			}
 		});
@@ -69,14 +66,14 @@ class GameOver extends FlxSubState
 
 	override function update(elapsed:Float):Void
 	{
-		if (Controls.instance.justPressed('confirm') && !members.contains(writer) && gameoverbg.alpha == 1)
+		/*if (Controls.instance.justPressed('confirm') && !members.contains(writer) && gameoverbg.alpha == 1)
 		{
 			FlxTween.tween(gameoverbg, {alpha: 0}, 1.5, {
 				onComplete: (twn:FlxTween) -> close()
 			});
 
 			FlxG.sound.music.fadeOut(1.5);
-		}
+		}*/
 
 		super.update(elapsed);
 	}
