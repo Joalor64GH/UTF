@@ -3,8 +3,8 @@ package utf.modding.registries;
 import flixel.FlxG;
 import haxe.io.Path;
 import haxe.Exception;
-import utf.objects.dialogue.Typer;
-import utf.objects.dialogue.ScriptedTyper;
+import utf.objects.dialogue.typers.Typer;
+import utf.objects.dialogue.typers.ScriptedTyper;
 
 /**
  * Handles the loading and management of scripted dialogue typer classes.
