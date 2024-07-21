@@ -1,13 +1,5 @@
 package utf.states;
 
-import utf.backend.AssetPaths;
-import utf.backend.Controls;
-import utf.backend.Data;
-// import utf.backend.GitHub;
-import utf.backend.Global;
-#if debug
-import utf.backend.Macros;
-#end
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -16,6 +8,13 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import openfl.Lib;
+import utf.backend.AssetPaths;
+import utf.backend.Controls;
+import utf.backend.Data;
+import utf.backend.Global;
+#if debug
+import utf.util.macro.git.GitUtil;
+#end
 import utf.states.Room;
 import utf.states.Settings;
 #if debug
@@ -159,7 +158,7 @@ class Intro extends FlxState
 
 		#if debug
 		var info:FlxText = new FlxText(0, FlxG.height - 40, 0,
-			'UTF v${Lib.application.meta['version']} (c) MAJigsaw77 2023\nCommit ${Macros.getCommitNumber()} (${Macros.getCommitHash()})', 16);
+			'UTF v${Lib.application.meta['version']} (c) MAJigsaw77 2023\nCommit ${GitUtil.getCommitNumber()} (${GitUtil.getCommitHash()})', 16);
 		#else
 		var info:FlxText = new FlxText(0, FlxG.height - 20, 0, 'UTF v${Lib.application.meta['version']} (c) MAJigsaw77 2023', 16);
 		#end
