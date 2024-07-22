@@ -21,6 +21,7 @@ import openfl.display.Bitmap;
 import openfl.display.Sprite;
 import openfl.errors.Error;
 import openfl.events.ErrorEvent;
+import openfl.events.Event;
 import openfl.events.UncaughtErrorEvent;
 import openfl.filesystem.File;
 import openfl.system.System;
@@ -93,6 +94,17 @@ class Main extends Sprite
 	public function new():Void
 	{
 		super();
+
+		if (stage != null)
+			onAddedToStage();
+		else
+			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+	}
+
+	private function onAddedToStage(?event:Event):Void
+	{
+		if (hasEventListener(Event.ADDED_TO_STAGE))
+			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 
 		#if debug
 		FlxG.log.redirectTraces = true;
