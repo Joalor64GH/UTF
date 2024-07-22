@@ -13,7 +13,6 @@ class UndyneEx extends Monster
 	var head:FlxSprite;
 	var hair:FlxSprite;
 	var beam:FlxSprite;
-	var beamtimer:Int = 0;
 
 	public function new():Void
 	{
@@ -59,12 +58,10 @@ class UndyneEx extends Monster
 		screenCenter();
 	}
 
+	var beamtimer:Int = 0;
+
 	public override function update(elapsed:Float):Void
 	{
-		(FlxG.game.ticks / 1000) += elapsed;
-
-		super.update(elapsed);
-
 		pants.angle = Math.sin((FlxG.game.ticks / 1000) * 6.5) * 3;
 		pants.centerOffsets();
 		pants.offset.y += (Math.sin(-(FlxG.game.ticks / 1000) * 6.5));
@@ -100,5 +97,7 @@ class UndyneEx extends Monster
 		}
 
 		beamtimer++;
+
+		super.update(elapsed);
 	}
 }
