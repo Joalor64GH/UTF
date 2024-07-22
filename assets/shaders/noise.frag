@@ -1,9 +1,9 @@
 #pragma header
 
 uniform float uTime;
-uniform float maxStrength; // 0.5
-uniform float minStrength; // 0.125
-uniform float speed; // 10.0
+uniform float maxStrength;
+uniform float minStrength;
+uniform float speed;
 
 float random(vec2 noise)
 {
@@ -16,5 +16,5 @@ void main(void)
 
 	vec3 colour = vec3(random(fract(openfl_TextureCoordv * fract(sin(uTime * speed))).xy)) * maxStrength;
 
-	gl_FragColor = vec4(vec3(texture2D(bitmap, openfl_TextureCoordv)) - colour, 1.0);
+	gl_FragColor = vec4(vec3(flixel_texture2D(bitmap, openfl_TextureCoordv)) - colour, 1.0);
 }
