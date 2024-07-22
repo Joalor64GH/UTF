@@ -38,7 +38,7 @@ class Overlay extends FPS
 		final textFormat:TextFormat = defaultTextFormat;
 		textFormat.font = AssetPaths.font('DTM-Sans');
 		textFormat.size = 16;
-		setTextFormat(textFormat);
+		defaultTextFormat = textFormat;
 	}
 
 	@:noCompletion
