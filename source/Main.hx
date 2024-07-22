@@ -82,6 +82,9 @@ class Main extends Sprite
 			if (keyCode == KeyCode.F && (keyModifier.ctrlKey && keyModifier.metaKey) && (!keyModifier.altKey && !keyModifier.shiftKey))
 				window.onKeyDown.cancel();
 			#end
+
+			if (keyCode == KeyCode.F4 && (!keyModifier.altKey && !keyModifier.ctrlKey && !keyModifier.shiftKey && !keyModifier.metaKey))
+				FlxG.fullscreen = !FlxG.fullscreen;
 		});
 		#end
 
@@ -113,10 +116,6 @@ class Main extends Sprite
 		FlxG.signals.gameResized.add(onResizeGame);
 		FlxG.signals.preStateCreate.add(onPreStateCreate);
 		FlxG.signals.postStateSwitch.add(onPostStateSwitch);
-
-		#if (!mobile || !switch)
-		FlxG.signals.postUpdate.add(onPostUpdate);
-		#end
 
 		addChild(new FlxGame(640, 480, Startup, 60, 60));
 
@@ -281,12 +280,4 @@ class Main extends Sprite
 	{
 		System.gc();
 	}
-
-	#if (!mobile || !switch)
-	private inline function onPostUpdate():Void
-	{
-		if (FlxG.keys.justPressed.F4)
-			FlxG.fullscreen = !FlxG.fullscreen;
-	}
-	#end
 }
