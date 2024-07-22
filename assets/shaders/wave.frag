@@ -36,5 +36,5 @@ vec2 sinWave(vec2 uv)
 
 void main(void)
 {
-	gl_FragColor = texture2D(bitmap, sinWave(openfl_TextureCoordv));
+	gl_FragColor = flixel_texture2D(bitmap, sinWave(openfl_TextureCoordv));
 }
