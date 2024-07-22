@@ -48,4 +48,9 @@ class Typer
 	{
 		this.typerID = typerID;
 	}
+
+	public function toString():String
+	{
+		return '';
+	}
 }
