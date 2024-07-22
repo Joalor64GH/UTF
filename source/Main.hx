@@ -223,13 +223,10 @@ class Main extends Sprite
 
 	private inline function onResizeGame(width:Int, height:Int):Void
 	{
-		if (overlay != null)
-		{
-			final scale:Float = Math.min(width / FlxG.width, height / FlxG.height);
+		final scale:Float = Math.min(width / FlxG.width, height / FlxG.height);
 
-			overlay.scaleX = (scale > 1 ? scale : 1);
-			overlay.scaleY = (scale > 1 ? scale : 1);
-		}
+		if (overlay != null)
+			overlay.scaleX = overlay.scaleY = (scale > 1 ? scale : 1);
 
 		if (FlxG.cameras != null && (FlxG.cameras.list != null && FlxG.cameras.list.length > 0))
 		{
