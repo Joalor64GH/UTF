@@ -2,6 +2,7 @@ package utf.objects.debug;
 
 import flixel.util.FlxStringUtil;
 import openfl.display.FPS;
+import openfl.text.TextFormat;
 import openfl.system.System;
 import openfl.Lib;
 import utf.backend.AssetPaths;
@@ -34,8 +35,10 @@ class Overlay extends FPS
 	{
 		super(x, y, color);
 
-		defaultTextFormat.font = AssetPaths.font('DTM-Sans');
-		defaultTextFormat.size = 16;
+		final textFormat:TextFormat = defaultTextFormat;
+		textFormat.font = AssetPaths.font('DTM-Sans');
+		textFormat.size = 16;
+		setTextFormat(textFormat);
 	}
 
 	@:noCompletion
