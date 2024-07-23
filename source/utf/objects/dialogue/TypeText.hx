@@ -51,35 +51,40 @@ class TypeText extends FlxText
 
 	override public function update(elapsed:Float):Void
 	{
-		if (textPos < originalText.length && typing && !_waiting)
+		if (textPos < originalText.length && typing)
 			timer += elapsed;
 
 		if (typing && timer >= delay)
 		{
-			if (originalText.charAt(textPos) == '^')
+			switch (originalText.charAt(textPos))
 			{
-				final waitTime:Null<Int> = Std.parseInt(originalText.charAt(textPos + 1));
+				case ' ':
+					textPos++;
 
-				if (waitTime != null)
-				{
-					originalText = originalText.substring(0, textPos) + originalText.substring(textPos + 2);
+					return;
+				case '^':
+					final waitTime:Null<Int> = Std.parseInt(originalText.charAt(textPos + 1));
 
-					textPos--;
-
-					if (waitTime > 0)
+					if (waitTime != null)
 					{
-						typing = false;
+						originalText = originalText.substring(0, textPos) + originalText.substring(textPos + 2);
 
-						FlxTimer.wait(1 / (waitTime * 10), () -> typing = true);
+						textPos--;
 
-						return;
+						if (waitTime > 0)
+						{
+							typing = false;
+
+							FlxTimer.wait(1 / (waitTime * 10), () -> typing = true);
+
+							return;
+						}
 					}
-				}
-				else
+					else
+						textPos++;
+				default:
 					textPos++;
 			}
-			else
-				textPos++;
 
 			if (textPos > originalText.length)
 				textPos = originalText.length;
@@ -88,7 +93,7 @@ class TypeText extends FlxText
 
 			timer %= delay;
 
-			if (sounds != null && sounds.length > 0 && !_ignoreCharacters.contains(originalText.charAt(textPos - 1)))
+			if (sounds != null && sounds.length > 0 && !IGNORE_CHARACTERS.contains(originalText.charAt(textPos - 1)))
 			{
 				for (sound in sounds)
 					sound.stop();
