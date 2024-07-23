@@ -25,6 +25,9 @@ class UndyneEx extends Monster
 		monsterDefense = 5;
 		monsterXpReward = 0;
 		monsterGoldReward = 0;
+		monsterComments = ['* The wind is howling...'];
+		monsterCheckMessage = '* UNDYNE THE UNDYING 99ATK 99DEF\n* Heroine reformed by her own\n  DETERMINATION to save Earth.';
+		monsterSpareable = false;
 
 		legs = new FlxSprite(78, 154, AssetPaths.sprite('undyne_anim/legs'));
 		add(legs);
