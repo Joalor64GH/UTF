@@ -27,7 +27,7 @@ class GameOver extends FlxSubState
 		bg.active = false;
 		add(bg);
 
-		gameoverbg = new FlxSprite(0, 30, AssetPaths.sprite('gameovergameoverbg'));
+		gameoverbg = new FlxSprite(0, 30, AssetPaths.sprite('gameoverbg'));
 		gameoverbg.alpha = 0;
 		gameoverbg.screenCenter(X);
 		gameoverbg.scrollFactor.set();
