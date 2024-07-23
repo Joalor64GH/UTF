@@ -14,7 +14,6 @@ class ClassMacro
 {
 	/**
 	 * Gets a list of `Class<T>` for all classes in a specified package.
-	 *
 	 * @param targetPackage A String containing the package name to query.
 	 * @param includeSubPackages Whether to include classes located in sub-packages of the target package.
 	 * @return A list of classes matching the specified criteria.
@@ -37,7 +36,6 @@ class ClassMacro
 
 	/**
 	 * Get a list of `Class<T>` for all classes extending a specified class.
-	 *
 	 * @param targetClass The class to query for subclasses.
 	 * @return A list of classes matching the specified criteria.
 	 */

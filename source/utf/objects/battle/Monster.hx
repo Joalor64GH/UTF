@@ -49,7 +49,6 @@ class Monster extends FlxSpriteGroup
 
 	/**
 	 * Constructor to initialize the monster with specified attributes.
-	 *
 	 * @param monsterId The ID of the monster.
 	 */
 	public function new(monsterID:String):Void

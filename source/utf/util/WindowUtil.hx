@@ -12,7 +12,6 @@ class WindowUtil
 {
 	/**
 	 * Show a popup with the given text.
-	 *
 	 * @param name The title of the popup.
 	 * @param desc The content of the popup.
 	 */

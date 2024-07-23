@@ -26,7 +26,6 @@ class Overlay extends FPS
 
 	/**
 	 * Constructs an instance with specified position and text color.
-	 *
 	 * @param x The x-coordinate of the overlay position. Default is 10.
 	 * @param y The y-coordinate of the overlay position. Default is 10.
 	 * @param color The color of the text in the overlay. Default is white (0xFFFFFFFF).

@@ -47,7 +47,6 @@ class CompiledClassList
 	/**
 	 * Retrieves a list of classes based on the given request identifier.
 	 * Initializes the class lists if they have not been initialized yet.
-	 *
 	 * @param request The identifier for the requested class list.
 	 * @return A list of classes corresponding to the request identifier.
 	 */
@@ -70,7 +69,6 @@ class CompiledClassList
 
 	/**
 	 * Retrieves a typed list of classes based on the given request identifier.
-	 *
 	 * @param request The identifier for the requested class list.
 	 * @param type The expected type of the classes in the list.
 	 * @return A list of classes of the specified type corresponding to the request identifier.

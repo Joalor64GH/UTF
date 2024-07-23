@@ -47,7 +47,6 @@ class ObjectRegistery
 
 	/**
 	 * Fetches a scripted room object by its ID.
-	 *
 	 * @param objectID The ID of the object.
 	 * @return The object or null if not found.
 	 */

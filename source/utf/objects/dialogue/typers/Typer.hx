@@ -41,7 +41,6 @@ class Typer
 
 	/**
 	 * Constructor to initialize the typer with specified ID.
-	 *
 	 * @param typerID The ID of the typer.
 	 */
 	public function new(typerID:String):Void

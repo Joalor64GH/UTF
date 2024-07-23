@@ -47,7 +47,6 @@ class TyperRegistery
 
 	/**
 	 * Fetches a scripted dialogue typer by its ID.
-	 *
 	 * @param typerID The ID of the typer.
 	 * @return The typer or null if not found.
 	 */

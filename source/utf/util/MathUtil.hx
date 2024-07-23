@@ -9,7 +9,6 @@ class MathUtil
 {
 	/**
 	 * Get a random number between a and b.
-	 *
 	 * @param a The lower limit.
 	 * @param b The upper limit.
 	 * @return A random number between a and b.
@@ -21,7 +20,6 @@ class MathUtil
 
 	/**
 	 * Calculate the positive modulo of n by m.
-	 *
 	 * @param n The dividend.
 	 * @param m The divisor.
 	 * @return The positive modulo result.

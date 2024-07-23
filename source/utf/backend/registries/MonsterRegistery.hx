@@ -47,7 +47,6 @@ class MonsterRegistery
 
 	/**
 	 * Fetches a scripted monster by its ID.
-	 *
 	 * @param monsterID The ID of the monster.
 	 * @return The monster or null if not found.
 	 */

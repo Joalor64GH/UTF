@@ -26,7 +26,6 @@ class Object extends FlxSprite
 
 	/**
 	 * Constructor to initialize the object with a specified ID.
-	 *
 	 * @param objectID The ID of the object.
 	 */
 	public function new(objectID:String):Void
