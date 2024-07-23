@@ -58,7 +58,7 @@ class TypeText extends FlxText
 		{
 			switch (originalText.charAt(textPos))
 			{
-				case ' ':
+				case ' ' | '\n':
 					textPos++;
 
 					return;
