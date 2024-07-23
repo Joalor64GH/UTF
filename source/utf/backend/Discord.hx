@@ -7,10 +7,19 @@ import hxdiscord_rpc.Types;
 import openfl.Lib;
 import sys.thread.Thread;
 
+/**
+ * This class handles Discord Rich Presence integration.
+ */
 class Discord
 {
+	/**
+	 * Indicates if Discord Rich Presence is initialized.
+	 */
 	public static var initialized(default, null):Bool = false;
 
+	/**
+	 * Initializes Discord Rich Presence.
+	 */
 	public static function load():Void
 	{
 		if (initialized)
@@ -22,7 +31,6 @@ class Discord
 		handlers.errored = cpp.Function.fromStaticFunction(onError);
 		RichPresence.Initialize("1140307809167220836", cpp.RawPointer.addressOf(handlers), 1, null);
 
-		// Daemon Thread
 		Thread.create(function():Void
 		{
 			while (true)
@@ -32,7 +40,6 @@ class Discord
 				#end
 				RichPresence.RunCallbacks();
 
-				// Wait 2 seconds until the next loop...
 				Sys.sleep(2);
 			}
 		});
@@ -42,27 +49,20 @@ class Discord
 		initialized = true;
 	}
 
-	public static function changePresence(details:String, ?state:String):Void
-	{
-		var discordPresence:DiscordRichPresence = DiscordRichPresence.create();
-		discordPresence.details = details;
-
-		if (state != null)
-			discordPresence.state = state;
-
-		discordPresence.largeImageKey = "icon";
-		discordPresence.largeImageText = cast(Lib.application.meta['title'], String);
-		RichPresence.UpdatePresence(cpp.RawConstPointer.addressOf(discordPresence));
-	}
-
 	private static function onReady(request:cpp.RawConstPointer<DiscordUser>):Void
 	{
-		if (Std.parseInt(cast(request[0].discriminator, String)) != 0)
-			FlxG.log.notice('(Discord) Connected to User "${cast (request[0].username, String)}#${cast (request[0].discriminator, String)}"');
-		else
-			FlxG.log.notice('(Discord) Connected to User "${cast (request[0].username, String)}"');
+		final discriminator:String = cast(request[0].discriminator, String);
+		final username:String = cast(request[0].username, String);
 
-		Discord.changePresence('Just Started');
+		if (Std.parseInt(discriminator) != 0)
+			FlxG.log.notice('(Discord) Connected to User "$username#$discriminator"');
+		else
+			FlxG.log.notice('(Discord) Connected to User "$username"');
+
+		var discordPresence:DiscordRichPresence = DiscordRichPresence.create();
+		discordPresence.largeImageKey = "icon";
+		discordPresence.largeImageText = "UTF";
+		RichPresence.UpdatePresence(cpp.RawConstPointer.addressOf(discordPresence));
 	}
 
 	private static function onDisconnected(errorCode:Int, message:cpp.ConstCharStar):Void
