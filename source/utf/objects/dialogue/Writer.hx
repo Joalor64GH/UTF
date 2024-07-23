@@ -3,7 +3,6 @@ package utf.objects.dialogue;
 import utf.backend.AssetPaths;
 import utf.backend.Controls;
 import utf.backend.Data;
-import utf.backend.Typers;
 import flixel.FlxG;
 import utf.objects.dialogue.typers.Typer;
 import utf.objects.dialogue.TypeText;
