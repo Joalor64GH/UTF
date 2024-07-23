@@ -25,7 +25,7 @@ class Discord
 		if (initialized)
 			return;
 
-		var handlers:DiscordEventHandlers = DiscordEventHandlers.create();
+		final handlers:DiscordEventHandlers = DiscordEventHandlers.create();
 		handlers.ready = cpp.Function.fromStaticFunction(onReady);
 		handlers.disconnected = cpp.Function.fromStaticFunction(onDisconnected);
 		handlers.errored = cpp.Function.fromStaticFunction(onError);
@@ -38,6 +38,7 @@ class Discord
 				#if DISCORD_DISABLE_IO_THREAD
 				RichPresence.UpdateConnection();
 				#end
+
 				RichPresence.RunCallbacks();
 
 				Sys.sleep(2);
