@@ -48,7 +48,7 @@ class Writer extends TypeText
 		if (dialogue == null)
 			dialogue = {typer: 'default', text: 'Error!'};
 
-		final typer:Typer = TyperRegistery.fetchTyper(dialogue.typer ?? 'default'):
+		final typer:Typer = TyperRegistery.fetchTyper(dialogue.typer ?? 'default');
 
 		if (font != typer.fontName)
 			font = typer.fontName;
