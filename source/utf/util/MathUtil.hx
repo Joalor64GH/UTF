@@ -28,4 +28,16 @@ class MathUtil
 	{
 		return ((n % m) + m) % m;
 	}
+
+	/**
+	 * Restricts a value to be within a specified range.
+	 * @param value The value to clamp.
+	 * @param min The minimum value allowed.
+	 * @param max The maximum value allowed.
+	 * @return The clamped value.
+	 */
+	public static function clamp(value:Float, min:Float, max:Float):Float
+	{
+		return Math.max(min, Math.min(max, value));
+	}
 }
