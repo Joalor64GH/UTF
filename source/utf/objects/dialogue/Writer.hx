@@ -1,12 +1,12 @@
 package utf.objects.dialogue;
 
+import flixel.FlxG;
+import utf.backend.registries.TyperRegistery;
 import utf.backend.AssetPaths;
 import utf.backend.Controls;
 import utf.backend.Data;
-import flixel.FlxG;
 import utf.objects.dialogue.typers.Typer;
 import utf.objects.dialogue.TypeText;
-import utf.backend.registries.TyperRegistery;
 
 using flixel.util.FlxArrayUtil;
 
