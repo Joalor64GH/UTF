@@ -36,18 +36,18 @@ class PolymodHandler
 	{
 		Polymod.onError = function(error:PolymodError):Void
 		{
-			final code:String = Std.string(error.code);
+			final code:String = FlxStringUtil.toTitleCase(Std.string(error.code).split('_').join(' '));
 
 			switch (error.severity)
 			{
 				case NOTICE:
-					FlxG.log.notice('(${code.toUpperCase()}) ${error.message}');
+					FlxG.log.notice('($code) ${error.message}');
 				case WARNING:
-					FlxG.log.warn('(${code.toUpperCase()}) ${error.message}');
+					FlxG.log.warn('($code) ${error.message}');
 				case ERROR:
-					FlxG.log.error('(${code.toUpperCase()}) ${error.message}');
+					FlxG.log.error('($code) ${error.message}');
 
-					WindowUtil.showAlert(FlxStringUtil.toTitleCase(code.split('_').join(' ')), error.message);
+					WindowUtil.showAlert(code, error.message);
 			}
 		}
 
