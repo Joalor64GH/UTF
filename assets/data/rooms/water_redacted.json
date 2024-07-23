@@ -1,9 +1,9 @@
 {
 	"id": 272,
+	"name": "Redacted",
 	"width": 640,
 	"height": 480,
 	"objects": [
-		{ "name": "mainchara", "position": [280, 200], "index": 1 },
 		{ "name": "solidsmall", "position": [200, 440], "index": 2 },
 		{ "name": "solidsmall", "position": [360, 440], "index": 3 },
 		{ "name": "solidsmall", "position": [360, 400], "index": 4 },
@@ -34,5 +34,8 @@
 		{ "name": "doorD", "position": [240, 440], "index": 29 },
 		{ "name": "doorD", "position": [280, 440], "index": 30 },
 		{ "name": "doorD", "position": [320, 440], "index": 31 }
+	],
+	"characters": [
+		{ "name": "mainchara", "position": [280, 200], "index": 1 },
 	]
 }
