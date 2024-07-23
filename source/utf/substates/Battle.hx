@@ -20,26 +20,27 @@ import utf.substates.GameOver;
 
 class Battle extends FlxSubState
 {
+	public static var instance:Battle = null;
+	
 	var selected:Int = 0;
 	final choices:Array<String> = ['Fight', 'Talk', 'Item', 'Spare'];
 	var items:FlxTypedGroup<FlxSprite>;
 
-	var stats:FlxText;
-	var hpName:FlxSprite;
-	var hpBar:FlxBar;
-	var hpInfo:FlxText;
+	public var bg:FlxSprite;
+	public var stats:FlxText;
+	public var hpName:FlxSprite;
+	public var hpBar:FlxBar;
+	public var hpInfo:FlxText;
 
-	var monster:Monster;
-	var box:FlxShapeBox;
-	var heart:FlxSprite;
+	public var monster:Monster;
+	public var box:FlxShapeBox;
+	public var heart:FlxSprite;
 	// var writer:Writer;
 
 	var bullets:FlxTypedGroup<FlxSprite>;
 
 	override function create():Void
 	{
-		persistentUpdate = true;
-
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.screenCenter();
 		bg.active = false;
