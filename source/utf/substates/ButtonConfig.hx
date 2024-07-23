@@ -19,8 +19,17 @@ class ButtonConfig extends FlxSubState
 	var selected:Int = 0;
 	var items:FlxTypedGroup<FlxText>;
 
+	var prevPersistentDraw:Bool;
+	var prevPersistentUpdate:Bool;
+
 	override function create():Void
 	{
+		prevPersistentDraw = FlxG.state.persistentDraw;
+		prevPersistentUpdate = FlxG.state.persistentUpdate;
+
+		FlxG.state.persistentDraw = false;
+		FlxG.state.persistentUpdate = false;
+
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.screenCenter();
 		bg.active = false;
@@ -98,6 +107,14 @@ class ButtonConfig extends FlxSubState
 			close();
 
 		super.update(elapsed);
+	}
+
+	override public function close():Void
+	{
+		FlxG.state.persistentDraw = prevPersistentDraw;
+		FlxG.state.persistentUpdate = prevPersistentUpdate;
+
+		super.close();
 	}
 
 	private function changeBind(num:Int = 0):Void
