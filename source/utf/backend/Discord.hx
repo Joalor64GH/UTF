@@ -59,7 +59,7 @@ class Discord
 		else
 			FlxG.log.notice('(Discord) Connected to User "$username"');
 
-		var discordPresence:DiscordRichPresence = DiscordRichPresence.create();
+		final discordPresence:DiscordRichPresence = DiscordRichPresence.create();
 		discordPresence.largeImageKey = "icon";
 		discordPresence.largeImageText = "UTF";
 		RichPresence.UpdatePresence(cpp.RawConstPointer.addressOf(discordPresence));
