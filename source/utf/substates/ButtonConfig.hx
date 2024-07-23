@@ -18,9 +18,9 @@ class ButtonConfig extends FlxSubState
 {
 	var selected:Int = 0;
 	var items:FlxTypedGroup<FlxText>;
-
-	var prevPersistentDraw:Bool;
-	var prevPersistentUpdate:Bool;
+	var keySelected:Bool = false;
+	var prevPersistentDraw:Bool = false;
+	var prevPersistentUpdate:Bool = false;
 
 	override function create():Void
 	{
@@ -69,10 +69,10 @@ class ButtonConfig extends FlxSubState
 		super.create();
 	}
 
-	var keySelected:Bool = false;
-
 	override function update(elapsed:Float):Void
 	{
+		super.update(elapsed);
+
 		if (FlxG.keys.justPressed.DOWN && !keySelected)
 			changeBind(1);
 		else if (FlxG.keys.justPressed.UP && !keySelected)
@@ -105,8 +105,6 @@ class ButtonConfig extends FlxSubState
 		}
 		else if (Controls.instance.justPressed('cancel') && !keySelected)
 			close();
-
-		super.update(elapsed);
 	}
 
 	override public function close():Void
