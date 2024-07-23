@@ -27,7 +27,7 @@ class Typer
 	/**
 	 * The spacing between characters in the text.
 	 */
-	public var fontSpacing:Float;
+	public var fontSpacing:Null<Float>;
 
 	/**
 	 * Array of sounds associated with the typer.
