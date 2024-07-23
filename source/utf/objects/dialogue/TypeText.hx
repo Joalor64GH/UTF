@@ -6,117 +6,118 @@ import flixel.sound.FlxSound;
 import flixel.util.FlxTimer;
 import flixel.FlxG;
 
+// TODO: Rewrite this to use a sprite group with text's as it's letters.
 class TypeText extends FlxText
 {
+	private static final IGNORE_CHARACTERS:Array<String> = ['\n', ' ', '^', '!', '.', '?', ',', ':', '/', '\\', '|', '*'];
+
 	public var delay:Float = 0.05;
-	public var sounds:Array<FlxSound> = [];
 	public var finished(get, null):Bool = false;
-	public var finishSounds:Bool = false;
 
-	var _finalText:String = '';
-	var _timer:Float = 0;
-	var _length:Int = 0;
-	var _typing:Bool = false;
-	var _waiting:Bool = false;
+	private var originalText:String = '';
+	private var textPos:Int = 0;
+	private var timer:Float = 0;
+	private var typing:Bool = false;
+	private var sounds:Array<FlxSound> = [];
 
-	final _ignoreCharacters:Array<String> = ['\n', ' ', '^', '!', '.', '?', ',', ':', '/', '\\', '|', '*'];
-
-	public function new(x:Float, y:Float, width:Int, size:Int = 8, embeddedFont:Bool = true):Void
+	public function new(x:Float, y:Float):Void
 	{
-		super(x, y, width, '', size, embeddedFont);
+		super(x, y, 0, '', 8, true);
 	}
 
-	public function start(text:String, ?delay:Float):Void
+	public function start(text:String, ?delay:Float = 0.05, ?sounds:Array<FlxSound>):Void
 	{
 		if (delay != null)
 			this.delay = delay;
 
-		_finalText = text;
-		_typing = true;
-		_length = 1;
+		if (sounds != null && sounds.length > 0)
+			this.sounds = sounds;
 
-		this.text = '';
+		originalText = text;
+		typing = true;
+		textPos = 1;
+
+		updateText();
 	}
 
 	public function skip():Void
 	{
-		if (_typing)
-			_length = _finalText.length;
+		if (typing)
+		{
+			textPos = originalText.length;
+			updateText();
+		}
 	}
 
 	override public function update(elapsed:Float):Void
 	{
-		if (_length < _finalText.length && _typing && !_waiting)
-			_timer += elapsed;
+		if (textPos < originalText.length && typing && !_waiting)
+			timer += elapsed;
 
-		if (_typing && !_waiting)
+		if (typing && timer >= delay)
 		{
-			if (_timer >= delay)
+			if (originalText.charAt(textPos) == '^')
 			{
-				if (_finalText.charAt(_length) == '^')
+				final waitTime:Null<Int> = Std.parseInt(originalText.charAt(textPos + 1));
+
+				if (waitTime != null)
 				{
-					final waitTime:Null<Int> = Std.parseInt(_finalText.charAt(_length + 1));
+					originalText = originalText.substring(0, textPos) + originalText.substring(textPos + 2);
 
-					if (waitTime != null)
+					textPos--;
+
+					if (waitTime > 0)
 					{
-						_finalText = _finalText.substring(0, _length) + _finalText.substring(_length + 2);
+						typing = false;
 
-						_length--;
+						FlxTimer.wait(1 / (waitTime * 10), () -> typing = true);
 
-						if (waitTime > 0)
-						{
-							_waiting = true;
-
-							new FlxTimer().start(1 / (waitTime * 10), function(tmr:FlxTimer):Void
-							{
-								_waiting = false;
-							});
-
-							return;
-						}
+						return;
 					}
-					else
-						_length += Math.floor(_timer / delay);
 				}
 				else
-					_length += Math.floor(_timer / delay);
-
-				if (_length > _finalText.length)
-					_length = _finalText.length;
-
-				_timer %= delay;
-
-				if (sounds != null && !_ignoreCharacters.contains(_finalText.charAt(_length - 1)))
-				{
-					if (!finishSounds)
-					{
-						for (sound in sounds)
-							sound.stop();
-					}
-
-					FlxG.random.getObject(sounds).play(!finishSounds);
-				}
+					textPos++;
 			}
+			else
+				textPos++;
 
-			final curText:String = _finalText.substr(0, _length);
+			if (textPos > originalText.length)
+				textPos = originalText.length;
 
-			if (text != curText)
+			updateText();
+
+			timer %= delay;
+
+			if (sounds != null && sounds.length > 0 && !_ignoreCharacters.contains(originalText.charAt(textPos - 1)))
 			{
-				text = curText;
+				for (sound in sounds)
+					sound.stop();
 
-				if (_length >= _finalText.length)
-				{
-					_timer = 0;
-					_typing = false;
-				}
+				FlxG.random.getObject(sounds).play(true);
 			}
 		}
 
 		super.update(elapsed);
 	}
 
+	private function updateText():Void
+	{
+		final curText:String = originalText.substr(0, textPos);
+
+		if (text != curText)
+		{
+			text = curText;
+
+			if (textPos >= originalText.length)
+			{
+				textPos = 0;
+				typing = false;
+			}
+		}
+	}
+
 	private function get_finished():Bool
 	{
-		return !_typing && _length >= _finalText.length;
+		return !typing && textPos >= originalText.length;
 	}
 }
