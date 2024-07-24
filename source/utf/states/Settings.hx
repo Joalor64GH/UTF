@@ -17,7 +17,6 @@ import utf.backend.Controls;
 import utf.backend.Data;
 import utf.backend.Global;
 import utf.states.Intro;
-import utf.substates.ButtonConfig;
 import utf.util.DateUtil;
 
 using StringTools;
@@ -25,7 +24,7 @@ using StringTools;
 class Settings extends FlxTransitionableState
 {
 	var selected:Int = 0;
-	final options:Array<String> = ['Exit', 'Button Config', 'Filter'];
+	final options:Array<String> = ['Exit', 'Filter'];
 	var items:FlxTypedGroup<FlxText>;
 
 	var tobdogLine:FlxText;
@@ -176,8 +175,6 @@ class Settings extends FlxTransitionableState
 			{
 				case 'Exit':
 					FlxG.switchState(() -> new Intro());
-				case 'Button Config':
-					openSubState(new ButtonConfig());
 				case 'Filter':
 					switch (Data.settings.get('filter'))
 					{
