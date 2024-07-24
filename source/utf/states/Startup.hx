@@ -1,6 +1,10 @@
 package utf.states;
 
-import utf.backend.Controls;
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.addons.transition.TransitionData;
+import flixel.util.FlxColor;
+import flixel.FlxG;
+import flixel.FlxState;
 import utf.backend.Data;
 #if hxdiscord_rpc
 import utf.backend.Discord;
@@ -9,11 +13,6 @@ import utf.backend.Global;
 #if polymod
 import utf.modding.PolymodHandler;
 #end
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.addons.transition.TransitionData;
-import flixel.util.FlxColor;
-import flixel.FlxG;
-import flixel.FlxState;
 import utf.states.Title;
 
 class Startup extends FlxState
@@ -21,9 +20,6 @@ class Startup extends FlxState
 	override function create():Void
 	{
 		FlxG.autoPause = false;
-
-		if (Controls == null)
-			Controls = new Controls();
 
 		Data.load();
 
