@@ -44,9 +44,6 @@ jobs:
         if: env.CACHE_HIT != 'true'
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp
 
-      - name: List of installed Haxe Libraries
-        run: haxelib list
-
       - name: Configure Android
         run: |
           haxelib run lime setup -alias -y
