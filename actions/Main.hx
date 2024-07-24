@@ -95,7 +95,11 @@ class Main
 	 */
 	public static function runCommand(args:Array<String>):Void
 	{
-		Sys.println(AnsiColors.yellow(args.join(' ')));
+		final command:String = args.join(' ');
+
+		if (command != AnsiColors.yellow(command))
+			Sys.println(AnsiColors.yellow(command));
+
 		Sys.command(args.shift(), args);
 	}
 }
@@ -111,7 +115,7 @@ class AnsiColors
 	 * @param input The input string.
 	 * @return The colored string.
 	 */
-	public static function red(input:String):String
+	public static inline function red(input:String):String
 	{
 		return color(input, Red);
 	}
@@ -121,7 +125,7 @@ class AnsiColors
 	 * @param input The input string.
 	 * @return The colored string.
 	 */
-	public static function green(input:String):String
+	public static inline function green(input:String):String
 	{
 		return color(input, Green);
 	}
@@ -131,7 +135,7 @@ class AnsiColors
 	 * @param input The input string.
 	 * @return The colored string.
 	 */
-	public static function yellow(input:String):String
+	public static inline function yellow(input:String):String
 	{
 		return color(input, Yellow);
 	}
@@ -141,7 +145,7 @@ class AnsiColors
 	 * @param input The input string.
 	 * @return The colored string.
 	 */
-	public static function blue(input:String):String
+	public static inline function blue(input:String):String
 	{
 		return color(input, Blue);
 	}
@@ -151,7 +155,7 @@ class AnsiColors
 	 * @param input The input string.
 	 * @return The colored string.
 	 */
-	public static function magenta(input:String):String
+	public static inline function magenta(input:String):String
 	{
 		return color(input, Magenta);
 	}
@@ -161,7 +165,7 @@ class AnsiColors
 	 * @param input The input string.
 	 * @return The colored string.
 	 */
-	public static function cyan(input:String):String
+	public static inline function cyan(input:String):String
 	{
 		return color(input, Cyan);
 	}
@@ -171,7 +175,7 @@ class AnsiColors
 	 * @param input The input string.
 	 * @return The colored string.
 	 */
-	public static function gray(input:String):String
+	public static inline function gray(input:String):String
 	{
 		return color(input, Gray);
 	}
@@ -181,7 +185,7 @@ class AnsiColors
 	 * @param input The input string.
 	 * @return The colored string.
 	 */
-	public static function white(input:String):String
+	public static inline function white(input:String):String
 	{
 		return color(input, White);
 	}
@@ -191,7 +195,7 @@ class AnsiColors
 	 * @param input The input string.
 	 * @return The uncolored string.
 	 */
-	public static function none(input:String):String
+	public static inline function none(input:String):String
 	{
 		return color(input, None);
 	}
@@ -202,19 +206,9 @@ class AnsiColors
 	 * @param ansiColor The ANSI color code.
 	 * @return The colored string.
 	 */
-	public static function color(input:String, ansiColor:AnsiColor):String
+	public static inline function color(input:String, ansiColor:AnsiColor):String
 	{
-		#if sys
-		final colorSupported:Bool = Sys.getEnv("TERM_PROGRAM") == "Apple_Terminal"
-			|| Sys.getEnv("TERM") == "xterm-256color"
-			|| Sys.getEnv("TERM") == "xterm"
-			|| Sys.getEnv("COLORTERM") != null
-			|| Sys.getEnv("ANSICON") != null;
-		#else
-		final colorSupported:Bool = false;
-		#end
-
-		return colorSupported ? '$ansiColor$input${AnsiColor.None}' : input;
+		return #if sys '$ansiColor$input${AnsiColor.None}' #else input #end;
 	}
 }
 
