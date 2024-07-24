@@ -35,6 +35,10 @@
 			"url": "https://github.com/larsiusprime/polymod.git"
 		},
 		{
+			"name": "thx.semver",
+			"type": "haxelib"
+		},
+		{
 			"name": "extension-androidtools",
 			"type": "git",
 			"ref": "main",
