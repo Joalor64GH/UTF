@@ -38,7 +38,7 @@ jobs:
         run: echo "CACHE_HIT=${{ steps.cache-build-restore.outputs.cache-hit }}" >> $GITHUB_ENV
 
       - name: Installing Libraries
-        run: haxelib install hmm --quiet && haxelib run hmm install --quiet
+        run: haxe --interp -cp ./actions -D analyzer-optimize -main Main
 
       - name: Setup Git hxcpp
         if: env.CACHE_HIT != 'true'
