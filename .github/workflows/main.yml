@@ -33,15 +33,11 @@ jobs:
             export/android/obj
           key: cache-android-build-${{ matrix.build }}
 
-      - name: Set Cache Status
-        id: cache-status
-        run: echo "CACHE_HIT=${{ steps.cache-build-restore.outputs.cache-hit }}" >> $GITHUB_ENV
-
       - name: Installing Libraries
         run: haxelib install hmm --quiet && haxelib run hmm install --quiet
 
       - name: Setup Git hxcpp
-        if: env.CACHE_HIT != 'true'
+        if: ${{ steps.cache-build-restore.outputs.cache-hit }} != 'true'
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp
 
       - name: List of installed Haxe Libraries
@@ -69,7 +65,6 @@ jobs:
               });
 
               for (const cache of caches.data.actions_caches) {
-                // Only clear cache for the current matrix build
                 if (cache.key === `cache-android-build-${{ matrix.build }}`) {
                   console.log('Clearing ' + cache.key + '...');
                   await github.rest.actions.deleteActionsCacheById({
@@ -77,7 +72,7 @@ jobs:
                     repo: context.repo.repo,
                     cache_id: cache.id,
                   });
-                  console.log("Previous Cache Cleared!");
+                  console.log('Previous Cache Cleared!');
                 }
               }
             } catch (error) {
