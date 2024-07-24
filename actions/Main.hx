@@ -41,7 +41,13 @@ class Main
 	public static function main():Void
 	{
 		if (!FileSystem.exists('.haxelib'))
-			Sys.command('haxelib', ['newrepo', '--quiet', '--never']);
+		{
+			final args:Array<String> = ['haxelib', 'newrepo', '--quiet', '--never'];
+
+			Sys.println(AnsiColors.yellow(args.join(' ')));
+
+			Sys.command(args.shift(), args);
+		}
 
 		final config:HmmConfig = Json.parse(File.getContent('./hmm.json'));
 
@@ -50,7 +56,7 @@ class Main
 			switch (lib.type)
 			{
 				case 'haxelib':
-					final args:Array<String> = ['install'];
+					final args:Array<String> = ['haxelib', 'install'];
 
 					args.push(lib.name);
 
@@ -61,9 +67,11 @@ class Main
 					args.push('--never');
 					args.push('--skip-dependencies');
 
-					Sys.command('haxelib', args);
+					Sys.println(AnsiColors.yellow(args.join(' ')));
+
+					Sys.command(args.shift(), args);
 				case 'git':
-					final args:Array<String> = ['git'];
+					final args:Array<String> = ['haxelib', 'git'];
 
 					args.push(lib.name);
 					args.push(lib.url);
@@ -75,10 +83,88 @@ class Main
 					args.push('--never');
 					args.push('--skip-dependencies');
 
-					Sys.command('haxelib', args);
+					Sys.println(AnsiColors.yellow(args.join(' ')));
+
+					Sys.command(args.shift(), args);
 			}
 		}
 
-		Sys.command('haxelib', ['list']);
+		final args:Array<String> = ['haxelib', 'list'];
+
+		Sys.println(AnsiColors.yellow(args.join(' ')));
+
+		Sys.command(args.shift(), args);
 	}
+}
+
+/**
+ * @see https://github.com/andywhite37/hmm/blob/master/src/hmm/utils/AnsiColors.hx
+ */
+class AnsiColors
+{
+	public static var disabled:Bool;
+
+	public static function red(input:String):String
+	{
+		return color(input, Red);
+	}
+
+	public static function green(input:String):String
+	{
+		return color(input, Green);
+	}
+
+	public static function yellow(input:String):String
+	{
+		return color(input, Yellow);
+	}
+
+	public static function blue(input:String):String
+	{
+		return color(input, Blue);
+	}
+
+	public static function magenta(input:String):String
+	{
+		return color(input, Magenta);
+	}
+
+	public static function cyan(input:String):String
+	{
+		return color(input, Cyan);
+	}
+
+	public static function gray(input:String):String
+	{
+		return color(input, Gray);
+	}
+
+	public static function white(input:String):String
+	{
+		return color(input, White);
+	}
+
+	public static function none(input:String):String
+	{
+		return color(input, None);
+	}
+
+	public static function color(input:String, ansiColor:AnsiColor):String
+	{
+		return disabled ? input : '${ansiColor}$input${AnsiColor.None}';
+	}
+}
+
+enum abstract AnsiColor(String) from String to String
+{
+	var Black = '\033[0;30m';
+	var Red = '\033[0;31m';
+	var Green = '\033[0;32m';
+	var Yellow = '\033[0;33m';
+	var Blue = '\033[0;34m';
+	var Magenta = '\033[0;35m';
+	var Cyan = '\033[0;36m';
+	var Gray = '\033[0;37m';
+	var White = '\033[1;37m';
+	var None = '\033[0;0m';
 }
