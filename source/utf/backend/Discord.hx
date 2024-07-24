@@ -50,6 +50,7 @@ class Discord
 		initialized = true;
 	}
 
+	@:noCompletion
 	private static function onReady(request:cpp.RawConstPointer<DiscordUser>):Void
 	{
 		final discriminator:String = cast(request[0].discriminator, String);
@@ -66,11 +67,13 @@ class Discord
 		RichPresence.UpdatePresence(cpp.RawConstPointer.addressOf(discordPresence));
 	}
 
+	@:noCompletion
 	private static function onDisconnected(errorCode:Int, message:cpp.ConstCharStar):Void
 	{
 		FlxG.log.notice('(Discord) Disconnected ($errorCode: ${cast (message, String)})');
 	}
 
+	@:noCompletion
 	private static function onError(errorCode:Int, message:cpp.ConstCharStar):Void
 	{
 		FlxG.log.notice('(Discord) Error ($errorCode: ${cast (message, String)})');
