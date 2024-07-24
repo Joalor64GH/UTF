@@ -47,7 +47,11 @@ class Controls
 		if (!binds.exists(tag))
 			return false;
 
+		#if mobile
+		return FlxG.gamepads.anyJustPressed(binds.get(tag).gamepad) || FlxG.keys.checkStatus(binds.get(tag).key, JUST_PRESSED);
+		#else
 		return FlxG.keys.checkStatus(binds.get(tag).key, JUST_PRESSED) || FlxG.gamepads.anyJustPressed(binds.get(tag).gamepad);
+		#end
 	}
 
 	/**
@@ -60,7 +64,11 @@ class Controls
 		if (!binds.exists(tag))
 			return false;
 
+		#if mobile
+		return FlxG.gamepads.anyPressed(binds.get(tag).gamepad) || FlxG.keys.checkStatus(binds.get(tag).key, PRESSED);
+		#else
 		return FlxG.keys.checkStatus(binds.get(tag).key, PRESSED) || FlxG.gamepads.anyPressed(binds.get(tag).gamepad);
+		#end
 	}
 
 	/**
@@ -73,6 +81,10 @@ class Controls
 		if (!binds.exists(tag))
 			return false;
 
+		#if mobile
+		return FlxG.gamepads.anyJustReleased(binds.get(tag).gamepad) || FlxG.keys.checkStatus(binds.get(tag).key, JUST_RELEASED);
+		#else
 		return FlxG.keys.checkStatus(binds.get(tag).key, JUST_RELEASED) || FlxG.gamepads.anyJustReleased(binds.get(tag).gamepad);
+		#end
 	}
 }
