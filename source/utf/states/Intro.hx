@@ -18,7 +18,7 @@ import utf.util.macro.git.GitUtil;
 import utf.states.Room;
 import utf.states.Settings;
 #if debug
-import utf.substates.Battle;
+import utf.substates.battle.EnemyEncounter;
 #end
 import utf.substates.Naming;
 
@@ -216,7 +216,7 @@ class Intro extends FlxState
 			if (FlxG.sound.music != null && FlxG.sound.music.playing)
 				FlxG.sound.music.stop();
 
-			openSubState(new Battle());
+			openSubState(new EnemyEncounter());
 		}
 		#end
 
