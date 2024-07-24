@@ -19,10 +19,10 @@ typedef LibraryConfig =
 {
 	name:String,
 	type:String,
-	version:String,
-	dir:String,
-	ref:String,
-	url:String
+	?version:String,
+	?dir:String,
+	?ref:String,
+	?url:String
 }
 
 /**
