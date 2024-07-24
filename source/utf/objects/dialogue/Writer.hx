@@ -65,7 +65,7 @@ class Writer extends TypeText
 
 	override public function update(elapsed:Float):Void
 	{
-		if (Controls.instance.justPressed('confirm') && finished && !done)
+		if (Controls.justPressed('confirm') && finished && !done)
 		{
 			if (page < list.indexOf(list.last()))
 			{
@@ -81,7 +81,7 @@ class Writer extends TypeText
 				done = true;
 			}
 		}
-		else if (Controls.instance.justPressed('cancel') && !finished && skippable)
+		else if (Controls.justPressed('cancel') && !finished && skippable)
 			skip();
 
 		super.update(elapsed);

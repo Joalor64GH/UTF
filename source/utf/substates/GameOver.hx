@@ -66,7 +66,7 @@ class GameOver extends FlxSubState
 
 	override function update(elapsed:Float):Void
 	{
-		if (Controls.instance.justPressed('confirm') && !members.contains(writer) && gameoverbg.alpha == 1)
+		if (Controls.justPressed('confirm') && !members.contains(writer) && gameoverbg.alpha == 1)
 		{
 			FlxTween.tween(gameoverbg, {alpha: 0}, 1.5, {
 				onComplete: (twn:FlxTween) -> close()

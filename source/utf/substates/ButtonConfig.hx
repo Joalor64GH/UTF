@@ -97,13 +97,13 @@ class ButtonConfig extends FlxSubState
 
 			FlxG.sound.play(AssetPaths.sound('menuconfirm'));
 		}
-		else if (Controls.instance.justPressed('confirm') && !keySelected)
+		else if (Controls.justPressed('confirm') && !keySelected)
 		{
 			keySelected = true;
 
 			FlxG.sound.play(AssetPaths.sound('menuconfirm'));
 		}
-		else if (Controls.instance.justPressed('cancel') && !keySelected)
+		else if (Controls.justPressed('cancel') && !keySelected)
 			close();
 	}
 

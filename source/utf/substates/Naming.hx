@@ -214,7 +214,7 @@ class Naming extends FlxSubState
 			}
 		}
 
-		if (Controls.instance.justPressed('confirm'))
+		if (Controls.justPressed('confirm'))
 		{
 			if (writingLetters)
 			{

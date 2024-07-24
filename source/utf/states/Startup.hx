@@ -22,8 +22,8 @@ class Startup extends FlxState
 	{
 		FlxG.autoPause = false;
 
-		if (Controls.instance == null)
-			Controls.instance = new Controls();
+		if (Controls == null)
+			Controls = new Controls();
 
 		Data.load();
 

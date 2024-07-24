@@ -192,7 +192,7 @@ class Intro extends FlxState
 				changeOption(-1, BOUND);
 		}
 
-		if (Controls.instance.justPressed('confirm'))
+		if (Controls.justPressed('confirm'))
 		{
 			if (FlxG.sound.music != null
 				&& FlxG.sound.music.playing

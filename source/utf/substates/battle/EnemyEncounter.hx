@@ -143,7 +143,7 @@ class EnemyEncounter extends FlxSubState
 		else if (FlxG.keys.justPressed.LEFT && !choiceSelected)
 			changeChoice(-1);
 
-		if (Controls.instance.justPressed('confirm'))
+		if (Controls.justPressed('confirm'))
 		{
 			FlxG.sound.play(AssetPaths.sound('menuconfirm'));
 
@@ -193,7 +193,7 @@ class EnemyEncounter extends FlxSubState
 				}
 			}
 		}
-		else if (Controls.instance.justPressed('cancel'))
+		else if (Controls.justPressed('cancel'))
 		{
 			choiceSelected = false;
 
