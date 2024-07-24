@@ -33,11 +33,15 @@ jobs:
             export/android/obj
           key: cache-android-build-${{ matrix.build }}
 
+      - name: Set Cache Status
+        id: cache-status
+        run: echo "CACHE_HIT=${{ steps.cache-build-restore.outputs.cache-hit }}" >> $GITHUB_ENV
+
       - name: Installing Libraries
         run: haxelib install hmm --quiet && haxelib run hmm install --quiet
 
       - name: Setup Git hxcpp
-        if: ${{ steps.cache-build-restore.outputs.cache-hit }} != 'true'
+        if: env.CACHE_HIT != 'true'
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp
 
       - name: List of installed Haxe Libraries
