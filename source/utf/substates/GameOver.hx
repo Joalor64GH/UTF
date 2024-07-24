@@ -18,17 +18,8 @@ class GameOver extends FlxSubState
 	var gameoverbg:FlxSprite;
 	var writer:Writer;
 
-	var prevPersistentDraw:Bool;
-	var prevPersistentUpdate:Bool;
-
 	override function create():Void
 	{
-		prevPersistentDraw = FlxG.state.persistentDraw;
-		prevPersistentUpdate = FlxG.state.persistentUpdate;
-
-		FlxG.state.persistentDraw = false;
-		FlxG.state.persistentUpdate = false;
-
 		FlxG.sound.playMusic(AssetPaths.music('gameover'));
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -85,13 +76,5 @@ class GameOver extends FlxSubState
 		}
 
 		super.update(elapsed);
-	}
-
-	override public function close():Void
-	{
-		FlxG.state.persistentDraw = prevPersistentDraw;
-		FlxG.state.persistentUpdate = prevPersistentUpdate;
-
-		super.close();
 	}
 }
