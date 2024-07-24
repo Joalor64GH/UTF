@@ -138,9 +138,9 @@ class EnemyEncounter extends FlxSubState
 
 	override function update(elapsed:Float):Void
 	{
-		if (FlxG.keys.justPressed.RIGHT && !choiceSelected)
+		if (Controls.justPressed('right') && !choiceSelected)
 			changeChoice(1);
-		else if (FlxG.keys.justPressed.LEFT && !choiceSelected)
+		else if (Controls.justPressed('left') && !choiceSelected)
 			changeChoice(-1);
 
 		if (Controls.justPressed('confirm'))

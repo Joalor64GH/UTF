@@ -179,16 +179,16 @@ class Intro extends FlxState
 	{
 		if (Global.flags[0] == 1)
 		{
-			if (FlxG.keys.justPressed.RIGHT)
+			if (Controls.justPressed('right'))
 				changeOption(1, WRAP);
-			else if (FlxG.keys.justPressed.LEFT)
+			else if (Controls.justPressed('left'))
 				changeOption(-1, WRAP);
 		}
 		else
 		{
-			if (FlxG.keys.justPressed.DOWN)
+			if (Controls.justPressed('down'))
 				changeOption(1, BOUND);
-			else if (FlxG.keys.justPressed.UP)
+			else if (Controls.justPressed('up'))
 				changeOption(-1, BOUND);
 		}
 

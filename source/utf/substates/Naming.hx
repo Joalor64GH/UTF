@@ -183,30 +183,30 @@ class Naming extends FlxSubState
 	{
 		if (writingLetters)
 		{
-			if (FlxG.keys.justPressed.RIGHT)
+			if (Controls.justPressed('right'))
 				handleKeyInput('RIGHT');
-			else if (FlxG.keys.justPressed.LEFT)
+			else if (Controls.justPressed('left'))
 				handleKeyInput('LEFT');
 
-			if (FlxG.keys.justPressed.DOWN)
+			if (Controls.justPressed('down'))
 				handleKeyInput('DOWN');
-			else if (FlxG.keys.justPressed.UP)
+			else if (Controls.justPressed('up'))
 				handleKeyInput('UP');
 		}
 		else
 		{
-			if (FlxG.keys.justPressed.RIGHT)
+			if (Controls.justPressed('right'))
 				selectedChoice = MathUtil.mod(selectedChoice + 1, 3);
-			else if (FlxG.keys.justPressed.LEFT)
+			else if (Controls.justPressed('left'))
 				selectedChoice = MathUtil.mod(selectedChoice - 1, 3);
 
-			if (FlxG.keys.justPressed.DOWN)
+			if (Controls.justPressed('down'))
 			{
 				selectedLetter = [0, 3, 5][selectedChoice];
 
 				writingLetters = true;
 			}
-			else if (FlxG.keys.justPressed.UP)
+			else if (Controls.justPressed('up'))
 			{
 				selectedLetter = [47, 50, 45][selectedChoice];
 

@@ -161,9 +161,9 @@ class Settings extends FlxTransitionableState
 	{
 		siner++;
 
-		if (FlxG.keys.justPressed.UP)
+		if (Controls.justPressed('up'))
 			changeOption(-1);
-		else if (FlxG.keys.justPressed.DOWN)
+		else if (Controls.justPressed('down'))
 			changeOption(1);
 
 		if (Controls.justPressed('confirm') && (FlxG.sound.music != null && FlxG.sound.music.playing))
