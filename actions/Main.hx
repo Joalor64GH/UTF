@@ -47,6 +47,9 @@ class Main
 		// Read and parse the hmm.json configuration file
 		final config:HmmConfig = Json.parse(File.getContent('./hmm.json'));
 
+		// Options to run with the commands
+		final options:Array<String> = ['--quiet', '--never', '--skip-dependencies'];
+
 		// Iterate over each library dependency in the configuration
 		for (lib in config.dependencies)
 		{
@@ -59,33 +62,26 @@ class Main
 				case 'haxelib':
 					// Prepare the haxelib install command arguments
 					final args:Array<String> = ['haxelib', 'install'];
+
 					args.push(lib.name);
 
 					if (lib.version != null)
 						args.push(lib.version);
 
-					args.push('--quiet');
-					args.push('--never');
-					args.push('--skip-dependencies');
-
 					// Execute the haxelib install command
-					runCommand(args);
-
+					runCommand(args.concat(options));
 				case 'git':
 					// Prepare the haxelib git command arguments
 					final args:Array<String> = ['haxelib', 'git'];
+
 					args.push(lib.name);
 					args.push(lib.url);
 
 					if (lib.ref != null)
 						args.push(lib.ref);
 
-					args.push('--quiet');
-					args.push('--never');
-					args.push('--skip-dependencies');
-
 					// Execute the haxelib git command
-					runCommand(args);
+					runCommand(args.concat(options));
 			}
 		}
 
@@ -110,8 +106,6 @@ class Main
  */
 class AnsiColors
 {
-	public static var disabled:Bool;
-
 	/**
 	 * Colors the input string red.
 	 * @param input The input string.
@@ -210,7 +204,17 @@ class AnsiColors
 	 */
 	public static function color(input:String, ansiColor:AnsiColor):String
 	{
-		return disabled ? input : '${ansiColor}$input${AnsiColor.None}';
+		#if sys
+		final colorSupported:Bool = Sys.getEnv("TERM_PROGRAM") == "Apple_Terminal"
+			|| Sys.getEnv("TERM") == "xterm-256color"
+			|| Sys.getEnv("TERM") == "xterm"
+			|| Sys.getEnv("COLORTERM") != null
+			|| Sys.getEnv("ANSICON") != null;
+		#else
+		final colorSupported:Bool = false;
+		#end
+
+		return colorSupported ? '$ansiColor$input${AnsiColor.None}' : input;
 	}
 }
 
