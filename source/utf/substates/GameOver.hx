@@ -45,7 +45,7 @@ class GameOver extends FlxSubState
 		FlxTween.tween(gameoverbg, {alpha: 1}, 1.5, {
 			onComplete: function(twn:FlxTween)
 			{
-				new FlxTimer().start(1, function(tmr:FlxTimer)
+				FlxTimer.wait(1, function():Void
 				{
 					final lines:Array<String> = [
 						'  You cannot give\n  up just yet...',
