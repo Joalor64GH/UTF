@@ -22,11 +22,28 @@ jobs:
         with:
           haxe-version: 4.3.5
 
+      - name: Restore Previous Cache
+        id: cache-build-restore
+        uses: actions/cache/restore@main
+        with:
+          path: |
+            .haxelib
+            export/android/haxe
+            export/android/obj
+          key: cache-android-build-${{ matrix.build }}
+
+      - name: Set Cache Status
+        id: cache-status
+        run: echo "CACHE_HIT=${{ steps.cache-build-restore.outputs.cache-hit }}" >> $GITHUB_ENV
+
       - name: Installing Libraries
-        run: haxelib install hmm --quiet && haxelib run hmm install --quiet
+        run: haxelib install hmm --quiet && haxelib run hmm install --quiet --skip-dependencies
 
       - name: Setup Git hxcpp
-        run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp
+        if: env.CACHE_HIT != 'true'
+        run: |
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet
+          haxelib run lime rebuild hxcpp
 
       - name: List of installed Haxe Libraries
         run: haxelib list
@@ -41,6 +58,42 @@ jobs:
 
       - name: Building
         run: haxelib run lime build android -${{matrix.build}}
+
+      - name: Clear Previous Cache
+        uses: actions/github-script@main
+        with:
+          script: |
+            try {
+              const caches = await github.rest.actions.getActionsCacheList({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              });
+
+              for (const cache of caches.data.actions_caches) {
+                // Only clear cache for the current matrix build
+                if (cache.key === `cache-android-build-${{ matrix.build }}`) {
+                  console.log('Clearing ' + cache.key + '...');
+                  await github.rest.actions.deleteActionsCacheById({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    cache_id: cache.id,
+                  });
+                  console.log("Previous Cache Cleared!");
+                }
+              }
+            } catch (error) {
+              console.log(error.message);
+            }
+
+      - name: Save Current Cache
+        id: cache-build-save
+        uses: actions/cache/save@main
+        with:
+          path: |
+            .haxelib
+            export/android/haxe
+            export/android/obj
+          key: cache-android-build-${{ matrix.build }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@main
