@@ -47,6 +47,8 @@ class Main
 		// Read and parse the hmm.json configuration file
 		final config:HmmConfig = Json.parse(File.getContent('./hmm.json'));
 
+		var runnedCommands:Int = 0;
+
 		// Iterate over each library dependency in the configuration
 		for (lib in config.dependencies)
 		{
@@ -66,18 +68,31 @@ class Main
 
 					// Execute the haxelib install command
 					Sys.command('haxelib', args);
+
+					// Increase commands count
+					if (Sys.command('haxelib', args) == 0)
+						runnedCommands++; // Increase commands count
 				case 'git':
 					// Prepare the git command arguments
 					final args:Array<String> = ['git'];
 
 					args.push(lib.name);
-					args.push(lib.git);
+					args.push(lib.url);
+
+					if (lib.ref != null)
+						args.push(lib.ref);
+
 					args.push('--quiet');
 					args.push('--skip-dependencies');
 
-					// Execute the git command
-					Sys.command('haxelib', args);
+					// Execute the haxelib git command
+					if (Sys.command('haxelib', args) == 0)
+						runnedCommands++; // Increase commands count
 			}
 		}
+
+		// Execute the haxelib list command
+		if (runnedCommands > 0)
+			Sys.command('haxelib', ['list']);
 	}
 }
