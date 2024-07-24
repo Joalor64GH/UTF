@@ -40,22 +40,16 @@ class Main
 	 */
 	public static function main():Void
 	{
-		// Ensure the .haxelib directory exists
 		if (!FileSystem.exists('.haxelib'))
-			FileSystem.createDirectory('.haxelib');
+			Sys.command('haxelib', ['newrepo', '--quiet', '--never']);
 
-		// Read and parse the hmm.json configuration file
 		final config:HmmConfig = Json.parse(File.getContent('./hmm.json'));
 
-		var runnedCommands:Int = 0;
-
-		// Iterate over each library dependency in the configuration
 		for (lib in config.dependencies)
 		{
 			switch (lib.type)
 			{
 				case 'haxelib':
-					// Prepare the haxelib install command arguments
 					final args:Array<String> = ['install'];
 
 					args.push(lib.name);
@@ -64,13 +58,11 @@ class Main
 						args.push(lib.version);
 
 					args.push('--quiet');
+					args.push('--never');
 					args.push('--skip-dependencies');
 
-					// Increase commands count
-					if (Sys.command('haxelib', args) == 0)
-						runnedCommands++; // Increase commands count
+					Sys.command('haxelib', args);
 				case 'git':
-					// Prepare the git command arguments
 					final args:Array<String> = ['git'];
 
 					args.push(lib.name);
@@ -80,16 +72,13 @@ class Main
 						args.push(lib.ref);
 
 					args.push('--quiet');
+					args.push('--never');
 					args.push('--skip-dependencies');
 
-					// Execute the haxelib git command
-					if (Sys.command('haxelib', args) == 0)
-						runnedCommands++; // Increase commands count
+					Sys.command('haxelib', args);
 			}
 		}
 
-		// Execute the haxelib list command
-		if (runnedCommands > 0)
-			Sys.command('haxelib', ['list']);
+		Sys.command('haxelib', ['list']);
 	}
 }
