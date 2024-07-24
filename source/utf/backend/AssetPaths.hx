@@ -5,6 +5,7 @@ import flixel.FlxG;
 import haxe.io.Path;
 import haxe.Exception;
 import openfl.utils.Assets;
+import openfl.utils.ByteArray;
 
 /**
  * Provides utility functions for constructing paths to various game assets,
@@ -119,21 +120,12 @@ class AssetPaths
 
 	/**
 	 * Constructs the path for a shader asset and retrieves its content.
-	 * @param key The key for the shader.
+	 * @param key The key for the shader with its extension.
 	 * @return The shader content, or null if the shader does not exist.
 	 */
 	public static inline function shader(key:String):String
 	{
-		try
-		{
-			return Assets.getText('assets/shaders/$key');
-		}
-		catch (e:Exception)
-		{
-			FlxG.log.error(e.message);
-		}
-
-		return null;
+		return 'assets/shaders/$key';
 	}
 
 	/**
@@ -179,5 +171,47 @@ class AssetPaths
 		});
 
 		return files;
+	}
+
+	/**
+	 * Retrieves the content of a specified asset file as a string.
+	 * @param path The path to the asset file.
+	 * @param force If true, forces the retrieval even if the asset does not exist.
+	 * @return The content of the file as a string, or null if the file does not exist and force is false.
+	 */
+	public static function getContent(path:String, ?force:Bool = false):String
+	{
+		if (!Assets.exists(path) && !force)
+			return null;
+
+		try
+		{
+			return Assets.getText(path);
+		}
+		catch (e:Exception)
+			FlxG.log.error(e.message);
+
+		return null;
+	}
+
+	/**
+	 * Retrieves the content of a specified asset file as a ByteArray.
+	 * @param path The path to the asset file.
+	 * @param force If true, forces the retrieval even if the asset does not exist.
+	 * @return The content of the file as a ByteArray, or null if the file does not exist and force is false.
+	 */
+	public static function getBytes(path:String, ?force:Bool = false):ByteArray
+	{
+		if (!Assets.exists(path) && !force)
+			return null;
+
+		try
+		{
+			return Assets.getBytes(path);
+		}
+		catch (e:Exception)
+			FlxG.log.error(e.message);
+
+		return null;
 	}
 }
