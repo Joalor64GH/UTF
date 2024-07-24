@@ -20,8 +20,6 @@ import utf.substates.GameOver;
 
 class EnemyEncounter extends FlxSubState
 {
-	public static var instance:Battle = null;
-	
 	var selected:Int = 0;
 	final choices:Array<String> = ['Fight', 'Talk', 'Item', 'Spare'];
 	var items:FlxTypedGroup<FlxSprite>;
