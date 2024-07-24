@@ -53,13 +53,16 @@ class Controls
 		{
 			final bind:Bind = binds.get(tag);
 
+			if (bind == null)
+				return false;
+
 			#if FLX_KEYBOARD
-			if (bind != null && bind.key != null && FlxG.keys.checkStatus(bind.key, JUST_PRESSED))
+			if (FlxG.keys.checkStatus(bind.key, JUST_PRESSED))
 				return true;
 			#end
 
 			#if FLX_GAMEPAD
-			if (bind != null && bind.gamepad != null && FlxG.gamepads.anyJustPressed(bind.gamepad))
+			if (FlxG.gamepads.anyJustPressed(bind.gamepad))
 				return true;
 			#end
 		}
@@ -78,13 +81,16 @@ class Controls
 		{
 			final bind:Bind = binds.get(tag);
 
+			if (bind == null)
+				return false;
+
 			#if FLX_KEYBOARD
-			if (bind != null && bind.key != null && FlxG.keys.checkStatus(bind.key, PRESSED))
+			if (FlxG.keys.checkStatus(bind.key, PRESSED))
 				return true;
 			#end
 
 			#if FLX_GAMEPAD
-			if (bind != null && bind.gamepad != null && FlxG.gamepads.anyPressed(bind.gamepad))
+			if (FlxG.gamepads.anyPressed(bind.gamepad))
 				return true;
 			#end
 		}
@@ -103,13 +109,16 @@ class Controls
 		{
 			final bind:Bind = binds.get(tag);
 
+			if (bind == null)
+				return false;
+
 			#if FLX_KEYBOARD
-			if (bind != null && bind.key != null && FlxG.keys.checkStatus(bind.key, JUST_RELEASED))
+			if (FlxG.keys.checkStatus(bind.key, JUST_RELEASED))
 				return true;
 			#end
 
 			#if FLX_GAMEPAD
-			if (bind != null && bind.gamepad != null && FlxG.gamepads.anyJustReleased(bind.gamepad))
+			if (FlxG.gamepads.anyJustReleased(bind.gamepad))
 				return true;
 			#end
 		}
