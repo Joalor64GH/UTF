@@ -37,17 +37,8 @@ class EnemyEncounter extends FlxSubState
 
 	var bullets:FlxTypedGroup<FlxSprite>;
 
-	var prevPersistentDraw:Bool;
-	var prevPersistentUpdate:Bool;
-
 	override function create():Void
 	{
-		prevPersistentDraw = FlxG.state.persistentDraw;
-		prevPersistentUpdate = FlxG.state.persistentUpdate;
-
-		FlxG.state.persistentDraw = false;
-		FlxG.state.persistentUpdate = false;
-
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.screenCenter();
 		bg.active = false;
@@ -216,14 +207,6 @@ class EnemyEncounter extends FlxSubState
 			if (hpInfo.text != hpInfoText)
 				hpInfo.text = hpInfoText;
 		}
-	}
-
-	override public function close():Void
-	{
-		FlxG.state.persistentDraw = prevPersistentDraw;
-		FlxG.state.persistentUpdate = prevPersistentUpdate;
-
-		super.close();
 	}
 
 	private function changeChoice(num:Int = 0):Void
