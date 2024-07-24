@@ -40,24 +40,25 @@ class Main
 	 */
 	public static function main():Void
 	{
+		// Ensure the .haxelib directory exists
 		if (!FileSystem.exists('.haxelib'))
-		{
-			final args:Array<String> = ['haxelib', 'newrepo', '--quiet', '--never'];
+			runCommand(['haxelib', 'newrepo', '--quiet', '--never']);
 
-			Sys.println(AnsiColors.yellow(args.join(' ')));
-
-			Sys.command(args.shift(), args);
-		}
-
+		// Read and parse the hmm.json configuration file
 		final config:HmmConfig = Json.parse(File.getContent('./hmm.json'));
 
+		// Iterate over each library dependency in the configuration
 		for (lib in config.dependencies)
 		{
+			// Skip hxcpp to set up the git one on our own
+			if (lib.name == 'hxcpp')
+				continue;
+
 			switch (lib.type)
 			{
 				case 'haxelib':
+					// Prepare the haxelib install command arguments
 					final args:Array<String> = ['haxelib', 'install'];
-
 					args.push(lib.name);
 
 					if (lib.version != null)
@@ -67,12 +68,12 @@ class Main
 					args.push('--never');
 					args.push('--skip-dependencies');
 
-					Sys.println(AnsiColors.yellow(args.join(' ')));
+					// Execute the haxelib install command
+					runCommand(args);
 
-					Sys.command(args.shift(), args);
 				case 'git':
+					// Prepare the haxelib git command arguments
 					final args:Array<String> = ['haxelib', 'git'];
-
 					args.push(lib.name);
 					args.push(lib.url);
 
@@ -83,78 +84,139 @@ class Main
 					args.push('--never');
 					args.push('--skip-dependencies');
 
-					Sys.println(AnsiColors.yellow(args.join(' ')));
-
-					Sys.command(args.shift(), args);
+					// Execute the haxelib git command
+					runCommand(args);
 			}
 		}
 
-		final args:Array<String> = ['haxelib', 'list'];
+		// List installed haxelib packages
+		runCommand(['haxelib', 'list']);
+	}
 
+	/**
+	 * Executes a system command with the provided arguments.
+	 * @param args The command and its arguments to be executed.
+	 */
+	public static function runCommand(args:Array<String>):Void
+	{
 		Sys.println(AnsiColors.yellow(args.join(' ')));
-
 		Sys.command(args.shift(), args);
 	}
 }
 
 /**
+ * Utility class for applying ANSI color codes to strings for terminal output.
  * @see https://github.com/andywhite37/hmm/blob/master/src/hmm/utils/AnsiColors.hx
  */
 class AnsiColors
 {
 	public static var disabled:Bool;
 
+	/**
+	 * Colors the input string red.
+	 * @param input The input string.
+	 * @return The colored string.
+	 */
 	public static function red(input:String):String
 	{
 		return color(input, Red);
 	}
 
+	/**
+	 * Colors the input string green.
+	 * @param input The input string.
+	 * @return The colored string.
+	 */
 	public static function green(input:String):String
 	{
 		return color(input, Green);
 	}
 
+	/**
+	 * Colors the input string yellow.
+	 * @param input The input string.
+	 * @return The colored string.
+	 */
 	public static function yellow(input:String):String
 	{
 		return color(input, Yellow);
 	}
 
+	/**
+	 * Colors the input string blue.
+	 * @param input The input string.
+	 * @return The colored string.
+	 */
 	public static function blue(input:String):String
 	{
 		return color(input, Blue);
 	}
 
+	/**
+	 * Colors the input string magenta.
+	 * @param input The input string.
+	 * @return The colored string.
+	 */
 	public static function magenta(input:String):String
 	{
 		return color(input, Magenta);
 	}
 
+	/**
+	 * Colors the input string cyan.
+	 * @param input The input string.
+	 * @return The colored string.
+	 */
 	public static function cyan(input:String):String
 	{
 		return color(input, Cyan);
 	}
 
+	/**
+	 * Colors the input string gray.
+	 * @param input The input string.
+	 * @return The colored string.
+	 */
 	public static function gray(input:String):String
 	{
 		return color(input, Gray);
 	}
 
+	/**
+	 * Colors the input string white.
+	 * @param input The input string.
+	 * @return The colored string.
+	 */
 	public static function white(input:String):String
 	{
 		return color(input, White);
 	}
 
+	/**
+	 * Removes any color from the input string.
+	 * @param input The input string.
+	 * @return The uncolored string.
+	 */
 	public static function none(input:String):String
 	{
 		return color(input, None);
 	}
 
+	/**
+	 * Applies the specified ANSI color code to the input string.
+	 * @param input The input string.
+	 * @param ansiColor The ANSI color code.
+	 * @return The colored string.
+	 */
 	public static function color(input:String, ansiColor:AnsiColor):String
 	{
 		return disabled ? input : '${ansiColor}$input${AnsiColor.None}';
 	}
 }
 
+/**
+ * Enum abstract representing ANSI color codes.
+ */
 enum abstract AnsiColor(String) from String to String
 {
 	var Black = '\033[0;30m';
