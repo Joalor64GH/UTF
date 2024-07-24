@@ -64,7 +64,6 @@ class PolymodHandler
 			extensionMap: ['frag' => TEXT, 'vert' => TEXT],
 			parseRules: buildParseRules(),
 			useScriptedClasses: true,
-			loadScriptsAsync: #if html5 true #else false #end,
 			apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version')),
 			customFilesystem: buildFileSystem(),
 		});
