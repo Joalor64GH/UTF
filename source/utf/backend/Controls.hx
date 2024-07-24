@@ -1,7 +1,11 @@
 package utf.backend;
 
+#if FLX_GAMEPAD
 import flixel.input.gamepad.FlxGamepadInputID;
+#end
+#if FLX_KEYBOARD
 import flixel.input.keyboard.FlxKey;
+#end
 import flixel.FlxG;
 
 /**
@@ -47,10 +51,14 @@ class Controls
 		if (!binds.exists(tag))
 			return false;
 
-		#if mobile
-		return FlxG.gamepads.anyJustPressed(binds.get(tag).gamepad) || FlxG.keys.checkStatus(binds.get(tag).key, JUST_PRESSED);
-		#else
-		return FlxG.keys.checkStatus(binds.get(tag).key, JUST_PRESSED) || FlxG.gamepads.anyJustPressed(binds.get(tag).gamepad);
+		#if FLX_KEYBOARD
+		if (FlxG.keys.checkStatus(binds.get(tag).key, JUST_PRESSED))
+			return true;
+		#end
+
+		#if FLX_GAMEPAD
+		if (FlxG.gamepads.anyJustPressed(binds.get(tag).gamepad))
+			return true;
 		#end
 	}
 
@@ -64,10 +72,14 @@ class Controls
 		if (!binds.exists(tag))
 			return false;
 
-		#if mobile
-		return FlxG.gamepads.anyPressed(binds.get(tag).gamepad) || FlxG.keys.checkStatus(binds.get(tag).key, PRESSED);
-		#else
-		return FlxG.keys.checkStatus(binds.get(tag).key, PRESSED) || FlxG.gamepads.anyPressed(binds.get(tag).gamepad);
+		#if FLX_KEYBOARD
+		if (FlxG.keys.checkStatus(binds.get(tag).key, PRESSED)
+			return true;
+		#end
+
+		#if FLX_GAMEPAD
+		if (FlxG.gamepads.anyPressed(binds.get(tag).gamepad))
+			return true;
 		#end
 	}
 
@@ -81,10 +93,14 @@ class Controls
 		if (!binds.exists(tag))
 			return false;
 
-		#if mobile
-		return FlxG.gamepads.anyJustReleased(binds.get(tag).gamepad) || FlxG.keys.checkStatus(binds.get(tag).key, JUST_RELEASED);
-		#else
-		return FlxG.keys.checkStatus(binds.get(tag).key, JUST_RELEASED) || FlxG.gamepads.anyJustReleased(binds.get(tag).gamepad);
+		#if FLX_KEYBOARD
+		if (FlxG.keys.checkStatus(binds.get(tag).key, JUST_RELEASED)
+			return true;
+		#end
+
+		#if FLX_GAMEPAD
+		if (FlxG.gamepads.anyJustReleased(binds.get(tag).gamepad))
+			return true;
 		#end
 	}
 }
