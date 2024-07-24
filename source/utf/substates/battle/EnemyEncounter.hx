@@ -1,4 +1,4 @@
-package utf.substates;
+package utf.substates.battle;
 
 import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.group.FlxGroup;
@@ -18,7 +18,7 @@ import utf.backend.registries.MonsterRegistery;
 import utf.objects.dialogue.Writer;
 import utf.substates.GameOver;
 
-class Battle extends FlxSubState
+class EnemyEncounter extends FlxSubState
 {
 	public static var instance:Battle = null;
 	
