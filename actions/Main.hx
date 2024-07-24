@@ -66,9 +66,6 @@ class Main
 					args.push('--quiet');
 					args.push('--skip-dependencies');
 
-					// Execute the haxelib install command
-					Sys.command('haxelib', args);
-
 					// Increase commands count
 					if (Sys.command('haxelib', args) == 0)
 						runnedCommands++; // Increase commands count
