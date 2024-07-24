@@ -19,10 +19,10 @@ class MathUtil
 	}
 
 	/**
-	 * Calculate the positive modulo of n by m.
+	 * Calculates the non-negative remainder of the division of n by m.
 	 * @param n The dividend.
 	 * @param m The divisor.
-	 * @return The positive modulo result.
+	 * @return The non-negative remainder when n is divided by m.
 	 */
 	public static inline function mod(n:Int, m:Int):Int
 	{
