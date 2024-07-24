@@ -17,6 +17,7 @@ typedef Bind =
 	 * The keyboard key associated with the action.
 	 */
 	key:FlxKey,
+
 	/**
 	 * The gamepad button associated with the action.
 	 */
@@ -48,18 +49,22 @@ class Controls
 	 */
 	public static function justPressed(tag:String):Bool
 	{
-		if (!binds.exists(tag))
-			return false;
+		if (binds.exists(tag))
+		{
+			final bind:Bind = binds.get(tag);
 
-		#if FLX_KEYBOARD
-		if (FlxG.keys.checkStatus(binds.get(tag).key, JUST_PRESSED))
-			return true;
-		#end
+			#if FLX_KEYBOARD
+			if (bind != null && bind.key != null && FlxG.keys.checkStatus(bind.key, JUST_PRESSED))
+				return true;
+			#end
 
-		#if FLX_GAMEPAD
-		if (FlxG.gamepads.anyJustPressed(binds.get(tag).gamepad))
-			return true;
-		#end
+			#if FLX_GAMEPAD
+			if (bind != null && bind.gamepad != null && FlxG.gamepads.anyJustPressed(bind.gamepad))
+				return true;
+			#end
+		}
+
+		return false;
 	}
 
 	/**
@@ -69,18 +74,22 @@ class Controls
 	 */
 	public static function pressed(tag:String):Bool
 	{
-		if (!binds.exists(tag))
-			return false;
+		if (binds.exists(tag))
+		{
+			final bind:Bind = binds.get(tag);
 
-		#if FLX_KEYBOARD
-		if (FlxG.keys.checkStatus(binds.get(tag).key, PRESSED)
-			return true;
-		#end
+			#if FLX_KEYBOARD
+			if (bind != null && bind.key != null && FlxG.keys.checkStatus(bind.key, PRESSED))
+				return true;
+			#end
 
-		#if FLX_GAMEPAD
-		if (FlxG.gamepads.anyPressed(binds.get(tag).gamepad))
-			return true;
-		#end
+			#if FLX_GAMEPAD
+			if (bind != null && bind.gamepad != null && FlxG.gamepads.anyPressed(bind.gamepad))
+				return true;
+			#end
+		}
+
+		return false;
 	}
 
 	/**
@@ -90,17 +99,21 @@ class Controls
 	 */
 	public static function justReleased(tag:String):Bool
 	{
-		if (!binds.exists(tag))
-			return false;
+		if (binds.exists(tag))
+		{
+			final bind:Bind = binds.get(tag);
 
-		#if FLX_KEYBOARD
-		if (FlxG.keys.checkStatus(binds.get(tag).key, JUST_RELEASED)
-			return true;
-		#end
+			#if FLX_KEYBOARD
+			if (bind != null && bind.key != null && FlxG.keys.checkStatus(bind.key, JUST_RELEASED))
+				return true;
+			#end
 
-		#if FLX_GAMEPAD
-		if (FlxG.gamepads.anyJustReleased(binds.get(tag).gamepad))
-			return true;
-		#end
+			#if FLX_GAMEPAD
+			if (bind != null && bind.gamepad != null && FlxG.gamepads.anyJustReleased(bind.gamepad))
+				return true;
+			#end
+		}
+
+		return false;
 	}
 }
