@@ -1,3 +1,4 @@
+import utf.backend.AssetPaths;
 import utf.states.Room;
 
 class Water_Redacted extends Room
@@ -14,6 +15,11 @@ class Water_Redacted extends Room
 
 	public override function create():Void
 	{
+		FlxG.sound.playMusic(AssetPaths.music('mysteriousroom2'), 0.8);
+
+		if (FlxG.sound.music != null)
+			FlxG.sound.music.pitch = 0.5;
+
 		loadCharacter('mainchara', 280, 200);
 
 		for (i in 0...5)
