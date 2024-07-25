@@ -1,4 +1,3 @@
-import utf.backend.AssetPaths;
 import utf.states.Room;
 
 class Water_Redacted extends Room
