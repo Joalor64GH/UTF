@@ -224,6 +224,7 @@ class Main extends Sprite
 		System.exit(1);
 	}
 
+	@:access(openfl.display.Sprite)
 	private inline function onResizeGame(width:Int, height:Int):Void
 	{
 		final scale:Float = Math.min(width / FlxG.width, height / FlxG.height);
@@ -237,11 +238,13 @@ class Main extends Sprite
 			{
 				if (camera != null && (camera.filters != null && camera.filters.length > 0))
 				{
-					@:privateAccess
 					if (camera.flashSprite != null)
 					{
 						camera.flashSprite.__cacheBitmap = null;
 						camera.flashSprite.__cacheBitmapData = null;
+						camera.flashSprite.__cacheBitmapData2 = null;
+						camera.flashSprite.__cacheBitmapData3 = null;
+						camera.flashSprite.__cacheBitmapColorTransform = null;
 					}
 				}
 			}
@@ -257,7 +260,7 @@ class Main extends Sprite
 
 	private inline function onPreStateCreate(state:FlxState):Void
 	{
-		var cache:AssetCache = cast(Assets.cache, AssetCache);
+		final cache:AssetCache = cast(Assets.cache, AssetCache);
 
 		for (key in cache.bitmapData.keys())
 		{
