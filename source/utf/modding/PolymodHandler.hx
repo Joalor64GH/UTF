@@ -25,6 +25,11 @@ import utf.util.WindowUtil;
 class PolymodHandler
 {
 	/**
+	 * The root directory for mods.
+	 */
+	private static final MOD_ROOT:String = 'mods';
+
+	/**
 	 * Stores metadata for the loaded mods.
 	 */
 	public static var data(default, null):Map<String, ModMetadata> = [];
@@ -53,11 +58,11 @@ class PolymodHandler
 
 		buildImports();
 
-		if (!FileSystem.exists('mods'))
-			FileSystem.createDirectory('mods');
+		if (!FileSystem.exists(MOD_ROOT))
+			FileSystem.createDirectory(MOD_ROOT);
 
 		Polymod.init({
-			modRoot: 'mods',
+			modRoot: MOD_ROOT,
 			dirs: getModDirs(),
 			framework: OPENFL,
 			ignoredFiles: Polymod.getDefaultIgnoreList(),
@@ -99,7 +104,7 @@ class PolymodHandler
 
 		final packs:Array<String> = [];
 
-		for (pack in Polymod.scan({modRoot: 'mods', apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version'))}))
+		for (pack in Polymod.scan({modRoot: MOD_ROOT, apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version'))}))
 		{
 			data.set(pack.id, pack);
 
