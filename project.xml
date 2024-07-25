@@ -30,7 +30,9 @@
 
 	<assets path="assets" />
 
-	<source name="source" />
+	<source path="source" />
+
+	<template path="templates" if="${lime &lt; 8.2.0}" />
 
 	<!--Libraries-->
 
