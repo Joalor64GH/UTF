@@ -35,6 +35,7 @@ import utf.backend.AssetPaths;
 import utf.backend.Data;
 import utf.objects.debug.Overlay;
 import utf.states.Startup;
+import utf.util.MemoryUtil;
 import utf.util.WindowUtil;
 #if sys
 import sys.io.File;
@@ -108,6 +109,8 @@ class Main extends Sprite
 	{
 		if (hasEventListener(Event.ADDED_TO_STAGE))
 			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+
+		MemoryUtil.enable();
 
 		#if debug
 		FlxG.log.redirectTraces = true;
@@ -275,6 +278,8 @@ class Main extends Sprite
 
 	private inline function onPostStateSwitch():Void
 	{
-		System.gc();
+		MemoryUtil.collect(true);
+		MemoryUtil.compact();
+		MemoryUtil.collect(false);
 	}
 }
