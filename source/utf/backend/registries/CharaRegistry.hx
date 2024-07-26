@@ -8,7 +8,7 @@ import utf.objects.room.Chara;
 /**
  * Handles the loading and management of character objects within a room.
  */
-class CharacterRegistry
+class CharaRegistry
 {
 	/**
 	 * Map to store associations between character IDs and their classes.
