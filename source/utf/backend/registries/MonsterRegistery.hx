@@ -1,8 +1,6 @@
 package utf.backend.registries;
 
 import flixel.FlxG;
-import haxe.io.Path;
-import haxe.Exception;
 import utf.objects.battle.Monster;
 import utf.objects.battle.ScriptedMonster;
 
