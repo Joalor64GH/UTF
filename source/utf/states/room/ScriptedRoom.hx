@@ -1,7 +1,7 @@
-package utf.objects.room;
+package utf.states.room;
 
 import polymod.hscript.HScriptedClass;
-import utf.objects.room.Room;
+import utf.states.room.Room;
 
 /**
  * A room that can be controlled by scripts.
