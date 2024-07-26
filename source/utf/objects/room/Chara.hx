@@ -1,4 +1,4 @@
-package utf.util;
+package utf.objects.room;
 
 import flixel.FlxObject;
 import flixel.FlxSprite;
