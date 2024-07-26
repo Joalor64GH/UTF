@@ -11,8 +11,10 @@ import polymod.util.VersionUtil;
 import polymod.Polymod;
 import openfl.Lib;
 import sys.FileSystem;
+import utf.backend.registries.CharaRegistry;
 import utf.backend.registries.MonsterRegistery;
 import utf.backend.registries.ObjectRegistery;
+import utf.backend.registries.RoomRegistry;
 import utf.backend.registries.TyperRegistery;
 import utf.util.macro.ClassMacro;
 import utf.util.WindowUtil;
@@ -91,8 +93,10 @@ class PolymodHandler
 	 */
 	public static function reloadRegisteries():Void
 	{
+		CharaRegistry.loadCharacters();
 		MonsterRegistery.loadMonsters();
 		ObjectRegistery.loadObjects();
+		RoomRegistry.loadRooms();
 		TyperRegistery.loadTypers();
 	}
 
