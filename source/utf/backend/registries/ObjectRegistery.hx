@@ -1,8 +1,6 @@
 package utf.backend.registries;
 
 import flixel.FlxG;
-import haxe.io.Path;
-import haxe.Exception;
 import utf.objects.room.Object;
 import utf.objects.room.ScriptedObject;
 
@@ -31,7 +29,7 @@ class ObjectRegistery
 
 			for (scriptedObject in scriptedObjects)
 			{
-				var object:Object = ScriptedObject.init(scriptedObject, 'unknown');
+				final object:Object = ScriptedObject.init(scriptedObject, 'unknown');
 
 				if (object == null)
 					continue;
