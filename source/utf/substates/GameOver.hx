@@ -11,7 +11,6 @@ import utf.input.Controls;
 import utf.backend.Data;
 import utf.backend.Global;
 import utf.objects.dialogue.Writer;
-import utf.states.Room;
 
 class GameOver extends FlxSubState
 {
