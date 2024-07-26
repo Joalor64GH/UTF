@@ -1,4 +1,4 @@
-package utf.backend;
+package utf.input;
 
 #if FLX_GAMEPAD
 import flixel.input.gamepad.FlxGamepadInputID;
