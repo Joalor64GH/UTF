@@ -33,10 +33,12 @@ class Chara extends FlxSprite
 
 	/**
 	 * Initializes the hitbox for the character and aligns it with the character sprite.
+	 * @param width The width of the hitbox.
+	 * @param height The height of the hitbox.
 	 */
-	public function initializeHitbox():Void
+	public function initializeHitbox(width:Float, height:Float):Void
 	{
-		characterHitbox = new FlxObject(x, y, 16, 4);
+		characterHitbox = new FlxObject(x, y, width, height);
 		characterHitbox.centerObject(this, X);
 		characterHitbox.y = y + height - characterHitbox.height;
 	}
@@ -44,7 +46,13 @@ class Chara extends FlxSprite
 	public override function update(elapsed:Float):Void
 	{
 		if (characterHitbox != null)
+		{
+			centerObject(characterHitbox, X);
+
+			y = characterHitbox.y - (characterHitbox.height - height);
+
 			characterHitbox.update(elapsed);
+		}
 
 		super.update(elapsed);
 	}
