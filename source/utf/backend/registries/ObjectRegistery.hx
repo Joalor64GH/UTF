@@ -40,7 +40,7 @@ class ObjectRegistery
 			}
 		}
 
-		FlxG.log.notice('Successfully loaded ${Lambda.count(objectScriptedClasses)} objects!');
+		FlxG.log.notice('Successfully loaded ${Lambda.count(objectScriptedClasses)} object(s)!');
 	}
 
 	/**

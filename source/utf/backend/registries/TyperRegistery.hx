@@ -42,7 +42,7 @@ class TyperRegistery
 			}
 		}
 
-		FlxG.log.notice('Successfully loaded ${Lambda.count(typerScriptedClasses)} typers!');
+		FlxG.log.notice('Successfully loaded ${Lambda.count(typerScriptedClasses)} typer(s)!');
 	}
 
 	/**

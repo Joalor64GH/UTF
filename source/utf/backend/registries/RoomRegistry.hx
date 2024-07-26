@@ -40,7 +40,7 @@ class RoomRegistry
 			}
 		}
 
-		FlxG.log.notice('Successfully loaded ${Lambda.count(roomClasses)} rooms!');
+		FlxG.log.notice('Successfully loaded ${Lambda.count(roomClasses)} room(s)!');
 	}
 
 	/**

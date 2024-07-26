@@ -40,7 +40,7 @@ class CharaRegistry
 			}
 		}
 
-		FlxG.log.notice('Successfully loaded ${Lambda.count(characterClasses)} characters!');
+		FlxG.log.notice('Successfully loaded ${Lambda.count(characterClasses)} character(s)!');
 	}
 
 	/**

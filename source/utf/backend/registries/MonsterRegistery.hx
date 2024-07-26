@@ -40,7 +40,7 @@ class MonsterRegistery
 			}
 		}
 
-		FlxG.log.notice('Successfully loaded ${Lambda.count(monsterScriptedClasses)} monsters!');
+		FlxG.log.notice('Successfully loaded ${Lambda.count(monsterScriptedClasses)} monster(s)!');
 	}
 
 	/**
