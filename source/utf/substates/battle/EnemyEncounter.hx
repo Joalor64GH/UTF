@@ -14,7 +14,7 @@ import utf.input.Controls;
 import utf.backend.Data;
 import utf.backend.Global;
 import utf.objects.battle.Monster;
-import utf.backend.registries.MonsterRegistery;
+import utf.backend.registries.MonsterRegistry;
 import utf.objects.dialogue.Writer;
 import utf.substates.GameOver;
 
@@ -92,7 +92,7 @@ class EnemyEncounter extends FlxSubState
 
 		add(items);
 
-		monster = MonsterRegistery.fetchMonster('undyne-ex');
+		monster = MonsterRegistry.fetchMonster('undyne-ex');
 		monster.scrollFactor.set();
 		add(monster);
 

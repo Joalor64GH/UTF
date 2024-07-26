@@ -9,7 +9,7 @@ import utf.objects.dialogue.typers.ScriptedTyper;
 /**
  * Handles the loading and management of scripted dialogue typer classes.
  */
-class TyperRegistery
+class TyperRegistry
 {
 	/**
 	 * Map to store associations between dialogue typer IDs and scripted dialogue typer classes.

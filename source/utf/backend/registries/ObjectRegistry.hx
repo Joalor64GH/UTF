@@ -7,7 +7,7 @@ import utf.objects.room.ScriptedObject;
 /**
  * Handles the loading and management of scripted room object classes.
  */
-class ObjectRegistery
+class ObjectRegistry
 {
 	/**
 	 * Map to store associations between room object IDs and scripted room object classes.

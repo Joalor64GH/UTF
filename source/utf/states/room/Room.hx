@@ -5,9 +5,9 @@ import flixel.group.FlxGroup;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import utf.backend.registries.CharaRegistery;
-import utf.backend.registries.ObjectRegistery;
-// import utf.backend.registries.TileRegistery;
+import utf.backend.registries.CharaRegistry;
+import utf.backend.registries.ObjectRegistry;
+// import utf.backend.registries.TileRegistry;
 import utf.backend.AssetPaths;
 import utf.backend.Global;
 import utf.input.Controls;
@@ -118,7 +118,7 @@ class Room extends FlxTransitionableState
 	 */
 	public function loadCharacter(characterID:String, x:Float, y:Float):Chara
 	{
-		chara = CharaRegistery.fetchCharacter(characterID);
+		chara = CharaRegistry.fetchCharacter(characterID);
 		chara.setPosition(x, y);
 		return chara;
 	}
@@ -132,7 +132,7 @@ class Room extends FlxTransitionableState
 	 */
 	public function createObject(objectID:String, x:Float, y:Float):Object
 	{
-		final object:Object = ObjectRegistery.fetchObject(objectID);
+		final object:Object = ObjectRegistry.fetchObject(objectID);
 		object.setPosition(x, y);
 		objects.add(object);
 		return object;

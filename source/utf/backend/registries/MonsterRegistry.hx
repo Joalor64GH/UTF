@@ -7,7 +7,7 @@ import utf.objects.battle.ScriptedMonster;
 /**
  * Handles the loading and management of scripted monster classes.
  */
-class MonsterRegistery
+class MonsterRegistry
 {
 	/**
 	 * Map to store associations between monster IDs and scripted monster classes.

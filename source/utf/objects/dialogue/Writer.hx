@@ -1,7 +1,7 @@
 package utf.objects.dialogue;
 
 import flixel.FlxG;
-import utf.backend.registries.TyperRegistery;
+import utf.backend.registries.TyperRegistry;
 import utf.backend.AssetPaths;
 import utf.input.Controls;
 import utf.backend.Data;
@@ -47,7 +47,7 @@ class Writer extends TypeText
 		if (dialogue == null)
 			dialogue = {typer: 'default', text: 'Error!'};
 
-		final typer:Typer = TyperRegistery.fetchTyper(dialogue.typer ?? 'default');
+		final typer:Typer = TyperRegistry.fetchTyper(dialogue.typer ?? 'default');
 
 		if (font != typer.fontName)
 			font = typer.fontName;
