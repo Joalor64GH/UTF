@@ -47,7 +47,7 @@ class Chara extends FlxSprite
 	{
 		if (characterHitbox != null)
 		{
-			centerObject(characterHitbox, X);
+			this.centerObject(characterHitbox, X);
 
 			y = characterHitbox.y - (characterHitbox.height - height);
 
