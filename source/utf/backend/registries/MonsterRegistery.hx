@@ -29,7 +29,7 @@ class MonsterRegistery
 
 			for (scriptedMonster in scriptedMonsters)
 			{
-				var monster:Monster = ScriptedMonster.init(scriptedMonster, 'unknown');
+				final monster:Monster = ScriptedMonster.init(scriptedMonster, 'unknown');
 
 				if (monster == null)
 					continue;
