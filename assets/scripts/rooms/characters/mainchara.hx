@@ -30,6 +30,8 @@ class MainChara extends Chara
 		}
 
 		animation.finish();
+
+		initializeHitbox(width, Math.round(height * 0.36));
 	}
 
 	public override function update(elapsed:Float):Void
