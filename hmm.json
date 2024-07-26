@@ -33,6 +33,10 @@
 			"type": "haxelib"
 		},
 		{
+			"name": "thx.core",
+			"type": "haxelib"
+		},
+		{
 			"name": "thx.semver",
 			"type": "haxelib"
 		},
