@@ -1,8 +1,5 @@
 package utf.states;
 
-import utf.backend.AssetPaths;
-import utf.input.Controls;
-import utf.backend.Global;
 import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup;
@@ -12,6 +9,12 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 
+import utf.backend.registries.CharaRegistery;
+import utf.backend.registries.ObjectRegistery;
+// import utf.backend.registries.TileRegistery;
+import utf.backend.AssetPaths;
+import utf.backend.Global;
+import utf.input.Controls;
 import utf.objects.room.Chara;
 import utf.objects.room.Object;
 // import utf.objects.room.Tile;
