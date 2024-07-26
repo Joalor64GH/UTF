@@ -31,7 +31,7 @@ class TyperRegistery
 
 			for (scriptedTyper in scriptedTypers)
 			{
-				var typer:Typer = ScriptedTyper.init(scriptedTyper, 'unknown');
+				final typer:Typer = ScriptedTyper.init(scriptedTyper, 'unknown');
 
 				if (typer == null)
 					continue;
