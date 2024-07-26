@@ -32,8 +32,6 @@
 
 	<source path="source" />
 
-	<templatePath name="templates" />
-
 	<!--Libraries-->
 
 	<haxelib name="flixel" />
@@ -106,4 +104,8 @@
 	<!--Analyzer Optimization-->
 
 	<haxedef name="analyzer-optimize" />
+
+	<!--Templates Path-->
+
+	<templatePath name="templates" />
 </project>
