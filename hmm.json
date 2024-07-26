@@ -30,12 +30,18 @@
 		},
 		{
 			"name": "polymod",
-			"type": "git",
-			"ref": "develop",
-			"url": "https://github.com/larsiusprime/polymod.git"
+			"type": "haxelib"
 		},
 		{
 			"name": "thx.semver",
+			"type": "haxelib"
+		},
+		{
+			"name": "jsonpath",
+			"type": "haxelib"
+		},
+		{
+			"name": "jsonpatch",
 			"type": "haxelib"
 		},
 		{
