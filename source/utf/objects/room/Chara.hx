@@ -37,7 +37,7 @@ class Chara extends FlxSprite
 	public function initializeHitbox():Void
 	{
 		characterHitbox = new FlxObject(x, y, 16, 4);
-		characterHitbox.centerOverlay(this, X);
+		characterHitbox.centerObject(this, X);
 		characterHitbox.y = y + height - characterHitbox.height;
 	}
 
