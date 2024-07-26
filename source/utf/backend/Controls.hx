@@ -125,4 +125,106 @@ class Controls
 
 		return false;
 	}
+
+	/**
+	 * Checks if any of the inputs associated with the given tags were just pressed.
+	 * @param tags An array of action names to check.
+	 * @return true if any of the keys or gamepad buttons were just pressed, false otherwise.
+	 */
+	public static function anyJustPressed(tags:Array<String>):Bool
+	{
+		if (tags == null || tags.length <= 0)
+			return false;
+
+		for (tag in tags)
+		{
+			if (!binds.exists(tag))
+				continue;
+
+			final bind:Bind = binds.get(tag);
+
+			if (bind == null)
+				continue;
+
+			#if FLX_KEYBOARD
+			if (FlxG.keys.checkStatus(bind.key, JUST_PRESSED))
+				return true;
+			#end
+
+			#if FLX_GAMEPAD
+			if (FlxG.gamepads.anyJustPressed(bind.gamepad))
+				return true;
+			#end
+		}
+
+		return false;
+	}
+
+	/**
+	 * Checks if any of the inputs associated with the given tags are currently pressed.
+	 * @param tags An array of action names to check.
+	 * @return true if any of the keys or gamepad buttons are pressed, false otherwise.
+	 */
+	public static function anyPressed(tags:Array<String>):Bool
+	{
+		if (tags == null || tags.length <= 0)
+			return false;
+
+		for (tag in tags)
+		{
+			if (!binds.exists(tag))
+				continue;
+
+			final bind:Bind = binds.get(tag);
+
+			if (bind == null)
+				continue;
+
+			#if FLX_KEYBOARD
+			if (FlxG.keys.checkStatus(bind.key, PRESSED))
+				return true;
+			#end
+
+			#if FLX_GAMEPAD
+			if (FlxG.gamepads.anyPressed(bind.gamepad))
+				return true;
+			#end
+		}
+
+		return false;
+	}
+
+	/**
+	 * Checks if any of the inputs associated with the given tags were just released.
+	 * @param tags An array of action names to check.
+	 * @return true if any of the keys or gamepad buttons were just released, false otherwise.
+	 */
+	public static function anyJustReleased(tags:Array<String>):Bool
+	{
+		if (tags == null || tags.length <= 0)
+			return false;
+
+		for (tag in tags)
+		{
+			if (!binds.exists(tag))
+				continue;
+
+			final bind:Bind = binds.get(tag);
+
+			if (bind == null)
+				continue;
+
+			#if FLX_KEYBOARD
+			if (FlxG.keys.checkStatus(bind.key, JUST_RELEASED))
+				return true;
+			#end
+
+			#if FLX_GAMEPAD
+			if (FlxG.gamepads.anyJustReleased(bind.gamepad))
+				return true;
+			#end
+		}
+
+		return false;
+	}
 }
