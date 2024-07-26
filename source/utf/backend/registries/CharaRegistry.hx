@@ -1,9 +1,8 @@
 package utf.backend.registries;
 
 import flixel.FlxG;
-import haxe.io.Path;
-import haxe.Exception;
 import utf.objects.room.Chara;
+import utf.objects.room.ScriptedChara;
 
 /**
  * Handles the loading and management of character objects within a room.
@@ -22,7 +21,7 @@ class CharaRegistry
 	{
 		clearCharacters();
 
-		final characterList:Array<String> = Chara.listScriptClasses();
+		final characterList:Array<String> = ScriptedChara.listScriptClasses();
 
 		if (characterList.length > 0)
 		{
@@ -30,7 +29,7 @@ class CharaRegistry
 
 			for (character in characterList)
 			{
-				var chara:Chara = Chara.init(character, 'unknown');
+				final chara:Chara = ScriptedChara.init(character, 'unknown');
 
 				if (chara == null)
 					continue;
@@ -62,7 +61,7 @@ class CharaRegistry
 
 		if (characterClass != null)
 		{
-			final chara:Chara = Chara.init(characterClass, characterID);
+			final chara:Chara = ScriptedChara.init(characterClass, characterID);
 
 			if (chara == null)
 			{
