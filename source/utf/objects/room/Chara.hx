@@ -1,37 +1,50 @@
 package utf.util;
 
-import flixel.util.FlxAxes;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 
 using utf.util.ObjectUtil;
 
 /**
- * Represents the character within a room.
+ * Represents a character within a room, including an associated hitbox.
  */
 class Chara extends FlxSprite
 {
-	public var hitbox:FlxObject;
+	/**
+	 * The ID of the character.
+	 */
+	public var characterID:String;
 
-	public function new(?x:Float = 0, ?y:Float = 0):Void
+	/**
+	 * The hitbox associated with the character.
+	 */
+	public var characterHitbox:FlxObject;
+
+	/**
+	 * Constructor to initialize the character with a specified ID.
+	 * @param characterID The ID of the character.
+	 */
+	public function new(characterID:String):Void
 	{
-		super(x, y);
+		super();
+
+		this.characterID = characterID;
 	}
 
 	/**
-	 * Initializes the hitbox for the character.
+	 * Initializes the hitbox for the character and aligns it with the character sprite.
 	 */
 	public function initializeHitbox():Void
 	{
-		hitbox = new FlxObject(x, y, 16, 4);
-		hitbox.centerOverlay(this, FlxAxes.X);
-		hitbox.y = y + height - hitbox.height;
+		characterHitbox = new FlxObject(x, y, 16, 4);
+		characterHitbox.centerOverlay(this, X);
+		characterHitbox.y = y + height - characterHitbox.height;
 	}
 
 	public override function update(elapsed:Float):Void
 	{
-		if (hitbox != null)
-			hitbox.update(elapsed);
+		if (characterHitbox != null)
+			characterHitbox.update(elapsed);
 
 		super.update(elapsed);
 	}
@@ -40,7 +53,15 @@ class Chara extends FlxSprite
 	{
 		super.draw();
 
-		if (hitbox != null)
-			hitbox.draw();
+		if (characterHitbox != null)
+			characterHitbox.draw();
+	}
+
+	public override function destroy():Void
+	{
+		super.destroy();
+
+		if (characterHitbox != null)
+			characterHitbox.destroy();
 	}
 }
