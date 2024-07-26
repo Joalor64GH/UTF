@@ -22,7 +22,7 @@ class CharaRegistry
 	{
 		clearCharacters();
 
-		final characterList:Array<String> = Chara.listCharacterClasses();
+		final characterList:Array<String> = Chara.listScriptClasses();
 
 		if (characterList.length > 0)
 		{
