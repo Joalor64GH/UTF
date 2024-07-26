@@ -1,8 +1,8 @@
 package utf.backend.registries;
 
 import flixel.FlxG;
-import utf.objects.room.Room;
-import utf.objects.room.ScriptedRoom;
+import utf.states.room.Room;
+import utf.states.room.ScriptedRoom;
 
 /**
  * Handles the loading and management of room classes within the game.
