@@ -1,4 +1,4 @@
-package utf.states;
+package utf.states.room;
 
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup;
