@@ -1,14 +1,10 @@
 package utf.states;
 
-import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup;
-import flixel.math.FlxPoint;
-import flixel.util.FlxColor;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
-
 import utf.backend.registries.CharaRegistery;
 import utf.backend.registries.ObjectRegistery;
 // import utf.backend.registries.TileRegistery;
@@ -19,24 +15,67 @@ import utf.objects.room.Chara;
 import utf.objects.room.Object;
 // import utf.objects.room.Tile;
 
-using StringTools;
-
+/**
+ * Represents a room in the game, managing the character, objects, and cameras within the room.
+ */
 class Room extends FlxTransitionableState
 {
+	/**
+	 * The ID of the room.
+	 */
 	public var roomID:String;
+
+	/**
+	 * The number of the room.
+	 */
 	public var roomNumber:Int;
+
+	/**
+	 * The name of the room.
+	 */
 	public var roomName:String;
+
+	/**
+	 * The width of the room.
+	 */
 	public var roomWidth:Int;
+
+	/**
+	 * The height of the room.
+	 */
 	public var roomHeight:Int;
+
+	/**
+	 * The scale of the room.
+	 */
 	public var roomScale:Float;
 
+	/**
+	 * The character within the room.
+	 */
 	var chara:Chara;
+
 	// var tiles:FlxTypedGroup<Tile> = new FlxTypedGroup<Tile>();
+
+	/**
+	 * The group of objects within the room.
+	 */
 	var objects:FlxTypedGroup<Object> = new FlxTypedGroup<Object>();
 
+	/**
+	 * The main game camera.
+	 */
 	var camGame:FlxCamera;
+
+	/**
+	 * The HUD camera.
+	 */
 	var camHud:FlxCamera;
 
+	/**
+	 * Constructor to initialize the room with a specified ID.
+	 * @param roomID The ID of the room.
+	 */
 	public function new(roomID:String):Void
 	{
 		super();
@@ -54,7 +93,6 @@ class Room extends FlxTransitionableState
 		FlxG.cameras.add(camHud, false);
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
-
 		FlxG.camera.setScrollBoundsRect(0, 0, roomWidth, roomHeight);
 
 		add(objects);
@@ -71,6 +109,13 @@ class Room extends FlxTransitionableState
 			FlxG.collide(chara.characterHitbox, objects);
 	}
 
+	/**
+	 * Loads the character into the room.
+	 * @param characterID The ID of the character to load.
+	 * @param x The x-coordinate to place the character.
+	 * @param y The y-coordinate to place the character.
+	 * @return The loaded character.
+	 */
 	public function loadCharacter(characterID:String, x:Float, y:Float):Chara
 	{
 		chara = CharaRegistery.fetchCharacter(characterID);
@@ -78,6 +123,13 @@ class Room extends FlxTransitionableState
 		return chara;
 	}
 
+	/**
+	 * Creates an object in the room.
+	 * @param objectID The ID of the object to create.
+	 * @param x The x-coordinate to place the object.
+	 * @param y The y-coordinate to place the object.
+	 * @return The created object.
+	 */
 	public function createObject(objectID:String, x:Float, y:Float):Object
 	{
 		final object:Object = ObjectRegistery.fetchObject(objectID);
