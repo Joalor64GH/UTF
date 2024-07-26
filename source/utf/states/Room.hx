@@ -1,7 +1,7 @@
 package utf.states;
 
 import utf.backend.AssetPaths;
-import utf.backend.Controls;
+import utf.input.Controls;
 import utf.backend.Global;
 import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.addons.transition.FlxTransitionableState;

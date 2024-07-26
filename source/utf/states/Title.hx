@@ -1,7 +1,7 @@
 package utf.states;
 
 import utf.backend.AssetPaths;
-import utf.backend.Controls;
+import utf.input.Controls;
 import utf.backend.Data;
 import flixel.input.keyboard.FlxKey;
 import flixel.text.FlxText;

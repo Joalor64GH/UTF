@@ -9,7 +9,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import openfl.Lib;
 import utf.backend.AssetPaths;
-import utf.backend.Controls;
+import utf.input.Controls;
 import utf.backend.Data;
 import utf.backend.Global;
 #if debug

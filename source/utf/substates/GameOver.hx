@@ -7,7 +7,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
 import utf.backend.AssetPaths;
-import utf.backend.Controls;
+import utf.input.Controls;
 import utf.backend.Data;
 import utf.backend.Global;
 import utf.objects.dialogue.Writer;

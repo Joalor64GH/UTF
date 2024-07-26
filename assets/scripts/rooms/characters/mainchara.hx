@@ -1,6 +1,7 @@
 import flixel.FlxG;
 import utf.backend.AssetPaths;
 import utf.backend.Global;
+import utf.input.Controls;
 import utf.objects.room.Chara;
 
 class MainChara extends Chara
