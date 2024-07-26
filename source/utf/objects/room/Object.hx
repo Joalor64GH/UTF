@@ -1,6 +1,5 @@
 package utf.objects.room;
 
-import utf.backend.AssetPaths;
 import flixel.FlxG;
 import flixel.FlxSprite;
 
