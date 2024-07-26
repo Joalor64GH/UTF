@@ -44,7 +44,9 @@
 		},
 		{
 			"name": "jsonpath",
-			"type": "haxelib"
+			"type": "git",
+			"ref": "main",
+			"url": "https://github.com/EliteMasterEric/jsonpath.git"
 		},
 		{
 			"name": "jsonpatch",
