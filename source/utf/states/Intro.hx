@@ -204,11 +204,11 @@ class Intro extends FlxState
 			switch (choices[selected])
 			{
 				case 'Continue':
-					FlxG.switchState(() -> ScriptedRoom.init(RoomRegistry.roomClasses.get(272)));
+					// FlxG.switchState(() -> ScriptedRoom.init(RoomRegistry.roomClasses.get(272)));
 				case 'Begin Game':
 					openSubState(new Naming());
 				case 'Settings':
-					FlxG.switchState(() -> new Settings());
+					FlxG.switchState(() -> stupidSHIT());
 			}
 		}
 
@@ -239,5 +239,11 @@ class Intro extends FlxState
 		{
 			spr.color = spr.ID == selected ? FlxColor.YELLOW : FlxColor.WHITE;
 		});
+	}
+
+	private function stupidSHIT():Settings
+	{
+		final idk:Settings = new Settings();
+		return idk;
 	}
 }
