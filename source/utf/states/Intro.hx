@@ -203,18 +203,9 @@ class Intro extends FlxState
 			switch (choices[selected])
 			{
 				case 'Continue':
-					final room:Room = RoomRegistry.fetchRoom(272);
-
-					if (room == null)
-					{
-						FlxG.camera.shake(0.5, 0.05);
-
-						return;
-					}
-
 					FlxG.switchState(function():FlxState
 					{
-						return room;
+						return RoomRegistry.fetchRoom(272).new;
 					});
 				case 'Begin Game':
 					openSubState(new Naming());
