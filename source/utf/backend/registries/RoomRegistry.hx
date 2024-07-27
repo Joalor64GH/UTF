@@ -29,7 +29,7 @@ class RoomRegistry
 
 			for (roomClass in roomList)
 			{
-				final room:Room = ScriptedRoom.init(roomClass, 'unknown');
+				final room:Room = ScriptedRoom.init(roomClass, 0);
 
 				if (room == null)
 					continue;
