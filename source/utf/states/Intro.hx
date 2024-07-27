@@ -208,7 +208,7 @@ class Intro extends FlxState
 				case 'Begin Game':
 					openSubState(new Naming());
 				case 'Settings':
-					FlxG.switchState(() -> stupidSHIT());
+					FlxG.switchState(stupidSHIT);
 			}
 		}
 
