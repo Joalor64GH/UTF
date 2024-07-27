@@ -5,6 +5,7 @@ import flixel.group.FlxGroup;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.FlxState;
 import utf.backend.registries.CharaRegistry;
 import utf.backend.registries.ObjectRegistry;
 // import utf.backend.registries.TileRegistry;
@@ -18,7 +19,7 @@ import utf.objects.room.Object;
 /**
  * Represents a room in the game, managing the character, objects, and cameras within the room.
  */
-class Room extends FlxTransitionableState
+class Room extends FlxState
 {
 	/**
 	 * The ID of the room.
