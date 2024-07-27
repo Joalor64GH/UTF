@@ -1,4 +1,4 @@
-package utf.states.room;
+/*package utf.states.room;
 
 import polymod.hscript.HScriptedClass;
 import utf.states.room.Room;
@@ -8,3 +8,4 @@ import utf.states.room.Room;
  */
 @:hscriptClass
 class ScriptedRoom extends Room implements HScriptedClass {}
+*/

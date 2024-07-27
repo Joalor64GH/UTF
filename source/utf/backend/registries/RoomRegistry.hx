@@ -1,4 +1,4 @@
-package utf.backend.registries;
+/*package utf.backend.registries;
 
 import flixel.FlxG;
 import utf.states.room.Room;
@@ -85,3 +85,4 @@ class RoomRegistry
 			roomClasses.clear();
 	}
 }
+*/

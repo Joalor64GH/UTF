@@ -8,7 +8,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import openfl.Lib;
-import utf.backend.registries.RoomRegistry;
+// import utf.backend.registries.RoomRegistry;
 import utf.backend.AssetPaths;
 import utf.input.Controls;
 import utf.backend.Data;
@@ -17,7 +17,7 @@ import utf.backend.Global;
 import utf.util.macro.git.GitUtil;
 #end
 import utf.states.room.Room;
-import utf.states.room.ScriptedRoom;
+// import utf.states.room.ScriptedRoom;
 import utf.states.Settings;
 #if debug
 import utf.substates.battle.EnemyEncounter;
