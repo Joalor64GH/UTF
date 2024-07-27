@@ -19,7 +19,7 @@ import utf.objects.room.Object;
 /**
  * Represents a room in the game, managing the character, objects, and cameras within the room.
  */
-class Room extends FlxState
+class Room extends FlxTransitionableState
 {
 	/**
 	 * The ID of the room.
