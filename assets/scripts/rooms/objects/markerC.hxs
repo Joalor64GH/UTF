@@ -8,6 +8,8 @@ class MarkerC extends Object
 		super('markerC');
 
 		loadGraphic(AssetPaths.sprite(objectID));
+		scale.set(2, 2);
+		updateHitbox();
 		immovable = true;
 		solid = false;
 	}

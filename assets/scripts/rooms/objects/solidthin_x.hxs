@@ -8,6 +8,8 @@ class SolidThin_X extends Object
 		super('solidthin_x');
 
 		loadGraphic(AssetPaths.sprite(objectID));
+		scale.set(2, 2);
+		updateHitbox();
 		immovable = true;
 		solid = true;
 	}

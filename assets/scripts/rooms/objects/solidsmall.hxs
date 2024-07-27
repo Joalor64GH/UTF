@@ -8,6 +8,8 @@ class SolidSmall extends Object
 		super('solidsmall');
 
 		loadGraphic(AssetPaths.sprite(objectID));
+		scale.set(2, 2);
+		updateHitbox();
 		immovable = true;
 		solid = true;
 	}

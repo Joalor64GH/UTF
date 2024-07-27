@@ -8,6 +8,8 @@ class SolidWide extends Object
 		super('solidwide');
 
 		loadGraphic(AssetPaths.sprite(objectID));
+		scale.set(2, 2);
+		updateHitbox();
 		immovable = true;
 		solid = true;
 	}

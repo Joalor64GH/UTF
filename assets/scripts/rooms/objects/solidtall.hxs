@@ -8,7 +8,8 @@ class SolidTall extends Object
 		super('solidtall');
 
 		loadGraphic(AssetPaths.sprite(objectID));
-		scale.y = 400;
+		scale.set(2, 800);
+		updateHitbox();
 		immovable = true;
 		solid = true;
 	}

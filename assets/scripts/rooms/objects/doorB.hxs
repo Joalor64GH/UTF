@@ -8,6 +8,8 @@ class DoorB extends Object
 		super('doorB');
 
 		loadGraphic(AssetPaths.sprite(objectID));
+		scale.set(2, 2);
+		updateHitbox();
 		immovable = true;
 		solid = false;
 	}

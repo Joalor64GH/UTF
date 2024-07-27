@@ -8,6 +8,8 @@ class SolidExTall_2 extends Object
 		super('solidextall_2');
 
 		loadGraphic(AssetPaths.sprite(objectID));
+		scale.set(2, 2);
+		updateHitbox();
 		immovable = true;
 		solid = true;
 	}

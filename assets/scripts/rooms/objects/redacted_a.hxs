@@ -8,6 +8,8 @@ class Redacted_A extends Object
 		super('redacted_a');
 
 		loadGraphic(AssetPaths.sprite(objectID));
+		scale.set(2, 2);
+		updateHitbox();
 		immovable = true;
 		solid = true;
 	}
