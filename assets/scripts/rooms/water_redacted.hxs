@@ -5,9 +5,8 @@ class Water_Redacted extends Room
 {
 	public function new():Void
 	{
-		super('water_redacted');
+		super(272);
 
-		roomNumber = 272;
 		roomName = 'Redacted';
 		roomWidth = 640;
 		roomHeight = 480;
