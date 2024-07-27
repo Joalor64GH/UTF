@@ -8,6 +8,9 @@ class DoorA extends Object
 		super('doorA');
 
 		loadGraphic(AssetPaths.sprite(objectID));
+		scale.set(2, 2);
+		updateHitbox();
+
 		immovable = true;
 		solid = false;
 	}
