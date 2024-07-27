@@ -17,6 +17,7 @@ import utf.backend.Global;
 import utf.util.macro.git.GitUtil;
 #end
 import utf.states.room.Room;
+import utf.states.room.ScriptedRoom;
 import utf.states.Settings;
 #if debug
 import utf.substates.battle.EnemyEncounter;
@@ -203,7 +204,7 @@ class Intro extends FlxState
 			switch (choices[selected])
 			{
 				case 'Continue':
-					FlxG.switchState(() -> Type.getClass(RoomRegistry.fetchRoom(272)));
+					FlxG.switchState(() -> ScriptedRoom.init(RoomRegistry.roomClasses.get(272)));
 				case 'Begin Game':
 					openSubState(new Naming());
 				case 'Settings':
