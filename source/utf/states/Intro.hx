@@ -208,7 +208,7 @@ class Intro extends FlxState
 				case 'Begin Game':
 					openSubState(new Naming());
 				case 'Settings':
-					FlxG.switchState(stupidSHIT);
+					FlxG.switchState(() -> new Settings());
 			}
 		}
 
@@ -239,11 +239,5 @@ class Intro extends FlxState
 		{
 			spr.color = spr.ID == selected ? FlxColor.YELLOW : FlxColor.WHITE;
 		});
-	}
-
-	private function stupidSHIT():Settings
-	{
-		final idk:Settings = new Settings();
-		return idk;
 	}
 }
