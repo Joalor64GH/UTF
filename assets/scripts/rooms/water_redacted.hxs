@@ -1,5 +1,5 @@
 import utf.backend.AssetPaths;
-import utf.states.Room;
+import utf.states.room.Room;
 
 class Water_Redacted extends Room
 {
