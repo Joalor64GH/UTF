@@ -22,11 +22,6 @@ import utf.objects.room.Object;
 class Room extends FlxTransitionableState
 {
 	/**
-	 * The ID of the room.
-	 */
-	public var roomID:String;
-
-	/**
 	 * The number of the room.
 	 */
 	public var roomNumber:Int;
@@ -75,13 +70,13 @@ class Room extends FlxTransitionableState
 
 	/**
 	 * Constructor to initialize the room with a specified ID.
-	 * @param roomID The ID of the room.
+	 * @param roomNumber The number of the room.
 	 */
-	public function new(roomID:String):Void
+	public function new(roomNumber:Int):Void
 	{
 		super();
 
-		this.roomID = roomID;
+		this.roomNumber = roomNumber;
 	}
 
 	override function create():Void
