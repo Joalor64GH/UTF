@@ -31,6 +31,9 @@ class MainChara extends Chara
 
 		animation.finish();
 
+		scale.set(2, 2);
+		updateHitbox();
+
 		initializeHitbox(width, Math.round(height * 0.36));
 	}
 
@@ -41,11 +44,11 @@ class MainChara extends Chara
 			if (!Controls.anyPressed(['right', 'left']))
 				animation.play('down');
 
-			characterHitbox.velocity.y = 180;
+			characterHitbox.velocity.y = 90;
 
 			#if debug
 			if (Controls.pressed('cancel'))
-				characterHitbox.velocity.y = 300;
+				characterHitbox.velocity.y = 150;
 			#end
 		}
 		else if (Controls.pressed('up'))
@@ -53,11 +56,11 @@ class MainChara extends Chara
 			if (!Controls.anyPressed(['right', 'left']))
 				animation.play('up');
 
-			characterHitbox.velocity.y = -180;
+			characterHitbox.velocity.y = -90;
 
 			#if debug
 			if (Controls.pressed('cancel'))
-				characterHitbox.velocity.y = -300;
+				characterHitbox.velocity.y = -150;
 			#end
 		}
 
@@ -65,22 +68,22 @@ class MainChara extends Chara
 		{
 			animation.play('right');
 
-			characterHitbox.velocity.x = 180;
+			characterHitbox.velocity.x = 90;
 
 			#if debug
 			if (Controls.pressed('cancel'))
-				characterHitbox.velocity.x = 300;
+				characterHitbox.velocity.x = 150;
 			#end
 		}
 		else if (Controls.pressed('left'))
 		{
 			animation.play('left');
 
-			characterHitbox.velocity.x = -180;
+			characterHitbox.velocity.x = -90;
 
 			#if debug
 			if (Controls.pressed('cancel'))
-				characterHitbox.velocity.x = -300;
+				characterHitbox.velocity.x = -150;
 			#end
 		}
 
