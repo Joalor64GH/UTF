@@ -14,7 +14,7 @@ import sys.FileSystem;
 import utf.backend.registries.CharaRegistry;
 import utf.backend.registries.MonsterRegistry;
 import utf.backend.registries.ObjectRegistry;
-// import utf.backend.registries.RoomRegistry;
+import utf.backend.registries.RoomRegistry;
 import utf.backend.registries.TyperRegistry;
 import utf.util.macro.ClassMacro;
 import utf.util.WindowUtil;
@@ -96,7 +96,7 @@ class PolymodHandler
 		CharaRegistry.loadCharacters();
 		MonsterRegistry.loadMonsters();
 		ObjectRegistry.loadObjects();
-		// RoomRegistry.loadRooms();
+		RoomRegistry.loadRooms();
 		TyperRegistry.loadTypers();
 	}
 
