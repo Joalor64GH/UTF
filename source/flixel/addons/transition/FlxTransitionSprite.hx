@@ -143,12 +143,12 @@ class FlxTransitionSprite extends FlxSprite
 		}
 
 		animation.play(anim);
-		#if (flixel == version("6.0.0") || flixel < version("5.9.0"))
+		//#if (flixel < version("5.9.0"))
 		animation.finishCallback = onFinishAnim;
-		#else
+		/*#else
 		if (!animation.onFinish.has(onFinishAnim))
 			animation.onFinish.add(onFinishAnim);
-		#end
+		#end*/
 		status = Status;
 	}
 
