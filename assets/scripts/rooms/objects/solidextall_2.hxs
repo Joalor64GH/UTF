@@ -10,6 +10,7 @@ class SolidExTall_2 extends Object
 		loadGraphic(AssetPaths.sprite(objectID));
 		scale.set(2, 2);
 		updateHitbox();
+
 		immovable = true;
 		solid = true;
 	}

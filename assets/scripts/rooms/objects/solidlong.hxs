@@ -10,6 +10,7 @@ class SolidLong extends Object
 		loadGraphic(AssetPaths.sprite(objectID));
 		scale.set(800, 2);
 		updateHitbox();
+
 		immovable = true;
 		solid = true;
 	}
