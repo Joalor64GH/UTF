@@ -203,7 +203,7 @@ class Intro extends FlxState
 			switch (choices[selected])
 			{
 				case 'Continue':
-					FlxG.switchState(Type.getClass(RoomRegistry.fetchRoom(272)));
+					FlxG.switchState(() -> Type.getClass(RoomRegistry.fetchRoom(272)));
 				case 'Begin Game':
 					openSubState(new Naming());
 				case 'Settings':
