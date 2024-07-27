@@ -42,11 +42,6 @@ class Room extends FlxTransitionableState
 	public var roomHeight:Int;
 
 	/**
-	 * The scale of the room.
-	 */
-	public var roomScale:Float;
-
-	/**
 	 * The character within the room.
 	 */
 	var chara:Chara;
@@ -89,10 +84,16 @@ class Room extends FlxTransitionableState
 		FlxG.cameras.add(camHud, false);
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
-		FlxG.camera.setScrollBoundsRect(0, 0, roomWidth, roomHeight);
 
 		add(objects);
-		add(chara);
+
+		if (chara != null)
+		{
+			FlxG.camera.follow(chara);
+			add(chara);
+		}
+
+		FlxG.camera.setScrollBoundsRect(0, 0, roomWidth, roomHeight);
 
 		super.create();
 	}
