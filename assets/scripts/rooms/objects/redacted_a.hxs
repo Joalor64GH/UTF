@@ -1,0 +1,14 @@
+import utf.backend.AssetPaths;
+import utf.objects.room.Object;
+
+class Redacted_A extends Object
+{
+	public function new():Void
+	{
+		super('redacted_a');
+
+		loadGraphic(AssetPaths.sprite(objectID));
+		immovable = true;
+		solid = true;
+	}
+}
