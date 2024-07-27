@@ -1,3 +1,4 @@
+import flixel.FlxG;
 import utf.backend.AssetPaths;
 import utf.states.room.Room;
 
