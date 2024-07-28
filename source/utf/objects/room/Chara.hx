@@ -54,10 +54,10 @@ class Chara extends FlxSprite
 
 		if (characterHitbox != null)
 		{
-			characterHitbox.update(elapsed);
-
 			x = characterHitbox.x - (this.width - characterHitbox.width) / 2;
 			y = characterHitbox.y + characterHitbox.height - this.height;
+
+			characterHitbox.update(elapsed);
 		}
 	}
 
