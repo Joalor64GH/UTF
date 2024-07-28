@@ -34,7 +34,9 @@
 		},
 		{
 			"name": "polymod",
-			"type": "haxelib"
+			"type": "git",
+			"ref": "develop",
+			"url": "https://github.com/MAJigsaw77/polymod.git"
 		},
 		{
 			"name": "thx.core",
