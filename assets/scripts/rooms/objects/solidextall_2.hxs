@@ -1,7 +1,7 @@
 import utf.backend.AssetPaths;
 import utf.objects.room.Object;
 
-class SolidExTall_2 extends Object
+class SolidExTall2Object extends Object
 {
 	public function new():Void
 	{

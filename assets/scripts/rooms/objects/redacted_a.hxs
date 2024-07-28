@@ -1,7 +1,7 @@
 import utf.backend.AssetPaths;
 import utf.objects.room.Object;
 
-class Redacted_A extends Object
+class RedactedAObject extends Object
 {
 	public function new():Void
 	{

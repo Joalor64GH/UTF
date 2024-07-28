@@ -1,7 +1,7 @@
 import utf.backend.AssetPaths;
 import utf.objects.room.Object;
 
-class MarkerD extends Object
+class MarkerDObject extends Object
 {
 	public function new():Void
 	{

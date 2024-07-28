@@ -1,7 +1,7 @@
 import utf.backend.AssetPaths;
 import utf.objects.room.Object;
 
-class Event extends Object
+class EventObject extends Object
 {
 	public function new():Void
 	{

@@ -1,7 +1,7 @@
 import utf.backend.AssetPaths;
 import utf.objects.room.Object;
 
-class DoorX extends Object
+class DoorXObject extends Object
 {
 	public function new():Void
 	{

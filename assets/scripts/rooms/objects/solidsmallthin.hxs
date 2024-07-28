@@ -1,7 +1,7 @@
 import utf.backend.AssetPaths;
 import utf.objects.room.Object;
 
-class SolidSmallThin extends Object
+class SolidSmallThinObject extends Object
 {
 	public function new():Void
 	{
