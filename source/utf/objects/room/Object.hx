@@ -14,11 +14,6 @@ class Object extends FlxSprite
 	public var objectID:String;
 
 	/**
-	 * The name of the object.
-	 */
-	public var objectName:String;
-
-	/**
 	 * Indicates whether the object is interactable.
 	 */
 	public var objectInteractable:Bool;
