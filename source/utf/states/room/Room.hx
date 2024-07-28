@@ -109,11 +109,11 @@ class Room extends FlxTransitionableState
 			{
 				obj2.forEach(function(obj:Object):Void
 				{
-					if (Controls.justPressed('confirm') && chara.overlaps(obj) && obj.objectInteractable)
+					if (Controls.justPressed('confirm') && obj != null && obj.objectInteractable && chara.overlaps(obj))
 					{
 						FlxG.log.notice('Trying to interact with "${obj.objectID}".');
-						
-						object.interact();
+
+						obj.interact();
 					}
 				});
 			});
