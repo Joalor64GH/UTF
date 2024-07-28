@@ -2,7 +2,7 @@ import flixel.FlxG;
 import utf.backend.AssetPaths;
 import utf.objects.dialogue.typers.Typer;
 
-class Default extends Typer
+class DefaultTyper extends Typer
 {
 	public function new():Void
 	{
