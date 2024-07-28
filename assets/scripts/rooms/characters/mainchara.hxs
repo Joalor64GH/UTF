@@ -38,59 +38,68 @@ class MainCharaCharacter extends Chara
 
 	public override function update(elapsed:Float):Void
 	{
-		if (Controls.pressed('down'))
+		if (characterControllable)
 		{
-			if (!Controls.anyPressed(['right', 'left']))
-				animation.play('down');
+			if (Controls.pressed('down'))
+			{
+				characterHitbox.velocity.y = 180;
 
-			characterHitbox.velocity.y = 180;
+				#if debug
+				if (Controls.pressed('cancel'))
+					characterHitbox.velocity.y = 300;
+				#end
 
-			#if debug
-			if (Controls.pressed('cancel'))
-				characterHitbox.velocity.y = 300;
-			#end
+				if (!Controls.anyPressed(['right', 'left']))
+					animation.play('down');
+			}
+			else if (Controls.pressed('up'))
+			{
+				characterHitbox.velocity.y = -180;
+
+				#if debug
+				if (Controls.pressed('cancel'))
+					characterHitbox.velocity.y = -300;
+				#end
+
+				if (!Controls.anyPressed(['right', 'left']))
+					animation.play('up');
+			}
+
+			if (Controls.pressed('right'))
+			{
+				characterHitbox.velocity.x = 180;
+
+				#if debug
+				if (Controls.pressed('cancel'))
+					characterHitbox.velocity.x = 300;
+				#end
+
+				animation.play('right');
+			}
+			else if (Controls.pressed('left'))
+			{
+				characterHitbox.velocity.x = -180;
+
+				#if debug
+				if (Controls.pressed('cancel'))
+					characterHitbox.velocity.x = -300;
+				#end
+
+				animation.play('left');
+			}
+
+			if (Controls.anyJustReleased(['down', 'up', 'right', 'left']))
+			{
+				characterHitbox.velocity.set();
+
+				animation.finish();
+			}
 		}
-		else if (Controls.pressed('up'))
+		else
 		{
-			if (!Controls.anyPressed(['right', 'left']))
-				animation.play('up');
-
-			characterHitbox.velocity.y = -180;
-
-			#if debug
-			if (Controls.pressed('cancel'))
-				characterHitbox.velocity.y = -300;
-			#end
-		}
-
-		if (Controls.pressed('right'))
-		{
-			animation.play('right');
-
-			characterHitbox.velocity.x = 180;
-
-			#if debug
-			if (Controls.pressed('cancel'))
-				characterHitbox.velocity.x = 300;
-			#end
-		}
-		else if (Controls.pressed('left'))
-		{
-			animation.play('left');
-
-			characterHitbox.velocity.x = -180;
-
-			#if debug
-			if (Controls.pressed('cancel'))
-				characterHitbox.velocity.x = -300;
-			#end
-		}
-
-		if (Controls.anyJustReleased(['down', 'up', 'right', 'left']))
-		{
-			animation.finish();
-
 			characterHitbox.velocity.set();
+
+			animation.finish();
 		}
 
 		super.update(elapsed);
