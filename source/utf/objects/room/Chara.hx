@@ -2,8 +2,8 @@ package utf.objects.room;
 
 import flixel.FlxObject;
 import flixel.FlxSprite;
-
-using utf.util.ObjectUtil;
+import utf.input.Controls;
+import utf.util.ObjectUtil;
 
 /**
  * Represents a character within a room, including an associated hitbox.
@@ -39,7 +39,9 @@ class Chara extends FlxSprite
 	public function initializeHitbox(width:Float, height:Float):Void
 	{
 		characterHitbox = new FlxObject(x, y, width, height);
-		characterHitbox.centerObject(this, X);
+
+		ObjectUtil.centerObject(characterHitbox, this, X);
+
 		characterHitbox.y = y + height - characterHitbox.height;
 	}
 
@@ -47,7 +49,8 @@ class Chara extends FlxSprite
 	{
 		super.setPosition(x, y);
 
-		characterHitbox.centerObject(this, X);
+		ObjectUtil.centerObject(characterHitbox, this, X);
+
 		characterHitbox.y = y + height - characterHitbox.height;
 	}
 
@@ -55,7 +58,7 @@ class Chara extends FlxSprite
 	{
 		if (characterHitbox != null)
 		{
-			this.centerObject(characterHitbox, X);
+			ObjectUtil.centerObject(this, characterHitbox, X);
 
 			y = characterHitbox.y - (characterHitbox.height - height);
 
@@ -70,7 +73,14 @@ class Chara extends FlxSprite
 		super.draw();
 
 		if (characterHitbox != null)
+		{
 			characterHitbox.draw();
+
+			#if FLX_DEBUG
+			if (Controls.justPressed('confirm'))
+				characterHitbox.drawDebug();
+			#end
+		}
 	}
 
 	public override function destroy():Void
