@@ -1,4 +1,4 @@
-package utf.backend.registries;
+package utf.registries;
 
 import flixel.FlxG;
 import utf.objects.room.Object;

@@ -8,7 +8,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import openfl.Lib;
-import utf.backend.registries.RoomRegistry;
+import utf.registries.RoomRegistry;
 import utf.backend.AssetPaths;
 import utf.input.Controls;
 import utf.backend.Data;

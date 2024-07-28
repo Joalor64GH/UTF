@@ -11,11 +11,11 @@ import polymod.util.VersionUtil;
 import polymod.Polymod;
 import openfl.Lib;
 import sys.FileSystem;
-import utf.backend.registries.CharaRegistry;
-import utf.backend.registries.MonsterRegistry;
-import utf.backend.registries.ObjectRegistry;
-import utf.backend.registries.RoomRegistry;
-import utf.backend.registries.TyperRegistry;
+import utf.registries.CharaRegistry;
+import utf.registries.MonsterRegistry;
+import utf.registries.ObjectRegistry;
+import utf.registries.RoomRegistry;
+import utf.registries.TyperRegistry;
 import utf.util.macro.ClassMacro;
 import utf.util.WindowUtil;
 
