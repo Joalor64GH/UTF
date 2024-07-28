@@ -105,17 +105,16 @@ class Room extends FlxTransitionableState
 
 		if (chara != null && chara.characterHitbox != null)
 		{
-			FlxG.collide(chara.characterHitbox, objects, function(obj1:FlxObject, obj2:FlxTypedGroup<Object>):Void
-			{
-				obj2.forEach(function(obj:Object):Void
-				{
-					if (Controls.justPressed('confirm') && obj != null && obj.objectInteractable && chara.overlaps(obj))
-					{
-						FlxG.log.notice('Trying to interact with "${obj.objectID}".');
+			FlxG.collide(chara.characterHitbox, objects);
 
-						obj.interact();
-					}
-				});
+			objects.forEach(function(obj:Object):Void
+			{
+				if (Controls.justPressed('confirm') && obj != null && obj.objectInteractable && chara.overlaps(obj))
+				{
+					FlxG.log.notice('Trying to interact with "${obj.objectID}".');
+
+					obj.interact();
+				}
 			});
 		}
 	}
