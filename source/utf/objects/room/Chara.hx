@@ -47,11 +47,7 @@ class Chara extends FlxSprite
 
 	public override function setPosition(x:Float = 0.0, y:Float = 0.0):Void
 	{
-		super.setPosition(x, y);
-
-		ObjectUtil.centerObject(characterHitbox, this, X);
-
-		characterHitbox.y = y + height - characterHitbox.height;
+		characterHitbox.setPosition(x, y);
 	}
 
 	public override function update(elapsed:Float):Void
@@ -77,7 +73,7 @@ class Chara extends FlxSprite
 			characterHitbox.draw();
 
 			#if FLX_DEBUG
-			if (Controls.justPressed('confirm'))
+			if (Controls.pressed('confirm'))
 				characterHitbox.drawDebug();
 			#end
 		}
