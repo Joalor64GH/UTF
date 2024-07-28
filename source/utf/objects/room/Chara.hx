@@ -43,6 +43,14 @@ class Chara extends FlxSprite
 		characterHitbox.y = y + height - characterHitbox.height;
 	}
 
+	public override function setPosition(x:Float = 0.0, y:Float = 0.0):Void
+	{
+		super.setPosition(x, y);
+
+		characterHitbox.centerObject(this, X);
+		characterHitbox.y = y + height - characterHitbox.height;
+	}
+
 	public override function update(elapsed:Float):Void
 	{
 		if (characterHitbox != null)
