@@ -35,7 +35,9 @@ import utf.backend.AssetPaths;
 import utf.backend.Data;
 import utf.objects.debug.Overlay;
 import utf.states.Startup;
+#if (cpp || neko || hl)
 import utf.util.MemoryUtil;
+#end
 import utf.util.TimerUtil;
 import utf.util.WindowUtil;
 #if sys
@@ -112,7 +114,9 @@ class Main extends Sprite
 		if (hasEventListener(Event.ADDED_TO_STAGE))
 			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 
+		#if (cpp || neko || hl)
 		MemoryUtil.enable();
+		#end
 
 		#if debug
 		FlxG.log.redirectTraces = true;
@@ -120,7 +124,9 @@ class Main extends Sprite
 
 		FlxG.signals.gameResized.add(onResizeGame);
 		FlxG.signals.preStateCreate.add(onPreStateCreate);
+		#if (cpp || neko || hl)
 		FlxG.signals.postStateSwitch.add(onPostStateSwitch);
+		#end
 
 		addChild(new FlxGame(640, 480, Startup, 60, 60));
 
@@ -296,6 +302,7 @@ class Main extends Sprite
 		#end
 	}
 
+	#if (cpp || neko || hl)
 	@:noCompletion
 	private inline function onPostStateSwitch():Void
 	{
@@ -309,4 +316,5 @@ class Main extends Sprite
 
 		FlxG.log.notice('Garbage collection took: ${TimerUtil.seconds(gcStart)}');
 	}
+	#end
 }
