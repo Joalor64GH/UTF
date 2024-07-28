@@ -17,7 +17,6 @@ typedef Bind =
 	 * The keyboard key associated with the action.
 	 */
 	key:FlxKey,
-
 	/**
 	 * The gamepad button associated with the action.
 	 */
