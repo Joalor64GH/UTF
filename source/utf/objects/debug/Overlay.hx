@@ -4,8 +4,8 @@ import flixel.util.FlxStringUtil;
 import openfl.display.FPS;
 import openfl.text.TextFormat;
 import openfl.system.System;
+import openfl.utils.Assets;
 import openfl.Lib;
-import utf.backend.AssetPaths;
 
 /**
  * This class extends `FPS` and is used to display the current frame rate (FPS)
@@ -35,7 +35,7 @@ class Overlay extends FPS
 		super(x, y, color);
 
 		final textFormat:TextFormat = defaultTextFormat;
-		textFormat.font = AssetPaths.font('DTM-Sans');
+		textFormat.font = Assets.getFont('assets/fonts/DTM-Sans.ttf', false).fontName;
 		textFormat.size = 16;
 		defaultTextFormat = textFormat;
 	}
