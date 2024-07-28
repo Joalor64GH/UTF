@@ -105,6 +105,7 @@ class TypeText extends FlxText
 		super.update(elapsed);
 	}
 
+	@:noCompletion
 	private function updateText():Void
 	{
 		final curText:String = originalText.substr(0, textPos);
@@ -121,6 +122,7 @@ class TypeText extends FlxText
 		}
 	}
 
+	@:noCompletion
 	private function get_finished():Bool
 	{
 		return !typing && textPos >= originalText.length;

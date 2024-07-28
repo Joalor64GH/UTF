@@ -94,6 +94,7 @@ class ClassMacro
 		compileClassLists();
 	}
 
+	@:noCompletion
 	private static function compileClassLists():Void
 	{
 		final compiledClassList:ClassType = MacroUtil.getClassType('utf.util.macro.CompiledClassList');
@@ -119,6 +120,7 @@ class ClassMacro
 		compiledClassList.meta.add('classLists', classLists, Context.currentPos());
 	}
 
+	@:noCompletion
 	private static function doesClassMatchRequest(classType:ClassType, request:String):Bool
 	{
 		final splitRequest:Array<String> = request.split('~');

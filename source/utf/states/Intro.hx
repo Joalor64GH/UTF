@@ -224,6 +224,7 @@ class Intro extends FlxState
 		super.update(elapsed);
 	}
 
+	@:noCompletion
 	private function changeOption(num:Int = 0, scrollType:Scroll = BOUND):Void
 	{
 		switch (scrollType)

@@ -300,6 +300,7 @@ class Naming extends FlxSubState
 		super.close();
 	}
 
+	@:noCompletion
 	private function handleKeyInput(name:String):Void
 	{
 		final oldLetter:Int = selectedLetter;

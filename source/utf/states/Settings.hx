@@ -224,6 +224,7 @@ class Settings extends FlxTransitionableState
 		tobdogLine.offset.add(Math.sin(siner / 12), Math.cos(siner / 12));
 	}
 
+	@:noCompletion
 	private function changeOption(num:Int = 0):Void
 	{
 		selected = Math.floor(FlxMath.bound(selected + num, 0, options.length - 1));

@@ -209,6 +209,7 @@ class EnemyEncounter extends FlxSubState
 		}
 	}
 
+	@:noCompletion
 	private function changeChoice(num:Int = 0):Void
 	{
 		if (num != 0)

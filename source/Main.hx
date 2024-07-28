@@ -105,6 +105,7 @@ class Main extends Sprite
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 	}
 
+	@:noCompletion
 	private function onAddedToStage(?event:Event):Void
 	{
 		if (hasEventListener(Event.ADDED_TO_STAGE))
@@ -134,6 +135,7 @@ class Main extends Sprite
 		FlxG.game.addChild(overlay);
 	}
 
+	@:noCompletion
 	private static inline function onUncaughtError(event:UncaughtErrorEvent):Void
 	{
 		event.preventDefault();
@@ -184,6 +186,7 @@ class Main extends Sprite
 		System.exit(1);
 	}
 
+	@:noCompletion
 	private static inline function onCriticalError(error:Dynamic):Void
 	{
 		final log:Array<String> = [Std.isOfType(error, String) ? error : Std.string(error)];
@@ -258,6 +261,7 @@ class Main extends Sprite
 		}
 	}
 
+	@:noCompletion
 	private inline function onPreStateCreate(state:FlxState):Void
 	{
 		final cache:AssetCache = cast(Assets.cache, AssetCache);
@@ -279,6 +283,7 @@ class Main extends Sprite
 		#end
 	}
 
+	@:noCompletion
 	private inline function onPostStateSwitch():Void
 	{
 		MemoryUtil.collect(true);
