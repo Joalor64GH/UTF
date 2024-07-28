@@ -2,7 +2,7 @@ import flixel.FlxG;
 import utf.backend.AssetPaths;
 import utf.states.room.Room;
 
-class Water_Redacted extends Room
+class WaterRedactedRoom extends Room
 {
 	public function new():Void
 	{
