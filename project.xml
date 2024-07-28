@@ -107,5 +107,5 @@
 
 	<!--Templates Path-->
 
-	<templatePath name="templates" />
+	<templatePath name="templates" if="${lime &lt; 8.2.0}" />
 </project>
