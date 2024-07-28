@@ -4,6 +4,7 @@ import flixel.FlxG;
 import haxe.Exception;
 import haxe.Http;
 import haxe.Json;
+import openfl.Lib;
 import utf.util.github.Contributor;
 
 using StringTools;
