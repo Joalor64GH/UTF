@@ -20,6 +20,11 @@ class Chara extends FlxSprite
 	public var characterHitbox:FlxObject;
 
 	/**
+	 * Indicates if the character is controllable by the player.
+	 */
+	public var characterControllable:Bool = true;
+
+	/**
 	 * Constructor to initialize the character with a specified ID.
 	 * @param characterID The ID of the character.
 	 */
