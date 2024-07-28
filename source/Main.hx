@@ -36,6 +36,7 @@ import utf.backend.Data;
 import utf.objects.debug.Overlay;
 import utf.states.Startup;
 import utf.util.MemoryUtil;
+import utf.util.TimerUtil;
 import utf.util.WindowUtil;
 #if sys
 import sys.io.File;
@@ -298,8 +299,14 @@ class Main extends Sprite
 	@:noCompletion
 	private inline function onPostStateSwitch():Void
 	{
+		FlxG.log.notice('Running the garbage collector.');
+
+		final gcStart:Float = TimerUtil.start();
+
 		MemoryUtil.collect(true);
 		MemoryUtil.compact();
 		MemoryUtil.collect(false);
+
+		FlxG.log.notice('Garbage collection took: ${TimerUtil.seconds(gcStart)}');
 	}
 }
