@@ -35,15 +35,7 @@ class Object extends FlxSprite
 	}
 
 	/**
-	 * Function to interact with the object.
+	 * Function to interact with the object if the object is interactable.
 	 */
-	public function interact():Void
-	{
-		if (!objectInteractable)
-			return;
-		#if debug
-		else
-			FlxG.log.notice('"$objectID" object is not interactable');
-		#end
-	}
+	public function interact():Void {}
 }
