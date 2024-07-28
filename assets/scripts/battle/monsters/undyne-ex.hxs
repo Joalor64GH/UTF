@@ -3,7 +3,7 @@ import utf.backend.AssetPaths;
 import utf.objects.battle.Monster;
 import flixel.FlxG;
 
-class UndyneEx extends Monster
+class UndyneExMonster extends Monster
 {
 	var legs:FlxSprite;
 	var pants:FlxSprite;
