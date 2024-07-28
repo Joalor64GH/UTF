@@ -269,14 +269,26 @@ class Main extends Sprite
 		for (key in cache.bitmapData.keys())
 		{
 			if (!FlxG.bitmap.checkCache(key))
+			{
+				FlxG.log.notice('Removing "$key" from the bitmapData cache.');
+				
 				cache.bitmapData.remove(key);
+			}
 		}
 
 		for (key in cache.sound.keys())
+		{
+			FlxG.log.notice('Removing "$key" from the sound cache.');
+
 			cache.sound.remove(key);
+		}
 
 		for (key in cache.font.keys())
+		{
+			FlxG.log.notice('Removing "$key" from the font cache.');
+
 			cache.font.remove(key);
+		}
 
 		#if polymod
 		Polymod.clearCache();
