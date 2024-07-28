@@ -4,7 +4,6 @@ import flixel.FlxG;
 import haxe.Exception;
 import haxe.Http;
 import haxe.Json;
-import openfl.Lib;
 import utf.util.github.Contributor;
 
 using StringTools;
@@ -17,12 +16,12 @@ class GitHubUtil
 	/**
 	 * The GitHub username for the repository owner.
 	 */
-	public static var USER(default, null):String = 'MAJigsaw77';
+	public static final USER:String = 'MAJigsaw77';
 
 	/**
 	 * The name of the GitHub repository.
 	 */
-	public static var REPOSITORY(default, null):String = 'UTF';
+	public static final REPOSITORY:String = 'UTF';
 
 	/**
 	 * Retrieves the list of contributors for the specified GitHub repository.
@@ -48,7 +47,7 @@ class GitHubUtil
 						http.request(false);
 					}
 					else
-						FlxG.log.error('Redirect location header missing');
+						throw 'Redirect location header missing';
 				}
 			}
 			http.onData = function(data:String):Void
