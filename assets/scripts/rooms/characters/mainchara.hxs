@@ -11,6 +11,8 @@ class MainChara extends Chara
 		super('mainchara');
 
 		frames = AssetPaths.spritesheet('f_mainchara');
+		scale.set(2, 2);
+		updateHitbox();
 
 		animation.addByPrefix('down', 'f_maincharad', 6, false);
 		animation.addByPrefix('right', 'f_maincharar', 6, false);
