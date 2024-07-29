@@ -75,16 +75,6 @@ class AssetPaths
 	}
 
 	/**
-	 * Constructs the path for a border image asset.
-	 * @param key The key for the border.
-	 * @return The path to the border image file.
-	 */
-	public static inline function border(key:String):String
-	{
-		return 'assets/images/borders/$key.png';
-	}
-
-	/**
 	 * Constructs the path for a sprite image asset.
 	 * @param key The key for the sprite.
 	 * @return The path to the sprite image file.
