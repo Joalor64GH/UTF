@@ -108,13 +108,4 @@
 	<!--Templates Path-->
 
 	<templatePath name="templates" if="${lime &lt; 8.2.0}" />
-
-	<!--Platforms Config-->
-
-	<section if="android">
-		<config>
-			<!--Target SDK-->
-			<android target-sdk-version="34" />
-		</config>
-	</section>
 </project>
