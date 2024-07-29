@@ -37,8 +37,8 @@
 		{
 			"name": "polymod",
 			"type": "git",
-			"ref": "develop",
-			"url": "https://github.com/MAJigsaw77/polymod.git"
+			"ref": "scripting-updates",
+			"url": "https://github.com/larsiusprime/polymod.git"
 		},
 		{
 			"name": "thx.core",
