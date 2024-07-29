@@ -9,13 +9,11 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import utf.registries.CharaRegistry;
 import utf.registries.ObjectRegistry;
-// import utf.registries.TileRegistry;
 import utf.backend.AssetPaths;
 import utf.backend.Global;
 import utf.input.Controls;
 import utf.objects.room.Chara;
 import utf.objects.room.Object;
-// import utf.objects.room.Tile;
 
 /**
  * Represents a room in the game, managing the character, objects, and cameras within the room.
@@ -42,26 +40,11 @@ class Room extends FlxTransitionableState
 	 */
 	public var roomHeight:Int;
 
-	/**
-	 * The character within the room.
-	 */
+	var backgrounds:FlxTypedGroup<FlxSprite>;
+	var tiles:FlxTypedGroup<FlxSprite>;
+	var objects:FlxTypedGroup<Object>;
 	var chara:Chara;
-
-	// var tiles:FlxTypedGroup<Tile> = new FlxTypedGroup<Tile>();
-
-	/**
-	 * The group of objects within the room.
-	 */
-	var objects:FlxTypedGroup<Object> = new FlxTypedGroup<Object>();
-
-	/**
-	 * The main game camera.
-	 */
 	var camGame:FlxCamera;
-
-	/**
-	 * The HUD camera.
-	 */
 	var camHud:FlxCamera;
 
 	/**
@@ -71,11 +54,10 @@ class Room extends FlxTransitionableState
 	public function new(roomNumber:Int):Void
 	{
 		super();
-
 		this.roomNumber = roomNumber;
 	}
 
-	override function create():Void
+	public override function create():Void
 	{
 		camGame = new FlxCamera();
 		FlxG.cameras.reset(camGame);
@@ -86,7 +68,11 @@ class Room extends FlxTransitionableState
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 
-		add(objects);
+		if (tiles != null)
+			add(tiles);
+
+		if (objects != null)
+			add(objects);
 
 		if (chara != null)
 		{
@@ -99,11 +85,11 @@ class Room extends FlxTransitionableState
 		super.create();
 	}
 
-	override function update(elapsed:Float):Void
+	public override function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 
-		if (chara != null && chara.characterHitbox != null)
+		if (chara != null && chara.characterHitbox != null && objects != null)
 		{
 			FlxG.collide(chara.characterHitbox, objects);
 
@@ -121,31 +107,70 @@ class Room extends FlxTransitionableState
 	}
 
 	/**
-	 * Loads the character into the room.
-	 * @param characterID The ID of the character to load.
-	 * @param x The x-coordinate to place the character.
-	 * @param y The y-coordinate to place the character.
-	 * @return The loaded character.
+	 * Creates a background in the room.
+	 * @param name The name of the background image.
+	 * @param x The x-coordinate to place the background.
+	 * @param y The y-coordinate to place the background.
+	 * @return The created background sprite.
 	 */
-	public function loadCharacter(characterID:String, x:Float, y:Float):Chara
+	public function createBackground(name:String, x:Float, y:Float):FlxSprite
 	{
-		chara = CharaRegistry.fetchCharacter(characterID);
-		chara.setPosition(x, y);
-		return chara;
+		if (backgrounds == null)
+			backgrounds = new FlxTypedGroup<FlxSprite>();
+
+		final bg:FlxSprite = new FlxSprite(x, y, AssetPaths.background(name));
+		backgrounds.add(bg);
+		return bg;
+	}
+
+	/**
+	 * Creates a tile in the room.
+	 * @param name The name of the tile image.
+	 * @param x The x-coordinate to place the tile.
+	 * @param y The y-coordinate to place the tile.
+	 * @param sourceSize The size of the source image.
+	 * @param offset The offset position of the tile.
+	 * @return The created tile sprite.
+	 */
+	public function createTile(name:String, x:Float, y:Float, sourceSize:FlxPoint, offset:FlxPoint):FlxSprite
+	{
+		if (tiles == null)
+			tiles = new FlxTypedGroup<FlxSprite>();
+
+		final tile:FlxSprite = new FlxSprite(x, y, AssetPaths.tile(name, sourceSize, offset));
+		tiles.add(tile);
+		return tile;
 	}
 
 	/**
 	 * Creates an object in the room.
-	 * @param objectID The ID of the object to create.
+	 * @param id The ID of the object to create.
 	 * @param x The x-coordinate to place the object.
 	 * @param y The y-coordinate to place the object.
 	 * @return The created object.
 	 */
-	public function createObject(objectID:String, x:Float, y:Float):Object
+	public function createObject(id:String, x:Float, y:Float):Object
 	{
-		final object:Object = ObjectRegistry.fetchObject(objectID);
+		if (objects == null)
+			objects = new FlxTypedGroup<Object>();
+
+		final object:Object = ObjectRegistry.fetchObject(id);
 		object.setPosition(x, y);
 		objects.add(object);
 		return object;
+	}
+
+	/**
+	 * Loads the character into the room.
+	 * @param id The ID of the character to load.
+	 * @param x The x-coordinate to place the character.
+	 * @param y The y-coordinate to place the character.
+	 * @return The loaded character.
+	 */
+	public function loadCharacter(id:String, x:Float, y:Float):Chara
+	{
+		chara = CharaRegistry.fetchCharacter(id);
+		chara.setPosition(x, y);
+		return chara;
 	}
 }
