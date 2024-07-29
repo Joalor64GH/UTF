@@ -40,11 +40,11 @@ jobs:
       - name: Installing Libraries
         run: haxe --interp -cp ./actions -D analyzer-optimize -main Main
 
-      - name: Setup Git hxcpp
+      - name: Setup hxcpp
         if: env.CACHE_HIT != 'true'
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp
 
-      - name: Configure Android
+      - name: Setup lime
         run: |
           haxelib run lime setup -alias -y
           haxelib run lime config ANDROID_SDK $ANDROID_HOME
