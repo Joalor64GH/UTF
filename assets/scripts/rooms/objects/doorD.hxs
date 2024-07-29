@@ -1,5 +1,7 @@
+import flixel.FlxG;
 import utf.backend.AssetPaths;
 import utf.objects.room.Object;
+import utf.states.Intro;
 
 class DoorDObject extends Object
 {
@@ -13,5 +15,16 @@ class DoorDObject extends Object
 
 		immovable = true;
 		solid = false;
+	}
+
+	public override function overlap():Void
+	{
+		if (FlxG.state.chara != null)
+			FlxG.state.chara.characterControllable = false;
+
+		if (FlxG.sound.music != null)
+			FlxG.sound.music.fadeOut();
+
+		FlxG.switchState(() -> new Intro());
 	}
 }
