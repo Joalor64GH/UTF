@@ -174,10 +174,6 @@ class Intro extends FlxState
 		changeOption();
 
 		super.create();
-
-		#if android
-		utf.util.WindowUtil.showAlert('Intrestingly', openfl.utils.Assets.getPath(AssetPaths.background('floweyglow')));
-		#end
 	}
 
 	override function update(elapsed:Float):Void
