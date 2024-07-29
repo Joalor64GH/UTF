@@ -1,6 +1,10 @@
 package utf.backend;
 
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.graphics.frames.FlxFrame;
+import flixel.graphics.FlxGraphic;
+import flixel.math.FlxPoint;
+import flixel.util.FlxDestroyUtil;
 import flixel.FlxG;
 import haxe.io.Path;
 import haxe.Exception;
@@ -140,6 +144,25 @@ class AssetPaths
 		}
 
 		return null;
+	}
+
+	/**
+	 * Creates a tiled background image asset with specified source size and offset.
+	 * @param path The path key for the background image.
+	 * @param sourceSize The size of the source image.
+	 * @param offset The offset position of the tile.
+	 * @return The path to the generated tiled background image.
+	 */
+	public static inline function tile(path:String, sourceSize:FlxPoint, offset:FlxPoint):String
+	{
+		final frame:FlxFrame = new FlxFrame(FlxGraphic.fromAssetKey(AssetPaths.background(path)));
+		frame.sourceSize.copyFrom(sourceSize);
+		frame.offset.copyFrom(offset);
+
+		sourceSize = FlxDestroyUtil.put(sourceSize);
+		offset = FlxDestroyUtil.put(offset);
+
+		return FlxGraphic.fromBitmapData(frame.paint());
 	}
 
 	/**
