@@ -33,4 +33,9 @@ class Object extends FlxSprite
 	 * Function to interact with the object if the object is interactable.
 	 */
 	public function interact():Void {}
+
+	/**
+	 * Function called when the player overlaps the object.
+	 */
+	public function overlap():Void {}
 }
