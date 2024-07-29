@@ -1,7 +1,6 @@
 package utf.backend;
 
 import utf.backend.AssetPaths;
-import flixel.input.keyboard.FlxKey;
 import flixel.util.FlxSave;
 import flixel.FlxG;
 import openfl.filters.BitmapFilter;
@@ -36,18 +35,11 @@ class Data
 		])
 	];
 
-	public static var binds(default, null):Map<String, FlxKey> = [
-		'confirm' => FlxKey.Z,
-		'cancel' => FlxKey.X,
-		'menu' => FlxKey.C
-	];
-
 	public static function save():Void
 	{
 		var save:FlxSave = new FlxSave();
 		save.bind('data', Lib.application.meta.get('file'));
 		save.data.settings = settings;
-		save.data.binds = binds;
 		save.close();
 	}
 
@@ -61,9 +53,6 @@ class Data
 		{
 			if (save.data.settings != null)
 				settings = save.data.settings;
-
-			if (save.data.binds != null)
-				binds = save.data.binds;
 		}
 
 		save.destroy();
