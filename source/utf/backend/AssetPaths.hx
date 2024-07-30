@@ -154,7 +154,7 @@ class AssetPaths
 	 * @return The path to the generated tiled background image.
 	 */
 	@:access(flixel.graphics.frames.FlxFrame)
-	public static inline function tile(path:String, sourceSize:FlxPoint, offset:FlxPoint):String
+	public static inline function tile(path:String, sourceSize:FlxPoint, offset:FlxPoint):FlxGraphic
 	{
 		final frame:FlxFrame = new FlxFrame(FlxGraphic.fromAssetKey(AssetPaths.background(path)));
 		frame.sourceSize.copyFrom(sourceSize);
