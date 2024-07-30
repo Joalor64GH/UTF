@@ -17,7 +17,7 @@ import utf.registries.ObjectRegistry;
 import utf.registries.RoomRegistry;
 import utf.registries.TyperRegistry;
 import utf.util.macro.ClassMacro;
-import utf.util.TimerUtil
+import utf.util.TimerUtil;
 import utf.util.WindowUtil;
 
 /**
