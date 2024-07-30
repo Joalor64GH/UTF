@@ -17,6 +17,7 @@ import utf.registries.ObjectRegistry;
 import utf.registries.RoomRegistry;
 import utf.registries.TyperRegistry;
 import utf.util.macro.ClassMacro;
+import utf.util.TimerUtil
 import utf.util.WindowUtil;
 
 /**
@@ -84,11 +85,17 @@ class PolymodHandler
 	@:noCompletion
 	private static function loadRegisteries():Void
 	{
+		FlxG.log.notice('Loading the registries.');
+
+		final registriesStart:Float = TimerUtil.start();
+
 		CharaRegistry.loadCharacters();
 		MonsterRegistry.loadMonsters();
 		ObjectRegistry.loadObjects();
 		RoomRegistry.loadRooms();
 		TyperRegistry.loadTypers();
+
+		FlxG.log.notice('Registries loading took: ${TimerUtil.seconds(registriesStart)}');
 	}
 
 	@:noCompletion
