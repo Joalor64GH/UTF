@@ -62,7 +62,7 @@ class TypeText extends FlxText
 					textPos++;
 
 					return;
-				/*case '^':
+				case '^':
 					final waitTime:Null<Int> = Std.parseInt(originalText.charAt(textPos + 1));
 
 					if (waitTime != null)
@@ -81,7 +81,7 @@ class TypeText extends FlxText
 						}
 					}
 					else
-						textPos++;*/
+						textPos++;
 				default:
 					textPos++;
 			}
@@ -116,7 +116,7 @@ class TypeText extends FlxText
 
 			if (textPos >= originalText.length)
 			{
-				textPos = 0;
+				timer = 0;
 				typing = false;
 			}
 		}
