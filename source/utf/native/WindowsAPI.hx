@@ -25,11 +25,5 @@ class WindowsAPI
 	 */
 	@:functionCode('SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX);')
 	public static function disableErrorReporting():Void;
-
-	/**
-	 * Sets the process as DPI-aware to handle high-DPI displays properly.
-	 */
-	@:functionCode('SetProcessDPIAware();')
-	public static function setProcessDPIAware():Void;
 }
 #end
