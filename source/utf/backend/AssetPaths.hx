@@ -174,9 +174,9 @@ class AssetPaths
 	 */
 	public static function list(directory:String, extension:String):Array<String>
 	{
-		final files:Array<String> = Assets.list(TEXT).filter(function(file:String):Bool
+		final files:Array<String> = Assets.list().filter(function(file:String):Bool
 		{
-			return Path.directory(file) == directory && Path.extension(file) == extension;
+			return (extension != null && extension.length > 0) ? (Path.directory(file) == directory && Path.extension(file) == extension) : Path.directory(file) == directory;
 		});
 
 		files.sort(function(a:String, b:String):Int
