@@ -21,6 +21,12 @@ class Startup extends FlxState
 	{
 		FlxG.autoPause = false;
 
+		FlxG.sound.volumeUpKeys = [];
+		FlxG.sound.volumeDownKeys = [];
+		FlxG.sound.muteKeys = [];
+
+		FlxG.game.focusLostFramerate = 30;
+
 		Data.load();
 
 		#if hxdiscord_rpc
@@ -30,11 +36,8 @@ class Startup extends FlxState
 		Global.load();
 
 		#if polymod
-		PolymodHandler.reloadMods();
-		PolymodHandler.reloadRegisteries();
+		PolymodHandler.load();
 		#end
-
-		FlxG.game.focusLostFramerate = FlxG.updateFramerate;
 
 		if (Data.settings.get('filter') != 'none' && Data.filters.exists(Data.settings.get('filter')))
 			FlxG.game.setFilters([Data.filters.get(Data.settings.get('filter'))]);
