@@ -33,11 +33,11 @@ import polymod.Polymod;
 #end
 import utf.backend.AssetPaths;
 import utf.backend.Data;
-#if (windows && cpp)
-import utf.native.WindowsAPI;
-#end
 import utf.objects.debug.Overlay;
 import utf.states.Startup;
+#if (windows && cpp)
+import utf.util.native.WindowsAPI;
+#end
 #if (cpp || neko || hl)
 import utf.util.MemoryUtil;
 #end
