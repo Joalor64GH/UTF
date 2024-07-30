@@ -1,6 +1,7 @@
 package utf.objects.debug;
 
 import flixel.util.FlxStringUtil;
+import flixel.FlxG;
 import openfl.display.FPS;
 import openfl.text.TextFormat;
 import openfl.system.System;
@@ -43,6 +44,9 @@ class Overlay extends FPS
 	@:noCompletion
 	private override function __enterFrame(deltaTime:Float):Void
 	{
+		if (FlxG.debugger != null)
+			visible = !FlxG.debugger.visible;
+
 		currentTime += deltaTime;
 
 		times.push(currentTime);
