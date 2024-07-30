@@ -4,6 +4,7 @@ package;
 import android.content.Context;
 import android.os.Build;
 #end
+import flixel.input.keyboard.FlxKey;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -138,6 +139,8 @@ class Main extends Sprite
 		addChild(new FlxGame(640, 480, Startup, 60, 60));
 
 		FlxG.autoPause = false;
+
+		FlxG.debugger.toggleKeys = [FlxKey.F2];
 
 		FlxG.sound.volumeUpKeys = [];
 		FlxG.sound.volumeDownKeys = [];
