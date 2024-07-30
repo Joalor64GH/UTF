@@ -37,10 +37,13 @@ class PolymodHandler
 	public static var data(default, null):Map<String, ModMetadata> = [];
 
 	/**
-	 * Reloads and initializes the mods.
+	 * Loads the game with ALL mods enabled with Polymod.
 	 */
-	public static function reloadMods():Void
+	public static function loadMods(?clearScripts:Bool = false):Void
 	{
+		if (clearScripts)
+			Polymod.clearScripts();
+		
 		Polymod.onError = function(error:PolymodError):Void
 		{
 			final code:String = FlxStringUtil.toTitleCase(Std.string(error.code).split('_').join(' '));
@@ -74,24 +77,12 @@ class PolymodHandler
 			apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version')),
 			customFilesystem: buildFileSystem(),
 		});
+
+		loadRegisteries();
 	}
 
-	/**
-	 * Reloads all scripts and registers them.
-	 */
-	public static function reloadScripts():Void
-	{
-		Polymod.clearScripts();
-		PolymodHandler.reloadMods();
-		Polymod.registerAllScriptClasses();
-
-		reloadRegisteries();
-	}
-
-	/**
-	 * Reloads registries.
-	 */
-	public static function reloadRegisteries():Void
+	@:noCompletion
+	private static function loadRegisteries():Void
 	{
 		CharaRegistry.loadCharacters();
 		MonsterRegistry.loadMonsters();
