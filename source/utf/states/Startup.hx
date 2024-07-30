@@ -19,14 +19,6 @@ class Startup extends FlxState
 {
 	override function create():Void
 	{
-		FlxG.autoPause = false;
-
-		FlxG.sound.volumeUpKeys = [];
-		FlxG.sound.volumeDownKeys = [];
-		FlxG.sound.muteKeys = [];
-
-		FlxG.game.focusLostFramerate = 30;
-
 		Data.load();
 
 		#if hxdiscord_rpc
@@ -41,12 +33,6 @@ class Startup extends FlxState
 
 		if (Data.settings.get('filter') != 'none' && Data.filters.exists(Data.settings.get('filter')))
 			FlxG.game.setFilters([Data.filters.get(Data.settings.get('filter'))]);
-
-		if (FlxG.save.data.volume != null)
-			FlxG.sound.volume = FlxG.save.data.volume;
-
-		if (FlxG.save.data.mute != null)
-			FlxG.sound.muted = FlxG.save.data.mute;
 
 		FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 0.5, NEW);
 		FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.5, NEW);
