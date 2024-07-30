@@ -1,4 +1,4 @@
-package utf.native;
+package utf.util.native;
 
 #if (windows && cpp)
 /**
