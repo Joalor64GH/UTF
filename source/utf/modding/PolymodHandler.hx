@@ -154,7 +154,7 @@ class PolymodHandler
 	@:noCompletion
 	private static function buildFileSystem():ZipFileSystem
 	{
-		return new ZipFileSystem({modRoot: 'mods', autoScan: true});
+		return new ZipFileSystem({modRoot: MOD_ROOT, autoScan: true});
 	}
 
 	@:noCompletion
