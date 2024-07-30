@@ -8,20 +8,20 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import openfl.Lib;
-import utf.registries.RoomRegistry;
 import utf.backend.AssetPaths;
-import utf.input.Controls;
 import utf.backend.Data;
 import utf.backend.Global;
-#if debug
-import utf.util.macro.git.GitUtil;
-#end
+import utf.input.Controls;
+import utf.registries.RoomRegistry;
 import utf.states.room.Room;
 import utf.states.Settings;
 #if debug
 import utf.substates.battle.EnemyEncounter;
 #end
 import utf.substates.Naming;
+#if debug
+import utf.util.macro.git.GitUtil;
+#end
 
 enum Scroll
 {
@@ -101,9 +101,9 @@ class Intro extends FlxState
 			add(instructions);
 
 			final list:Array<String> = [
-				'[${Data.binds.get('confirm')}] - Confirm',
-				'[${Data.binds.get('cancel')}] - Cancel',
-				'[${Data.binds.get('menu')}] - Menu (In-game)',
+				'[${Controls.binds.get('confirm').key}] - Confirm',
+				'[${Controls.binds.get('cancel').key}] - Cancel',
+				'[${Controls.binds.get('menu').key}] - Menu (In-game)',
 				'[F4] - Fullscreen',
 				'[Hold ESC] - Quit',
 				'When HP is 0, you lose.'
@@ -159,7 +159,7 @@ class Intro extends FlxState
 
 		#if debug
 		var info:FlxText = new FlxText(0, FlxG.height - 40, 0,
-			'UTF v${Lib.application.meta['version']} (c) MAJigsaw77 2023\nCommit ${GitUtil.getCommitNumber()} (${GitUtil.getCommitHash()})', 16);
+			'UTF v${Lib.application.meta['version']} (c) MAJigsaw77 2023\nCommit (${GitUtil.getCommitHash()})', 16);
 		#else
 		var info:FlxText = new FlxText(0, FlxG.height - 20, 0, 'UTF v${Lib.application.meta['version']} (c) MAJigsaw77 2023', 16);
 		#end
