@@ -130,6 +130,14 @@ class Main extends Sprite
 
 		addChild(new FlxGame(640, 480, Startup, 60, 60));
 
+		FlxG.autoPause = false;
+
+		FlxG.sound.volumeUpKeys = [];
+		FlxG.sound.volumeDownKeys = [];
+		FlxG.sound.muteKeys = [];
+
+		FlxG.game.focusLostFramerate = 30;
+
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];
 		#end
