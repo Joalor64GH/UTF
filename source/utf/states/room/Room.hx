@@ -2,7 +2,7 @@ package utf.states.room;
 
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup;
-import flixel.math.FlxMath;
+import flixel.math.FlxPoint;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
