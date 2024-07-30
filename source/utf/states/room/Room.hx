@@ -2,15 +2,16 @@ package utf.states.room;
 
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup;
+import flixel.math.FlxMath;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import utf.registries.CharaRegistry;
-import utf.registries.ObjectRegistry;
 import utf.backend.AssetPaths;
 import utf.backend.Global;
+import utf.registries.CharaRegistry;
+import utf.registries.ObjectRegistry;
 import utf.input.Controls;
 import utf.objects.room.Chara;
 import utf.objects.room.Object;
