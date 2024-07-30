@@ -33,6 +33,9 @@ import polymod.Polymod;
 #end
 import utf.backend.AssetPaths;
 import utf.backend.Data;
+#if (windows && cpp)
+import utf.native.WindowsAPI;
+#end
 import utf.objects.debug.Overlay;
 import utf.states.Startup;
 #if (cpp || neko || hl)
@@ -66,6 +69,10 @@ class Main extends Sprite
 		Sys.setCwd(Path.addTrailingSlash(VERSION.SDK_INT > 30 ? Context.getObbDir() : Context.getExternalFilesDir()));
 		#elseif (ios || switch)
 		Sys.setCwd(Path.addTrailingSlash(File.applicationStorageDirectory.nativePath));
+		#end
+
+		#if (windows && cpp)
+		WindowsAPI.disableErrorReporting();
 		#end
 
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
