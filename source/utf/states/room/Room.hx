@@ -55,6 +55,7 @@ class Room extends FlxTransitionableState
 	public function new(roomNumber:Int):Void
 	{
 		super();
+
 		this.roomNumber = roomNumber;
 	}
 
@@ -68,6 +69,9 @@ class Room extends FlxTransitionableState
 		FlxG.cameras.add(camHud, false);
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+
+		if (backgrounds != null)
+			add(backgrounds);
 
 		if (tiles != null)
 			add(tiles);
