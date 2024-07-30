@@ -23,4 +23,13 @@ class WindowUtil
 		Tools.showAlertDialog(name, desc, {name: 'Ok', func: null});
 		#end
 	}
+
+	/**
+	 * Sets the title of the application window.
+	 * @param value The title to set for the application window.
+	 */
+	public static inline function setWindowTitle(value:String):Void
+	{
+		Lib.application.window.title = value;
+	}
 }
