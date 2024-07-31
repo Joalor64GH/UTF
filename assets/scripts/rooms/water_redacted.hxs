@@ -26,14 +26,14 @@ class WaterRedactedRoom extends Room
 
 		for (i in 0...31)
 		{
-			var tile:FlxSprite = createTile('bg_watertiles', i * 40, 80, FlxRect.weak(20, 60, 20, 180));
+			var tile:FlxSprite = createTile('bg_watertiles', i * 40, 80, FlxRect.weak(20, 180, 20, 60));
 			tile.scale.set(2, 2);
 			tile.updateHitbox();
 		}
 
 		for (i in 0...30)
 		{
-			var tile:FlxSprite = createTile('bg_watertiles', i * 40, 320, FlxRect.weak(20, 60, 20, 180));
+			var tile:FlxSprite = createTile('bg_watertiles', i * 40, 320, FlxRect.weak(20, 180, 20, 60));
 			tile.scale.set(2, 2);
 			tile.updateHitbox();
 		}
