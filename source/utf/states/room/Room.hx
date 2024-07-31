@@ -125,7 +125,6 @@ class Room extends FlxTransitionableState
 			backgrounds = new FlxTypedGroup<FlxSprite>();
 
 		final bg:FlxSprite = new FlxSprite(x, y, AssetPaths.background(name));
-		bg.scrollFactor.set(0, 0);
 		bg.active = false;
 		backgrounds.add(bg);
 
@@ -147,7 +146,6 @@ class Room extends FlxTransitionableState
 
 		final tile:FlxSprite = new FlxSprite(x, y);
 		tile.frames = FlxImageFrame.fromGraphic(FlxG.bitmap.add(AssetPaths.background(name)), rect);
-		tile.scrollFactor.set(0, 0);
 		tiles.add(tile);
 
 		rect.put();
