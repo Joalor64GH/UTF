@@ -1,8 +1,9 @@
 package utf.states.room;
 
 import flixel.addons.transition.FlxTransitionableState;
+import flixel.graphics.frames.FlxImageFrame;
 import flixel.group.FlxGroup;
-import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -124,26 +125,31 @@ class Room extends FlxTransitionableState
 			backgrounds = new FlxTypedGroup<FlxSprite>();
 
 		final bg:FlxSprite = new FlxSprite(x, y, AssetPaths.background(name));
+		bg.active = false;
 		backgrounds.add(bg);
+
 		return bg;
 	}
 
 	/**
 	 * Creates a tile in the room.
-	 * @param name The name of the tile image.
-	 * @param x The x-coordinate to place the tile.
-	 * @param y The y-coordinate to place the tile.
-	 * @param sourceSize The size of the source image.
-	 * @param offset The offset position of the tile.
+	 * @param name The name of the image asset for the tile.
+	 * @param x The x-coordinate where the tile should be placed.
+	 * @param y The y-coordinate where the tile should be placed.
+	 * @param rect The portion of the image to use for the tile, specified as a `FlxRect`.
 	 * @return The created tile sprite.
 	 */
-	public function createTile(name:String, x:Float, y:Float, sourceSize:FlxPoint, offset:FlxPoint):FlxSprite
+	public function createTile(name:String, x:Float, y:Float, rect:FlxRect):FlxSprite
 	{
 		if (tiles == null)
 			tiles = new FlxTypedGroup<FlxSprite>();
 
-		final tile:FlxSprite = new FlxSprite(x, y, AssetPaths.tile(name, sourceSize, offset));
+		final tile:FlxSprite = new FlxSprite(x, y);
+		tile.frames = FlxImageFrame.fromGraphic(FlxG.bitmap.add(AssetPaths.background(name)), rect);
 		tiles.add(tile);
+
+		rect.put();
+
 		return tile;
 	}
 
@@ -162,6 +168,7 @@ class Room extends FlxTransitionableState
 		final object:Object = ObjectRegistry.fetchObject(id);
 		object.setPosition(x, y);
 		objects.add(object);
+
 		return object;
 	}
 
