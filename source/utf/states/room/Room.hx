@@ -16,6 +16,7 @@ import utf.registries.ObjectRegistry;
 import utf.input.Controls;
 import utf.objects.room.Chara;
 import utf.objects.room.Object;
+import utf.util.FlxGraphicUtil;
 
 /**
  * Represents a room in the game, managing the character, objects, and cameras within the room.
@@ -95,9 +96,6 @@ class Room extends FlxTransitionableState
 	{
 		super.update(elapsed);
 
-		if (tiles != null)
-			FlxG.collide(chara.characterHitbox, tiles);
-
 		if (chara != null && chara.characterHitbox != null && objects != null)
 		{
 			FlxG.collide(chara.characterHitbox, objects);
@@ -128,6 +126,7 @@ class Room extends FlxTransitionableState
 			backgrounds = new FlxTypedGroup<FlxSprite>();
 
 		final bg:FlxSprite = new FlxSprite(x, y, AssetPaths.background(name));
+		bg.scrollFactor.set(0, 0);
 		bg.active = false;
 		backgrounds.add(bg);
 
@@ -147,13 +146,10 @@ class Room extends FlxTransitionableState
 		if (tiles == null)
 			tiles = new FlxTypedGroup<FlxSprite>();
 
-		final tile:FlxSprite = new FlxSprite(x, y);
-		tile.frames = FlxImageFrame.fromGraphic(FlxG.bitmap.add(AssetPaths.background(name)), rect);
-		tile.immovable = true;
-		tile.solid = false;
+		final tile:FlxSprite = new FlxSprite(x, y, FlxGraphicUtil.fromRegion(AssetPaths.background(name), rect));
+		tile.scrollFactor.set(0, 0);
+		tile.active = false;
 		tiles.add(tile);
-
-		rect.put();
 
 		return tile;
 	}
