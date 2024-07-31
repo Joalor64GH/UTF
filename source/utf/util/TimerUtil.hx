@@ -5,6 +5,8 @@ import haxe.Timer;
 
 /**
  * Utility class for measuring elapsed time.
+ *
+ * @see https://github.com/FunkinCrew/Funkin/blob/main/source/funkin/util/TimerUtil.hx
  */
 class TimerUtil
 {
