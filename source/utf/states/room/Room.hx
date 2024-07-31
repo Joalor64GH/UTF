@@ -95,6 +95,9 @@ class Room extends FlxTransitionableState
 	{
 		super.update(elapsed);
 
+		if (tiles != null)
+			FlxG.collide(chara.characterHitbox, tiles);
+
 		if (chara != null && chara.characterHitbox != null && objects != null)
 		{
 			FlxG.collide(chara.characterHitbox, objects);
