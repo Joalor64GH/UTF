@@ -146,7 +146,7 @@ class Room extends FlxTransitionableState
 
 		final tile:FlxSprite = new FlxSprite(x, y);
 		tile.frames = FlxImageFrame.fromGraphic(FlxG.bitmap.add(AssetPaths.background(name)), rect);
-		tile.immoveable = true;
+		tile.immovable = true;
 		tile.solid = false;
 		tiles.add(tile);
 
