@@ -15,7 +15,6 @@ class FlxGraphicUtil
 {
 	/**
 	 * Creates a new FlxGraphic from a specified region of an existing graphic.
-	 *
 	 * @param graphic The source graphic asset to partition.
 	 * @param region The rectangular region of the source graphic to copy.
 	 * @param unique Whether the graphic should be unique in the FlxG bitmap cache.
