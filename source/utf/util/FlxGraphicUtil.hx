@@ -31,7 +31,7 @@ class FlxGraphicUtil
 			return null;
 
 		// Create a new BitmapData object with the dimensions of the specified region
-		final portion:BitmapData = new BitmapData(region.width, region.height, true, 0);
+		final portion:BitmapData = new BitmapData(Math.floor(region.width), Math.floor(region.height), true, 0);
 
 		// Copy pixels from the specified region of the original graphic to the new BitmapData object
 		portion.copyPixels(graph.bitmap, new Rectangle(region.x, region.y, region.width, region.height), new Point(0, 0));
