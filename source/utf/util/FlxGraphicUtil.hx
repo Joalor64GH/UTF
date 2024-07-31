@@ -3,6 +3,7 @@ package utf.util;
 import flixel.graphics.FlxGraphic;
 import flixel.math.FlxRect;
 import flixel.system.FlxAssets;
+import flixel.FlxG;
 import openfl.display.BitmapData;
 import openfl.geom.Rectangle;
 import openfl.geom.Point;
