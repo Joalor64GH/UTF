@@ -1,5 +1,6 @@
-import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
 import flixel.FlxG;
+import flixel.FlxSprite;
 import utf.backend.AssetPaths;
 import utf.states.room.Room;
 
@@ -24,10 +25,18 @@ class WaterRedactedRoom extends Room
 		loadCharacter('mainchara', 280, 200);
 
 		for (i in 0...31)
-			createTile('bg_watertiles', i * 40, 80, FlxPoint.weak(20, 60), FlxPoint.weak(20, 180));
+		{
+			var tile:FlxSprite = createTile('bg_watertiles', i * 40, 80, FlxRect.weak(20, 60, 20, 180));
+			tile.scale.set(2, 2);
+			tile.updateHitbox();
+		}
 
 		for (i in 0...30)
-			createTile('bg_watertiles', i * 40, 320, FlxPoint.weak(20, 60), FlxPoint.weak(20, 180));
+		{
+			var tile:FlxSprite = createTile('bg_watertiles', i * 40, 320, FlxRect.weak(20, 60, 20, 180));
+			tile.scale.set(2, 2);
+			tile.updateHitbox();
+		}
 
 		for (i in 0...5)
 			createObject('solidsmall', 160, 320 - (i * 40));
