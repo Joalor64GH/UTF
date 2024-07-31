@@ -160,8 +160,8 @@ class AssetPaths
 		frame.sourceSize.copyFrom(sourceSize);
 		frame.offset.copyFrom(offset);
 
-		sourceSize = FlxDestroyUtil.put(sourceSize);
-		offset = FlxDestroyUtil.put(offset);
+		// sourceSize = FlxDestroyUtil.put(sourceSize);
+		// offset = FlxDestroyUtil.put(offset);
 
 		return FlxGraphic.fromBitmapData(frame.paint());
 	}
