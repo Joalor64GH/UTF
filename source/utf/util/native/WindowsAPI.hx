@@ -23,7 +23,9 @@ class WindowsAPI
 	/**
 	 * Disables the "Report to Microsoft" dialog that appears when the application crashes.
 	 */
-	@:functionCode('SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX);')
-	public static function disableErrorReporting():Void;
+	public static function disableErrorReporting():Void
+	{
+		untyped SetErrorMode(untyped SEM_FAILCRITICALERRORS | untyped SEM_NOGPFAULTERRORBOX);
+	}
 }
 #end
