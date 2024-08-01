@@ -177,6 +177,16 @@ class Main extends Sprite
 	{
 		final cache:AssetCache = cast(Assets.cache, AssetCache);
 
+		for (key in cache.bitmapData.keys())
+		{
+			if (!FlxG.bitmap.checkCache(key))
+			{
+				FlxG.log.notice('Removing "$key" from the bitmapData cache.');
+
+				cache.bitmapData.remove(key);
+			}
+		}
+
 		for (key in cache.sound.keys())
 		{
 			FlxG.log.notice('Removing "$key" from the sound cache.');
