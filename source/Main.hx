@@ -7,6 +7,7 @@ import android.os.Build;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
 import flixel.input.keyboard.FlxKey;
+import flixel.util.typeLimit.NextState;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxGame;
