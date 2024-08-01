@@ -9,24 +9,11 @@ A engine for [Undertale](https://undertale.com) made with [HaxeFlixel](https://h
 > [!CAUTION]
 > **The engine is very early in development**.
 
-> [!NOTE]
+> [!TIP]
 > **The latest builds of the engine can be found in the [Actions](https://github.com/MAJigsaw77/UTF/actions) tab**.
-
-### Setup
-
-> Look in [here](./SETUP.md).
 
 ### Licensing
 
 **UTF** is made available under the **Apache 2.0 License**.
 
 Check [LICENSE](./LICENSE) for more information.
-
-### Credits
-
-| Avatar | UserName | Involvement |
-| ------ | -------- | ----------- |
-| ![](https://upload.wikimedia.org/wikipedia/en/a/af/Toby_Fox_dog.jpg) | [Toby Fox](https://twitter.com/tobyfox) | Creator of [Undertale](https://undertale.com).
-| ![](https://avatars.githubusercontent.com/u/77043862?s=64) | [MAJigsaw77](https://github.com/MAJigsaw77) | Creator of **UTF**.
-| ![](https://avatars.githubusercontent.com/u/45212377?s=64) | [CrowPlexus](https://github.com/CrowPlexus) | Programmer.
-| ![](https://avatars.githubusercontent.com/u/23155359?s=64) | [Ne_Eo](https://github.com/NeeEoo) | Programmer.
