@@ -10,22 +10,11 @@ import flixel.FlxG;
 import flixel.FlxGame;
 import flixel.FlxState;
 import haxe.io.Path;
-import haxe.CallStack;
-import haxe.Exception;
-import haxe.Log;
-#if hl
-import hl.Api;
-#end
 import lime.ui.KeyCode;
 import lime.ui.KeyModifier;
-import openfl.display.Bitmap;
 import openfl.display.Sprite;
-import openfl.errors.Error;
-import openfl.events.ErrorEvent;
 import openfl.events.Event;
-import openfl.events.UncaughtErrorEvent;
 import openfl.filesystem.File;
-import openfl.system.System;
 import openfl.utils.AssetCache;
 import openfl.utils.Assets;
 import openfl.Lib;
@@ -36,18 +25,11 @@ import utf.backend.AssetPaths;
 import utf.backend.Data;
 import utf.objects.debug.Overlay;
 import utf.states.Startup;
-#if (windows && cpp)
-import utf.util.native.WindowsAPI;
-#end
+import utf.util.logging.ErrorHandler;
 #if (cpp || neko || hl)
 import utf.util.MemoryUtil;
 #end
 import utf.util.TimerUtil;
-import utf.util.WindowUtil;
-#if sys
-import sys.io.File;
-import sys.FileSystem;
-#end
 
 using StringTools;
 
@@ -72,17 +54,7 @@ class Main extends Sprite
 		Sys.setCwd(Path.addTrailingSlash(File.applicationStorageDirectory.nativePath));
 		#end
 
-		#if (windows && cpp)
-		WindowsAPI.disableErrorReporting();
-		#end
-
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
-
-		#if hl
-		Api.setErrorHandler(onCriticalError);
-		#elseif cpp
-		untyped __global__.__hxcpp_set_critical_error_handler(onCriticalError);
-		#end
+		ErrorHandler.init();
 
 		#if desktop
 		Lib.application.window.onKeyDown.add(function(keyCode:KeyCode, keyModifier:KeyModifier):Void
@@ -166,98 +138,6 @@ class Main extends Sprite
 		FlxG.game.addChild(overlay);
 	}
 
-	@:noCompletion
-	private static inline function onUncaughtError(event:UncaughtErrorEvent):Void
-	{
-		event.preventDefault();
-		event.stopImmediatePropagation();
-
-		final log:Array<String> = [];
-
-		if (Std.isOfType(event.error, Error))
-			log.push(cast(event.error, Error).message);
-		else if (Std.isOfType(event.error, ErrorEvent))
-			log.push(cast(event.error, ErrorEvent).text);
-		else
-			log.push(Std.string(event.error));
-
-		for (item in CallStack.exceptionStack(true))
-		{
-			switch (item)
-			{
-				case CFunction:
-					log.push('C Function');
-				case Module(m):
-					log.push('Module [$m]');
-				case FilePos(s, file, line, column):
-					log.push('$file [line $line]');
-				case Method(classname, method):
-					log.push('$classname [method $method]');
-				case LocalFunction(name):
-					log.push('Local Function [$name]');
-			}
-		}
-
-		final msg:String = log.join('\n');
-
-		#if sys
-		try
-		{
-			if (!FileSystem.exists('errors'))
-				FileSystem.createDirectory('errors');
-
-			File.saveContent('errors/' + Date.now().toString().replace(' ', '-').replace(':', "'") + '.txt', msg);
-		}
-		catch (e:Exception)
-			FlxG.log.warn('Couldn\'t save error message "${e.message}"');
-		#end
-
-		WindowUtil.showAlert('Uncaught an Error!', msg);
-
-		System.exit(1);
-	}
-
-	@:noCompletion
-	private static inline function onCriticalError(error:Dynamic):Void
-	{
-		final log:Array<String> = [Std.isOfType(error, String) ? error : Std.string(error)];
-
-		for (item in CallStack.exceptionStack(true))
-		{
-			switch (item)
-			{
-				case CFunction:
-					log.push('C Function');
-				case Module(m):
-					log.push('Module [$m]');
-				case FilePos(s, file, line, column):
-					log.push('$file [line $line]');
-				case Method(classname, method):
-					log.push('$classname [method $method]');
-				case LocalFunction(name):
-					log.push('Local Function [$name]');
-			}
-		}
-
-		final msg:String = log.join('\n');
-
-		#if sys
-		try
-		{
-			if (!FileSystem.exists('errors'))
-				FileSystem.createDirectory('errors');
-
-			File.saveContent('errors/' + Date.now().toString().replace(' ', '-').replace(':', "'") + '.txt', msg);
-		}
-		catch (e:Exception)
-			FlxG.log.warn('Couldn\'t save error message "${e.message}"');
-		#end
-
-		WindowUtil.showAlert('Critical Error!', msg);
-
-		System.exit(1);
-	}
-
 	@:access(openfl.display.Sprite)
 	private inline function onResizeGame(width:Int, height:Int):Void
 	{
@@ -296,16 +176,6 @@ class Main extends Sprite
 	private inline function onPreStateCreate(state:FlxState):Void
 	{
 		final cache:AssetCache = cast(Assets.cache, AssetCache);
-
-		for (key in cache.bitmapData.keys())
-		{
-			if (!FlxG.bitmap.checkCache(key))
-			{
-				FlxG.log.notice('Removing "$key" from the bitmapData cache.');
-				
-				cache.bitmapData.remove(key);
-			}
-		}
 
 		for (key in cache.sound.keys())
 		{
