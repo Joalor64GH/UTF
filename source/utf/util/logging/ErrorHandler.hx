@@ -61,7 +61,7 @@ class ErrorHandler
 	{
 		final log:Array<String> = [];
 		log.push('Error: $message');
-		log.push('Exception Stack:\n{CallStack.toString(CallStack.exceptionStack(true))}');
+		log.push('Exception Stack:\n${CallStack.toString(CallStack.exceptionStack(true))}');
 		saveLog(log.join('\n'), true);
 
 		WindowUtil.showAlert('Critical Error!', log.join('\n'));
