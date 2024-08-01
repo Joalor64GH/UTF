@@ -1,16 +1,16 @@
-package utf.backend;
+package utf.util.discord;
 
 #if hxdiscord_rpc
 import flixel.FlxG;
-import hxdiscord_rpc.Discord as RichPresence;
+import hxdiscord_rpc.Discord;
 import hxdiscord_rpc.Types;
 import openfl.Lib;
 import sys.thread.Thread;
 
 /**
- * This class handles Discord Rich Presence integration.
+ * Utility class for handling Discord Rich Presence integration.
  */
-class Discord
+class DiscordUtil
 {
 	/**
 	 * Indicates if Discord Rich Presence is initialized.
@@ -19,8 +19,11 @@ class Discord
 
 	/**
 	 * Initializes Discord Rich Presence.
+	 *
+	 * Sets up the Discord Rich Presence, starts a background thread for updates,
+	 * and ensures proper shutdown on application exit.
 	 */
-	public static function load():Void
+	public static function init():Void
 	{
 		if (initialized)
 			return;
@@ -29,23 +32,23 @@ class Discord
 		handlers.ready = cpp.Function.fromStaticFunction(onReady);
 		handlers.disconnected = cpp.Function.fromStaticFunction(onDisconnected);
 		handlers.errored = cpp.Function.fromStaticFunction(onError);
-		RichPresence.Initialize("1140307809167220836", cpp.RawPointer.addressOf(handlers), 1, null);
+		Discord.Initialize("1140307809167220836", cpp.RawPointer.addressOf(handlers), 1, null);
 
 		Thread.create(function():Void
 		{
 			while (true)
 			{
 				#if DISCORD_DISABLE_IO_THREAD
-				RichPresence.UpdateConnection();
+				Discord.UpdateConnection();
 				#end
 
-				RichPresence.RunCallbacks();
+				Discord.RunCallbacks();
 
 				Sys.sleep(2);
 			}
 		});
 
-		Lib.application.onExit.add((exitCode:Int) -> RichPresence.Shutdown());
+		Lib.application.onExit.add((exitCode:Int) -> Discord.Shutdown());
 
 		initialized = true;
 	}
@@ -53,8 +56,8 @@ class Discord
 	@:noCompletion
 	private static function onReady(request:cpp.RawConstPointer<DiscordUser>):Void
 	{
-		final discriminator:String = cast(request[0].discriminator, String);
-		final username:String = cast(request[0].username, String);
+		final discriminator:String = request[0].discriminator;
+		final username:String = request[0].username;
 
 		if (Std.parseInt(discriminator) != 0)
 			FlxG.log.notice('(Discord) Connected to User "$username#$discriminator"');
@@ -64,19 +67,19 @@ class Discord
 		final discordPresence:DiscordRichPresence = DiscordRichPresence.create();
 		discordPresence.largeImageKey = "icon";
 		discordPresence.largeImageText = "UTF";
-		RichPresence.UpdatePresence(cpp.RawConstPointer.addressOf(discordPresence));
+		Discord.UpdatePresence(cpp.RawConstPointer.addressOf(discordPresence));
 	}
 
 	@:noCompletion
 	private static function onDisconnected(errorCode:Int, message:cpp.ConstCharStar):Void
 	{
-		FlxG.log.notice('(Discord) Disconnected ($errorCode: ${cast (message, String)})');
+		FlxG.log.notice('(Discord) Disconnected ($errorCode:$message)');
 	}
 
 	@:noCompletion
 	private static function onError(errorCode:Int, message:cpp.ConstCharStar):Void
 	{
-		FlxG.log.notice('(Discord) Error ($errorCode: ${cast (message, String)})');
+		FlxG.log.notice('(Discord) Error ($errorCode:$message)');
 	}
 }
 #end
