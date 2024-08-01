@@ -138,11 +138,11 @@ class Main extends Sprite
 			{
 				if (camera?.filters?.length > 0)
 				{
-					camera?.flashSprite?.__cacheBitmap = null;
-					camera?.flashSprite?.__cacheBitmapData = null;
-					camera?.flashSprite?.__cacheBitmapData2 = null;
-					camera?.flashSprite?.__cacheBitmapData3 = null;
-					camera?.flashSprite?.__cacheBitmapColorTransform = null;
+					camera.flashSprite?.__cacheBitmap = null;
+					camera.flashSprite?.__cacheBitmapData = null;
+					camera.flashSprite?.__cacheBitmapData2 = null;
+					camera.flashSprite?.__cacheBitmapData3 = null;
+					camera.flashSprite?.__cacheBitmapColorTransform = null;
 				}
 			}
 		}
