@@ -54,14 +54,14 @@ class ErrorHandler
 		{
 			final error:ErrorEvent = cast(event.error, ErrorEvent);
 
-			log.push('Error Event: ${error.text}');
+			log.push(error.text);
 		}
 		else
 		{
 			if (Std.isOfType(event.error, String))
-				log.push('Error: ${event.error}');
+				log.push(event.error);
 			else
-				log.push('Error: ${Std.string(event.error)}');
+				log.push(Std.string(event.error));
 
 			log.push(CallStack.toString(CallStack.exceptionStack(true)));
 
