@@ -70,7 +70,7 @@ class ErrorHandler
 		}
 		else
 		{
-			log.push('Unknown Error: ${Std.string()}');
+			log.push('Unknown Error: ${Std.string(event.error)}');
 			log.push('Exception Stack:\n${CallStack.toString(CallStack.exceptionStack(true))}');
 
 			#if sys
