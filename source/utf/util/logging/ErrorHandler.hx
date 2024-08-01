@@ -51,21 +51,32 @@ class ErrorHandler
 
 		final log:Array<String> = [];
 
-		if (Std.isOfType(event.error, Error))
+		if (Std.isOfType(event.error, Exception))
 		{
-			final error:Error = cast(event.error, Error);
+			final error:Exception = cast(event.error, Exception);
 
 			log.push('Error: ${error.message}');
-			log.push('Stack Trace:\n${error.getStackTrace()}');
+			log.push('Exception Stack:\n${CallStack.toString(CallStack.exceptionStack(true))}');
+
+			#if sys
+			saveLog(log.join('\n'));
+			#end
 		}
 		else if (Std.isOfType(event.error, ErrorEvent))
-			log.push('Error Event: ${cast (event.error, ErrorEvent).text}');
-		else
-			log.push('Unknown Error: ${Std.string(event.error)}');
+		{
+			final error:ErrorEvent = cast(event.error, ErrorEvent);
 
-		#if sys
-		saveLog(log.join('\n'));
-		#end
+			log.push('Error Event: ${error.text}');
+		}
+		else
+		{
+			log.push('Unknown Error: ${Std.string()}');
+			log.push('Exception Stack:\n${CallStack.toString(CallStack.exceptionStack(true))}');
+
+			#if sys
+			saveLog(log.join('\n'));
+			#end
+		}
 
 		WindowUtil.showAlert('Uncaught Error!', log.join('\n'));
 
@@ -76,6 +87,7 @@ class ErrorHandler
 	private static inline function onCriticalError(message:String):Void
 	{
 		final log:Array<String> = [];
+
 		log.push('Error: $message');
 		log.push('Exception Stack:\n${CallStack.toString(CallStack.exceptionStack(true))}');
 
