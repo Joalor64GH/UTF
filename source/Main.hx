@@ -6,9 +6,7 @@ import android.os.Build;
 #end
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
-import flixel.input.keyboard.FlxKey;
 import flixel.util.typeLimit.NextState;
-import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxGame;
 import haxe.io.Path;
@@ -22,6 +20,7 @@ import utf.states.Startup;
 import utf.util.logging.ErrorHandler;
 import utf.util.CleanupUtil;
 import utf.util.MemoryUtil;
+import utf.util.ResizeUtil;
 
 using StringTools;
 
@@ -115,17 +114,25 @@ class Main extends Sprite
 		MemoryUtil.enable();
 		#end
 
+		CleanupUtil.init();
+
+		ResizeUtil.init();
+
 		final game:FlxGame = new FlxGame(GAME_WIDTH, GAME_HEIGHT, GAME_INITIAL_STATE, GAME_FRAMERATE, GAME_FRAMERATE, GAME_SKIP_SPLASH, GAME_START_FULLSCREEN);
 
+		setupFlixel();
+
+		addChild(game);
+	}
+
+	@:noCompletion
+	private function setupFlixel():Void
+	{
 		FlxG.autoPause = false;
 
 		#if debug
 		FlxG.log.redirectTraces = true;
 		#end
-
-		CleanupUtil.init();
-
-		FlxG.signals.gameResized.add(onResizeGame);
 
 		FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 0.5, NEW);
 		FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.5, NEW);
@@ -134,7 +141,7 @@ class Main extends Sprite
 		FlxG.android.preventDefaultKeys = [BACK];
 		#end
 
-		FlxG.debugger.toggleKeys = [FlxKey.F2];
+		FlxG.debugger.toggleKeys = [F2];
 
 		if (FlxG.save.data.volume != null)
 			FlxG.sound.volume = FlxG.save.data.volume;
@@ -151,38 +158,5 @@ class Main extends Sprite
 		#if FLX_MOUSE
 		FlxG.mouse.useSystemCursor = true;
 		#end
-
-		addChild(game);
-	}
-
-	@:access(openfl.display.Sprite)
-	private inline function onResizeGame(width:Int, height:Int):Void
-	{
-		if (FlxG.cameras?.list?.length > 0)
-		{
-			for (camera in FlxG.cameras.list)
-			{
-				if (camera?.filters?.length > 0)
-				{
-					if (camera.flashSprite != null)
-					{
-						camera.flashSprite.__cacheBitmap = null;
-						camera.flashSprite.__cacheBitmapData = null;
-						camera.flashSprite.__cacheBitmapData2 = null;
-						camera.flashSprite.__cacheBitmapData3 = null;
-						camera.flashSprite.__cacheBitmapColorTransform = null;
-					}
-				}
-			}
-		}
-
-		if (FlxG.game != null)
-		{
-			FlxG.game.__cacheBitmap = null;
-			FlxG.game.__cacheBitmapData = null;
-			FlxG.game.__cacheBitmapData2 = null;
-			FlxG.game.__cacheBitmapData3 = null;
-			FlxG.game.__cacheBitmapColorTransform = null;
-		}
 	}
 }
