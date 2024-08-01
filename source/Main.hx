@@ -4,6 +4,8 @@ package;
 import android.content.Context;
 import android.os.Build;
 #end
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.addons.transition.TransitionData;
 import flixel.input.keyboard.FlxKey;
 import flixel.util.FlxColor;
 import flixel.FlxG;
@@ -90,25 +92,21 @@ class Main extends Sprite
 
 		CleanupUtil.init();
 
-		addChild(new FlxGame(640, 480, Startup, 60, 60));
-
-		setupFlixel();
-
-		overlay = new Overlay(10, 10, FlxColor.RED);
-		FlxG.game.addChild(overlay);
-	}
-
-	@:noCompletion
-	private function setupFlixel():Void
-	{
-		#if android
-		FlxG.android.preventDefaultKeys = [BACK];
-		#end
-
 		FlxG.autoPause = false;
 
 		#if debug
 		FlxG.log.redirectTraces = true;
+		#end
+
+		FlxG.signals.gameResized.add(onResizeGame);
+
+		FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 0.5, NEW);
+		FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.5, NEW);
+
+		addChild(new FlxGame(640, 480, Startup, 60, 60));
+
+		#if android
+		FlxG.android.preventDefaultKeys = [BACK];
 		#end
 
 		FlxG.debugger.toggleKeys = [FlxKey.F2];
@@ -119,8 +117,6 @@ class Main extends Sprite
 		if (FlxG.save.data.mute != null)
 			FlxG.sound.muted = FlxG.save.data.mute;
 
-		FlxG.signals.gameResized.add(onResizeGame);
-
 		FlxG.sound.volumeUpKeys = [];
 		FlxG.sound.volumeDownKeys = [];
 		FlxG.sound.muteKeys = [];
@@ -130,6 +126,9 @@ class Main extends Sprite
 		#if FLX_MOUSE
 		FlxG.mouse.useSystemCursor = true;
 		#end
+
+		overlay = new Overlay(10, 10, FlxColor.RED);
+		FlxG.game.addChild(overlay);
 	}
 
 	@:access(openfl.display.Sprite)
