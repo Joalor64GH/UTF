@@ -17,7 +17,6 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.filesystem.File;
 import openfl.Lib;
-import utf.objects.debug.Overlay;
 import utf.states.Startup;
 import utf.util.logging.ErrorHandler;
 import utf.util.CleanupUtil;
@@ -30,10 +29,12 @@ using StringTools;
  */
 class Main extends Sprite
 {
-	/**
-	 * Tracks frames per second (Overlay).
-	 */
-	public static var overlay:Overlay;
+	private static final GAME_WIDTH:Int = 640;
+	private static final GAME_HEIGHT:Int = 480;
+	private static final GAME_FRAMERATE:Int = 60;
+	private static final GAME_INITIAL_STATE:InitialState = () -> new Startup();
+	private static final GAME_SKIP_SPLASH:Bool = true;
+	private static final GAME_START_FULLSCREEN:Bool = false;
 
 	/**
 	 * The entry point of the application.
@@ -103,7 +104,7 @@ class Main extends Sprite
 		FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 0.5, NEW);
 		FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.5, NEW);
 
-		addChild(new FlxGame(640, 480, Startup, 60, 60));
+		addChild(new FlxGame(GAME_WIDTH, GAME_HEIGHT, GAME_INITIAL_STATE, GAME_FRAMERATE, GAME_FRAMERATE, GAME_SKIP_SPLASH, GAME_START_FULLSCREEN));
 
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];
@@ -126,44 +127,30 @@ class Main extends Sprite
 		#if FLX_MOUSE
 		FlxG.mouse.useSystemCursor = true;
 		#end
-
-		overlay = new Overlay(10, 10, FlxColor.RED);
-		FlxG.game.addChild(overlay);
 	}
 
 	@:access(openfl.display.Sprite)
 	private inline function onResizeGame(width:Int, height:Int):Void
 	{
-		final scale:Float = Math.min(width / FlxG.width, height / FlxG.height);
-
-		if (overlay != null)
-			overlay.scaleX = overlay.scaleY = (scale > 1 ? scale : 1);
-
-		if (FlxG.cameras != null && (FlxG.cameras.list != null && FlxG.cameras.list.length > 0))
+		if (FlxG.cameras?.list?.length > 0)
 		{
 			for (camera in FlxG.cameras.list)
 			{
-				if (camera != null && (camera.filters != null && camera.filters.length > 0))
+				if (camera?.filters?.length > 0)
 				{
-					if (camera.flashSprite != null)
-					{
-						camera.flashSprite.__cacheBitmap = null;
-						camera.flashSprite.__cacheBitmapData = null;
-						camera.flashSprite.__cacheBitmapData2 = null;
-						camera.flashSprite.__cacheBitmapData3 = null;
-						camera.flashSprite.__cacheBitmapColorTransform = null;
-					}
+					camera?.flashSprite?.__cacheBitmap = null;
+					camera?.flashSprite?.__cacheBitmapData = null;
+					camera?.flashSprite?.__cacheBitmapData2 = null;
+					camera?.flashSprite?.__cacheBitmapData3 = null;
+					camera?.flashSprite?.__cacheBitmapColorTransform = null;
 				}
 			}
 		}
 
-		if (FlxG.game != null)
-		{
-			FlxG.game.__cacheBitmap = null;
-			FlxG.game.__cacheBitmapData = null;
-			FlxG.game.__cacheBitmapData2 = null;
-			FlxG.game.__cacheBitmapData3 = null;
-			FlxG.game.__cacheBitmapColorTransform = null;
-		}
+		FlxG.game?.__cacheBitmap = null;
+		FlxG.game?.__cacheBitmapData = null;
+		FlxG.game?.__cacheBitmapData2 = null;
+		FlxG.game?.__cacheBitmapData3 = null;
+		FlxG.game?.__cacheBitmapColorTransform = null;
 	}
 }
