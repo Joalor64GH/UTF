@@ -7,6 +7,7 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import lime.utils.Log;
 import openfl.Lib;
 import utf.backend.AssetPaths;
 import utf.backend.Data;
@@ -175,7 +176,10 @@ class Intro extends FlxState
 
 		super.create();
 
-		throw 'OOO WHAT DO WE HAVE HERE???';
+		
+		var shit = 'OOO WHAT DO WE HAVE HERE???';
+
+		Log.error(shit);
 	}
 
 	override function update(elapsed:Float):Void
