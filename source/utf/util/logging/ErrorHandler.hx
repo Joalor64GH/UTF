@@ -63,7 +63,9 @@ class ErrorHandler
 		else
 			log.push('Unknown Error: ${Std.string(event.error)}');
 
+		#if sys
 		saveLog(log.join('\n'));
+		#end
 
 		WindowUtil.showAlert('Uncaught Error!', log.join('\n'));
 
@@ -76,7 +78,10 @@ class ErrorHandler
 		final log:Array<String> = [];
 		log.push('Error: $message');
 		log.push('Exception Stack:\n${CallStack.toString(CallStack.exceptionStack(true))}');
+
+		#if sys
 		saveLog(log.join('\n'), true);
+		#end
 
 		WindowUtil.showAlert('Critical Error!', log.join('\n'));
 
