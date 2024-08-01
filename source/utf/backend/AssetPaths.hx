@@ -136,9 +136,7 @@ class AssetPaths
 				return FlxAtlasFrames.fromTexturePackerJson(AssetPaths.sprite(key), Path.withExtension(path, 'json'));
 		}
 		catch (e:Exception)
-		{
 			FlxG.log.error(e.message);
-		}
 
 		return null;
 	}
