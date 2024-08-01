@@ -5,6 +5,7 @@ import haxe.Exception;
 import openfl.errors.Error;
 import openfl.events.ErrorEvent;
 import openfl.events.UncaughtErrorEvent;
+import openfl.system.System;
 import openfl.Lib;
 #if sys
 import sys.io.File;
@@ -14,6 +15,7 @@ import sys.FileSystem;
 import utf.util.native.WindowsAPI;
 #end
 import utf.util.DateUtil;
+import utf.util.WindowUtil;
 
 /**
  * Error handler utility class for handling uncaught errors and critical errors.
