@@ -18,6 +18,9 @@ import openfl.events.Event;
 import openfl.filesystem.File;
 import openfl.Lib;
 import utf.states.Startup;
+#if hxdiscord_rpc
+import utf.util.discord.DiscordUtil;
+#end
 import utf.util.logging.ErrorHandler;
 import utf.util.CleanupUtil;
 import utf.util.MemoryUtil;
@@ -113,6 +116,10 @@ class Main extends Sprite
 
 		#if (cpp || neko || hl)
 		MemoryUtil.enable();
+		#end
+
+		#if hxdiscord_rpc
+		DiscordUtil.init();
 		#end
 
 		CleanupUtil.init();
