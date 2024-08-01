@@ -8,28 +8,17 @@ import flixel.input.keyboard.FlxKey;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxGame;
-import flixel.FlxState;
 import haxe.io.Path;
 import lime.ui.KeyCode;
 import lime.ui.KeyModifier;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.filesystem.File;
-import openfl.utils.AssetCache;
-import openfl.utils.Assets;
 import openfl.Lib;
-#if polymod
-import polymod.Polymod;
-#end
-import utf.backend.AssetPaths;
-import utf.backend.Data;
 import utf.objects.debug.Overlay;
 import utf.states.Startup;
 import utf.util.logging.ErrorHandler;
-#if (cpp || neko || hl)
-import utf.util.MemoryUtil;
-#end
-import utf.util.TimerUtil;
+import utf.util.CleanupUtil;
 
 using StringTools;
 
@@ -83,40 +72,45 @@ class Main extends Sprite
 		super();
 
 		if (stage != null)
-			onAddedToStage();
+			setupGame();
 		else
-			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			addEventListener(Event.ADDED_TO_STAGE, setupGame);
 	}
 
 	@:noCompletion
-	private function onAddedToStage(?event:Event):Void
+	private function setupGame(?event:Event):Void
 	{
 		if (hasEventListener(Event.ADDED_TO_STAGE))
-			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			removeEventListener(Event.ADDED_TO_STAGE, setupGame);
 
 		#if (cpp || neko || hl)
 		MemoryUtil.enable();
 		#end
 
+		CleanupUtil.init();
+
+		addChild(new FlxGame(640, 480, Startup, 60, 60));
+
+		setupFlixel();
+
+		overlay = new Overlay(10, 10, FlxColor.RED);
+		FlxG.game.addChild(overlay);
+	}
+
+	@:noCompletion
+	private function setupFlixel():Void
+	{
+		#if android
+		FlxG.android.preventDefaultKeys = [BACK];
+		#end
+
+		FlxG.autoPause = false;
+
 		#if debug
 		FlxG.log.redirectTraces = true;
 		#end
 
-		FlxG.signals.gameResized.add(onResizeGame);
-		FlxG.signals.preStateCreate.add(onPreStateCreate);
-		#if (cpp || neko || hl)
-		FlxG.signals.postStateSwitch.add(onPostStateSwitch);
-		#end
-
-		addChild(new FlxGame(640, 480, Startup, 60, 60));
-
-		FlxG.autoPause = false;
-
 		FlxG.debugger.toggleKeys = [FlxKey.F2];
-
-		FlxG.sound.volumeUpKeys = [];
-		FlxG.sound.volumeDownKeys = [];
-		FlxG.sound.muteKeys = [];
 
 		if (FlxG.save.data.volume != null)
 			FlxG.sound.volume = FlxG.save.data.volume;
@@ -124,18 +118,17 @@ class Main extends Sprite
 		if (FlxG.save.data.mute != null)
 			FlxG.sound.muted = FlxG.save.data.mute;
 
-		FlxG.game.focusLostFramerate = 30;
+		FlxG.signals.gameResized.add(onResizeGame);
 
-		#if android
-		FlxG.android.preventDefaultKeys = [BACK];
-		#end
+		FlxG.sound.volumeUpKeys = [];
+		FlxG.sound.volumeDownKeys = [];
+		FlxG.sound.muteKeys = [];
+
+		FlxG.game.focusLostFramerate = 30;
 
 		#if FLX_MOUSE
 		FlxG.mouse.useSystemCursor = true;
 		#end
-
-		overlay = new Overlay(10, 10, FlxColor.RED);
-		FlxG.game.addChild(overlay);
 	}
 
 	@:access(openfl.display.Sprite)
@@ -164,61 +157,13 @@ class Main extends Sprite
 			}
 		}
 
-		@:privateAccess
 		if (FlxG.game != null)
 		{
 			FlxG.game.__cacheBitmap = null;
 			FlxG.game.__cacheBitmapData = null;
+			FlxG.game.__cacheBitmapData2 = null;
+			FlxG.game.__cacheBitmapData3 = null;
+			FlxG.game.__cacheBitmapColorTransform = null;
 		}
 	}
-
-	@:noCompletion
-	private inline function onPreStateCreate(state:FlxState):Void
-	{
-		final cache:AssetCache = cast(Assets.cache, AssetCache);
-
-		for (key in cache.bitmapData.keys())
-		{
-			if (!FlxG.bitmap.checkCache(key))
-			{
-				FlxG.log.notice('Removing "$key" from the bitmapData cache.');
-
-				cache.bitmapData.remove(key);
-			}
-		}
-
-		for (key in cache.sound.keys())
-		{
-			FlxG.log.notice('Removing "$key" from the sound cache.');
-
-			cache.sound.remove(key);
-		}
-
-		for (key in cache.font.keys())
-		{
-			FlxG.log.notice('Removing "$key" from the font cache.');
-
-			cache.font.remove(key);
-		}
-
-		#if polymod
-		Polymod.clearCache();
-		#end
-	}
-
-	#if (cpp || neko || hl)
-	@:noCompletion
-	private inline function onPostStateSwitch():Void
-	{
-		FlxG.log.notice('Running the garbage collector.');
-
-		final gcStart:Float = TimerUtil.start();
-
-		MemoryUtil.collect(true);
-		MemoryUtil.compact();
-		MemoryUtil.collect(false);
-
-		FlxG.log.notice('Garbage collection took: ${TimerUtil.seconds(gcStart)}');
-	}
-	#end
 }
