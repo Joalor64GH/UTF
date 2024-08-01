@@ -51,10 +51,10 @@ class Main extends Sprite
 		{
 			#if (windows || linux)
 			if (keyCode == KeyCode.RETURN && keyModifier.altKey && (!keyModifier.ctrlKey && !keyModifier.shiftKey && !keyModifier.metaKey))
-				window.onKeyDown.cancel();
+				Lib.application.window.onKeyDown.cancel();
 			#elseif mac
 			if (keyCode == KeyCode.F && (keyModifier.ctrlKey && keyModifier.metaKey) && (!keyModifier.altKey && !keyModifier.shiftKey))
-				window.onKeyDown.cancel();
+				Lib.application.window.onKeyDown.cancel();
 			#end
 
 			if (keyCode == KeyCode.F4 && (!keyModifier.altKey && !keyModifier.ctrlKey && !keyModifier.shiftKey && !keyModifier.metaKey))
