@@ -70,7 +70,7 @@ class ErrorHandler
 			#end
 		}
 
-		WindowUtil.showAlert('Uncaught Error!', log.join('\n'));
+		WindowUtil.showAlert('Uncaught Error', log.join('\n'));
 
 		System.exit(1);
 	}
@@ -86,7 +86,7 @@ class ErrorHandler
 		saveLog(log.join('\n'), true);
 		#end
 
-		WindowUtil.showAlert('Critical Error!', log.join('\n'));
+		WindowUtil.showAlert('Critical Error', log.join('\n'));
 
 		System.exit(1);
 	}
