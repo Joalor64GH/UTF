@@ -19,6 +19,7 @@ import utf.objects.debug.Overlay;
 import utf.states.Startup;
 import utf.util.logging.ErrorHandler;
 import utf.util.CleanupUtil;
+import utf.util.MemoryUtil;
 
 using StringTools;
 
