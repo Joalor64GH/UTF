@@ -2,7 +2,6 @@ package utf.util.logging;
 
 import haxe.CallStack;
 import haxe.Exception;
-import openfl.errors.Error;
 import openfl.events.ErrorEvent;
 import openfl.events.UncaughtErrorEvent;
 import openfl.system.System;
@@ -51,18 +50,7 @@ class ErrorHandler
 
 		final log:Array<String> = [];
 
-		if (Std.isOfType(event.error, Exception))
-		{
-			final error:Exception = cast(event.error, Exception);
-
-			log.push('Error: ${error.message}');
-			log.push('Exception Stack:\n${CallStack.toString(CallStack.exceptionStack(true))}');
-
-			#if sys
-			saveLog(log.join('\n'));
-			#end
-		}
-		else if (Std.isOfType(event.error, ErrorEvent))
+		if (Std.isOfType(event.error, ErrorEvent))
 		{
 			final error:ErrorEvent = cast(event.error, ErrorEvent);
 
@@ -70,8 +58,12 @@ class ErrorHandler
 		}
 		else
 		{
-			log.push('Unknown Error: ${Std.string(event.error)}');
-			log.push('Exception Stack:\n${CallStack.toString(CallStack.exceptionStack(true))}');
+			if (Std.isOfType(event.error, String))
+				log.push('Error: ${event.error}');
+			else
+				log.push('Error: ${Std.string(event.error)}');
+
+			log.push(CallStack.toString(CallStack.exceptionStack(true)));
 
 			#if sys
 			saveLog(log.join('\n'));
@@ -86,10 +78,9 @@ class ErrorHandler
 	@:noCompletion
 	private static inline function onCriticalError(message:String):Void
 	{
-		final log:Array<String> = [];
+		final log:Array<String> = [message];
 
-		log.push('Error: $message');
-		log.push('Exception Stack:\n${CallStack.toString(CallStack.exceptionStack(true))}');
+		log.push(CallStack.toString(CallStack.exceptionStack(true)));
 
 		#if sys
 		saveLog(log.join('\n'), true);
