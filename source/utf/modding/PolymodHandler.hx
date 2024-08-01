@@ -30,7 +30,7 @@ class PolymodHandler
 	/**
 	 * The root directory for mods.
 	 */
-	private static final MOD_ROOT:String = 'mods';
+	private static final MODS_ROOT:String = 'mods';
 
 	/**
 	 * Stores metadata for the loaded mods.
@@ -64,11 +64,11 @@ class PolymodHandler
 
 		buildImports();
 
-		if (!FileSystem.exists(MOD_ROOT))
-			FileSystem.createDirectory(MOD_ROOT);
+		if (!FileSystem.exists(MODS_ROOT))
+			FileSystem.createDirectory(MODS_ROOT);
 
 		Polymod.init({
-			modRoot: MOD_ROOT,
+			modRoot: MODS_ROOT,
 			dirs: getModDirs(),
 			framework: OPENFL,
 			ignoredFiles: Polymod.getDefaultIgnoreList(),
@@ -106,7 +106,7 @@ class PolymodHandler
 
 		final packs:Array<String> = [];
 
-		for (pack in Polymod.scan({modRoot: MOD_ROOT, apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version'))}))
+		for (pack in Polymod.scan({modRoot: MODS_ROOT, apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version'))}))
 		{
 			data.set(pack.id, pack);
 
@@ -161,7 +161,7 @@ class PolymodHandler
 	@:noCompletion
 	private static function buildFileSystem():ZipFileSystem
 	{
-		return new ZipFileSystem({modRoot: MOD_ROOT, autoScan: true});
+		return new ZipFileSystem({modRoot: MODS_ROOT, autoScan: true});
 	}
 
 	@:noCompletion
