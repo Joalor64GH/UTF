@@ -166,11 +166,11 @@ class Main extends Sprite
 				{
 					if (camera.flashSprite != null)
 					{
-					camera.flashSprite.__cacheBitmap = null;
-					camera.flashSprite.__cacheBitmapData = null;
-					camera.flashSprite.__cacheBitmapData2 = null;
-					camera.flashSprite.__cacheBitmapData3 = null;
-					camera.flashSprite.__cacheBitmapColorTransform = null;
+						camera.flashSprite.__cacheBitmap = null;
+						camera.flashSprite.__cacheBitmapData = null;
+						camera.flashSprite.__cacheBitmapData2 = null;
+						camera.flashSprite.__cacheBitmapData3 = null;
+						camera.flashSprite.__cacheBitmapColorTransform = null;
 					}
 				}
 			}
@@ -178,11 +178,11 @@ class Main extends Sprite
 
 		if (FlxG.game != null)
 		{
-		FlxG.game.__cacheBitmap = null;
-		FlxG.game.__cacheBitmapData = null;
-		FlxG.game.__cacheBitmapData2 = null;
-		FlxG.game.__cacheBitmapData3 = null;
-		FlxG.game.__cacheBitmapColorTransform = null;
+			FlxG.game.__cacheBitmap = null;
+			FlxG.game.__cacheBitmapData = null;
+			FlxG.game.__cacheBitmapData2 = null;
+			FlxG.game.__cacheBitmapData3 = null;
+			FlxG.game.__cacheBitmapColorTransform = null;
 		}
 	}
 }
