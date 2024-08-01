@@ -2,7 +2,10 @@ package utf.util.logging;
 
 import haxe.CallStack;
 import haxe.Exception;
-import haxe.Log;
+import openfl.errors.Error;
+import openfl.events.ErrorEvent;
+import openfl.events.UncaughtErrorEvent;
+import openfl.Lib;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
@@ -12,10 +15,19 @@ import utf.util.native.WindowsAPI;
 #end
 import utf.util.DateUtil;
 
+/**
+ * Error handler utility class for handling uncaught errors and critical errors.
+ */
 class ErrorHandler
 {
+	/**
+	 * The root directory where log files will be saved.
+	 */
 	private static final LOGS_ROOT:String = 'logs';
 
+	/**
+	 * Initializes the error handler by setting up the necessary error listeners.
+	 */
 	public static function init():Void
 	{
 		#if (windows && cpp)
@@ -45,7 +57,7 @@ class ErrorHandler
 			log.push('Stack Trace:\n${error.getStackTrace()}');
 		}
 		else if (Std.isOfType(event.error, ErrorEvent))
-			log.push('Error Event: ${cast(event.error, ErrorEvent).text}');
+			log.push('Error Event: ${cast (event.error, ErrorEvent).text}');
 		else
 			log.push('Unknown Error: ${Std.string(event.error)}');
 
