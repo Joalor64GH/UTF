@@ -120,6 +120,7 @@ class Main extends Sprite
 		ResizeUtil.init();
 
 		final game:FlxGame = new FlxGame(GAME_WIDTH, GAME_HEIGHT, GAME_INITIAL_STATE, GAME_FRAMERATE, GAME_FRAMERATE, GAME_SKIP_SPLASH, GAME_START_FULLSCREEN);
+		game.focusLostFramerate = 30;
 
 		setupFlixel();
 
@@ -129,8 +130,6 @@ class Main extends Sprite
 	@:noCompletion
 	private function setupFlixel():Void
 	{
-		FlxG.autoPause = false;
-
 		#if debug
 		FlxG.log.redirectTraces = true;
 		#end
@@ -153,8 +152,6 @@ class Main extends Sprite
 		FlxG.sound.volumeUpKeys = [];
 		FlxG.sound.volumeDownKeys = [];
 		FlxG.sound.muteKeys = [];
-
-		FlxG.game.focusLostFramerate = 30;
 
 		#if FLX_MOUSE
 		FlxG.mouse.useSystemCursor = true;
