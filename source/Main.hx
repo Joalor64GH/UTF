@@ -115,7 +115,7 @@ class Main extends Sprite
 		MemoryUtil.enable();
 		#end
 
-		CleanupUtil.init();
+		final game:FlxGame = new FlxGame(GAME_WIDTH, GAME_HEIGHT, GAME_INITIAL_STATE, GAME_FRAMERATE, GAME_FRAMERATE, GAME_SKIP_SPLASH, GAME_START_FULLSCREEN);
 
 		FlxG.autoPause = false;
 
@@ -123,12 +123,12 @@ class Main extends Sprite
 		FlxG.log.redirectTraces = true;
 		#end
 
+		CleanupUtil.init();
+
 		FlxG.signals.gameResized.add(onResizeGame);
 
 		FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 0.5, NEW);
 		FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.5, NEW);
-
-		addChild(new FlxGame(GAME_WIDTH, GAME_HEIGHT, GAME_INITIAL_STATE, GAME_FRAMERATE, GAME_FRAMERATE, GAME_SKIP_SPLASH, GAME_START_FULLSCREEN));
 
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];
@@ -151,6 +151,8 @@ class Main extends Sprite
 		#if FLX_MOUSE
 		FlxG.mouse.useSystemCursor = true;
 		#end
+
+		addChild(game);
 	}
 
 	@:access(openfl.display.Sprite)
@@ -162,19 +164,25 @@ class Main extends Sprite
 			{
 				if (camera?.filters?.length > 0)
 				{
-					camera.flashSprite?.__cacheBitmap = null;
-					camera.flashSprite?.__cacheBitmapData = null;
-					camera.flashSprite?.__cacheBitmapData2 = null;
-					camera.flashSprite?.__cacheBitmapData3 = null;
-					camera.flashSprite?.__cacheBitmapColorTransform = null;
+					if (camera.flashSprite != null)
+					{
+					camera.flashSprite.__cacheBitmap = null;
+					camera.flashSprite.__cacheBitmapData = null;
+					camera.flashSprite.__cacheBitmapData2 = null;
+					camera.flashSprite.__cacheBitmapData3 = null;
+					camera.flashSprite.__cacheBitmapColorTransform = null;
+					}
 				}
 			}
 		}
 
-		FlxG.game?.__cacheBitmap = null;
-		FlxG.game?.__cacheBitmapData = null;
-		FlxG.game?.__cacheBitmapData2 = null;
-		FlxG.game?.__cacheBitmapData3 = null;
-		FlxG.game?.__cacheBitmapColorTransform = null;
+		if (FlxG.game != null)
+		{
+		FlxG.game.__cacheBitmap = null;
+		FlxG.game.__cacheBitmapData = null;
+		FlxG.game.__cacheBitmapData2 = null;
+		FlxG.game.__cacheBitmapData3 = null;
+		FlxG.game.__cacheBitmapColorTransform = null;
+		}
 	}
 }
