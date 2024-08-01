@@ -29,11 +29,34 @@ using StringTools;
  */
 class Main extends Sprite
 {
+	/**
+	 * The width of the game window in pixels.
+	 */
 	private static final GAME_WIDTH:Int = 640;
+
+	/**
+	 * The height of the game window in pixels.
+	 */
 	private static final GAME_HEIGHT:Int = 480;
+
+	/**
+	 * The frame rate of the game, in frames per second (FPS).
+	 */
 	private static final GAME_FRAMERATE:Int = 60;
+
+	/**
+	 * The initial state of the game.
+	 */
 	private static final GAME_INITIAL_STATE:InitialState = () -> new Startup();
+
+	/**
+	 * Whether to skip the splash screen on startup.
+	 */
 	private static final GAME_SKIP_SPLASH:Bool = true;
+
+	/**
+	 * Whether to start the game in fullscreen mode.
+	 */
 	private static final GAME_START_FULLSCREEN:Bool = false;
 
 	/**
