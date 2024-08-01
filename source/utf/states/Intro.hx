@@ -1,5 +1,6 @@
 package utf.states;
 
+import flixel.addons.display.FlxRuntimeShader;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -7,7 +8,6 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import lime.utils.Log;
 import openfl.Lib;
 import utf.backend.AssetPaths;
 import utf.backend.Data;
@@ -45,43 +45,49 @@ class Intro extends FlxState
 			if (!(FlxG.sound.music?.playing ?? false))
 				FlxG.sound.playMusic(AssetPaths.music('menu1'));
 
-			var bg:FlxSprite = new FlxSprite(0, -240, AssetPaths.background('floweyglow'));
+			final bg:FlxSprite = new FlxSprite(0, -240, AssetPaths.background('floweyglow'));
 			bg.scale.set(2, 2);
 			bg.updateHitbox();
 			bg.scrollFactor.set();
 			bg.active = false;
 			add(bg);
 
-			var flowey:FlxSprite = new FlxSprite(0, 348);
+			final chrome:FlxRuntimeShader = new FlxRuntimeShader(AssetPaths.getContent(AssetPaths.shader('chrome.frag'), true));
+			chrome.setFloat('rOffset', 0.0);
+			chrome.setFloat('gOffset', 0.0);
+			chrome.setFloat('bOffset', -0.005);
+
+			final flowey:FlxSprite = new FlxSprite(0, 348);
 			flowey.frames = AssetPaths.spritesheet('flowey');
 			flowey.animation.frameIndex = 1;
 			flowey.scale.set(2, 2);
 			flowey.updateHitbox();
 			flowey.screenCenter(X);
 			flowey.scrollFactor.set();
+			flowey.shader = chrome;
 			add(flowey);
 
-			var name:FlxText = new FlxText(145, 120, 0, Global.name, 32);
+			final name:FlxText = new FlxText(145, 120, 0, Global.name, 32);
 			name.font = AssetPaths.font('DTM-Sans');
 			name.scrollFactor.set();
 			name.active = false;
 			add(name);
 
-			var love:FlxText = new FlxText(285, 120, 0, 'LV ${Global.lv}', 32);
+			final love:FlxText = new FlxText(285, 120, 0, 'LV ${Global.lv}', 32);
 			love.font = AssetPaths.font('DTM-Sans');
 			love.scrollFactor.set();
 			love.active = false;
 			add(love);
 
 			// TODO
-			var time:FlxText = new FlxText(425, 120, 0, '0:0', 32);
+			final time:FlxText = new FlxText(425, 120, 0, '0:0', 32);
 			time.font = AssetPaths.font('DTM-Sans');
 			time.scrollFactor.set();
 			time.active = false;
 			add(time);
 
 			// TODO
-			var room:FlxText = new FlxText(145, 160, 0, '---', 32);
+			final room:FlxText = new FlxText(145, 160, 0, '---', 32);
 			room.font = AssetPaths.font('DTM-Sans');
 			room.scrollFactor.set();
 			room.active = false;
@@ -94,7 +100,7 @@ class Intro extends FlxState
 			if (!(FlxG.sound.music?.playing ?? false))
 				FlxG.sound.playMusic(AssetPaths.music('menu0'));
 
-			var instructions:FlxText = new FlxText(170, 40, 0, ' --- Instruction --- ', 32);
+			final instructions:FlxText = new FlxText(170, 40, 0, ' --- Instruction --- ', 32);
 			instructions.font = AssetPaths.font('DTM-Sans');
 			instructions.color = 0xFFC0C0C0;
 			instructions.scrollFactor.set();
@@ -110,7 +116,7 @@ class Intro extends FlxState
 				'When HP is 0, you lose.'
 			];
 
-			var instructionsList:FlxText = new FlxText(170, 100, 0, list.join('\n'), 32);
+			final instructionsList:FlxText = new FlxText(170, 100, 0, list.join('\n'), 32);
 			instructionsList.font = AssetPaths.font('DTM-Sans');
 			instructionsList.color = 0xFFC0C0C0;
 			instructionsList.scrollFactor.set();
@@ -124,7 +130,7 @@ class Intro extends FlxState
 
 		for (i in 0...choices.length)
 		{
-			var bt:FlxText = new FlxText(0, 0, 0, choices[i], 32);
+			final bt:FlxText = new FlxText(0, 0, 0, choices[i], 32);
 
 			if (!choices.contains('Begin Game'))
 			{
@@ -175,11 +181,6 @@ class Intro extends FlxState
 		changeOption();
 
 		super.create();
-
-		
-		var shit = 'OOO WHAT DO WE HAVE HERE???';
-
-		Log.error(shit);
 	}
 
 	override function update(elapsed:Float):Void
