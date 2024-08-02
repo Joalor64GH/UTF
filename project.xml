@@ -4,10 +4,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/xsd/project-1.0.4.xsd">
 
-	<!--Android Gradle Task-->
-
-	<setenv name="ANDROID_GRADLE_TASK" value="assembleRelease" unless="debug" />
-
 	<!--Application Settings-->
 
 	<meta title="UTF" packageName="com.majigsaw77.utf" package="com.majigsaw77.utf" version="1.0.0" company="MAJigsaw77" />
