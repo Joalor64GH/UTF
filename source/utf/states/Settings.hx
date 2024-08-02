@@ -2,24 +2,47 @@ package utf.states;
 
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
-
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxG;
-import flixel.FlxSprite;
-
 import utf.input.Controls;
-
 import utf.backend.AssetPaths;
 import utf.backend.Data;
 import utf.backend.Global;
-
 import utf.states.Intro;
+
+typedef Option =
+{
+	var name:String;
+	var type:OptionType;
+	var value:Dynamic;
+}
+
+enum OptionType
+{
+	Toggle;
+	Integer(min:Int, max:Int, step:Int);
+	Decimal(min:Float, max:Float, step:Float);
+	Function;
+}
 
 class Settings extends FlxState
 {
 	var selected:Int = 0;
-	final options:Array<String> = ['Exit', 'Filter'];
+
+	final options:Array<Option> = [
+		{
+			name: 'Exit',
+			type: Function,
+			value: () -> FlxG.switchState(() -> new Intro());
+		},
+		{
+			name: 'Master Volume',
+			type: Decimal(0.0, 100.0, 1.0),
+			value: 50.0,
+		}
+	];
+
 	var items:FlxTypedGroup<FlxText>;
 
 	override function create():Void
@@ -35,7 +58,7 @@ class Settings extends FlxState
 
 		for (i in 0...options.length)
 		{
-			final opt:FlxText = new FlxText(40, i == 0 ? 80 : (120 + i * 32), 0, options[i].toUpperCase(), 32);
+			final opt:FlxText = new FlxText(40, 80 + i * 32, 0, optionToString(options[i]), 32);
 			opt.font = AssetPaths.font('DTM-Sans');
 			opt.scrollFactor.set();
 			opt.active = false;
@@ -55,18 +78,20 @@ class Settings extends FlxState
 		else if (Controls.justPressed('down'))
 			changeOption(1);
 
-		if (Controls.justPressed('confirm') && (FlxG.sound.music != null && FlxG.sound.music.playing))
+		if (Controls.justPressed('left'))
+			changeValue(-1);
+		else if (Controls.justPressed('right'))
+			changeValue(1);
+
+		if (Controls.justPressed('confirm'))
 		{
-			if (FlxG.sound.music.playing && options[selected] == 'Exit')
-				FlxG.sound.music.stop();
+			final option:Option = options[selected];
 
-			switch (options[selected])
+			switch (option.type)
 			{
-				case 'Exit':
-					FlxG.switchState(() -> new Intro());
+				case Function:
+					option.value();
 			}
-
-			Data.save();
 		}
 
 		super.update(elapsed);
@@ -81,5 +106,40 @@ class Settings extends FlxState
 		{
 			spr.color = spr.ID == selected ? FlxColor.YELLOW : FlxColor.WHITE;
 		});
+	}
+
+	private function changeValue(direction:Int):Void
+	{
+		final option:Option = options[selected];
+
+		switch (option.type)
+		{
+			case Toggle:
+				option.value = !option.value;
+			case Integer(min, max, step):
+				option.value = FlxMath.bound(option.value + direction * step, min, max);
+			case Decimal(min, max, step):
+				option.value = FlxMath.bound(option.value + direction * step, min, max);
+		}
+
+		items.members[selected].text = optionToString(option);
+
+		if (option.name == 'Master Volume')
+			FlxG.sound.volume = option.value / 100;
+	}
+
+	private function optionToString(option:Option):String
+	{
+		switch (option.type)
+		{
+			case Toggle:
+				return '${option.name}: ${option.value ? 'On' : 'Off'}';
+			case Integer(_, _, _) | Decimal(_, _, _):
+				return '${option.name}: ${option.value}';
+			case Function:
+				return option.name;
+		}
+
+		return '';
 	}
 }
