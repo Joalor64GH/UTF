@@ -88,11 +88,8 @@ class Settings extends FlxState
 		{
 			final option:Option = options[selected];
 
-			switch (option.type)
-			{
-				case Function:
-					option.value();
-			}
+			if (option?.type == Function)
+				option.value();
 		}
 
 		super.update(elapsed);
@@ -118,9 +115,10 @@ class Settings extends FlxState
 			case Toggle:
 				option.value = !option.value;
 			case Integer(min, max, step):
-				option.value = FlxMath.bound(option.value + direction * step, min, max);
+				option.value = Math.floor(FlxMath.bound(option.value + direction * step, min, max));
 			case Decimal(min, max, step):
 				option.value = FlxMath.bound(option.value + direction * step, min, max);
+			case Function:
 		}
 
 		items.members[selected].text = optionToString(option);
