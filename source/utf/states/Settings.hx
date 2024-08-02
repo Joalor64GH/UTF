@@ -5,6 +5,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxG;
+import flixel.FlxState;
 import utf.input.Controls;
 import utf.backend.AssetPaths;
 import utf.backend.Data;
