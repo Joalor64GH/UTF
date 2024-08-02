@@ -12,6 +12,8 @@ import utf.backend.Data;
 import utf.backend.Global;
 import utf.states.Intro;
 
+using StringTools;
+
 typedef Option =
 {
 	var name:String;
@@ -26,8 +28,6 @@ enum OptionType
 	Decimal(min:Float, max:Float, step:Float);
 	Function;
 }
-
-using StringTools;
 
 class Settings extends FlxState
 {
