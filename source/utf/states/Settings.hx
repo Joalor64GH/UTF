@@ -131,7 +131,7 @@ class Settings extends FlxState
 
 	private function optionToString(option:Option):String
 	{
-		final text:String;
+		var text:String = '';
 
 		switch (option.type)
 		{
