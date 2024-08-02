@@ -27,7 +27,7 @@ enum OptionType
 	Function;
 }
 
-using StringTools:
+using StringTools;
 
 class Settings extends FlxState
 {
