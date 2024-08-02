@@ -78,17 +78,7 @@ class ErrorHandler
 	@:noCompletion
 	private static inline function onCriticalError(message:String):Void
 	{
-		final log:Array<String> = [message];
-
-		log.push(CallStack.toString(CallStack.exceptionStack(true)));
-
-		#if sys
-		saveLog(log.join('\n'), true);
-		#end
-
-		WindowUtil.showAlert('Critical Error', log.join('\n'));
-
-		System.exit(1);
+		throw message;
 	}
 
 	#if sys
