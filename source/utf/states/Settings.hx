@@ -27,6 +27,8 @@ enum OptionType
 	Function;
 }
 
+using StringTools:
+
 class Settings extends FlxState
 {
 	var selected:Int = 0;
@@ -40,7 +42,7 @@ class Settings extends FlxState
 		{
 			name: 'Master Volume',
 			type: Decimal(0.0, 100.0, 1.0),
-			value: 50.0
+			value: 100.0
 		}
 	];
 
@@ -129,16 +131,18 @@ class Settings extends FlxState
 
 	private function optionToString(option:Option):String
 	{
+		final text:String;
+
 		switch (option.type)
 		{
 			case Toggle:
-				return '${option.name}: ${option.value ? 'On' : 'Off'}';
+				text = '${option.name}: ${option.value ? 'On' : 'Off'}';
 			case Integer(_, _, _) | Decimal(_, _, _):
-				return '${option.name}: ${option.value}';
+				text = '${option.name}: ${option.value}';
 			case Function:
-				return option.name;
+				text = option.name;
 		}
 
-		return '';
+		return text.toUpperCase();
 	}
 }
