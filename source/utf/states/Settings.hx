@@ -34,12 +34,12 @@ class Settings extends FlxState
 		{
 			name: 'Exit',
 			type: Function,
-			value: () -> FlxG.switchState(() -> new Intro());
+			value: () -> FlxG.switchState(() -> new Intro())
 		},
 		{
 			name: 'Master Volume',
 			type: Decimal(0.0, 100.0, 1.0),
-			value: 50.0,
+			value: 50.0
 		}
 	];
 
