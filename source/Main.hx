@@ -14,6 +14,8 @@ import haxe.io.Path;
 import lime.ui.KeyCode;
 import lime.ui.KeyModifier;
 import openfl.display.Sprite;
+import openfl.display.StageAlign;
+import openfl.display.StageScaleMode;
 import openfl.events.Event;
 import openfl.filesystem.File;
 import openfl.Lib;
@@ -92,6 +94,8 @@ class Main extends Sprite
 		});
 		#end
 
+		Lib.current.stage.align = StageAlign.TOP_LEFT;
+		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		Lib.current.addChild(new Main());
 	}
 
