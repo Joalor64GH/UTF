@@ -1,43 +1,37 @@
 package utf.states;
 
-import flixel.math.FlxMath;
-
 /**
  * Enum defining the types of options available.
  */
 enum OptionType
 {
 	/**
-	 * A option that can be toggled on or off.
+	 * A toggle option, usually represented as a boolean value.
 	 */
 	Toggle;
-
 	/**
-	 * An option with a specified range and step value.
+	 * An integer option with a specified range and step value.
 	 * @param min The minimum value.
 	 * @param max The maximum value.
-	 * @param step The increment or decrement step.
+	 * @param step The step value.
 	 */
 	Integer(min:Int, max:Int, step:Int);
-
 	/**
-	 * A option with a specified range and step value.
+	 * A decimal option with a specified range and step value.
 	 * @param min The minimum value.
 	 * @param max The maximum value.
-	 * @param step The increment or decrement step.
+	 * @param step The step value.
 	 */
 	Decimal(min:Float, max:Float, step:Float);
-
 	/**
-	 * A option with a list of selectable choices.
-	 * @param choices The list of possible choices.
-	 */
-	Choice(choices:Array<String>);
-
-	/**
-	 * A function option that performs an action when selected.
+	 * A function option which triggers a specific action when selected.
 	 */
 	Function;
+	/**
+	 * A choice option allowing selection from a list of predefined values.
+	 * @param choices The array of possible choices.
+	 */
+	Choice(choices:Array<String>);
 }
 
 /**
@@ -63,21 +57,24 @@ class Option
 	/**
 	 * Indicates whether to display a '%' sign for Integer and Decimal types.
 	 */
-	public var showPercentage:Bool;
+	public var showPercentage:Bool = false;
+
+	/**
+	 * A function to be called when the option value changes.
+	 */
+	public var onChange:Dynamic->Void;
 
 	/**
 	 * Creates a new option with a specified name, type, and initial value.
 	 * @param name The name of the option.
 	 * @param type The type of the option which dictates how values are managed.
 	 * @param value The initial value of the option.
-	 * @param showPercentage (Optional) Whether to display a '%' sign for Integer and Decimal types.
 	 */
-	public function new(name:String, type:OptionType, value:Dynamic, ?showPercentage:Bool = false):Void
+	public function new(name:String, type:OptionType, value:Dynamic):Void
 	{
 		this.name = name;
 		this.type = type;
 		this.value = value;
-		this.showPercentage = showPercentage;
 	}
 
 	/**
@@ -91,12 +88,24 @@ class Option
 		{
 			case OptionType.Toggle:
 				value = !value;
+
+				if (onChange != null)
+					onChange(value);
 			case OptionType.Integer(min, max, step):
 				value = Math.floor(FlxMath.bound(value + direction * step, min, max));
+
+				if (onChange != null)
+					onChange(value);
 			case OptionType.Decimal(min, max, step):
 				value = FlxMath.bound(value + direction * step, min, max);
+
+				if (onChange != null)
+					onChange(value);
 			case OptionType.Choice(choices):
 				value = choices[FlxMath.wrap(choices.indexOf(value) + direction, 0, choices.length - 1)];
+
+				if (onChange != null)
+					onChange(value);
 			case OptionType.Function:
 		}
 	}
