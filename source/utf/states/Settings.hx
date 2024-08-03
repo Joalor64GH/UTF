@@ -1,4 +1,4 @@
-package utf.states;
+package utf.states.config;
 
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
@@ -6,47 +6,35 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxState;
-import utf.input.Controls;
 import utf.backend.AssetPaths;
-import utf.backend.Data;
 import utf.backend.Global;
+import utf.input.Controls;
+import utf.states.config.Option;
 import utf.states.Intro;
 
-using StringTools;
-
-typedef Option =
-{
-	var name:String;
-	var type:OptionType;
-	var value:Dynamic;
-}
-
-enum OptionType
-{
-	Toggle;
-	Integer(min:Int, max:Int, step:Int);
-	Decimal(min:Float, max:Float, step:Float);
-	Function;
-}
-
+/**
+ * Manages the settings menu, allowing users to configure various options.
+ */
 class Settings extends FlxState
 {
 	var selected:Int = 0;
-
-	final options:Array<Option> = [
-		{
-			name: 'Exit',
-			type: Function,
-			value: () -> FlxG.switchState(() -> new Intro())
-		},
-		{
-			name: 'Master Volume',
-			type: Decimal(0.0, 100.0, 1.0),
-			value: 100.0
-		}
-	];
-
+	final options:Array<Option> = [];
 	var items:FlxTypedGroup<FlxText>;
+
+	public function new():Void
+	{
+		super();
+
+		options.push(new Option('Exit', OptionType.Function, function():Void
+		{
+			FlxG.switchState(() -> new Intro());
+		}));
+
+		final option:Option = new Option('Master Volume', OptionType.Integer(0, 100, 1), 100);
+		option.showPercentage = true;
+		option.onChange = (value:Dynamic) -> FlxG.sound.volume = value / 100;
+		options.push(option);
+	}
 
 	override function create():Void
 	{
@@ -61,7 +49,7 @@ class Settings extends FlxState
 
 		for (i in 0...options.length)
 		{
-			final opt:FlxText = new FlxText(40, 80 + i * 32, 0, optionToString(options[i]), 32);
+			final opt:FlxText = new FlxText(40, 80 + i * 32, 0, options[i].toString(), 32);
 			opt.font = AssetPaths.font('DTM-Sans');
 			opt.scrollFactor.set();
 			opt.active = false;
@@ -90,7 +78,7 @@ class Settings extends FlxState
 		{
 			final option:Option = options[selected];
 
-			if (option?.type == Function)
+			if (option.type == OptionType.Function)
 				option.value();
 		}
 
@@ -100,7 +88,7 @@ class Settings extends FlxState
 	@:noCompletion
 	private function changeOption(num:Int = 0):Void
 	{
-		selected = Math.floor(FlxMath.bound(selected + num, 0, options.length - 1));
+		selected = FlxMath.wrap(selected + num, 0, options.length - 1);
 
 		items.forEach(function(spr:FlxText):Void
 		{
@@ -108,41 +96,13 @@ class Settings extends FlxState
 		});
 	}
 
+	@:noCompletion
 	private function changeValue(direction:Int):Void
 	{
 		final option:Option = options[selected];
 
-		switch (option.type)
-		{
-			case Toggle:
-				option.value = !option.value;
-			case Integer(min, max, step):
-				option.value = Math.floor(FlxMath.bound(option.value + direction * step, min, max));
-			case Decimal(min, max, step):
-				option.value = FlxMath.bound(option.value + direction * step, min, max);
-			case Function:
-		}
+		option.changeValue(direction);
 
-		items.members[selected].text = optionToString(option);
-
-		if (option.name == 'Master Volume')
-			FlxG.sound.volume = option.value / 100;
-	}
-
-	private function optionToString(option:Option):String
-	{
-		var text:String = '';
-
-		switch (option.type)
-		{
-			case Toggle:
-				text = '${option.name}: ${option.value ? 'On' : 'Off'}';
-			case Integer(_, _, _) | Decimal(_, _, _):
-				text = '${option.name}: ${option.value}';
-			case Function:
-				text = option.name;
-		}
-
-		return text.toUpperCase();
+		items.members[selected].text = option.toString();
 	}
 }
