@@ -14,8 +14,8 @@ import utf.backend.Data;
 import utf.backend.Global;
 import utf.input.Controls;
 import utf.registries.RoomRegistry;
+import utf.states.config.Settings;
 import utf.states.room.Room;
-import utf.states.Settings;
 #if debug
 import utf.substates.battle.EnemyEncounter;
 #end
