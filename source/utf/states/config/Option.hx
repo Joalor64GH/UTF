@@ -1,4 +1,6 @@
-package utf.states;
+package utf.states.config;
+
+import flixel.math.FlxMath;
 
 /**
  * Enum defining the types of options available.
