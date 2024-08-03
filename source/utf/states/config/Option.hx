@@ -7,9 +7,36 @@ import flixel.math.FlxMath;
  */
 enum OptionType
 {
+	/**
+	 * A option that can be toggled on or off.
+	 */
 	Toggle;
+
+	/**
+	 * An option with a specified range and step value.
+	 * @param min The minimum value.
+	 * @param max The maximum value.
+	 * @param step The increment or decrement step.
+	 */
 	Integer(min:Int, max:Int, step:Int);
+
+	/**
+	 * A option with a specified range and step value.
+	 * @param min The minimum value.
+	 * @param max The maximum value.
+	 * @param step The increment or decrement step.
+	 */
 	Decimal(min:Float, max:Float, step:Float);
+
+	/**
+	 * A option with a list of selectable choices.
+	 * @param choices The list of possible choices.
+	 */
+	Choice(choices:Array<String>);
+
+	/**
+	 * A function option that performs an action when selected.
+	 */
 	Function;
 }
 
@@ -68,8 +95,9 @@ class Option
 				value = Math.floor(FlxMath.bound(value + direction * step, min, max));
 			case OptionType.Decimal(min, max, step):
 				value = FlxMath.bound(value + direction * step, min, max);
+			case OptionType.Choice(choices):
+				value = choices[FlxMath.wrap(choices.indexOf(value) + direction, 0, choices.length - 1)];
 			case OptionType.Function:
-				// No value change for Function type
 		}
 	}
 
@@ -87,6 +115,8 @@ class Option
 				return '$name: $value${showPercentage ? '%' : ''}';
 			case OptionType.Decimal(_, _, _):
 				return '$name: $value${showPercentage ? '%' : ''}';
+			case OptionType.Choice(_):
+				return '$name: $value';
 			case OptionType.Function:
 				return name;
 		}
