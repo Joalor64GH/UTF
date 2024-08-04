@@ -28,7 +28,11 @@
 
 	<!--Path Settings-->
 
-	<assets path="assets" />
+	<assets path="assets/fonts" embed="true" />
+	<assets path="assets/images" />
+	<assets path="assets/music" />
+	<assets path="assets/scripts" />
+	<assets path="assets/sounds" />
 
 	<source path="source" />
 
