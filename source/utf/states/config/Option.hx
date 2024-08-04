@@ -156,6 +156,6 @@ class Option
 				formattedString = name;
 		}
 
-		return formattedString;
+		return formattedString.toUpperCase();
 	}
 }
