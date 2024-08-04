@@ -61,6 +61,8 @@ class Settings extends FlxState
 
 		add(items);
 
+		changeOption();
+
 		super.create();
 	}
 
@@ -80,8 +82,9 @@ class Settings extends FlxState
 		{
 			final option:Option = options[selected];
 
-			if (option.type == OptionType.Function)
-				option.value();
+			if (option != null)
+				option.execute();
+				
 		}
 
 		super.update(elapsed);
@@ -103,8 +106,11 @@ class Settings extends FlxState
 	{
 		final option:Option = options[selected];
 
-		option.changeValue(direction);
+		if (option != null)
+		{
+			option.changeValue(direction);
 
-		items.members[selected].text = option.toString().toUpperCase();
+			items.members[selected].text = option.toString().toUpperCase();
+		}
 	}
 }
