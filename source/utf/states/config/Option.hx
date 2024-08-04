@@ -98,26 +98,17 @@ class Option
 		{
 			case OptionType.Toggle:
 				value = !value;
-
-				if (onChange != null)
-					onChange(value);
 			case OptionType.Integer(min, max, step):
 				value = Math.floor(FlxMath.bound(value + direction * step, min, max));
-
-				if (onChange != null)
-					onChange(value);
 			case OptionType.Decimal(min, max, step):
 				value = FlxMath.bound(value + direction * step, min, max);
-
-				if (onChange != null)
-					onChange(value);
 			case OptionType.Choice(choices):
 				value = choices[FlxMath.wrap(choices.indexOf(value) + direction, 0, choices.length - 1)];
-
-				if (onChange != null)
-					onChange(value);
-			case OptionType.Function:
+			default:
 		}
+
+		if (type != OptionType.Function && onChange != null)
+			onChange(value);
 	}
 
 	/**
@@ -153,7 +144,7 @@ class Option
 				formattedString = '$name: $value${showPercentage ? '%' : ''}';
 			case OptionType.Choice(_):
 				formattedString = '$name: $value';
-			case OptionType.Function:
+			default:
 				formattedString = name;
 		}
 
