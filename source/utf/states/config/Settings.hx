@@ -12,8 +12,6 @@ import utf.input.Controls;
 import utf.states.config.Option;
 import utf.states.Intro;
 
-using StringTools;
-
 /**
  * Manages the settings menu, allowing users to configure various options.
  */
@@ -110,7 +108,7 @@ class Settings extends FlxState
 		{
 			option.changeValue(direction);
 
-			items.members[selected].text = option.toString().toUpperCase();
+			items.members[selected].text = option.toString();
 		}
 	}
 }
