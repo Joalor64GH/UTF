@@ -44,6 +44,9 @@ jobs:
         if: env.CACHE_HIT != 'true'
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp
 
+      - name: Rebuild tools
+        run: cp -rf tools $(haxelib libpath lime)/tools && haxelib run lime rebuild tools
+
       - name: Setup lime
         run: |
           haxelib run lime setup -alias -y
