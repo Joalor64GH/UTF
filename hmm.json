@@ -5,6 +5,14 @@
 			"type": "haxelib"
 		},
 		{
+			"name": "format",
+			"type": "haxelib"
+		},
+		{
+			"name": "hxp",
+			"type": "haxelib"
+		},
+		{
 			"name": "lime",
 			"type": "haxelib"
 		},
