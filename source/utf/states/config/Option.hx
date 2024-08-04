@@ -4,6 +4,8 @@ import flixel.math.FlxMath;
 import flixel.FlxG;
 import haxe.Exception;
 
+using StringTools;
+
 /**
  * Enum defining the types of options available.
  */
@@ -13,6 +15,7 @@ enum OptionType
 	 * A toggle option, usually represented as a boolean value.
 	 */
 	Toggle;
+
 	/**
 	 * An integer option with a specified range and step value.
 	 * @param min The minimum value.
@@ -20,6 +23,7 @@ enum OptionType
 	 * @param step The step value.
 	 */
 	Integer(min:Int, max:Int, step:Int);
+
 	/**
 	 * A decimal option with a specified range and step value.
 	 * @param min The minimum value.
@@ -27,10 +31,12 @@ enum OptionType
 	 * @param step The step value.
 	 */
 	Decimal(min:Float, max:Float, step:Float);
+
 	/**
 	 * A function option which triggers a specific action when selected.
 	 */
 	Function;
+
 	/**
 	 * A choice option allowing selection from a list of predefined values.
 	 * @param choices The array of possible choices.
@@ -114,12 +120,15 @@ class Option
 		}
 	}
 
+	/**
+	 * Executes the function associated with this option if it is of type Function.
+	 * Attempts to call the function stored in the value property and logs an error if unsuccessful.
+	 */
 	public function execute():Void
 	{
 		try
 		{
-			if (type == OptionType.Function && (value != null && Reflect.isFunction(value)))
-				Reflect.callMethod(null, value, []);
+			if (type == OptionType.Function && (value != null && Reflect.isFunction(value))) Reflect.callMethod(null, value, []);
 		}
 		catch (e:Exception)
 			FlxG.log.error('Unable to call the function for "$name" option: ${e.message}');
@@ -131,20 +140,22 @@ class Option
 	 */
 	public function toString():String
 	{
+		var formattedString:String = 'Error!';
+
 		switch (type)
 		{
 			case OptionType.Toggle:
-				return '$name: ${value ? 'On' : 'Off'}';
+				formattedString = '$name: ${value ? 'On' : 'Off'}';
 			case OptionType.Integer(_, _, _):
-				return '$name: $value${showPercentage ? '%' : ''}';
+				formattedString = '$name: $value${showPercentage ? '%' : ''}';
 			case OptionType.Decimal(_, _, _):
-				return '$name: $value${showPercentage ? '%' : ''}';
+				formattedString = '$name: $value${showPercentage ? '%' : ''}';
 			case OptionType.Choice(_):
-				return '$name: $value';
+				formattedString = '$name: $value';
 			case OptionType.Function:
-				return name;
+				formattedString = name;
 		}
 
-		return 'Error!';
+		return formattedString;
 	}
 }
