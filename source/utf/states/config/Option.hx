@@ -128,7 +128,8 @@ class Option
 	{
 		try
 		{
-			if (type == OptionType.Function && (value != null && Reflect.isFunction(value))) Reflect.callMethod(null, value, []);
+			if (type == OptionType.Function && (value != null && Reflect.isFunction(value)))
+				Reflect.callMethod(null, value, []);
 		}
 		catch (e:Exception)
 			FlxG.log.error('Unable to call the function for "$name" option: ${e.message}');
