@@ -1,6 +1,7 @@
 package utf.states.config;
 
 import flixel.math.FlxMath;
+import flixel.FlxG;
 import haxe.Exception;
 
 /**
