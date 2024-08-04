@@ -122,7 +122,7 @@ class Option
 				Reflect.callMethod(null, value, []);
 		}
 		catch (e:Exception)
-			FlxG.log.error('Unable to call the function for "$name" option: ${e.messege}');
+			FlxG.log.error('Unable to call the function for "$name" option: ${e.message}');
 	}
 
 	/**
