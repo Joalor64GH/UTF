@@ -1,8 +1,7 @@
 package utf.objects.dialogue.typers;
 
-import flixel.FlxG;
 import flixel.sound.FlxSound;
-import utf.backend.AssetPaths;
+import flixel.util.FlxStringUtil;
 
 /**
  * Represents a typer for displaying text in the game.
@@ -48,8 +47,19 @@ class Typer
 		this.typerID = typerID;
 	}
 
+	/**
+	 * Converts the typer to a string for display and debugging purposes.
+	 * @return A string representation of the typer, including its ID, font properties, spacing, associated sounds, and typing delay.
+	 */
 	public function toString():String
 	{
-		return '';
+		return FlxStringUtil.getDebugString([
+			LabelValuePair.weak("Typer ID", typerID),
+			LabelValuePair.weak("Font Name", fontName),
+			LabelValuePair.weak("Font Size", fontSize),
+			LabelValuePair.weak("Font Spacing", fontSpacing),
+			LabelValuePair.weak("Typer Sounds", typerSounds),
+			LabelValuePair.weak("Typer Delay", typerDelay)
+		]);
 	}
 }
