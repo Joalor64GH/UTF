@@ -45,7 +45,7 @@ jobs:
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
 
       - name: Rebuild tools
-        run: cp -rf tools $(haxelib libpath lime) && haxelib run lime rebuild tools -verbose
+        run: cp -f tools/platforms/AndroidPlatform.hx $(haxelib libpath lime)/tools/platforms/AndroidPlatform.hx && haxelib run lime rebuild tools -verbose
 
       - name: Setup lime
         run: |
