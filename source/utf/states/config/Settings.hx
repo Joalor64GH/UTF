@@ -6,6 +6,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.util.FlxTimer;
 import utf.backend.AssetPaths;
 import utf.backend.Global;
 import utf.input.Controls;
@@ -21,6 +22,9 @@ class Settings extends FlxState
 	final options:Array<Option> = [];
 	var items:FlxTypedGroup<FlxText>;
 
+	var holdTimer:FlxTimer;
+	var holdDirection:Int = 0;
+
 	public function new():Void
 	{
 		super();
@@ -34,6 +38,8 @@ class Settings extends FlxState
 		option.showPercentage = true;
 		option.onChange = (value:Dynamic) -> FlxG.sound.volume = value / 100;
 		options.push(option);
+
+		holdTimer = new FlxTimer();
 	}
 
 	override function create():Void
@@ -72,9 +78,12 @@ class Settings extends FlxState
 			changeOption(1);
 
 		if (Controls.justPressed('left'))
-			changeValue(-1);
+			startHold(-1);
 		else if (Controls.justPressed('right'))
-			changeValue(1);
+			startHold(1);
+
+		if (Controls.justReleased('left') || Controls.justReleased('right'))
+			holdTimer.cancel();
 
 		if (Controls.justPressed('confirm'))
 		{
@@ -82,7 +91,6 @@ class Settings extends FlxState
 
 			if (option != null)
 				option.execute();
-				
 		}
 
 		super.update(elapsed);
@@ -108,7 +116,30 @@ class Settings extends FlxState
 		{
 			option.changeValue(direction);
 
-			items.members[selected].text = option.toString();
+			items.forEach(function(spr:FlxText):Void
+			{
+				if (spr.ID == selected)
+					spr.text = option.toString();
+			});
+		}
+	}
+
+	@:noCompletion
+	private function startHold(direction:Int):Void
+	{
+		holdDirection = direction;
+
+		changeValue(holdDirection);
+
+		if (!holdTimer.active)
+		{
+			holdTimer.start(0.5, function(timer:FlxTimer):Void
+			{
+				timer.start(0.1, function(timer:FlxTimer):Void
+				{
+					changeValue(holdDirection);
+				}, 0);
+			});
 		}
 	}
 }
