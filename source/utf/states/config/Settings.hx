@@ -12,6 +12,8 @@ import utf.input.Controls;
 import utf.states.config.Option;
 import utf.states.Intro;
 
+using StringTools;
+
 /**
  * Manages the settings menu, allowing users to configure various options.
  */
@@ -30,7 +32,7 @@ class Settings extends FlxState
 			FlxG.switchState(() -> new Intro());
 		}));
 
-		final option:Option = new Option('Master Volume', OptionType.Integer(0, 100, 1), 100);
+		final option:Option = new Option('Master Volume', OptionType.Integer(0, 100, 1), FlxG.sound.volume * 100);
 		option.showPercentage = true;
 		option.onChange = (value:Dynamic) -> FlxG.sound.volume = value / 100;
 		options.push(option);
@@ -103,6 +105,6 @@ class Settings extends FlxState
 
 		option.changeValue(direction);
 
-		items.members[selected].text = option.toString();
+		items.members[selected].text = option.toString().toUpperCase();
 	}
 }
