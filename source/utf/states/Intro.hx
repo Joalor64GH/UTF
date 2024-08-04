@@ -1,6 +1,5 @@
 package utf.states;
 
-import flixel.addons.display.FlxRuntimeShader;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -52,11 +51,6 @@ class Intro extends FlxState
 			bg.active = false;
 			add(bg);
 
-			final chrome:FlxRuntimeShader = new FlxRuntimeShader(AssetPaths.getContent(AssetPaths.shader('chrome.frag'), true));
-			chrome.setFloat('rOffset', 0.0);
-			chrome.setFloat('gOffset', 0.0);
-			chrome.setFloat('bOffset', -0.005);
-
 			final flowey:FlxSprite = new FlxSprite(0, 348);
 			flowey.frames = AssetPaths.spritesheet('flowey');
 			flowey.animation.frameIndex = 1;
@@ -64,7 +58,6 @@ class Intro extends FlxState
 			flowey.updateHitbox();
 			flowey.screenCenter(X);
 			flowey.scrollFactor.set();
-			flowey.shader = chrome;
 			add(flowey);
 
 			final name:FlxText = new FlxText(145, 120, 0, Global.name, 32);
