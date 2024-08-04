@@ -83,7 +83,10 @@ class Settings extends FlxState
 			startHold(1);
 
 		if (Controls.justReleased('left') || Controls.justReleased('right'))
-			holdTimer.cancel();
+		{
+			if (holdTimer.active)
+				holdTimer.cancel();
+		}
 
 		if (Controls.justPressed('confirm'))
 		{
@@ -108,7 +111,7 @@ class Settings extends FlxState
 	}
 
 	@:noCompletion
-	private function changeValue(direction:Int):Void
+	private function changeValue(direction:Int = 0):Void
 	{
 		final option:Option = options[selected];
 
@@ -125,21 +128,32 @@ class Settings extends FlxState
 	}
 
 	@:noCompletion
-	private function startHold(direction:Int):Void
+	private function startHold(direction:Int = 0):Void
 	{
 		holdDirection = direction;
 
-		changeValue(holdDirection);
+		final option:Option = options[selected];
 
-		if (!holdTimer.active)
+		if (option != null)
 		{
-			holdTimer.start(0.5, function(timer:FlxTimer):Void
+			if (option.type != OptionType.Function)
+				changeValue(holdDirection);
+
+			switch (option.type)
 			{
-				timer.start(0.1, function(timer:FlxTimer):Void
-				{
-					changeValue(holdDirection);
-				}, 0);
-			});
+				case OptionType.Integer | OptionType.Decimal:
+					if (!holdTimer.active)
+					{
+						holdTimer.start(0.5, function(timer:FlxTimer):Void
+						{
+							timer.start(0.1, function(timer:FlxTimer):Void
+							{
+								changeValue(holdDirection);
+							}, 0);
+						});
+					}
+				default:
+			}
 		}
 	}
 }
