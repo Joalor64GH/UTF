@@ -19,7 +19,7 @@ class FlxGraphicUtil
 	 * @param region The rectangular region of the source graphic to copy.
 	 * @param unique Whether the graphic should be unique in the FlxG bitmap cache.
 	 * @param key Optional key for the bitmap cache.
-	 * @return A new FlxGraphic containing the specified region of the source graphic, or null if the source graphic is invalid.
+	 * @return A new FlxGraphic containing the specified region of the source graphic, or an existing one if it is already cached, or null if the source graphic is invalid.
 	 */
 	public static function fromRegion(graphic:FlxGraphicAsset, region:FlxRect, ?unique:Bool = false, ?key:String):FlxGraphic
 	{
@@ -28,11 +28,18 @@ class FlxGraphicUtil
 		if (graph == null || graph.bitmap == null)
 			return null;
 
-		final portion:BitmapData = new BitmapData(Math.floor(region.width), Math.floor(region.height), true, 0);
-		portion.copyPixels(graph.bitmap, new Rectangle(region.x, region.y, region.width, region.height), new Point(0, 0));
+		final cacheKey:String = '${graph.key}_Region:${region.x}_${region.y}_${region.width}_${region.height}';
 
-		region.put();
+		if (!FlxG.bitmap.checkCache(cacheKey))
+		{
+			final portion:BitmapData = new BitmapData(Math.floor(region.width), Math.floor(region.height), true, 0);
+			portion.copyPixels(graph.bitmap, new Rectangle(region.x, region.y, region.width, region.height), new Point(0, 0));
 
-		return FlxGraphic.fromBitmapData(portion);
+			region.put();
+
+			return FlxGraphic.fromBitmapData(portion, false, cacheKey, true);
+		}
+
+		return FlxG.bitmap.get(cacheKey);
 	}
 }
