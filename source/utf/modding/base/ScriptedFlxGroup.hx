@@ -1,4 +1,4 @@
-package funkin.modding.base;
+package utf.modding.base;
 
 /**
  * A group that can be controlled by scripts.
