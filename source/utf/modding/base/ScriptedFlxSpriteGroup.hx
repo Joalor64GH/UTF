@@ -1,4 +1,4 @@
-package funkin.modding.base;
+package utf.modding.base;
 
 /**
  * A sprite group that can be controlled by scripts.
