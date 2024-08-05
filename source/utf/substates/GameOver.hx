@@ -14,14 +14,14 @@ import utf.objects.dialogue.Writer;
 
 class GameOver extends FlxSubState
 {
-	var gameoverbg:FlxSprite;
-	var writer:Writer;
+	final gameoverbg:FlxSprite;
+	final writer:Writer;
 
 	override function create():Void
 	{
 		FlxG.sound.playMusic(AssetPaths.music('gameover'));
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		final bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.screenCenter();
 		bg.active = false;
 		add(bg);
