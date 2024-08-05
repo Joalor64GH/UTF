@@ -24,11 +24,10 @@ class GitHubUtil
 	 * The name of the GitHub repository.
 	 */
 	@:noCompletion
-	public static final REPOSITORY:String = 'UTF';
+	private static final REPOSITORY:String = 'UTF';
 
 	/**
 	 * Retrieves the list of contributors for the specified GitHub repository.
-	 *
 	 * @return An array of Contributor objects representing the contributors.
 	 * @throws Exception if there is an error while fetching the contributors.
 	 */
