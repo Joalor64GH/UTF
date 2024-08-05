@@ -369,7 +369,7 @@ class AndroidPlatform extends PlatformTarget
 		var commands = [];
 
 		if (armv5) commands.push(["-Dandroid", "-DPLATFORM_NUMBER=23"]);
-		if (armv7) commands.push(["-Dandroid", "-DHXCPP_ARMV7", "-DHXCPP_ARM7", "-DPLATFORM_NUMBER=23"]);
+		if (armv7) commands.push(["-Dandroid", "-DHXCPP_ARMV7", "-DPLATFORM_NUMBER=23"]);
 		if (arm64) commands.push(["-Dandroid", "-DHXCPP_ARM64", "-DPLATFORM_NUMBER=23"]);
 		if (x86) commands.push(["-Dandroid", "-DHXCPP_X86", "-DPLATFORM_NUMBER=23"]);
 		if (x64) commands.push(["-Dandroid", "-DHXCPP_X86_64", "-DPLATFORM_NUMBER=23"]);
@@ -447,7 +447,7 @@ class AndroidPlatform extends PlatformTarget
 			"android.permission.ACCESS_NETWORK_STATE"
 		]);
 		context.ANDROID_GRADLE_VERSION = project.config.getString("android.gradle-version", "8.9");
-		context.ANDROID_GRADLE_PLUGIN = project.config.getString("android.gradle-plugin", "7.4.2");
+		context.ANDROID_GRADLE_PLUGIN = project.config.getString("android.gradle-plugin", "8.2.0");
 		context.ANDROID_USE_ANDROIDX = project.config.getString("android.useAndroidX", "true");
 		context.ANDROID_ENABLE_JETIFIER = project.config.getString("android.enableJetifier", "false");
 
