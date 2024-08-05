@@ -1,8 +1,5 @@
 package utf.states;
 
-import utf.backend.AssetPaths;
-import utf.input.Controls;
-import utf.backend.Data;
 import flixel.input.keyboard.FlxKey;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
@@ -13,11 +10,11 @@ import utf.states.Intro;
 
 class Title extends FlxState
 {
-	var titleText:FlxText;
+	final titleText:FlxText;
 
 	override function create():Void
 	{
-		var titleImage:FlxSprite = new FlxSprite(0, 0, AssetPaths.sprite('titleimage'));
+		final titleImage:FlxSprite = new FlxSprite(0, 0, AssetPaths.sprite('titleimage'));
 		titleImage.scale.set(2, 2);
 		titleImage.updateHitbox();
 		titleImage.screenCenter();
