@@ -1,4 +1,4 @@
-package funkin.modding.base;
+package utf.modding.base;
 
 /**
  * A transitionable state that can be controlled by scripts.
