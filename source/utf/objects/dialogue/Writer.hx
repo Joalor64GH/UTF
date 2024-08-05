@@ -2,9 +2,9 @@ package utf.objects.dialogue;
 
 import flixel.FlxG;
 import utf.registries.TyperRegistry;
-import utf.backend.AssetPaths;
+import utf.AssetPaths;
 import utf.input.Controls;
-import utf.backend.Data;
+import utf.Data;
 import utf.objects.dialogue.typers.Typer;
 import utf.objects.dialogue.TypeText;
 

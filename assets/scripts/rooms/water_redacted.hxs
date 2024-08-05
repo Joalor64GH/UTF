@@ -1,7 +1,7 @@
 import flixel.math.FlxRect;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import utf.backend.AssetPaths;
+import utf.AssetPaths;
 import utf.states.room.Room;
 
 class WaterRedactedRoom extends Room

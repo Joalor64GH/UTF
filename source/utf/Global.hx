@@ -1,4 +1,4 @@
-package utf.backend;
+package utf;
 
 import flixel.util.FlxSave;
 import flixel.FlxG;

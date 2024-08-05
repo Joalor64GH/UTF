@@ -1,5 +1,5 @@
 import flixel.FlxG;
-import utf.backend.AssetPaths;
+import utf.AssetPaths;
 import utf.objects.dialogue.typers.Typer;
 
 class GameOverTyper extends Typer

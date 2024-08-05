@@ -13,6 +13,11 @@ import sys.thread.Thread;
 class DiscordUtil
 {
 	/**
+	 * Discord Application ID.
+	 */
+	private static final APPLICATION_ID:String = '1140307809167220836';
+
+	/**
 	 * Indicates if Discord Rich Presence is initialized.
 	 */
 	public static var initialized(default, null):Bool = false;
@@ -32,7 +37,7 @@ class DiscordUtil
 		handlers.ready = cpp.Function.fromStaticFunction(onReady);
 		handlers.disconnected = cpp.Function.fromStaticFunction(onDisconnected);
 		handlers.errored = cpp.Function.fromStaticFunction(onError);
-		Discord.Initialize("1140307809167220836", cpp.RawPointer.addressOf(handlers), 1, null);
+		Discord.Initialize(APPLICATION_ID, cpp.RawPointer.addressOf(handlers), 1, null);
 
 		Thread.create(function():Void
 		{

@@ -7,10 +7,10 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
-import utf.backend.AssetPaths;
+import utf.AssetPaths;
 import utf.input.Controls;
-import utf.backend.Data;
-import utf.backend.Global;
+import utf.Data;
+import utf.Global;
 import utf.util.MathUtil;
 
 typedef Name =

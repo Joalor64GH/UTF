@@ -1,4 +1,4 @@
-import utf.backend.AssetPaths;
+import utf.AssetPaths;
 import utf.objects.room.Object;
 
 class RedactedAObject extends Object

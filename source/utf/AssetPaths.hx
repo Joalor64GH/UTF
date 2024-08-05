@@ -1,4 +1,4 @@
-package utf.backend;
+package utf;
 
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.FlxGraphic;

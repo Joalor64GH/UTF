@@ -24,6 +24,7 @@ class ErrorHandler
 	/**
 	 * The root directory where log files will be saved.
 	 */
+	@:noCompletion
 	private static final LOGS_ROOT:String = 'logs';
 
 	/**

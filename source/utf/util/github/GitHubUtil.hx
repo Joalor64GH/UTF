@@ -17,11 +17,13 @@ class GitHubUtil
 	/**
 	 * The GitHub username for the repository owner.
 	 */
-	public static final USER:String = 'MAJigsaw77';
+	@:noCompletion
+	private static final USER:String = 'MAJigsaw77';
 
 	/**
 	 * The name of the GitHub repository.
 	 */
+	@:noCompletion
 	public static final REPOSITORY:String = 'UTF';
 
 	/**

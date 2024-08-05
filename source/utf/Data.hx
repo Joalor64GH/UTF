@@ -1,6 +1,6 @@
-package utf.backend;
+package utf;
 
-import utf.backend.AssetPaths;
+import utf.AssetPaths;
 import flixel.util.FlxSave;
 import flixel.FlxG;
 import openfl.filters.BitmapFilter;
