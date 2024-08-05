@@ -141,7 +141,7 @@ class Settings extends FlxState
 
 			switch (option.type)
 			{
-				case OptionType.Integer | OptionType.Decimal:
+				case OptionType.Integer(_, _, _) | OptionType.Decimal(_, _, _):
 					if (!holdTimer.active)
 					{
 						holdTimer.start(0.5, function(timer:FlxTimer):Void
