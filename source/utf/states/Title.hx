@@ -10,7 +10,7 @@ import utf.states.Intro;
 
 class Title extends FlxState
 {
-	final titleText:FlxText;
+	var titleText:FlxText;
 
 	override function create():Void
 	{
