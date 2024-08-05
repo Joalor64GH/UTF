@@ -38,31 +38,37 @@ class Main extends Sprite
 	/**
 	 * The width of the game window in pixels.
 	 */
+	@:noCompletion
 	private static final GAME_WIDTH:Int = 640;
 
 	/**
 	 * The height of the game window in pixels.
 	 */
+	@:noCompletion
 	private static final GAME_HEIGHT:Int = 480;
 
 	/**
 	 * The frame rate of the game, in frames per second (FPS).
 	 */
+	@:noCompletion
 	private static final GAME_FRAMERATE:Int = 60;
 
 	/**
 	 * The initial state of the game.
 	 */
+	@:noCompletion
 	private static final GAME_INITIAL_STATE:InitialState = () -> new Startup();
 
 	/**
 	 * Whether to skip the splash screen on startup.
 	 */
+	@:noCompletion
 	private static final GAME_SKIP_SPLASH:Bool = true;
 
 	/**
-	 * Whether to start the game in fullscreen mode.
+	 * Whether to start the game in fullscreen mode on desktop.
 	 */
+	@:noCompletion
 	private static final GAME_START_FULLSCREEN:Bool = false;
 
 	/**
@@ -139,7 +145,7 @@ class Main extends Sprite
 	}
 
 	@:noCompletion
-	private function setupFlixel():Void
+	private inline function setupFlixel():Void
 	{
 		#if debug
 		FlxG.log.redirectTraces = true;
