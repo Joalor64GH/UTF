@@ -40,6 +40,8 @@ class FlxGraphicUtil
 			return FlxGraphic.fromBitmapData(portion, false, cacheKey, true);
 		}
 
+		region.put();
+
 		return FlxG.bitmap.get(cacheKey);
 	}
 }
