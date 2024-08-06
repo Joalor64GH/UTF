@@ -1,8 +1,6 @@
 package utf.registries;
 
 import flixel.FlxG;
-import haxe.io.Path;
-import haxe.Exception;
 import utf.objects.dialogue.typers.Typer;
 import utf.objects.dialogue.typers.ScriptedTyper;
 
