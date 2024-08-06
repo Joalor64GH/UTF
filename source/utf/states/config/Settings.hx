@@ -7,7 +7,6 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.util.FlxTimer;
-import utf.Global;
 import utf.states.config.Option;
 import utf.states.Intro;
 
