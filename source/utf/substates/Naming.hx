@@ -8,8 +8,6 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
 import utf.util.MathUtil;
-import utf.Data;
-import utf.Global;
 
 typedef Name =
 {
