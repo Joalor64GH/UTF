@@ -2,8 +2,6 @@ package utf.states;
 
 import flixel.FlxG;
 import flixel.FlxState;
-import utf.Data;
-import utf.Global;
 #if polymod
 import utf.modding.PolymodHandler;
 #end
