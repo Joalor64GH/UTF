@@ -1,8 +1,8 @@
 package utf.registries;
 
 import flixel.FlxG;
-import utf.objects.dialogue.typers.Typer;
 import utf.objects.dialogue.typers.ScriptedTyper;
+import utf.objects.dialogue.typers.Typer;
 
 /**
  * Handles the loading and management of scripted dialogue typer classes.
