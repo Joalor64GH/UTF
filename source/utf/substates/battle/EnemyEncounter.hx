@@ -9,14 +9,12 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
-import utf.AssetPaths;
-import utf.input.Controls;
+import utf.objects.battle.Monster;
+import utf.objects.dialogue.Writer;
+import utf.registries.MonsterRegistry;
+import utf.substates.GameOver;
 import utf.Data;
 import utf.Global;
-import utf.objects.battle.Monster;
-import utf.registries.MonsterRegistry;
-import utf.objects.dialogue.Writer;
-import utf.substates.GameOver;
 
 class EnemyEncounter extends FlxSubState
 {
