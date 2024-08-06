@@ -13,8 +13,6 @@ import utf.objects.battle.Monster;
 import utf.objects.dialogue.Writer;
 import utf.registries.MonsterRegistry;
 import utf.substates.GameOver;
-import utf.Data;
-import utf.Global;
 
 class EnemyEncounter extends FlxSubState
 {
