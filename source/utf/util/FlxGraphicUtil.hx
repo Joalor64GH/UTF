@@ -38,7 +38,7 @@ class FlxGraphicUtil
 			region.put();
 
 			final portionGraphic:FlxGraphic = new FlxGraphic(key, portion);
-			FlxG.bitmap.addGraphic(portionGraphic):
+			FlxG.bitmap.addGraphic(portionGraphic);
 			return portionGraphic;
 		}
 
