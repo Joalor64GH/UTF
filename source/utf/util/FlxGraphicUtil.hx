@@ -26,25 +26,26 @@ class FlxGraphicUtil
 		if (graph == null || graph.bitmap == null)
 			return null;
 
-		final cacheKey:String = '${graph.key}_Region:${region.x}_${region.y}_${region.width}_${region.height}';
+		final key:String = '${graph.key}_Region:${region.x}_${region.y}_${region.width}_${region.height}';
 
-		if (!FlxG.bitmap.checkCache(cacheKey))
+		if (!FlxG.bitmap.checkCache(key))
 		{
-			FlxG.log.notice('Creating "$cacheKey" from "${graph.key}"');
+			FlxG.log.notice('Creating "$key" from "${graph.key}"');
 
 			final portion:BitmapData = new BitmapData(Math.floor(region.width), Math.floor(region.height), true, 0);
-
 			portion.copyPixels(graph.bitmap, new Rectangle(region.x, region.y, region.width, region.height), new Point(0, 0));
 
 			region.put();
 
-			return FlxGraphic.fromBitmapData(portion, false, cacheKey, true);
+			final portionGraphic:FlxGraphic = new FlxGraphic(key, portion);
+			FlxG.bitmap.addGraphic(portionGraphic):
+			return portionGraphic;
 		}
 
-		FlxG.log.notice('Reusing "$cacheKey" from cache');
+		FlxG.log.notice('Reusing "$key" from cache');
 
 		region.put();
 
-		return FlxG.bitmap.get(cacheKey);
+		return FlxG.bitmap.get(key);
 	}
 }
