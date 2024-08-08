@@ -17,13 +17,11 @@ class FlxGraphicUtil
 	 * Creates a new FlxGraphic from a specified region of an existing graphic.
 	 * @param graphic The source graphic asset to partition.
 	 * @param region The rectangular region of the source graphic to copy.
-	 * @param unique Whether the graphic should be unique in the FlxG bitmap cache.
-	 * @param key Optional key for the bitmap cache.
 	 * @return A new FlxGraphic containing the specified region of the source graphic, or an existing one if it is already cached, or null if the source graphic is invalid.
 	 */
-	public static function fromRegion(graphic:FlxGraphicAsset, region:FlxRect, ?unique:Bool = false, ?key:String):FlxGraphic
+	public static function fromRegion(graphic:FlxGraphicAsset, region:FlxRect):FlxGraphic
 	{
-		final graph:FlxGraphic = FlxG.bitmap.add(graphic, unique, key);
+		final graph:FlxGraphic = FlxG.bitmap.add(graphic);
 
 		if (graph == null || graph.bitmap == null)
 			return null;
