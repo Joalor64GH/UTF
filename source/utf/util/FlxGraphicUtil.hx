@@ -19,6 +19,7 @@ class FlxGraphicUtil
 	 * @param region The rectangular region of the source graphic to copy.
 	 * @return A new FlxGraphic containing the specified region of the source graphic, or an existing one if it is already cached, or null if the source graphic is invalid.
 	 */
+	@:access(flixel.graphics.FlxGraphic)
 	public static function fromRegion(graphic:FlxGraphicAsset, region:FlxRect):FlxGraphic
 	{
 		final graph:FlxGraphic = FlxG.bitmap.add(graphic);
