@@ -46,6 +46,8 @@ class Room extends FlxTransitionableState
 	var chara:Chara;
 	var camGame:FlxCamera;
 	var camHud:FlxCamera;
+	var camFollow:FlxObject;
+	var camFollowControllable:Bool = false;
 
 	/**
 	 * Constructor to initialize the room with a specified ID.
@@ -78,11 +80,17 @@ class Room extends FlxTransitionableState
 		if (objects != null)
 			add(objects);
 
+		camFollow = new FlxObject(0, 0, 1, 1);
+		
 		if (chara != null)
 		{
-			FlxG.camera.follow(chara);
+			if (!camFollowControllable)
+				camFollow.setPosition(chara.getGraphicMidpoint().x, chara.getGraphicMidpoint().y);
+
 			add(chara);
 		}
+
+		FlxG.camera.follow(camFollow);
 
 		FlxG.camera.setScrollBoundsRect(0, 0, roomWidth, roomHeight);
 
@@ -91,6 +99,9 @@ class Room extends FlxTransitionableState
 
 	public override function update(elapsed:Float):Void
 	{
+		if (!camFollowControllable)
+			camFollow.setPosition(chara.getGraphicMidpoint().x, chara.getGraphicMidpoint().y);
+
 		super.update(elapsed);
 
 		if (chara != null && chara.characterHitbox != null && objects != null)
