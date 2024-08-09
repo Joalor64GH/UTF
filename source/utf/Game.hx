@@ -21,11 +21,7 @@ class Game extends FlxGame
 				super.create(_);
 			}
 			catch (e:Dynamic)
-			{
-				#if !display
 				stage.__handleError(e);
-				#end
-			}
 		}
 		else
 			super.create(_);
@@ -40,11 +36,7 @@ class Game extends FlxGame
 				super.onFocus(_);
 			}
 			catch (e:Dynamic)
-			{
-				#if !display
 				stage.__handleError(e);
-				#end
-			}
 		}
 		else
 			super.onFocus(_);
@@ -59,11 +51,7 @@ class Game extends FlxGame
 				super.onFocusLost(_);
 			}
 			catch (e:Dynamic)
-			{
-				#if !display
 				stage.__handleError(e);
-				#end
-			}
 		}
 		else
 			super.onFocusLost(_);
@@ -78,11 +66,7 @@ class Game extends FlxGame
 				super.onEnterFrame(_);
 			}
 			catch (e:Dynamic)
-			{
-				#if !display
 				stage.__handleError(e);
-				#end
-			}
 		}
 		else
 			super.onEnterFrame(_);
@@ -97,11 +81,7 @@ class Game extends FlxGame
 				super.update();
 			}
 			catch (e:Dynamic)
-			{
-				#if !display
 				stage.__handleError(e);
-				#end
-			}
 		}
 		else
 			super.update();
@@ -116,11 +96,7 @@ class Game extends FlxGame
 				super.draw();
 			}
 			catch (e:Dynamic)
-			{
-				#if !display
 				stage.__handleError(e);
-				#end
-			}
 		}
 		else
 			super.draw();
@@ -136,11 +112,7 @@ class Game extends FlxGame
 				super.onResize(_);
 			}
 			catch (e:Dynamic)
-			{
-				#if !display
 				stage.__handleError(e);
-				#end
-			}
 		}
 		else
 			super.onResize(_);
