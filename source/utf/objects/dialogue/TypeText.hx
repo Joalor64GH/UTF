@@ -16,7 +16,6 @@ class TypeText extends FlxText
 	private var originalText:String = '';
 	private var textPos:Int = 0;
 
-	private var typing:Bool = false;
 	private var typingTimer:FlxTimer;
 
 	public function new(x:Float, y:Float):Void
@@ -31,9 +30,7 @@ class TypeText extends FlxText
 		setupTyper(typer);
 
 		originalText = text;
-		typing = true;
 		textPos = 1;
-
 		updateText();
 
 		typingTimer.start(typer.typerLettersPerSecond, function(timer:FlxTimer):Void
@@ -43,12 +40,12 @@ class TypeText extends FlxText
 				updateText();
 				playSounds();
 			}
-		});
+		}, 0);
 	}
 
 	public function skip():Void
 	{
-		if (typing)
+		if (typingTimer.active)
 		{
 			textPos = originalText.length;
 
@@ -65,9 +62,6 @@ class TypeText extends FlxText
 	@:noCompletion
 	private function updateTextPos(timer:FlxTimer):Bool
 	{
-		if (!typing)
-			return false;
-
 		switch (originalText.charAt(textPos))
 		{
 			case ' ' | '\n':
@@ -117,8 +111,6 @@ class TypeText extends FlxText
 			{
 				if (typingTimer.active)
 					typingTimer.cancel();
-
-				typing = false;
 			}
 		}
 	}
@@ -138,6 +130,6 @@ class TypeText extends FlxText
 	@:noCompletion
 	private function get_finished():Bool
 	{
-		return !typing && textPos >= originalText.length;
+		return typingTimer.finished && textPos >= originalText.length;
 	}
 }
