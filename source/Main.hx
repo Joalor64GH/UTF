@@ -25,6 +25,7 @@ import utf.util.discord.DiscordUtil;
 #end
 import utf.util.logging.ErrorHandler;
 import utf.util.CleanupUtil;
+import utf.util.FramerateUtil;
 import utf.util.MemoryUtil;
 import utf.util.ResizeUtil;
 
@@ -51,7 +52,7 @@ class Main extends Sprite
 	 * The frame rate of the game, in frames per second (FPS).
 	 */
 	@:noCompletion
-	private static final GAME_FRAMERATE:Int = 60;
+	private static final GAME_FRAMERATE:Int = 30;
 
 	/**
 	 * The initial state of the game.
@@ -137,11 +138,12 @@ class Main extends Sprite
 		ResizeUtil.init();
 
 		final game:FlxGame = new FlxGame(GAME_WIDTH, GAME_HEIGHT, GAME_INITIAL_STATE, GAME_FRAMERATE, GAME_FRAMERATE, GAME_SKIP_SPLASH, GAME_START_FULLSCREEN);
-		game.focusLostFramerate = 30;
 
 		setupFlixel();
 
 		addChild(game);
+
+		FramerateUtil.adjustStageFramerate();
 	}
 
 	@:noCompletion
