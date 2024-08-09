@@ -95,16 +95,6 @@ class TypeText extends FlxText
 		}
 	}
 
-	/**
-	 * Determines if the typing effect has finished.
-	 * @return A boolean indicating whether the typing effect is complete.
-	 */
-	@:noCompletion
-	private function get_finished():Bool
-	{
-		return typingTimer.finished && textPos >= originalText.length;
-	}
-
 	@:noCompletion
 	private inline function setupTyper(typer:Typer):Void
 	{
