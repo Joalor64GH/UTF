@@ -169,7 +169,7 @@ class TypeText extends FlxText
 	@:noCompletion
 	private function playSounds():Void
 	{
-		if (typer?.typerSounds != null && typer?.typerSounds?.length > 0)
+		if (typer?.typerSounds != null && typer?.typerSounds?.length > 0 && !IGNORE_CHARACTERS.contains(originalText.charAt(textPos)))
 		{
 			for (sound in typer.typerSounds)
 			{
@@ -177,8 +177,7 @@ class TypeText extends FlxText
 					sound.stop();
 			}
 
-			if (!IGNORE_CHARACTERS.contains(originalText.charAt(textPos)))
-				FlxG.random.getObject(typer.typerSounds).play(true);
+			FlxG.random.getObject(typer.typerSounds).play(true);
 		}
 	}
 
