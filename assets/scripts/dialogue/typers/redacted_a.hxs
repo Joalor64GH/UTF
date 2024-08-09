@@ -20,6 +20,6 @@ class RedactedATyper extends Typer
 			FlxG.sound.load(AssetPaths.sound('wngdng2'), 0.99),
 			FlxG.sound.load(AssetPaths.sound('wngdng1'), 1.0)
 		];
-		typerDelay = 0.06;
+		typerLPS = 0.06;
 	}
 }

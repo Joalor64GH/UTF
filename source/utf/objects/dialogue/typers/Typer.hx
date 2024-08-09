@@ -59,7 +59,7 @@ class Typer
 			LabelValuePair.weak("Font Size", fontSize),
 			LabelValuePair.weak("Font Spacing", fontSpacing),
 			LabelValuePair.weak("Typer Sounds", typerSounds),
-			LabelValuePair.weak("Typer Delay", typerDelay)
+			LabelValuePair.weak("Typer Latters Per Second", typerLPS)
 		]);
 	}
 }
