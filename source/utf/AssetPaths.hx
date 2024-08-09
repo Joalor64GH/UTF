@@ -15,6 +15,9 @@ import openfl.utils.ByteArray;
  */
 class AssetPaths
 {
+	private static final PERSISTENT_SOUNDS:Array<String> = [];
+	private static final PERSISTENT_FONTS:Array<String> = [];
+
 	/**
 	 * Constructs the path for a script asset.
 	 * @param key The key for the script.
