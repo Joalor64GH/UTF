@@ -34,7 +34,7 @@ class Typer
 	public var typerSounds:Array<FlxSound>;
 
 	/**
-	 * The delay between characters being typed.
+	 * The amount of seconds between characters being typed.
 	 */
 	public var typerDelay:Float;
 
