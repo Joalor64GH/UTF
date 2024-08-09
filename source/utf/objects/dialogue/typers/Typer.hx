@@ -36,7 +36,7 @@ class Typer
 	/**
 	 * The amount of seconds between characters being typed.
 	 */
-	public var typerDelay:Float;
+	public var typerLPS:Float;
 
 	/**
 	 * Constructor to initialize the typer with specified ID.
