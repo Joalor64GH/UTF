@@ -14,8 +14,9 @@ class TypeText extends FlxText
 	public var finished(get, null):Bool = false;
 
 	private var originalText:String = '';
-	private var textPos:Int = 0;
 
+	private var textPos:Int = 0;
+	private var typer:Typer;
 	private var typingTimer:FlxTimer;
 
 	public function new(x:Float, y:Float):Void
@@ -127,12 +128,12 @@ class TypeText extends FlxText
 	@:noCompletion
 	private function playSounds():Void
 	{
-		if (sounds != null && sounds.length > 0 && !IGNORE_CHARACTERS.contains(originalText.charAt(textPos - 1)))
+		if (typer?.sounds != null && typer?.sounds?.length > 0 && !IGNORE_CHARACTERS.contains(originalText.charAt(textPos - 1)))
 		{
-			for (sound in sounds)
+			for (sound in typer.sounds)
 				sound.stop();
 
-			FlxG.random.getObject(sounds).play(true);
+			FlxG.random.getObject(typer.sounds).play(true);
 		}
 	}
 
