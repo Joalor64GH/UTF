@@ -49,7 +49,7 @@ class Writer extends TypeText
 
 		done = false;
 
-		start(dialogue.text, TyperRegistry.fetchTyper(dialogue.typer ?? 'default'));
+		start(TyperRegistry.fetchTyper(dialogue.typer ?? 'default'), dialogue.text);
 	}
 
 	override public function update(elapsed:Float):Void
