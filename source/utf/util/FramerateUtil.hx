@@ -15,7 +15,7 @@ class FramerateUtil
 	 */
 	public static function adjustStageFramerate():Void
 	{
-		final refreshRate:Int = Lib.application.window.displayMode.refreshRate;
+		var refreshRate:Int = Lib.application.window.displayMode.refreshRate;
 
 		if (refreshRate < 60)
 			refreshRate = 60;
