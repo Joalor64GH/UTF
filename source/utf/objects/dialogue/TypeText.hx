@@ -56,6 +56,15 @@ class TypeText extends FlxText
 	@:noCompletion
 	private inline function setupTyper(typer:Typer):Void
 	{
+		if (font != typer.fontName)
+			font = typer.fontName;
+
+		if (size != typer.fontSize)
+			size = typer.fontSize;
+
+		if (typer.fontSpacing != null && letterSpacing != typer.fontSpacing)
+			letterSpacing = typer.fontSpacing;
+
 		this.typer = typer;
 	}
 
