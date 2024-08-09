@@ -51,7 +51,7 @@ class Main extends Sprite
 	 * The frame rate of the game, in frames per second (FPS).
 	 */
 	@:noCompletion
-	private static final GAME_FRAMERATE:Int = 30;
+	private static final GAME_FRAMERATE:Int = 60;
 
 	/**
 	 * The initial state of the game.
