@@ -11,33 +11,39 @@ class TypeText extends FlxText
 {
 	private static final IGNORE_CHARACTERS:Array<String> = ['\n', ' ', '^', '!', '.', '?', ',', ':', '/', '\\', '|', '*'];
 
-	public var delay:Float = 0.05;
 	public var finished(get, null):Bool = false;
 
 	private var originalText:String = '';
 	private var textPos:Int = 0;
-	private var timer:Float = 0;
+
 	private var typing:Bool = false;
-	private var sounds:Array<FlxSound> = [];
+	private var typingTimer:FlxTimer;
 
 	public function new(x:Float, y:Float):Void
 	{
 		super(x, y, 0, '', 8, true);
+
+		typingTimer = new FlxTimer();
 	}
 
-	public function start(text:String, ?delay:Float = 0.05, ?sounds:Array<FlxSound>):Void
+	public function start(typer:Typer, text:String):Void
 	{
-		if (delay != null)
-			this.delay = delay;
-
-		if (sounds != null && sounds.length > 0)
-			this.sounds = sounds;
+		setupTyper(typer);
 
 		originalText = text;
 		typing = true;
 		textPos = 1;
 
 		updateText();
+
+		typingTimer.start(typer.typerLettersPerSecond, function(timer:FlxTimer):Void
+		{
+			if (updateTextPos(timer))
+			{
+				updateText();
+				playSounds();
+			}
+		});
 	}
 
 	public function skip():Void
@@ -45,64 +51,57 @@ class TypeText extends FlxText
 		if (typing)
 		{
 			textPos = originalText.length;
+
 			updateText();
 		}
 	}
 
-	override public function update(elapsed:Float):Void
+	@:noCompletion
+	private inline function setupTyper(typer:Typer):Void
 	{
-		if (textPos < originalText.length && typing)
-			timer += elapsed;
+		this.typer = typer;
+	}
 
-		if (typing && timer >= delay)
+	@:noCompletion
+	private function updateTextPos(timer:FlxTimer):Bool
+	{
+		if (!typing)
+			return false;
+
+		switch (originalText.charAt(textPos))
 		{
-			switch (originalText.charAt(textPos))
-			{
-				case ' ' | '\n':
-					textPos++;
+			case ' ' | '\n':
+				textPos++;
 
-					return;
-				case '^':
-					final waitTime:Null<Int> = Std.parseInt(originalText.charAt(textPos + 1));
+				return false;
+			case '^':
+				final waitTime:Null<Int> = Std.parseInt(originalText.charAt(textPos + 1));
 
-					if (waitTime != null)
+				if (waitTime != null)
+				{
+					originalText = originalText.substring(0, textPos) + originalText.substring(textPos + 2);
+
+					textPos--;
+
+					if (waitTime > 0)
 					{
-						originalText = originalText.substring(0, textPos) + originalText.substring(textPos + 2);
+						timer.active = false;
 
-						textPos--;
+						FlxTimer.wait(1 / (waitTime * 10), () -> timer.active = true);
 
-						if (waitTime > 0)
-						{
-							typing = false;
-
-							FlxTimer.wait(1 / (waitTime * 10), () -> typing = true);
-
-							return;
-						}
+						return false;
 					}
-					else
-						textPos++;
-				default:
+				}
+				else
 					textPos++;
-			}
-
-			if (textPos > originalText.length)
-				textPos = originalText.length;
-
-			updateText();
-
-			timer %= delay;
-
-			if (sounds != null && sounds.length > 0 && !IGNORE_CHARACTERS.contains(originalText.charAt(textPos - 1)))
-			{
-				for (sound in sounds)
-					sound.stop();
-
-				FlxG.random.getObject(sounds).play(true);
-			}
+			default:
+				textPos++;
 		}
 
-		super.update(elapsed);
+		if (textPos > originalText.length)
+			textPos = originalText.length;
+
+		return true;
 	}
 
 	@:noCompletion
@@ -116,9 +115,23 @@ class TypeText extends FlxText
 
 			if (textPos >= originalText.length)
 			{
-				timer = 0;
+				if (typingTimer.active)
+					typingTimer.cancel();
+
 				typing = false;
 			}
+		}
+	}
+
+	@:noCompletion
+	private function playSounds():Void
+	{
+		if (sounds != null && sounds.length > 0 && !IGNORE_CHARACTERS.contains(originalText.charAt(textPos - 1)))
+		{
+			for (sound in sounds)
+				sound.stop();
+
+			FlxG.random.getObject(sounds).play(true);
 		}
 	}
 
