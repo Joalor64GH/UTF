@@ -170,6 +170,8 @@ class Intro extends FlxState
 		changeOption();
 
 		super.create();
+
+		lime.utils.Log.error('What a nice error!');
 	}
 
 	override function update(elapsed:Float):Void
