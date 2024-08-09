@@ -73,7 +73,7 @@ class TypeText extends FlxText
 		textPos = 1;
 		updateText();
 
-		typingTimer.start(typer.typerLettersPerSecond, function(timer:FlxTimer):Void
+		typingTimer.start(typer.typerLPS, function(timer:FlxTimer):Void
 		{
 			if (updateTextPos(timer))
 			{
@@ -176,16 +176,16 @@ class TypeText extends FlxText
 	@:noCompletion
 	private function playSounds():Void
 	{
-		if (typer?.sounds != null && typer?.sounds?.length > 0)
+		if (typer?.typerSounds != null && typer?.typerSounds?.length > 0)
 		{
-			for (sound in typer.sounds)
+			for (sound in typer.typerSounds)
 			{
 				if (sound.playing)
 					sound.stop();
 			}
 
 			if (!IGNORE_CHARACTERS.contains(originalText.charAt(textPos)))
-				FlxG.random.getObject(typer.sounds).play(true);
+				FlxG.random.getObject(typer.typerSounds).play(true);
 		}
 	}
 
