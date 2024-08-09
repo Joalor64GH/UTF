@@ -184,7 +184,7 @@ class TypeText extends FlxText
 					sound.stop();
 			}
 
-			if (!IGNORE_CHARACTERS.contains(originalText.charAt(textPos - 1)))
+			if (!IGNORE_CHARACTERS.contains(originalText.charAt(textPos)))
 				FlxG.random.getObject(typer.sounds).play(true);
 		}
 	}
