@@ -76,10 +76,7 @@ class TypeText extends FlxText
 		typingTimer.start(typer.typerLPS, function(timer:FlxTimer):Void
 		{
 			if (updateTextPos(timer))
-			{
 				updateText();
-				playSounds();
-			}
 		}, 0);
 	}
 
@@ -125,7 +122,6 @@ class TypeText extends FlxText
 				if (waitTime != null)
 				{
 					originalText = originalText.substring(0, textPos) + originalText.substring(textPos + 2);
-
 					textPos--;
 
 					if (waitTime > 0)
@@ -158,6 +154,9 @@ class TypeText extends FlxText
 		{
 			text = curText;
 
+			if (textPos <= originalText.length)
+				playSounds(originalText.charAt(textPos - 1));
+
 			if (textPos >= originalText.length)
 			{
 				if (typingTimer.active)
@@ -167,9 +166,9 @@ class TypeText extends FlxText
 	}
 
 	@:noCompletion
-	private function playSounds():Void
+	private function playSounds(currentChar:String):Void
 	{
-		if (typer?.typerSounds != null && typer?.typerSounds?.length > 0 && !IGNORE_CHARACTERS.contains(originalText.charAt(textPos)))
+		if (typer?.typerSounds != null && typer?.typerSounds?.length > 0 && !IGNORE_CHARACTERS.contains(currentChar))
 		{
 			for (sound in typer.typerSounds)
 			{
