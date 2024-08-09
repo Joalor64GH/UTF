@@ -3,11 +3,16 @@ package utf;
 import flixel.FlxG;
 import flixel.FlxGame;
 
+/**
+ * Custom game class that extends FlxGame, incorporating error handling for various lifecycle events.
+ * This class ensures that uncaught errors during the game's execution are handled appropriately
+ * by leveraging the stage's error handling mechanisms when enabled.
+ */
 @:access(openfl.display.Stage)
 @:access(openfl.events.UncaughtErrorEvents)
 class Game extends FlxGame
 {
-	override function create(_):Void
+	public override function create(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
@@ -26,13 +31,13 @@ class Game extends FlxGame
 			super.create(_);
 	}
 
-	override function onFocus(_):Void
+	public override function onFocus(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
 			try
 			{
-			super.onFocus(_);
+				super.onFocus(_);
 			}
 			catch (e:Dynamic)
 			{
@@ -45,13 +50,13 @@ class Game extends FlxGame
 			super.onFocus(_);
 	}
 
-	override function onFocusLost(_):Void
+	public override function onFocusLost(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
 			try
 			{
-			super.onFocusLost(_);
+				super.onFocusLost(_);
 			}
 			catch (e:Dynamic)
 			{
@@ -64,13 +69,13 @@ class Game extends FlxGame
 			super.onFocusLost(_);
 	}
 
-	override function onEnterFrame(_):Void
+	public override function onEnterFrame(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
 			try
 			{
-			super.onEnterFrame(_);
+				super.onEnterFrame(_);
 			}
 			catch (e:Dynamic)
 			{
@@ -83,13 +88,13 @@ class Game extends FlxGame
 			super.onEnterFrame(_);
 	}
 
-	override function update():Void
+	public override function update():Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
 			try
 			{
-			super.update();
+				super.update();
 			}
 			catch (e:Dynamic)
 			{
@@ -102,13 +107,13 @@ class Game extends FlxGame
 			super.update();
 	}
 
-	override function draw():Void
+	public override function draw():Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
 			try
 			{
-			super.draw();
+				super.draw();
 			}
 			catch (e:Dynamic)
 			{
@@ -122,7 +127,7 @@ class Game extends FlxGame
 	}
 
 	@:allow(flixel.FlxG)
-	override function onResize(_):Void
+	public override function onResize(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
