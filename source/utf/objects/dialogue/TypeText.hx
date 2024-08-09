@@ -34,7 +34,7 @@ class TypeText extends FlxText
 	 * Current position in the text that has been revealed.
 	 */
 	@:noCompletion
-	private var textPos:Int = 0;
+	private var textPos(default, set):Int = 0;
 
 	/**
 	 * The `Typer` object controlling the appearance and behavior of the typing effect.
@@ -56,6 +56,7 @@ class TypeText extends FlxText
 	public function new(x:Float, y:Float):Void
 	{
 		super(x, y, 0, '', 8, true);
+
 		typingTimer = new FlxTimer();
 	}
 
@@ -67,6 +68,7 @@ class TypeText extends FlxText
 	public function start(typer:Typer, text:String):Void
 	{
 		setupTyper(typer);
+
 		originalText = text;
 		textPos = 1;
 		updateText();
@@ -151,8 +153,6 @@ class TypeText extends FlxText
 				textPos++;
 		}
 
-		textPos = Math.min(originalText.length, textPos);
-
 		return true;
 	}
 
@@ -193,5 +193,11 @@ class TypeText extends FlxText
 	private function get_finished():Bool
 	{
 		return typingTimer.finished && textPos >= originalText.length;
+	}
+
+	@:noCompletion
+	private function set_textPos(value:Int):Int
+	{
+		return Math.floor(Math.min(originalText.length, value));
 	}
 }
