@@ -5,31 +5,68 @@ import flixel.text.FlxText;
 import flixel.sound.FlxSound;
 import flixel.util.FlxTimer;
 import flixel.FlxG;
+import utf.objects.dialogue.typers.Typer;
 
-// TODO: Rewrite this to use a sprite group with text's as it's letters.
+/**
+ * Displays text with a typewriter effect, revealing characters one by one.
+ * Optionally plays a sound for each character and supports skipping to the end.
+ */
 class TypeText extends FlxText
 {
+	/**
+	 * Characters that will not trigger sound playback during the typing effect.
+	 */
+	@:noCompletion
 	private static final IGNORE_CHARACTERS:Array<String> = ['\n', ' ', '^', '!', '.', '?', ',', ':', '/', '\\', '|', '*'];
 
+	/**
+	 * Indicates whether the text has finished typing out.
+	 */
 	public var finished(get, null):Bool = false;
 
+	/**
+	 * Stores the original text that is being typed out.
+	 */
+	@:noCompletion
 	private var originalText:String = '';
 
+	/**
+	 * Current position in the text that has been revealed.
+	 */
+	@:noCompletion
 	private var textPos:Int = 0;
+
+	/**
+	 * The `Typer` object controlling the appearance and behavior of the typing effect.
+	 */
+	@:noCompletion
 	private var typer:Typer;
+
+	/**
+	 * Timer used to control the speed of the typing effect.
+	 */
+	@:noCompletion
 	private var typingTimer:FlxTimer;
 
+	/**
+	 * Constructor for creating a `TypeText` instance.
+	 * @param x The x-coordinate for the text display.
+	 * @param y The y-coordinate for the text display.
+	 */
 	public function new(x:Float, y:Float):Void
 	{
 		super(x, y, 0, '', 8, true);
-
 		typingTimer = new FlxTimer();
 	}
 
+	/**
+	 * Starts typing out the specified text using the provided `Typer`.
+	 * @param typer The `Typer` instance controlling the typing effect.
+	 * @param text The text to be typed out.
+	 */
 	public function start(typer:Typer, text:String):Void
 	{
 		setupTyper(typer);
-
 		originalText = text;
 		textPos = 1;
 		updateText();
@@ -44,14 +81,26 @@ class TypeText extends FlxText
 		}, 0);
 	}
 
+	/**
+	 * Skips the typing effect, immediately displaying the full text.
+	 */
 	public function skip():Void
 	{
 		if (typingTimer.active)
 		{
 			textPos = originalText.length;
-
 			updateText();
 		}
+	}
+
+	/**
+	 * Determines if the typing effect has finished.
+	 * @return A boolean indicating whether the typing effect is complete.
+	 */
+	@:noCompletion
+	private function get_finished():Bool
+	{
+		return typingTimer.finished && textPos >= originalText.length;
 	}
 
 	@:noCompletion
@@ -102,8 +151,7 @@ class TypeText extends FlxText
 				textPos++;
 		}
 
-		if (textPos > originalText.length)
-			textPos = originalText.length;
+		textPos = Math.min(originalText.length, textPos);
 
 		return true;
 	}
@@ -128,12 +176,16 @@ class TypeText extends FlxText
 	@:noCompletion
 	private function playSounds():Void
 	{
-		if (typer?.sounds != null && typer?.sounds?.length > 0 && !IGNORE_CHARACTERS.contains(originalText.charAt(textPos - 1)))
+		if (typer?.sounds != null && typer?.sounds?.length > 0)
 		{
 			for (sound in typer.sounds)
-				sound.stop();
+			{
+				if (sound.playing)
+					sound.stop();
+			}
 
-			FlxG.random.getObject(typer.sounds).play(true);
+			if (!IGNORE_CHARACTERS.contains(originalText.charAt(textPos - 1)))
+				FlxG.random.getObject(typer.sounds).play(true);
 		}
 	}
 
