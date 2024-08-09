@@ -9,7 +9,6 @@ import flixel.addons.transition.TransitionData;
 import flixel.util.typeLimit.NextState;
 import flixel.util.FlxColor;
 import flixel.FlxG;
-import flixel.FlxGame;
 import haxe.io.Path;
 import lime.ui.KeyCode;
 import lime.ui.KeyModifier;
@@ -28,6 +27,7 @@ import utf.util.CleanupUtil;
 import utf.util.FramerateUtil;
 import utf.util.MemoryUtil;
 import utf.util.ResizeUtil;
+import utf.Game;
 
 using StringTools;
 
@@ -137,7 +137,7 @@ class Main extends Sprite
 
 		ResizeUtil.init();
 
-		final game:FlxGame = new FlxGame(GAME_WIDTH, GAME_HEIGHT, GAME_INITIAL_STATE, GAME_FRAMERATE, GAME_FRAMERATE, GAME_SKIP_SPLASH, GAME_START_FULLSCREEN);
+		final game:Game = new Game(GAME_WIDTH, GAME_HEIGHT, GAME_INITIAL_STATE, GAME_FRAMERATE, GAME_FRAMERATE, GAME_SKIP_SPLASH, GAME_START_FULLSCREEN);
 
 		setupFlixel();
 
