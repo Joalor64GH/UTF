@@ -47,20 +47,9 @@ class Writer extends TypeText
 		if (dialogue == null)
 			dialogue = {typer: 'default', text: 'Error!'};
 
-		final typer:Typer = TyperRegistry.fetchTyper(dialogue.typer ?? 'default');
-
-		if (font != typer.fontName)
-			font = typer.fontName;
-
-		if (size != typer.fontSize)
-			size = typer.fontSize;
-
-		if (typer.fontSpacing != null && letterSpacing != typer.fontSpacing)
-			letterSpacing = typer.fontSpacing;
-
 		done = false;
 
-		start(dialogue.text, typer.typerDelay, typer.typerSounds);
+		start(dialogue.text, TyperRegistry.fetchTyper(dialogue.typer ?? 'default'));
 	}
 
 	override public function update(elapsed:Float):Void
