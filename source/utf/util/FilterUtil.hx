@@ -85,7 +85,15 @@ class FilterUtil
 	 */
 	public static function getFiltersKeys():Array<String>
 	{
-		return Lambda.array(filters.keys());
+		final filtersKeys:Array<String> = [];
+
+		for (key => value in filters)
+		{
+			if ((key != null && key.length > 0) && value != null)
+				filtersKeys.push(key);
+		}
+
+		return filtersKeys;
 	}
 
 	/**
@@ -97,10 +105,8 @@ class FilterUtil
 	{
 		if (getFiltersKeys().contains(filter))
 		{
-			// Save the selected filter in the settings
 			Data.settings.set('filter', filter);
 
-			// Retrieve the filter and apply it to the game
 			final bitmapFilter:Null<BitmapFilter> = getFilter(Data.settings.get('filter'));
 
 			if (bitmapFilter != null)
