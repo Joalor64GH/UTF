@@ -38,14 +38,12 @@
 		},
 		{
 			"name": "hscript",
-			"type": "git",
-			"ref": "master",
-			"url": "https://github.com/HaxeFoundation/hscript.git"
+			"type": "haxelib"
 		},
 		{
 			"name": "polymod",
 			"type": "git",
-			"ref": "scripting-updates",
+			"ref": "develop",
 			"url": "https://github.com/larsiusprime/polymod.git"
 		},
 		{
