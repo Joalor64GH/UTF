@@ -103,6 +103,10 @@
 
 	<undefine name="openfl-disable-handle-error" if="debug" unless="${openfl &ge; 9.4.0}" />
 
+	<!--Ingnore Deprecation Warnings-->
+
+	<haxeflag name="-w" value="-WDeprecated" />
+
 	<!--Pretty Message Reporting-->
 
 	<haxedef name="message.reporting" value="pretty" />
