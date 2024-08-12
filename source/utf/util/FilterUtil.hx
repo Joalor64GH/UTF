@@ -5,11 +5,14 @@ import openfl.filters.ColorMatrixFilter;
 
 /**
  * Utility class for managing color filters.
+ * Provides predefined color matrices that simulate various types of color blindness and
+ * allows creating ColorMatrixFilter instances for use in image processing.
  */
 class FilterUtil
 {
 	/**
 	 * Map of color blindness simulation filters as arrays of floats.
+	 * Each entry represents a color matrix that can be used to simulate specific types of color blindness.
 	 */
 	@:noCompletion
 	private static final filters:Map<String, Array<Float>> = [
@@ -59,6 +62,9 @@ class FilterUtil
 
 	/**
 	 * Retrieves a ColorMatrixFilter based on the provided filter name.
+	 *
+	 * @param name The name of the filter (e.g., 'deuteranopia', 'protanopia').
+	 * @return A ColorMatrixFilter instance representing the color transformation for the specified color blindness type, or null if the filter does not exist.
 	 */
 	public static function getFilter(name:String):BitmapFilter
 	{
@@ -68,5 +74,15 @@ class FilterUtil
 			return new ColorMatrixFilter(matrix);
 		else
 			return null;
+	}
+
+	/**
+	 * Retrieves the list of available filter names.
+	 *
+	 * @return An array of strings representing the keys in the filters map.
+	 */
+	public static function getFiltersKeys():Array<String>
+	{
+		return Lambda.array(filters.keys());
 	}
 }
