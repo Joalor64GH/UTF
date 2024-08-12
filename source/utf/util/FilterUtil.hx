@@ -1,7 +1,9 @@
 package utf.util;
 
+import flixel.FlxG;
 import openfl.filters.BitmapFilter;
 import openfl.filters.ColorMatrixFilter;
+import utf.Data;
 
 /**
  * Utility class for managing color filters.
@@ -66,7 +68,7 @@ class FilterUtil
 	 * @param name The name of the filter (e.g., 'deuteranopia', 'protanopia').
 	 * @return A ColorMatrixFilter instance representing the color transformation for the specified color blindness type, or null if the filter does not exist.
 	 */
-	public static function getFilter(name:String):BitmapFilter
+	public static function getFilter(name:String):Null<BitmapFilter>
 	{
 		final matrix:Array<Float> = filters.get(name);
 
@@ -84,5 +86,25 @@ class FilterUtil
 	public static function getFiltersKeys():Array<String>
 	{
 		return Lambda.array(filters.keys());
+	}
+
+	/**
+	 * Reloads and applies a specified color filter to the game.
+	 *
+	 * @param filter The name of the filter to apply.
+	 */
+	public static function reloadGameFilter(filter:String):Void
+	{
+		if (getFiltersKeys().contains(filter))
+		{
+			// Save the selected filter in the settings
+			Data.settings.set('filter', filter);
+
+			// Retrieve the filter and apply it to the game
+			final bitmapFilter:Null<BitmapFilter> = getFilter(Data.settings.get('filter'));
+
+			if (bitmapFilter != null)
+				FlxG.game.setFilters([bitmapFilter]);
+		}
 	}
 }
