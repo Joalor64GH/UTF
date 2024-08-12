@@ -37,7 +37,7 @@ class Settings extends FlxState
 		option.onChange = (value:Dynamic) -> FlxG.sound.volume = value / 100;
 		options.push(option);
 
-		final option:Option = new Option('Filter', OptionType.Choice(FilterUtil.getFiltersKeys().concat(['none']))), Data.settings.get('filter'));
+		final option:Option = new Option('Filter', OptionType.Choice(FilterUtil.getFiltersKeys().concat(['none'])), Data.settings.get('filter'));
 		option.onChange = (value:Dynamic) -> FilterUtil.reloadGameFilter(value);
 		options.push(option);
 
