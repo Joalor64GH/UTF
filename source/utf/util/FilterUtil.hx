@@ -105,7 +105,11 @@ class FilterUtil
 	{
 		if (getFiltersKeys().contains(filter))
 		{
-			Data.settings.set('filter', filter);
+			if (Data.settings.get('filter') != filter)
+			{
+				Data.settings.set('filter', filter);
+				Data.save();
+			}
 
 			final bitmapFilter:Null<BitmapFilter> = getFilter(Data.settings.get('filter'));
 
