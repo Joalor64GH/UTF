@@ -22,15 +22,11 @@
 		},
 		{
 			"name": "flixel",
-			"type": "git",
-			"ref": "release6",
-			"url": "https://github.com/HaxeFlixel/flixel.git"
+			"type": "haxelib"
 		},
 		{
 			"name": "flixel-addons",
-			"type": "git",
-			"ref": "dev",
-			"url": "https://github.com/HaxeFlixel/flixel-addons.git"
+			"type": "haxelib"
 		},
 		{
 			"name": "hxdiscord_rpc",
