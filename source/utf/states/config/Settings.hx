@@ -9,6 +9,7 @@ import flixel.FlxState;
 import flixel.util.FlxTimer;
 import utf.states.config.Option;
 import utf.states.Intro;
+import utf.util.FilterUtil;
 
 /**
  * Manages the settings menu, allowing users to configure various options.
@@ -34,6 +35,11 @@ class Settings extends FlxState
 		final option:Option = new Option('Master Volume', OptionType.Integer(0, 100, 1), FlxG.sound.volume * 100);
 		option.showPercentage = true;
 		option.onChange = (value:Dynamic) -> FlxG.sound.volume = value / 100;
+		options.push(option);
+
+		final option:Option = new Option('Filter', OptionType.Choice(FilterUtil.getFiltersKeys()), Data.settings.get('filter'));
+		option.showPercentage = true;
+		option.onChange = (value:Dynamic) -> FilterUtil.reloadGameFilter(value);
 		options.push(option);
 
 		holdTimer = new FlxTimer();
@@ -143,7 +149,7 @@ class Settings extends FlxState
 					{
 						holdTimer.start(0.5, function(timer:FlxTimer):Void
 						{
-							timer.start(0.1, function(timer:FlxTimer):Void
+							timer.start(0.05, function(timer:FlxTimer):Void
 							{
 								changeValue(holdDirection);
 							}, 0);
