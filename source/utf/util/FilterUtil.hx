@@ -112,5 +112,7 @@ class FilterUtil
 			if (bitmapFilter != null)
 				FlxG.game.setFilters([bitmapFilter]);
 		}
+		else
+			FlxG.game.setFilters([]);
 	}
 }
