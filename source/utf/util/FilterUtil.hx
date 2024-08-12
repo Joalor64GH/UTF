@@ -103,14 +103,14 @@ class FilterUtil
 	 */
 	public static function reloadGameFilter(filter:String):Void
 	{
+		if (Data.settings.get('filter') != filter)
+		{
+			Data.settings.set('filter', filter);
+			Data.save();
+		}
+
 		if (getFiltersKeys().contains(filter))
 		{
-			if (Data.settings.get('filter') != filter)
-			{
-				Data.settings.set('filter', filter);
-				Data.save();
-			}
-
 			final bitmapFilter:Null<BitmapFilter> = getFilter(Data.settings.get('filter'));
 
 			if (bitmapFilter != null)
