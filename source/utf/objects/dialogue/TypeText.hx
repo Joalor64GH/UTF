@@ -17,7 +17,7 @@ class TypeText extends FlxText
 	 * Characters that will not trigger sound playback during the typing effect.
 	 */
 	@:noCompletion
-	private static final IGNORE_CHARACTERS:Array<String> = ['\n', ' ', '^', '!', '.', '?', ',', ':', '/', '\\', '|', '*'];
+	private static final IGNORE_CHARACTERS:Array<String> = [' ', '\n', '^', '/', '\\'];
 
 	/**
 	 * Indicates whether the text has finished typing out.
