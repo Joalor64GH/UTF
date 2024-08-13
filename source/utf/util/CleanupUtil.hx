@@ -2,9 +2,6 @@ package utf.util;
 
 import flixel.FlxG;
 import flixel.FlxState;
-import openfl.media.Sound;
-import openfl.utils.AssetCache;
-import openfl.utils.Assets;
 #if polymod
 import polymod.Polymod;
 #end
@@ -38,22 +35,6 @@ class CleanupUtil
 	private static inline function onPreStateCreate(state:FlxState):Void
 	{
 		final cacheClearingStart:Float = TimerUtil.start();
-
-		final cache:AssetCache = cast(Assets.cache, AssetCache);
-
-		for (key in cache.sound.keys())
-		{
-			FlxG.log.notice('Removing "$key" from the sound cache.');
-
-			cache.removeSound(key);
-		}
-
-		for (key in cache.font.keys())
-		{
-			FlxG.log.notice('Removing "$key" from the font cache.');
-
-			cache.removeFont(key);
-		}
 
 		#if polymod
 		Polymod.clearCache();
