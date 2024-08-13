@@ -20,6 +20,7 @@ class FramerateUtil
 		if (refreshRate < 60)
 			refreshRate = 60;
 
-		FlxG.stage.frameRate = refreshRate;
+		if (FlxG.stage.frameRate != refreshRate)
+			FlxG.stage.frameRate = refreshRate;
 	}
 }
