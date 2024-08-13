@@ -58,7 +58,7 @@ class CleanupUtil
 			}
 		}
 
-		FlxG.log.notice('Cache clearing took: ${TimerUtil.seconds(soundClearingStart)}');
+		FlxG.log.notice('Cache clearing took: ${TimerUtil.seconds(cacheClearingStart)}');
 	}
 
 	#if (cpp || neko || hl)
