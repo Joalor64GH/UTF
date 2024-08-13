@@ -1,6 +1,5 @@
 package utf.modding;
 
-#if polymod
 import flixel.util.FlxSave;
 import flixel.util.FlxStringUtil;
 import flixel.FlxG;
@@ -173,4 +172,3 @@ class PolymodHandler
 		return output;
 	}
 }
-#end

@@ -2,9 +2,7 @@ package utf.util;
 
 import flixel.FlxG;
 import flixel.FlxState;
-#if polymod
 import polymod.Polymod;
-#end
 #if (cpp || neko || hl)
 import utf.util.MemoryUtil;
 #end
@@ -36,9 +34,7 @@ class CleanupUtil
 	{
 		final cacheClearingStart:Float = TimerUtil.start();
 
-		#if polymod
 		Polymod.clearCache();
-		#end
 
 		FlxG.log.notice('Cache clearing took: ${TimerUtil.seconds(soundClearingStart)}');
 	}
