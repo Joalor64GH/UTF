@@ -49,4 +49,16 @@ class Data
 
 		save.destroy();
 	}
+
+	public static function updateSetting(name:String, value:Dynamic):Void
+	{
+		if (!Data.settings.exists(name))
+			return;
+
+		if (Data.settings.get(name) != value)
+		{
+			Data.settings.set(name, value);
+			Data.save();
+		}
+	}
 }
