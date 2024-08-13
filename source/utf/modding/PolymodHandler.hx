@@ -10,6 +10,7 @@ import polymod.util.VersionUtil;
 import polymod.Polymod;
 import openfl.Lib;
 import sys.FileSystem;
+import utf.modding.AssetsBackend;
 import utf.registries.CharaRegistry;
 import utf.registries.MonsterRegistry;
 import utf.registries.ObjectRegistry;
@@ -76,6 +77,7 @@ class PolymodHandler
 			useScriptedClasses: true,
 			apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version')),
 			customFilesystem: buildFileSystem(),
+			customBackend: AssetsBackend,
 		});
 
 		loadRegisteries();
