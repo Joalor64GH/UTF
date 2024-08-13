@@ -22,7 +22,12 @@ class CleanupUtil
 	 */
 	public static function init():Void
 	{
+		#if (cpp || neko || hl)
+		MemoryUtil.enable();
+		#end
+
 		FlxG.signals.preStateCreate.add(onPreStateCreate);
+
 		#if (cpp || neko || hl)
 		FlxG.signals.postStateSwitch.add(onPostStateSwitch);
 		#end
