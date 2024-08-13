@@ -37,22 +37,16 @@ class CleanupUtil
 	@:noCompletion
 	private static inline function onPreStateCreate(state:FlxState):Void
 	{
-		final cache:AssetCache = cast(Assets.cache, AssetCache);
+		final cacheClearingStart:Float = TimerUtil.start();
 
-		final soundClearingStart:Float = TimerUtil.start();
+		final cache:AssetCache = cast(Assets.cache, AssetCache);
 
 		for (key in cache.sound.keys())
 		{
 			FlxG.log.notice('Removing "$key" from the sound cache.');
 
-			final asset:Sound = Assets.cache.getSound(key);
-			asset.close();
 			cache.removeSound(key);
 		}
-
-		FlxG.log.notice('Sound cache clearing took: ${TimerUtil.seconds(soundClearingStart)}');
-
-		final fontClearingStart:Float = TimerUtil.start();
 
 		for (key in cache.font.keys())
 		{
@@ -61,11 +55,11 @@ class CleanupUtil
 			cache.removeFont(key);
 		}
 
-		FlxG.log.notice('Font cache clearing took: ${TimerUtil.seconds(fontClearingStart)}');
-
 		#if polymod
 		Polymod.clearCache();
 		#end
+
+		FlxG.log.notice('Cache clearing took: ${TimerUtil.seconds(soundClearingStart)}');
 	}
 
 	#if (cpp || neko || hl)
