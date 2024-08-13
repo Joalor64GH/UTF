@@ -8,9 +8,9 @@ class DefaultTyper extends Typer
 	{
 		super('default');
 
-		fontName = AssetPaths.font('DTM-Mono');
+		fontName = AssetPaths.font('DTM-Mono', false);
 		fontSize = 32;
-		typerSounds = [FlxG.sound.load(AssetPaths.sound('txt1'), 1)];
+		typerSounds = [FlxG.sound.load(AssetPaths.sound('txt1', false), 1)];
 		typerLPS = 0.05;
 	}
 }
