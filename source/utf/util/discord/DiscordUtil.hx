@@ -64,7 +64,8 @@ class DiscordUtil
 			});
 		}
 
-		Lib.application.onExit.add((exitCode:Int) -> Discord.Shutdown());
+		if (Lib.application != null && !Lib.application.onExit.has(shutdown))
+			Lib.application.onExit.add(shutdown);
 
 		initialized = true;
 	}
@@ -96,6 +97,14 @@ class DiscordUtil
 	private static function onError(errorCode:Int, message:cpp.ConstCharStar):Void
 	{
 		FlxG.log.notice('(Discord) Error ($errorCode:$message)');
+	}
+
+	@:noCompletion
+	private static function shutdown(exitCode:Int):Void
+	{
+		updateThread = null;
+		Discord.Shutdown();
+		initialized = false;
 	}
 }
 #end
