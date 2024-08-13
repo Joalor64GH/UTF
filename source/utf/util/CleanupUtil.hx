@@ -34,7 +34,7 @@ class CleanupUtil
 	{
 		final cacheClearingStart:Float = TimerUtil.start();
 
-		Polymod.clearAssets();
+		Polymod.clearCache();
 
 		FlxG.log.notice('Cache clearing took: ${TimerUtil.seconds(cacheClearingStart)}');
 	}
