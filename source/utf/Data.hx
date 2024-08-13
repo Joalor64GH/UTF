@@ -61,4 +61,12 @@ class Data
 			Data.save();
 		}
 	}
+
+	public static function getSetting(name:String):Void
+	{
+		if (!Data.settings.exists(name))
+			return;
+
+		return Data.settings.get(name);
+	}
 }
