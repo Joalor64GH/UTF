@@ -103,11 +103,7 @@ class FilterUtil
 	 */
 	public static function reloadGameFilter(filter:String):Void
 	{
-		if (Data.settings.get('filter') != filter)
-		{
-			Data.settings.set('filter', filter);
-			Data.save();
-		}
+		Data.updateSetting('filter', filter);
 
 		if (getFiltersKeys().contains(filter))
 		{
