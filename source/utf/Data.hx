@@ -6,21 +6,17 @@ import openfl.Lib;
 import utf.util.FilterUtil;
 
 /**
- * Handles saving and loading of settings to and from a file.
+ * Handles saving and loading game settings.
  */
 class Data
 {
 	/**
-	 * Map to store game settings.
+	 * Stores game settings like filter and quality options.
 	 */
-	public static var settings(default, null):Map<String, Dynamic> = [
-		'filter' => 'none',
-		'low-quality' => false
-	];
+	public static var settings(default, null):Map<String, Dynamic> = ['filter' => 'none', 'low-quality' => false];
 
 	/**
 	 * Saves the current settings to a file.
-	 * Uses the FlxSave class to bind to a file and stores the settings map.
 	 */
 	public static function save():Void
 	{
@@ -31,42 +27,45 @@ class Data
 	}
 
 	/**
-	 * Loads settings from a file and applies the saved filter.
-	 * Retrieves the settings using FlxSave and updates the settings map.
+	 * Loads settings from a file and applies them.
 	 */
 	public static function load():Void
 	{
 		final save:FlxSave = new FlxSave();
 		save.bind('data', Lib.application.meta.get('file'));
 
-		if (!save.isEmpty())
+		if (!save.isEmpty() && save.data.settings != null)
 		{
-			if (save.data.settings != null)
-				settings = save.data.settings;
-
+			settings = save.data.settings;
 			FilterUtil.reloadGameFilter(settings.get('filter'));
 		}
 
 		save.destroy();
 	}
 
+	/**
+	 * Updates a setting and saves it.
+	 *
+	 * @param name The name of the setting to update.
+	 * @param value The new value for the setting.
+	 */
 	public static function updateSetting(name:String, value:Dynamic):Void
 	{
-		if (!Data.settings.exists(name))
-			return;
-
-		if (Data.settings.get(name) != value)
+		if (settings.exists(name) && settings.get(name) != value)
 		{
-			Data.settings.set(name, value);
-			Data.save();
+			settings.set(name, value);
+			save();
 		}
 	}
 
+	/**
+	 * Retrieves a setting's value.
+	 *
+	 * @param name The name of the setting.
+	 * @return The value of the setting, or null if it doesn't exist.
+	 */
 	public static function getSetting(name:String):Null<Dynamic>
 	{
-		if (!Data.settings.exists(name))
-			return;
-
-		return Data.settings.get(name);
+		return settings.get(name);
 	}
 }
