@@ -15,7 +15,16 @@ import openfl.utils.ByteArray;
  */
 class AssetPaths
 {
+	/**
+	 * List of paths to sound assets that should be persistent.
+	 * These assets are not unloaded or garbage collected between game sessions.
+	 */
 	private static final PERSISTENT_SOUNDS:Array<String> = [];
+
+	/**
+	 * List of paths to font assets that should be persistent.
+	 * These assets are not unloaded or garbage collected between game sessions.
+	 */
 	private static final PERSISTENT_FONTS:Array<String> = [];
 
 	/**
@@ -51,21 +60,45 @@ class AssetPaths
 	/**
 	 * Constructs the path for a music asset.
 	 * @param key The key for the music.
+	 * @param persistent If true, the path is added to or remains in the persistent sounds list.
+	 *                   If false, the path is removed from the persistent sounds list if it was previously added.
 	 * @return The path to the music file.
 	 */
-	public static inline function music(key:String):String
+	public static inline function music(key:String, ?persistent:Bool = false):String
 	{
-		return 'assets/music/$key.ogg';
+		final path:String = 'assets/music/$key.ogg';
+
+		if (persistent)
+		{
+			if (!PERSISTENT_SOUNDS.contains(path))
+				PERSISTENT_SOUNDS.push(path);
+		}
+		else
+			PERSISTENT_SOUNDS.remove(path);
+
+		return path;
 	}
 
 	/**
 	 * Constructs the path for a sound asset.
 	 * @param key The key for the sound.
+	 * @param persistent If true, the path is added to or remains in the persistent sounds list.
+	 *                   If false, the path is removed from the persistent sounds list if it was previously added.
 	 * @return The path to the sound file.
 	 */
-	public static inline function sound(key:String):String
+	public static inline function sound(key:String, ?persistent:Bool = false):String
 	{
-		return 'assets/sounds/$key.wav';
+		final path:String = 'assets/sounds/$key.wav';
+
+		if (persistent)
+		{
+			if (!PERSISTENT_SOUNDS.contains(path))
+				PERSISTENT_SOUNDS.push(path);
+		}
+		else
+			PERSISTENT_SOUNDS.remove(path);
+
+		return path;
 	}
 
 	/**
@@ -91,23 +124,43 @@ class AssetPaths
 	/**
 	 * Constructs the path for a font asset and retrieves the font name if it exists.
 	 * @param key The key for the font.
+	 * @param persistent If true, the path is added to or remains in the persistent fonts list.
+	 *                   If false, the path is removed from the persistent fonts list if it was previously added.
 	 * @return The font name, or null if the font does not exist.
 	 */
-	public static function font(key:String):String
+	public static function font(key:String, ?persistent:Bool = false):String
 	{
 		final path:String = 'assets/fonts/$key.ttf';
 
 		try
 		{
 			if (Assets.exists(path, FONT))
+			{
+				if (persistent)
+				{
+					if (!PERSISTENT_FONTS.contains(path))
+						PERSISTENT_FONTS.push(path);
+				}
+				else
+					PERSISTENT_FONTS.remove(path);
+
 				return Assets.getFont(path).fontName;
+			}
 			else if (Assets.exists(Path.withoutExtension(path), FONT))
+			{
+				if (persistent)
+				{
+					if (!PERSISTENT_FONTS.contains(Path.withoutExtension(path)))
+						PERSISTENT_FONTS.push(Path.withoutExtension(path));
+				}
+				else
+					PERSISTENT_FONTS.remove(Path.withoutExtension(path));
+
 				return Assets.getFont(Path.withoutExtension(path)).fontName;
+			}
 		}
 		catch (e:Exception)
-		{
 			FlxG.log.error(e.message);
-		}
 
 		return null;
 	}
@@ -154,7 +207,8 @@ class AssetPaths
 	{
 		final files:Array<String> = Assets.list().filter(function(file:String):Bool
 		{
-			return (extension != null && extension.length > 0) ? (Path.directory(file) == directory && Path.extension(file) == extension) : Path.directory(file) == directory;
+			return
+				(extension != null && extension.length > 0) ? (Path.directory(file) == directory && Path.extension(file) == extension) : Path.directory(file) == directory;
 		});
 
 		files.sort(function(a:String, b:String):Int
