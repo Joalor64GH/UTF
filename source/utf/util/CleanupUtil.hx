@@ -2,6 +2,7 @@ package utf.util;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import openfl.media.Sound;
 import openfl.utils.AssetCache;
 import openfl.utils.Assets;
 #if polymod
