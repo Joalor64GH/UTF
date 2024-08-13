@@ -8,9 +8,9 @@ class BattleTyper extends Typer
 	{
 		super('battle');
 
-		fontName = AssetPaths.font('DTM-Mono');
+		fontName = AssetPaths.font('DTM-Mono', false);
 		fontSize = 32;
-		typerSounds = [FlxG.sound.load(AssetPaths.sound('txt2'), 0.86)];
+		typerSounds = [FlxG.sound.load(AssetPaths.sound('txt2', false), 0.86)];
 		typerLPS = 0.05;
 	}
 }
