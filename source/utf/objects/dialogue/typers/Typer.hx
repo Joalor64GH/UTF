@@ -1,12 +1,13 @@
 package utf.objects.dialogue.typers;
 
 import flixel.sound.FlxSound;
+import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxStringUtil;
 
 /**
  * Represents a typer for displaying text in the game.
  */
-class Typer
+class Typer implements IFlxDestroyable
 {
 	/**
 	 * The ID of the typer.
@@ -45,6 +46,14 @@ class Typer
 	public function new(typerID:String):Void
 	{
 		this.typerID = typerID;
+	}
+
+	/**
+	 * Clean up memory.
+	 */
+	public function destroy():Void
+	{
+		typerSounds = FlxDestroyUtil.destroyArray(typerSounds);
 	}
 
 	/**
