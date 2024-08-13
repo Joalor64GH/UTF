@@ -41,6 +41,10 @@ class Settings extends FlxState
 		option.onChange = (value:Dynamic) -> FilterUtil.reloadGameFilter(value);
 		options.push(option);
 
+		final option:Option = new Option('Low Quality', OptionType.Toggle, Data.settings.get('low-quality'));
+		option.onChange = (value:Dynamic) -> Data.updateSetting('low-quality', value);
+		options.push(option);
+
 		holdTimer = new FlxTimer();
 	}
 
