@@ -3,6 +3,7 @@ package utf.util;
 import flixel.FlxG;
 import flixel.FlxState;
 import openfl.utils.AssetCache;
+import openfl.utils.Assets;
 #if (cpp || neko || hl)
 import utf.util.MemoryUtil;
 #end
