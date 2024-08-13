@@ -25,7 +25,6 @@ import utf.util.discord.DiscordUtil;
 import utf.util.logging.ErrorHandler;
 import utf.util.CleanupUtil;
 import utf.util.FramerateUtil;
-import utf.util.MemoryUtil;
 import utf.util.ResizeUtil;
 import utf.Game;
 
@@ -125,10 +124,6 @@ class Main extends Sprite
 		if (hasEventListener(Event.ADDED_TO_STAGE))
 			removeEventListener(Event.ADDED_TO_STAGE, setupGame);
 
-		#if (cpp || neko || hl)
-		MemoryUtil.enable();
-		#end
-
 		#if hxdiscord_rpc
 		DiscordUtil.init();
 		#end
@@ -139,16 +134,6 @@ class Main extends Sprite
 
 		final game:Game = new Game(GAME_WIDTH, GAME_HEIGHT, GAME_INITIAL_STATE, GAME_FRAMERATE, GAME_FRAMERATE, GAME_SKIP_SPLASH, GAME_START_FULLSCREEN);
 
-		setupFlixel();
-
-		addChild(game);
-
-		FramerateUtil.adjustStageFramerate();
-	}
-
-	@:noCompletion
-	private inline function setupFlixel():Void
-	{
 		#if debug
 		FlxG.log.redirectTraces = true;
 		#end
@@ -169,5 +154,9 @@ class Main extends Sprite
 		#if FLX_MOUSE
 		FlxG.mouse.useSystemCursor = true;
 		#end
+
+		addChild(game);
+
+		FramerateUtil.adjustStageFramerate();
 	}
 }
