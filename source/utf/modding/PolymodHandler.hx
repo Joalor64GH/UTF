@@ -39,10 +39,10 @@ class PolymodHandler
 	/**
 	 * Loads the game with ALL mods enabled with Polymod.
 	 */
-	public static function load(?clearScripts:Bool = false):Void
+	public static function load():Void
 	{
-		if (clearScripts)
-			Polymod.clearScripts();
+		Polymod.clearCache();
+		Polymod.clearScripts();
 		
 		Polymod.onError = function(error:PolymodError):Void
 		{
