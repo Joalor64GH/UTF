@@ -19,12 +19,14 @@ class AssetPaths
 	 * List of paths to sound assets that should be persistent.
 	 * These assets are not unloaded or garbage collected between game sessions.
 	 */
+	@:noCompletion
 	private static final PERSISTENT_SOUNDS:Array<String> = [];
 
 	/**
 	 * List of paths to font assets that should be persistent.
 	 * These assets are not unloaded or garbage collected between game sessions.
 	 */
+	@:noCompletion
 	private static final PERSISTENT_FONTS:Array<String> = [];
 
 	/**
