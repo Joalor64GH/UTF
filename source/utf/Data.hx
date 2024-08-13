@@ -14,7 +14,8 @@ class Data
 	 * Map to store game settings.
 	 */
 	public static var settings(default, null):Map<String, Dynamic> = [
-		'filter' => 'none'
+		'filter' => 'none',
+		'low-quality' => false
 	];
 
 	/**
@@ -36,7 +37,6 @@ class Data
 	public static function load():Void
 	{
 		final save:FlxSave = new FlxSave();
-
 		save.bind('data', Lib.application.meta.get('file'));
 
 		if (!save.isEmpty())
