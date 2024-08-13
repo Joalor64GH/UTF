@@ -2,7 +2,7 @@ package utf.util;
 
 import flixel.FlxG;
 import flixel.FlxState;
-import polymod.Polymod;
+import openfl.utils.AssetsCache;
 #if (cpp || neko || hl)
 import utf.util.MemoryUtil;
 #end
