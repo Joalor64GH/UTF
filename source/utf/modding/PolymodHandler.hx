@@ -41,7 +41,6 @@ class PolymodHandler
 	 */
 	public static function load():Void
 	{
-		Polymod.clearCache();
 		Polymod.clearScripts();
 		
 		Polymod.onError = function(error:PolymodError):Void
