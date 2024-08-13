@@ -62,7 +62,7 @@ class Data
 		}
 	}
 
-	public static function getSetting(name:String):Void
+	public static function getSetting(name:String):Null<Dynamic>
 	{
 		if (!Data.settings.exists(name))
 			return;
