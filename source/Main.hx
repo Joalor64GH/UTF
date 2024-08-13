@@ -15,6 +15,7 @@ import lime.ui.KeyModifier;
 import openfl.display.Sprite;
 import openfl.display.StageAlign;
 import openfl.display.StageScaleMode;
+import openfl.display.StageQuality;
 import openfl.events.Event;
 import openfl.filesystem.File;
 import openfl.Lib;
@@ -101,6 +102,7 @@ class Main extends Sprite
 		#end
 
 		Lib.current.stage.align = StageAlign.TOP_LEFT;
+		Lib.current.stage.quality = StageQuality.LOW;
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		Lib.current.addChild(new Main());
 	}
