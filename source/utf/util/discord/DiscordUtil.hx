@@ -59,7 +59,7 @@ class DiscordUtil
 
 					Discord.RunCallbacks();
 
-					Sys.sleep(2);
+					Sys.sleep(Data.settings.get('low-quality') ? 5 : 2);
 				}
 			});
 		}
