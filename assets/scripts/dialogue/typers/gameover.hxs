@@ -8,10 +8,10 @@ class GameOverTyper extends Typer
 	{
 		super('gameover');
 
-		fontName = AssetPaths.font('DTM-Mono');
+		fontName = AssetPaths.font('DTM-Mono', false);
 		fontSize = 32;
 		fontSpacing = 2;
-		typerSounds = [FlxG.sound.load(AssetPaths.sound('txt1'), 1.0)];
+		typerSounds = [FlxG.sound.load(AssetPaths.sound('txt1', false), 1.0)];
 		typerLPS = 0.05;
 	}
 }
