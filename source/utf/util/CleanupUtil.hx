@@ -11,7 +11,6 @@ import utf.util.TimerUtil;
 /**
  * Utility class for handling state-related cache management and garbage collection in HaxeFlixel.
  */
-@:access(utf.AssetPaths)
 class CleanupUtil
 {
 	/**
