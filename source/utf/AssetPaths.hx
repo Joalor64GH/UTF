@@ -5,6 +5,7 @@ import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import haxe.io.Path;
 import haxe.Exception;
+import openfl.media.Sound;
 import openfl.utils.Assets;
 import openfl.utils.ByteArray;
 
@@ -15,20 +16,6 @@ import openfl.utils.ByteArray;
  */
 class AssetPaths
 {
-	/**
-	 * List of paths to sound assets that should be persistent.
-	 * These assets are not unloaded or garbage collected between game sessions.
-	 */
-	@:noCompletion
-	private static final PERSISTENT_SOUNDS:Array<String> = [];
-
-	/**
-	 * List of paths to font assets that should be persistent.
-	 * These assets are not unloaded or garbage collected between game sessions.
-	 */
-	@:noCompletion
-	private static final PERSISTENT_FONTS:Array<String> = [];
-
 	/**
 	 * Constructs the path for a script asset.
 	 * @param key The key for the script.
@@ -60,47 +47,47 @@ class AssetPaths
 	}
 
 	/**
-	 * Constructs the path for a music asset.
-	 * @param key The key for the music.
-	 * @param persistent If true, the path is added to or remains in the persistent sounds list.
-	 *                   If false, the path is removed from the persistent sounds list if it was previously added.
-	 * @return The path to the music file.
+	 * Constructs the path for a music asset and retrieves it as a `Sound` object.
+	 * @param key The key for the music asset.
+	 * @param cache If true, the sound will be cached for future use.
+	 *              If false, the sound will not be cached.
+	 * @return The `Sound` object corresponding to the music file, or `null` if the file does not exist.
 	 */
-	public static inline function music(key:String, ?persistent:Bool = false):String
+	public static function music(key:String, ?cache:Bool = true):Null<Sound>
 	{
 		final path:String = 'assets/music/$key.ogg';
 
-		if (persistent)
+		try
 		{
-			if (!PERSISTENT_SOUNDS.contains(path))
-				PERSISTENT_SOUNDS.push(path);
+			if (Assets.exists(path, SOUND))
+				return Assets.getSound(path, cache);
 		}
-		else
-			PERSISTENT_SOUNDS.remove(path);
+		catch (e:Exception)
+			FlxG.log.error(e.message);
 
-		return path;
+		return null;
 	}
 
 	/**
-	 * Constructs the path for a sound asset.
-	 * @param key The key for the sound.
-	 * @param persistent If true, the path is added to or remains in the persistent sounds list.
-	 *                   If false, the path is removed from the persistent sounds list if it was previously added.
-	 * @return The path to the sound file.
+	 * Constructs the path for a sound effect asset and retrieves it as a `Sound` object.
+	 * @param key The key for the sound effect asset.
+	 * @param cache If true, the sound will be cached for future use.
+	 *              If false, the sound will not be cached.
+	 * @return The `Sound` object corresponding to the sound effect file, or `null` if the file does not exist.
 	 */
-	public static inline function sound(key:String, ?persistent:Bool = false):String
+	public static function sound(key:String, ?cache:Bool = true):Null<Sound>
 	{
 		final path:String = 'assets/sounds/$key.wav';
 
-		if (persistent)
+		try
 		{
-			if (!PERSISTENT_SOUNDS.contains(path))
-				PERSISTENT_SOUNDS.push(path);
+			if (Assets.exists(path, SOUND))
+				return Assets.getSound(path, cache);
 		}
-		else
-			PERSISTENT_SOUNDS.remove(path);
+		catch (e:Exception)
+			FlxG.log.error(e.message);
 
-		return path;
+		return null;
 	}
 
 	/**
@@ -125,41 +112,21 @@ class AssetPaths
 
 	/**
 	 * Constructs the path for a font asset and retrieves the font name if it exists.
-	 * @param key The key for the font.
-	 * @param persistent If true, the path is added to or remains in the persistent fonts list.
-	 *                   If false, the path is removed from the persistent fonts list if it was previously added.
-	 * @return The font name, or null if the font does not exist.
+	 * @param key The key for the font asset.
+	 * @param cache If true, the font will be cached for future use.
+	 *              If false, the font will not be cached.
+	 * @return The font name as a `String`, or `null` if the font file does not exist.
 	 */
-	public static function font(key:String, ?persistent:Bool = false):String
+	public static function font(key:String, ?cache:Bool = true):Null<String>
 	{
 		final path:String = 'assets/fonts/$key.ttf';
 
 		try
 		{
 			if (Assets.exists(path, FONT))
-			{
-				if (persistent)
-				{
-					if (!PERSISTENT_FONTS.contains(path))
-						PERSISTENT_FONTS.push(path);
-				}
-				else
-					PERSISTENT_FONTS.remove(path);
-
-				return Assets.getFont(path).fontName;
-			}
+				return Assets.getFont(path, cache).fontName;
 			else if (Assets.exists(Path.withoutExtension(path), FONT))
-			{
-				if (persistent)
-				{
-					if (!PERSISTENT_FONTS.contains(Path.withoutExtension(path)))
-						PERSISTENT_FONTS.push(Path.withoutExtension(path));
-				}
-				else
-					PERSISTENT_FONTS.remove(Path.withoutExtension(path));
-
-				return Assets.getFont(Path.withoutExtension(path)).fontName;
-			}
+				return Assets.getFont(Path.withoutExtension(path), cache).fontName;
 		}
 		catch (e:Exception)
 			FlxG.log.error(e.message);
