@@ -11,6 +11,7 @@ import utf.util.TimerUtil;
 /**
  * Utility class for handling state-related cache management and garbage collection in HaxeFlixel.
  */
+@:access(utf.AssetPaths)
 class CleanupUtil
 {
 	/**
@@ -32,9 +33,29 @@ class CleanupUtil
 	@:noCompletion
 	private static inline function onPreStateCreate(state:FlxState):Void
 	{
+		final cache:AssetCache = cast(Assets.cache, AssetCache);
+
 		final cacheClearingStart:Float = TimerUtil.start();
 
-		Polymod.clearCache();
+		for (key in cache.sound.keys())
+		{
+			if (!AssetPaths.PERSISTENT_SOUNDS.contains(key))
+			{
+				FlxG.log.notice('Removing "$key" from the sound cache.');
+
+				cache.removeSound(key);
+			}
+		}
+
+		for (key in cache.font.keys())
+		{
+			if (!AssetPaths.PERSISTENT_FONTS.contains(key))
+			{
+				FlxG.log.notice('Removing "$key" from the font cache.');
+
+				cache.removeFont(key);
+			}
+		}
 
 		FlxG.log.notice('Cache clearing took: ${TimerUtil.seconds(soundClearingStart)}');
 	}
