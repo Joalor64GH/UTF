@@ -6,6 +6,7 @@ import hxdiscord_rpc.Discord;
 import hxdiscord_rpc.Types;
 import openfl.Lib;
 import sys.thread.Thread;
+import utf.Data;
 
 /**
  * Utility class for handling Discord Rich Presence integration.
@@ -15,7 +16,14 @@ class DiscordUtil
 	/**
 	 * Discord Application ID.
 	 */
+	@:noCompletion
 	private static final APPLICATION_ID:String = '1140307809167220836';
+
+	/**
+	 * Deamon Thread.
+	 */
+	@:noCompletion
+	private static var deamonThread:Thread;
 
 	/**
 	 * Indicates if Discord Rich Presence is initialized.
@@ -39,19 +47,22 @@ class DiscordUtil
 		handlers.errored = cpp.Function.fromStaticFunction(onError);
 		Discord.Initialize(APPLICATION_ID, cpp.RawPointer.addressOf(handlers), 1, null);
 
-		Thread.create(function():Void
+		if (deamonThread == null)
 		{
-			while (true)
+			deamonThread = Thread.create(function():Void
 			{
-				#if DISCORD_DISABLE_IO_THREAD
-				Discord.UpdateConnection();
-				#end
+				while (true)
+				{
+					#if DISCORD_DISABLE_IO_THREAD
+					Discord.UpdateConnection();
+					#end
 
-				Discord.RunCallbacks();
+					Discord.RunCallbacks();
 
-				Sys.sleep(2);
-			}
-		});
+					Sys.sleep(2);
+				}
+			});
+		}
 
 		Lib.application.onExit.add((exitCode:Int) -> Discord.Shutdown());
 
