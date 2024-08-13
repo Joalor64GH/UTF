@@ -2,8 +2,7 @@ package utf.util;
 
 import flixel.FlxG;
 import flixel.FlxState;
-import openfl.utils.AssetCache;
-import openfl.utils.Assets;
+import polymod.Polymod;
 #if (cpp || neko || hl)
 import utf.util.MemoryUtil;
 #end
@@ -34,29 +33,9 @@ class CleanupUtil
 	@:noCompletion
 	private static inline function onPreStateCreate(state:FlxState):Void
 	{
-		final cache:AssetCache = cast(Assets.cache, AssetCache);
-
 		final cacheClearingStart:Float = TimerUtil.start();
 
-		for (key in cache.sound.keys())
-		{
-			if (!AssetPaths.PERSISTENT_SOUNDS.contains(key))
-			{
-				FlxG.log.notice('Removing "$key" from the sound cache.');
-
-				cache.removeSound(key);
-			}
-		}
-
-		for (key in cache.font.keys())
-		{
-			if (!AssetPaths.PERSISTENT_FONTS.contains(key))
-			{
-				FlxG.log.notice('Removing "$key" from the font cache.');
-
-				cache.removeFont(key);
-			}
-		}
+		Polymod.clearAssets();
 
 		FlxG.log.notice('Cache clearing took: ${TimerUtil.seconds(cacheClearingStart)}');
 	}
@@ -65,8 +44,6 @@ class CleanupUtil
 	@:noCompletion
 	private static inline function onPostStateSwitch():Void
 	{
-		FlxG.log.notice('Running the garbage collector.');
-
 		final gcStart:Float = TimerUtil.start();
 
 		MemoryUtil.collect(true);
