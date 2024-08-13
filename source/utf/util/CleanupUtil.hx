@@ -38,19 +38,29 @@ class CleanupUtil
 	{
 		final cache:AssetCache = cast(Assets.cache, AssetCache);
 
+		final soundClearingStart:Float = TimerUtil.start();
+
 		for (key in cache.sound.keys())
 		{
 			FlxG.log.notice('Removing "$key" from the sound cache.');
 
-			cache.sound.remove(key);
+			final asset:Sound = Assets.cache.getSound(key);
+			asset.close();
+			cache.removeSound(key);
 		}
+
+		FlxG.log.notice('Sound cache clearing took: ${TimerUtil.seconds(soundClearingStart)}');
+
+		final fontClearingStart:Float = TimerUtil.start();
 
 		for (key in cache.font.keys())
 		{
 			FlxG.log.notice('Removing "$key" from the font cache.');
 
-			cache.font.remove(key);
+			cache.removeFont(key);
 		}
+
+		FlxG.log.notice('Font cache clearing took: ${TimerUtil.seconds(fontClearingStart)}');
 
 		#if polymod
 		Polymod.clearCache();
