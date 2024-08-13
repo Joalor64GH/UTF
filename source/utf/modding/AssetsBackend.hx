@@ -10,7 +10,7 @@ class AssetsBackend extends OpenFLBackend
 	{
 		super.clearCache();
 
-		AssetPaths.PERSISTENT_SOUNDS = [];
-		AssetPaths.PERSISTENT_FONTS = [];
+		AssetPaths.PERSISTENT_SOUNDS.splice(0, AssetPaths.PERSISTENT_SOUNDS.length);
+		AssetPaths.PERSISTENT_FONTS.splice(0, AssetPaths.PERSISTENT_FONTS.length);
 	}
 }
