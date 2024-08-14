@@ -16,12 +16,20 @@ import utf.util.FilterUtil;
  */
 class Settings extends FlxState
 {
-	var selected:Int = 0;
-	final options:Array<Option> = [];
-	var items:FlxTypedGroup<FlxText>;
+	@:noCompletion
+	private var selected:Int = 0;
 
-	var holdTimer:FlxTimer;
-	var holdDirection:Int = 0;
+	@:noCompletion
+	private final options:Array<Option> = [];
+
+	@:noCompletion
+	private var items:FlxTypedGroup<FlxText>;
+
+	@:noCompletion
+	private var holdTimer:FlxTimer;
+
+	@:noCompletion
+	private var holdDirection:Int = 0;
 
 	public function new():Void
 	{
@@ -108,6 +116,9 @@ class Settings extends FlxState
 	@:noCompletion
 	private function changeOption(num:Int = 0):Void
 	{
+		if (num != 0)
+			FlxG.sound.play(AssetPaths.sound('menumove'));
+
 		selected = FlxMath.wrap(selected + num, 0, options.length - 1);
 
 		items.forEach(function(spr:FlxText):Void
@@ -119,6 +130,9 @@ class Settings extends FlxState
 	@:noCompletion
 	private function changeValue(direction:Int = 0):Void
 	{
+		if (direction != 0)
+			FlxG.sound.play(AssetPaths.sound('menumove'));
+
 		final option:Option = options[selected];
 
 		if (option != null)
