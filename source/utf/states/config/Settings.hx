@@ -9,6 +9,7 @@ import flixel.FlxState;
 import flixel.util.FlxTimer;
 import utf.states.config.Option;
 import utf.states.Intro;
+import utf.util.DateUtil;
 import utf.util.FilterUtil;
 
 /**
@@ -56,8 +57,44 @@ class Settings extends FlxState
 		holdTimer = new FlxTimer();
 	}
 
-	override function create():Void
+	public override function create():Void
 	{
+		persistentUpdate = false;
+		var weatherMusic:String = AssetPaths.music('options_fall');
+
+		switch (DateUtil.getWeather())
+		{
+			case 1:
+				weatherMusic = AssetPaths.music('options_winter');
+			case 3:
+				weatherMusic = AssetPaths.music('options_summer');
+		}
+
+		FlxG.sound.cache(weatherMusic);
+
+		if (DateUtil.getWeather() != 3)
+		{
+			var particles:FlxEmitter = new FlxEmitter(0, 0);
+			particles.loadParticles(AssetPaths.sprite(DateUtil.getWeather() == 1 ? 'christmasflake' : 'fallleaf'), 120);
+			particles.alpha.set(0.5, 0.5);
+			particles.scale.set(2, 2);
+
+			switch (DateUtil.getWeather())
+			{
+				case 2:
+					particles.color.set(FlxColor.interpolate(FlxColor.RED, FlxColor.WHITE, 0.5));
+				case 4:
+					particles.color.set(FlxColor.YELLOW, FlxColor.fromRGB(255, 159, 64), FlxColor.RED);
+			}
+
+			particles.width = FlxG.width;
+			particles.launchMode = SQUARE;
+			particles.acceleration.set(120, 120, 120, 120);
+			particles.velocity.set(-10, 80, 0, FlxG.height);
+			particles.start(false, 0.01);
+			add(particles);
+		}
+
 		final settings:FlxText = new FlxText(0, 20, 0, 'SETTINGS', 64);
 		settings.font = AssetPaths.font('DTM-Sans');
 		settings.screenCenter(X);
@@ -79,12 +116,67 @@ class Settings extends FlxState
 
 		add(items);
 
+		final tobdogWeather:FlxSprite = new FlxSprite(500, 436);
+
+		switch (DateUtil.getWeather())
+		{
+			case 1:
+				tobdogWeather.loadGraphic(AssetPaths.sprite('tobdog_winter'));
+			case 2:
+				tobdogWeather.frames = AssetPaths.spritesheet('tobdog_spring');
+				tobdogWeather.animation.addByPrefix('spring', 'tobdog_spring', 2, true);
+				tobdogWeather.animation.play('spring');
+			case 3:
+				tobdogWeather.frames = AssetPaths.spritesheet('tobdog_summer');
+				tobdogWeather.animation.addByPrefix('summer', 'tobdog_summer', 2, true);
+				tobdogWeather.animation.play('summer');
+			case 4:
+				tobdogWeather.loadGraphic(AssetPaths.sprite('tobdog_autumn'));
+		}
+
+		tobdogWeather.scale.set(2, 2);
+		tobdogWeather.updateHitbox();
+		tobdogWeather.scrollFactor.set();
+
+		if (DateUtil.getWeather() != 2 && DateUtil.getWeather() != 3)
+			tobdogWeather.active = false;
+
+		add(tobdogWeather);
+
+		tobdogLine = new FlxText(420, 260, 0, '', 32);
+
+		switch (DateUtil.getWeather())
+		{
+			case 1:
+				tobdogLine.text = 'cold outside\nbut stay warm\ninside of you';
+			case 2:
+				tobdogLine.text = 'spring time\nback to school';
+			case 3:
+				tobdogLine.text = 'try to withstand\nthe sun\'s life-\ngiving rays';
+			case 4:
+				tobdogLine.text = 'sweep a leaf\nsweep away a\ntroubles';
+		}
+
+		tobdogLine.font = AssetPaths.font('DTM-Sans');
+		tobdogLine.color = FlxColor.GRAY;
+		tobdogLine.angle = 20;
+		tobdogLine.scrollFactor.set();
+		tobdogLine.active = false;
+		add(tobdogLine);
+
 		changeOption();
 
+		FlxG.sound.play(AssetPaths.music('harpnoise'));
+
 		super.create();
+
+		FlxTimer.wait(1.5, function():Void
+		{
+			FlxG.sound.playMusic(weatherMusic, 0.8);
+		});
 	}
 
-	override function update(elapsed:Float):Void
+	public override function update(elapsed:Float):Void
 	{
 		if (Controls.justPressed('up'))
 			changeOption(-1);
@@ -111,6 +203,10 @@ class Settings extends FlxState
 		}
 
 		super.update(elapsed);
+
+		tobdogLine.centerOffsets();
+
+		tobdogLine.offset.add(Math.sin((FlxG.game.ticks / 100) / 12), Math.cos((FlxG.game.ticks / 100) / 12));
 	}
 
 	@:noCompletion
