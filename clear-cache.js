@@ -12,7 +12,7 @@ module.exports = async ({github, context}, cacheKey) => {
 		{
 			if (cache.key === cacheKey)
 			{
-				console.log('Clearing ${cache.key}...');
+				console.log(`Clearing ${cache.key}...`);
 
 				await github.rest.actions.deleteActionsCacheById({
 					owner: context.repo.owner,
@@ -20,7 +20,7 @@ module.exports = async ({github, context}, cacheKey) => {
 					cache_id: cache.id,
 				});
 
-				console.log('Previous Cache Cleared!');
+				console.log(`Previous Cache Cleared!`);
 				cacheFound = true;
 				break;
 			}
@@ -28,7 +28,7 @@ module.exports = async ({github, context}, cacheKey) => {
 
 		if (!cacheFound)
 		{
-			console.log('Cache key not found: ${cacheKey}');
+			console.log(`Cache key not found: ${cacheKey}`);
 		}
 	}
 	catch (error)
