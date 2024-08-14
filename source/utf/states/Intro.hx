@@ -27,14 +27,17 @@ enum Scroll
 
 class Intro extends FlxState
 {
+	@:noCompletion
 	var selected:Int = 0;
+
+	@:noCompletion
 	var choices:Array<String> = [];
+
+	@:noCompletion
 	var items:FlxTypedGroup<FlxText>;
 
-	override function create():Void
+	public override function create():Void
 	{
-		// FlxG.log.notice([for (contributor in GitHub.getContributors()) {name: contributor.login, commits: contributor.contributions}]);
-
 		if (Global.flags[0] == 1)
 		{
 			if (!(FlxG.sound.music?.playing ?? false))
