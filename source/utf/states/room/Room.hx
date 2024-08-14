@@ -157,7 +157,7 @@ class Room extends FlxTransitionableState
 
 			objects.forEach(function(obj:Object):Void
 			{
-				if (obj != null && chara.overlaps(obj))
+				if (obj != null && chara.characterControllable && chara.overlaps(obj))
 				{
 					if (Controls.justPressed('confirm') && obj.objectInteractable)
 						obj.interact();
@@ -255,9 +255,13 @@ class Room extends FlxTransitionableState
 		{
 			if (dialogueBox != null)
 			{
+				dialogueBox.active = dialogueBox.visible = false;
+
 				dialogueBox.kill();
 				remove(dialogueBox, true);
 				dialogueBox.destroy();
+
+				dialogueBox = null;
 			}
 
 			if (finishCallback != null)
