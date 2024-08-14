@@ -40,14 +40,29 @@ class Room extends FlxTransitionableState
 	 */
 	public var roomHeight:Int;
 
-	var backgrounds:FlxTypedGroup<FlxSprite>;
-	var tiles:FlxTypedGroup<FlxSprite>;
-	var objects:FlxTypedGroup<Object>;
-	var chara:Chara;
-	var camGame:FlxCamera;
-	var camHud:FlxCamera;
-	var camFollow:FlxObject;
-	var camFollowControllable:Bool = false;
+	@:noCompletion
+	private var backgrounds:FlxTypedGroup<FlxSprite>;
+
+	@:noCompletion
+	private var tiles:FlxTypedGroup<FlxSprite>;
+
+	@:noCompletion
+	private var objects:FlxTypedGroup<Object>;
+
+	@:noCompletion
+	private var chara:Chara;
+
+	@:noCompletion
+	private var camGame:FlxCamera;
+
+	@:noCompletion
+	private var camHud:FlxCamera;
+
+	@:noCompletion
+	private var camFollow:FlxObject;
+
+	@:noCompletion
+	private var camFollowControllable:Bool = false;
 
 	/**
 	 * Constructor to initialize the room with a specified ID.
@@ -137,7 +152,6 @@ class Room extends FlxTransitionableState
 		bg.scrollFactor.set(0, 0);
 		bg.active = false;
 		backgrounds.add(bg);
-
 		return bg;
 	}
 
@@ -158,7 +172,6 @@ class Room extends FlxTransitionableState
 		tile.scrollFactor.set(0, 0);
 		tile.active = false;
 		tiles.add(tile);
-
 		return tile;
 	}
 
@@ -177,7 +190,6 @@ class Room extends FlxTransitionableState
 		final object:Object = ObjectRegistry.fetchObject(id);
 		object.setPosition(x, y);
 		objects.add(object);
-
 		return object;
 	}
 
