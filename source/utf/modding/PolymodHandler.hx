@@ -29,6 +29,7 @@ class PolymodHandler
 	/**
 	 * The root directory for mods.
 	 */
+	@:noCompletion
 	private static final MODS_ROOT:String = 'mods';
 
 	/**
