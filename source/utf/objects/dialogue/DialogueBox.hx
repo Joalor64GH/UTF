@@ -14,6 +14,8 @@ class DialogueBox extends FlxSpriteGroup
 
 	public function new(showOnTop:Bool = false):Void
 	{
+		super();
+
 		box = new FlxShapeBox(32, showOnTop ? 10 : 320, 576, 150, {thickness: 6, jointStyle: MITER, color: FlxColor.WHITE},
 			FlxColor.BLACK);
 		box.scrollFactor.set();
