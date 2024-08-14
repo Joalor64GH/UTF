@@ -69,7 +69,7 @@ class Settings extends FlxState
 
 		for (i in 0...options.length)
 		{
-			final opt:FlxText = new FlxText(40, 80 + i * 32, 0, options[i].toString(), 32);
+			final opt:FlxText = new FlxText(40, i == 0 ? 80 : (120 + i * 32), 0, options[i].toString(), 32);
 			opt.font = AssetPaths.font('DTM-Sans');
 			opt.scrollFactor.set();
 			opt.active = false;
