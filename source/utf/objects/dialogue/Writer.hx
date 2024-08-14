@@ -52,7 +52,7 @@ class Writer extends TypeText
 		start(TyperRegistry.fetchTyper(dialogue.typer ?? 'default'), dialogue.text);
 	}
 
-	override public function update(elapsed:Float):Void
+	public override function update(elapsed:Float):Void
 	{
 		if (Controls.justPressed('confirm') && finished && !done)
 		{

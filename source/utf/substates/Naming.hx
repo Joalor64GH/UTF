@@ -288,7 +288,7 @@ class Naming extends FlxSubState
 		});
 	}
 
-	override public function close():Void
+	public override function close():Void
 	{
 		FlxG.state.persistentDraw = prevPersistentDraw;
 		FlxG.state.persistentUpdate = prevPersistentUpdate;
