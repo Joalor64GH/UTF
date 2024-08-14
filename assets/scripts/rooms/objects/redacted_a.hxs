@@ -16,4 +16,20 @@ class RedactedAObject extends Object
 		immovable = true;
 		solid = true;
 	}
+
+	public override function interact():Void
+	{
+		if (FlxG.state.chara != null)
+			FlxG.state.chara.characterControllable = false;
+
+		objectInteractable = false;
+
+		FlxG.state.startDialogue([{typer: 'redacted_a', text: '* [redacted]'}], function():Void
+		{
+			if (FlxG.state.chara != null)
+				FlxG.state.chara.characterControllable = true;
+
+			objectInteractable = true;
+		});
+	}
 }
