@@ -256,7 +256,7 @@ class Room extends FlxTransitionableState
 			if (dialogueBox != null)
 			{
 				dialogueBox.kill();
-				remove(dialogueBox);
+				remove(dialogueBox, true);
 				dialogueBox.destroy();
 			}
 
