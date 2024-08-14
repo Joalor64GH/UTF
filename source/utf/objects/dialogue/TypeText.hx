@@ -105,7 +105,7 @@ class TypeText extends FlxText
 	private inline function setupTyper(typer:Typer):Void
 	{
 		if (this.typer != typer)
-			this.typer.destroy();
+			this.typer?.destroy();
 
 		if (font != typer.fontName)
 			font = typer.fontName;
