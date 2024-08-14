@@ -1,3 +1,4 @@
+import flixel.FlxG;
 import utf.AssetPaths;
 import utf.objects.room.Object;
 
