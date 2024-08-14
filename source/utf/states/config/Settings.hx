@@ -116,9 +116,6 @@ class Settings extends FlxState
 	@:noCompletion
 	private function changeOption(num:Int = 0):Void
 	{
-		if (num != 0)
-			FlxG.sound.play(AssetPaths.sound('menumove'));
-
 		selected = FlxMath.wrap(selected + num, 0, options.length - 1);
 
 		items.forEach(function(spr:FlxText):Void
@@ -130,9 +127,6 @@ class Settings extends FlxState
 	@:noCompletion
 	private function changeValue(direction:Int = 0):Void
 	{
-		if (direction != 0)
-			FlxG.sound.play(AssetPaths.sound('menumove'));
-
 		final option:Option = options[selected];
 
 		if (option != null)
