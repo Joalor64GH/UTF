@@ -60,6 +60,14 @@ class TypeText extends FlxText
 		typingTimer = new FlxTimer();
 	}
 
+	public override function destroy():Void
+	{
+		super.destroy();
+
+		typer = FlxDestroyUtil.destory(typer);
+		typingTimer = FlxDestroyUtil.destory(typingTimer);
+	}
+
 	/**
 	 * Starts typing out the specified text using the provided `Typer`.
 	 * @param typer The `Typer` instance controlling the typing effect.
@@ -95,6 +103,9 @@ class TypeText extends FlxText
 	@:noCompletion
 	private inline function setupTyper(typer:Typer):Void
 	{
+		if (this.typer != typer)
+			this.typer.destroy();
+
 		if (font != typer.fontName)
 			font = typer.fontName;
 
