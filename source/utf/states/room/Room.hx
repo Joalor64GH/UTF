@@ -253,7 +253,7 @@ class Room extends FlxTransitionableState
 		dialogueBox.camera = camHud;
 		dialogueBox.writer.finishCallback = function():Void
 		{
-			if (dialogueBox != null)
+			/*if (dialogueBox != null)
 			{
 				dialogueBox.active = dialogueBox.visible = false;
 
@@ -263,6 +263,8 @@ class Room extends FlxTransitionableState
 
 				dialogueBox = null;
 			}
+			else*/
+				remove(dialogueBox);
 
 			if (finishCallback != null)
 				finishCallback();
