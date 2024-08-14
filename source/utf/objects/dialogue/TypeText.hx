@@ -3,6 +3,7 @@ package utf.objects.dialogue;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.sound.FlxSound;
+import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxTimer;
 import flixel.FlxG;
 import utf.objects.dialogue.typers.Typer;
