@@ -2,7 +2,7 @@ package utf.objects.dialogue;
 
 import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.util.FlxColor;
-import objects.dialogue.Writer;
+import utf.objects.dialogue.Writer;
 
 class DialogueBox extends FlxSpriteGroup
 {
