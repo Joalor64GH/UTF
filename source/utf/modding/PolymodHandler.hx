@@ -34,7 +34,7 @@ class PolymodHandler
 	/**
 	 * Stores metadata for the loaded mods.
 	 */
-	public static var data(default, null):Map<String, ModMetadata> = [];
+	public static var loadedMods(default, null):Map<String, ModMetadata> = [];
 
 	/**
 	 * Loads the game with ALL mods enabled with Polymod.
@@ -106,7 +106,7 @@ class PolymodHandler
 
 		for (pack in Polymod.scan({modRoot: MODS_ROOT, apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version'))}))
 		{
-			data.set(pack.id, pack);
+			loadedMods.set(pack.id, pack);
 
 			// TODO: Adding the ability to disable mods.
 			if (true)
