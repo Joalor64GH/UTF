@@ -21,14 +21,14 @@ class Writer extends TypeText
 	public var skippable:Bool = true;
 	public var finishCallback:Void->Void = null;
 
+	@:noCompletion
 	var done:Bool = false;
-	var list:Array<DialogueData> = [];
-	var page:Int = 0;
 
-	public function new(x:Float = 0, y:Float = 0):Void
-	{
-		super(x, y);
-	}
+	@:noCompletion
+	var list:Array<DialogueData> = [];
+
+	@:noCompletion
+	var page:Int = 0;
 
 	public function startDialogue(list:Array<DialogueData>):Void
 	{
