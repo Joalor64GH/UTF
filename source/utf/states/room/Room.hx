@@ -226,9 +226,6 @@ class Room extends FlxTransitionableState
 		dialogueBox.camera = camHud;
 		dialogueBox.writer.finishCallback = function():Void
 		{
-			if (finishCallback != null)
-				finishCallback();
-
 			if (dialogueBox != null)
 			{
 				dialogueBox.kill();
@@ -237,6 +234,9 @@ class Room extends FlxTransitionableState
 			}
 
 			dialogueBox = null;
+
+			if (finishCallback != null)
+				finishCallback();
 		}
 		dialogueBox.writer.startDialogue(dialogue);
 		add(dialogueBox);
