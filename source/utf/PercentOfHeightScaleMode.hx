@@ -10,6 +10,7 @@ class PercentOfHeightScaleMode extends RatioScaleMode
 	/**
 	 * The percentage by which to scale the game size.
 	 */
+	@:noCompletion
 	private var percent:Float;
 
 	/**
