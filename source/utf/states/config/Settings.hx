@@ -179,12 +179,12 @@ class Settings extends FlxState
 			switch (DateUtil.getWeather())
 			{
 				case 1:
-					FlxG.sound.playMusic(AssetPaths.music('options_winter', 0.8);
+					FlxG.sound.playMusic(AssetPaths.music('options_winter'), 0.8);
 				case 3:
-					FlxG.sound.playMusic(AssetPaths.music('options_summer', 0.8);
-						default:
-							FlxG.sound.playMusic(AssetPaths.music('options_fall'), 0.8)
-							;
+					FlxG.sound.playMusic(AssetPaths.music('options_summer'), 0.8);
+				default:
+					FlxG.sound.playMusic(AssetPaths.music('options_fall'), 0.8);
+					;
 			}
 		});
 	}
