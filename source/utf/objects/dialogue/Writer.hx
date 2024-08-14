@@ -22,19 +22,17 @@ class Writer extends TypeText
 	public var finishCallback:Void->Void = null;
 
 	@:noCompletion
-	var done:Bool = false;
+	private var done:Bool = false;
 
 	@:noCompletion
-	var list:Array<DialogueData> = [];
+	private var list:Array<DialogueData> = [];
 
 	@:noCompletion
-	var page:Int = 0;
+	private var page:Int = 0;
 
 	public function startDialogue(list:Array<DialogueData>):Void
 	{
-		this.list = list ?? [
-			{typer: 'default', text: 'Error!'}
-		];
+		this.list = list ?? [{typer: 'default', text: 'Error!'}];
 
 		page = 0;
 
