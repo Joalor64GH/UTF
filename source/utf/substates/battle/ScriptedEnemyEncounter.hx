@@ -1,4 +1,4 @@
-package utf.states.room;
+package utf.substates.battle;
 
 import polymod.hscript.HScriptedClass;
 import utf.substates.battle.EnemyEncounter;
