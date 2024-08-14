@@ -1,6 +1,7 @@
 package utf.objects.dialogue;
 
 import flixel.addons.display.shapes.FlxShapeBox;
+import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
 import utf.objects.dialogue.Writer;
 
