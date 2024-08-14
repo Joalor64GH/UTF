@@ -42,30 +42,57 @@ class Room extends FlxTransitionableState
 	 */
 	public var roomHeight:Int;
 
+	/**
+	 * A group containing the background sprites in the room.
+	 */
 	@:noCompletion
 	private var backgrounds:FlxTypedGroup<FlxSprite>;
 
+	/**
+	 * A group containing the tile sprites in the room.
+	 */
 	@:noCompletion
 	private var tiles:FlxTypedGroup<FlxSprite>;
 
+	/**
+	 * A group containing the interactive objects in the room.
+	 */
 	@:noCompletion
 	private var objects:FlxTypedGroup<Object>;
 
+	/**
+	 * The main character object present in the room.
+	 */
 	@:noCompletion
 	private var chara:Chara;
 
+	/**
+	 * The main game camera for rendering the room.
+	 */
 	@:noCompletion
 	private var camGame:FlxCamera;
 
+	/**
+	 * The HUD camera used for displaying overlays like dialogue boxes.
+	 */
 	@:noCompletion
 	private var camHud:FlxCamera;
 
+	/**
+	 * The object that the camera follows within the room.
+	 */
 	@:noCompletion
 	private var camFollow:FlxObject;
 
+	/**
+	 * Determines whether the camera's following behavior can be controlled.
+	 */
 	@:noCompletion
 	private var camFollowControllable:Bool = false;
 
+	/**
+	 * The dialogue box currently active in the room, if any.
+	 */
 	@:noCompletion
 	private var dialogueBox:DialogueBox;
 
@@ -232,8 +259,6 @@ class Room extends FlxTransitionableState
 				remove(dialogueBox);
 				dialogueBox.destroy();
 			}
-
-			dialogueBox = null;
 
 			if (finishCallback != null)
 				finishCallback();
