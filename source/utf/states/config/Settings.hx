@@ -184,7 +184,6 @@ class Settings extends FlxState
 					FlxG.sound.playMusic(AssetPaths.music('options_summer'), 0.8);
 				default:
 					FlxG.sound.playMusic(AssetPaths.music('options_fall'), 0.8);
-					;
 			}
 		});
 	}
