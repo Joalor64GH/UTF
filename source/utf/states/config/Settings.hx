@@ -1,10 +1,12 @@
 package utf.states.config;
 
+import flixel.effects.particles.FlxEmitter;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.util.FlxTimer;
 import utf.states.config.Option;
@@ -31,6 +33,9 @@ class Settings extends FlxState
 
 	@:noCompletion
 	private var holdDirection:Int = 0;
+
+	@:noCompletion
+	private var tobdogLine:FlxText;
 
 	public function new():Void
 	{
@@ -60,21 +65,20 @@ class Settings extends FlxState
 	public override function create():Void
 	{
 		persistentUpdate = false;
-		var weatherMusic:String = AssetPaths.music('options_fall');
 
 		switch (DateUtil.getWeather())
 		{
 			case 1:
-				weatherMusic = AssetPaths.music('options_winter');
+				AssetPaths.music('options_winter');
 			case 3:
-				weatherMusic = AssetPaths.music('options_summer');
+				AssetPaths.music('options_summer');
+			default:
+				AssetPaths.music('options_fall');
 		}
-
-		FlxG.sound.cache(weatherMusic);
 
 		if (DateUtil.getWeather() != 3)
 		{
-			var particles:FlxEmitter = new FlxEmitter(0, 0);
+			final particles:FlxEmitter = new FlxEmitter(0, 0);
 			particles.loadParticles(AssetPaths.sprite(DateUtil.getWeather() == 1 ? 'christmasflake' : 'fallleaf'), 120);
 			particles.alpha.set(0.5, 0.5);
 			particles.scale.set(2, 2);
@@ -172,7 +176,16 @@ class Settings extends FlxState
 
 		FlxTimer.wait(1.5, function():Void
 		{
-			FlxG.sound.playMusic(weatherMusic, 0.8);
+			switch (DateUtil.getWeather())
+			{
+				case 1:
+					FlxG.sound.playMusic(AssetPaths.music('options_winter', 0.8);
+				case 3:
+					FlxG.sound.playMusic(AssetPaths.music('options_summer', 0.8);
+						default:
+							FlxG.sound.playMusic(AssetPaths.music('options_fall'), 0.8)
+							;
+			}
 		});
 	}
 
