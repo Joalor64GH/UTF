@@ -100,8 +100,8 @@ class PolymodHandler
 	@:noCompletion
 	private static function getModDirs():Array<String>
 	{
-		if (data != null && Lambda.count(data) > 0)
-			data.clear();
+		if (loadedMods != null && Lambda.count(loadedMods) > 0)
+			loadedMods.clear();
 
 		final packs:Array<String> = [];
 
