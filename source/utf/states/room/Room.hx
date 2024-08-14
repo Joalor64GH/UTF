@@ -11,6 +11,8 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import utf.registries.CharaRegistry;
 import utf.registries.ObjectRegistry;
+import utf.objects.dialogue.DialogueBox;
+import utf.objects.dialogue.Writer;
 import utf.objects.room.Chara;
 import utf.objects.room.Object;
 import utf.util.FlxGraphicUtil;
@@ -64,6 +66,9 @@ class Room extends FlxTransitionableState
 	@:noCompletion
 	private var camFollowControllable:Bool = false;
 
+	@:noCompletion
+	private var dialogueBox:DialogueBox;
+
 	/**
 	 * Constructor to initialize the room with a specified ID.
 	 * @param roomNumber The number of the room.
@@ -96,7 +101,7 @@ class Room extends FlxTransitionableState
 			add(objects);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
-		
+
 		if (chara != null)
 		{
 			if (!camFollowControllable)
@@ -205,5 +210,35 @@ class Room extends FlxTransitionableState
 		chara = CharaRegistry.fetchCharacter(id);
 		chara.setPosition(x, y);
 		return chara;
+	}
+
+	/**
+	 * Initiates a dialogue sequence in the room.
+	 * @param dialogue The array of `DialogueData` to display during the dialogue sequence.
+	 * @param finishCallback An optional callback function to execute once the dialogue finishes.
+	 */
+	public function startDialogue(dialogue:Array<DialogueData>, ?finishCallback:Void->Void):Void
+	{
+		if (dialogue == null || dialogue.length <= 0)
+			return;
+
+		dialogueBox = new DialogueBox((chara != null && chara.y >= 260));
+		dialogueBox.camera = camHud;
+		dialogueBox.writer.finishCallback = function():Void
+		{
+			if (finishCallback != null)
+				finishCallback();
+
+			if (dialogueBox != null)
+			{
+				dialogueBox.kill();
+				remove(dialogueBox);
+				dialogueBox.destroy();
+			}
+
+			dialogueBox = null;
+		}
+		dialogueBox.writer.startDialogue(dialogue);
+		add(dialogueBox);
 	}
 }
