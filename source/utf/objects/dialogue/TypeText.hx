@@ -65,8 +65,8 @@ class TypeText extends FlxText
 	{
 		super.destroy();
 
-		typer = FlxDestroyUtil.destory(typer);
-		typingTimer = FlxDestroyUtil.destory(typingTimer);
+		typer = FlxDestroyUtil.destroy(typer);
+		typingTimer = FlxDestroyUtil.destroy(typingTimer);
 	}
 
 	/**
