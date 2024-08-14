@@ -122,6 +122,7 @@ class TypeText extends FlxText
 				if (waitTime != null)
 				{
 					originalText = originalText.substring(0, textPos) + originalText.substring(textPos + 2);
+
 					textPos--;
 
 					if (waitTime > 0)
@@ -142,6 +143,8 @@ class TypeText extends FlxText
 		if (textPos > originalText.length)
 			textPos = originalText.length;
 
+		playSounds(originalText.charAt(textPos));
+
 		return true;
 	}
 
@@ -153,9 +156,6 @@ class TypeText extends FlxText
 		if (text != curText)
 		{
 			text = curText;
-
-			if (textPos <= originalText.length)
-				playSounds(originalText.charAt(textPos - 1));
 
 			if (textPos >= originalText.length)
 			{
