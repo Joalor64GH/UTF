@@ -118,7 +118,7 @@ class PolymodHandler
 	}
 
 	@:noCompletion
-	private static function buildImports():Void
+	private static inline function buildImports():Void
 	{
 		Polymod.addImportAlias('flixel.effects.particles.FlxEmitter', flixel.effects.particles.FlxEmitter);
 		Polymod.addImportAlias('flixel.group.FlxContainer', flixel.group.FlxContainer);
@@ -158,13 +158,13 @@ class PolymodHandler
 	}
 
 	@:noCompletion
-	private static function buildFileSystem():ZipFileSystem
+	private static inline function buildFileSystem():ZipFileSystem
 	{
 		return new ZipFileSystem({modRoot: MODS_ROOT, autoScan: true});
 	}
 
 	@:noCompletion
-	private static function buildParseRules():ParseRules
+	private static inline function buildParseRules():ParseRules
 	{
 		final output:ParseRules = ParseRules.getDefault();
 		output.addType('txt', TextFileFormat.LINES);
