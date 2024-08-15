@@ -16,9 +16,17 @@ import utf.substates.GameOver;
 
 class EnemyEncounter extends FlxSubState
 {
-	var selected:Int = 0;
-	final choices:Array<String> = ['Fight', 'Talk', 'Item', 'Spare'];
-	var items:FlxTypedGroup<FlxSprite>;
+	@:noCompletion
+	private var selected:Int = 0;
+
+	@:noCompletion
+	private final choices:Array<String> = ['Fight', 'Talk', 'Item', 'Spare'];
+
+	@:noCompletion
+	private var choiceSelected:Bool = false;
+
+	@:noCompletion
+	private var items:FlxTypedGroup<FlxSprite>;
 
 	public var bg:FlxSprite;
 	public var stats:FlxText;
@@ -31,12 +39,10 @@ class EnemyEncounter extends FlxSubState
 	public var heart:FlxSprite;
 	public var writer:Writer;
 
-	var bullets:FlxTypedGroup<FlxSprite>;
-
 	@:noCompletion
 	private override function create():Void
 	{
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		final bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.screenCenter();
 		bg.active = false;
 		add(bg);
@@ -112,15 +118,10 @@ class EnemyEncounter extends FlxSubState
 		writer.scrollFactor.set();
 		add(writer);
 
-		bullets = new FlxTypedGroup<FlxSprite>();
-		add(bullets);
-
 		changeChoice();
 
 		super.create();
 	}
-
-	var choiceSelected:Bool = false;
 
 	@:noCompletion
 	private override function update(elapsed:Float):Void
