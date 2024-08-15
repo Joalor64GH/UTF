@@ -187,7 +187,7 @@ class TypeText extends FlxText
 	{
 		if (typer?.typerSounds != null && typer?.typerSounds?.length > 0 && !IGNORE_CHARACTERS.contains(currentChar))
 		{
-			if (typerSounds.length > 1)
+			if (typer.typerSounds.length > 1)
 			{
 				for (sound in typer.typerSounds)
 					sound.stop();
