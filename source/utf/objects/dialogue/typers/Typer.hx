@@ -1,7 +1,6 @@
 package utf.objects.dialogue.typers;
 
-import flixel.sound.FlxSound;
-import flixel.util.FlxDestroyUtil;
+import flixel.util.FlxArrayUtil;
 import flixel.util.FlxStringUtil;
 
 /**
@@ -32,7 +31,7 @@ class Typer implements IFlxDestroyable
 	/**
 	 * Array of sounds associated with the typer.
 	 */
-	public var typerSounds:Array<FlxSound>;
+	public var typerSounds:Array<{sound:Sound, volume:Float, ?pitch:Float}>;
 
 	/**
 	 * The amount of seconds between characters being typed.
@@ -53,7 +52,7 @@ class Typer implements IFlxDestroyable
 	 */
 	public function destroy():Void
 	{
-		typerSounds = FlxDestroyUtil.destroyArray(typerSounds);
+		typerSounds = FlxArrayUtil.clearArray(typerSounds);
 	}
 
 	/**
