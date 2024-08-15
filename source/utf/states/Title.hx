@@ -10,7 +10,11 @@ import utf.states.Intro;
 
 class Title extends FlxState
 {
-	var titleText:FlxText;
+	@:noCompletion
+	private var titleText:FlxText;
+
+	@:noCompletion
+	private var letters:String = '';
 
 	@:noCompletion
 	private override function create():Void
@@ -36,8 +40,6 @@ class Title extends FlxState
 
 		FlxG.sound.play(AssetPaths.music('intronoise'), () -> titleText.alpha = 1);
 	}
-
-	var letters:String = '';
 
 	@:noCompletion
 	private override function update(elapsed:Float):Void
