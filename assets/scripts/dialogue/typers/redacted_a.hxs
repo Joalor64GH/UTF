@@ -11,6 +11,7 @@ class RedactedATyper extends Typer
 		fontName = AssetPaths.font('Wingdings', false);
 		fontSize = 24;
 		fontSpacing = 1.6;
+		typerOffset.set(20, 20);
 		typerSounds = [
 			{sound: AssetPaths.sound('wngdng7', false), volume: 0.9},
 			{sound: AssetPaths.sound('wngdng6', false), volume: 0.83},
