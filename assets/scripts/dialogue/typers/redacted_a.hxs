@@ -12,13 +12,13 @@ class RedactedATyper extends Typer
 		fontSize = 24;
 		fontSpacing = 1.6;
 		typerSounds = [
-			FlxG.sound.load(AssetPaths.sound('wngdng7', false), 0.9),
-			FlxG.sound.load(AssetPaths.sound('wngdng6', false), 0.83),
-			FlxG.sound.load(AssetPaths.sound('wngdng5', false), 0.85),
-			FlxG.sound.load(AssetPaths.sound('wngdng4', false), 0.84),
-			FlxG.sound.load(AssetPaths.sound('wngdng3', false), 0.81),
-			FlxG.sound.load(AssetPaths.sound('wngdng2', false), 0.99),
-			FlxG.sound.load(AssetPaths.sound('wngdng1', false), 1.0)
+			{sound: AssetPaths.sound('wngdng7', false), volume: 0.9},
+			{sound: AssetPaths.sound('wngdng6', false), volume: 0.83},
+			{sound: AssetPaths.sound('wngdng5', false), volume: 0.85},
+			{sound: AssetPaths.sound('wngdng4', false), volume: 0.84},
+			{sound: AssetPaths.sound('wngdng3', false), volume: 0.81},
+			{sound: AssetPaths.sound('wngdng2', false), volume: 0.99},
+			{sound: AssetPaths.sound('wngdng1', false), volume: 1.0}
 		];
 		typerLPS = 0.3333;
 	}
