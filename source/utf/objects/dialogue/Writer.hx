@@ -52,6 +52,8 @@ class Writer extends TypeText
 
 	public override function update(elapsed:Float):Void
 	{
+		super.update(elapsed);
+
 		if (Controls.justPressed('confirm') && finished && !done)
 		{
 			if (page < list.indexOf(list.last()))
@@ -70,7 +72,5 @@ class Writer extends TypeText
 		}
 		else if (Controls.justPressed('cancel') && !finished && skippable)
 			skip();
-
-		super.update(elapsed);
 	}
 }
