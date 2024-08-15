@@ -147,7 +147,12 @@ class TypeText extends FlxText
 					}
 				}
 				else
+				{
 					textPos++;
+
+					if (originalText.charAt(textPos) == ' ' || originalText.charAt(textPos) == '\n')
+						return updateTextPos(timer);
+				}
 			default:
 				textPos++;
 		}
