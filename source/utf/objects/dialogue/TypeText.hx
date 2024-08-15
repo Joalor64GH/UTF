@@ -127,7 +127,7 @@ class TypeText extends FlxText
 			case ' ' | '\n':
 				textPos++;
 
-				return false;
+				return updateTextPos(timer);
 			case '^':
 				final waitTime:Null<Int> = Std.parseInt(originalText.charAt(textPos + 1));
 
