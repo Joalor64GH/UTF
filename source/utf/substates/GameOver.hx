@@ -11,10 +11,10 @@ import utf.objects.dialogue.Writer;
 class GameOver extends FlxSubState
 {
 	@:noCompletion
-	var gameoverbg:FlxSprite;
+	private var gameoverbg:FlxSprite;
 
 	@:noCompletion
-	var writer:Writer;
+	private var writer:Writer;
 
 	@:noCompletion
 	private override function create():Void
