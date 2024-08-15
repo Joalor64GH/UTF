@@ -186,7 +186,19 @@ class TypeText extends FlxText
 	private function playSounds(currentChar:String):Void
 	{
 		if (typer?.typerSounds != null && typer?.typerSounds?.length > 0 && !IGNORE_CHARACTERS.contains(currentChar))
-			FlxG.random.getObject(typer.typerSounds).play(true);
+		{
+			final typingSound:TypingSound = typer.typerSounds[FlxG.random.int(0, typer.typerSounds.length - 1)];
+
+			if (typingSound != null)
+			{
+				final sound:FlxSound = FlxG.sound.load(typingSound.sound, typingSound.volume);
+
+				if (typingSound.pitch != null)
+					sound.pitch = typingSound.pitch;
+
+				sound.play();
+			}
+		}
 	}
 
 	@:noCompletion
