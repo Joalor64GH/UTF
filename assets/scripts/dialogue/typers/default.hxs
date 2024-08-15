@@ -11,6 +11,6 @@ class DefaultTyper extends Typer
 		fontName = AssetPaths.font('DTM-Mono', false);
 		fontSize = 32;
 		typerSounds = [FlxG.sound.load(AssetPaths.sound('txt1', false), 1)];
-		typerLPS = 0.05;
+		typerLPS = 0.5;
 	}
 }
