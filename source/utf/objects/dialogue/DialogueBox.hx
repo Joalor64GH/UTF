@@ -9,8 +9,8 @@ typedef DialogueData =
 {
 	> WriterData,
 
-	portrait:String
-	?face:String,
+	portrait:String,
+	?face:String
 }
 
 /**
