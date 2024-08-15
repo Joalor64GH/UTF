@@ -2,6 +2,14 @@ package utf.objects.dialogue.typers;
 
 import flixel.util.FlxArrayUtil;
 import flixel.util.FlxStringUtil;
+import openfl.media.Sound;
+
+typedef TypingSound =
+{
+	sound:Sound,
+	volume:Float,
+	?pitch:Float
+}
 
 /**
  * Represents a typer for displaying text in the game.
@@ -31,7 +39,7 @@ class Typer implements IFlxDestroyable
 	/**
 	 * Array of sounds associated with the typer.
 	 */
-	public var typerSounds:Array<{sound:Sound, volume:Float, ?pitch:Float}>;
+	public var typerSounds:Array<TypingSound>;
 
 	/**
 	 * The amount of seconds between characters being typed.
