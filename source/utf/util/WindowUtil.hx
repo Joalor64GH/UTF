@@ -15,7 +15,7 @@ class WindowUtil
 	 * @param name The title of the popup.
 	 * @param desc The content of the popup.
 	 */
-	public static function showAlert(name:String, desc:String):Void
+	public static inline function showAlert(name:String, desc:String):Void
 	{
 		#if !android
 		Lib.application.window.alert(desc, name);
