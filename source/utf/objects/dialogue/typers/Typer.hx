@@ -1,14 +1,29 @@
 package utf.objects.dialogue.typers;
 
+import flixel.math.FlxPoint;
 import flixel.util.FlxArrayUtil;
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxStringUtil;
 import openfl.media.Sound;
 
+/**
+ * A structure representing the sound settings for typing effects.
+ */
 typedef TypingSound =
 {
+	/**
+	 * The sound to be played when typing.
+	 */
 	sound:Sound,
+
+	/**
+	 * The volume level of the sound, where 1.0 is 100%.
+	 */
 	volume:Float,
+
+	/**
+	 * The pitch of the sound, if specified. Defaults to 1.0 (normal pitch) if not provided.
+	 */
 	?pitch:Float
 }
 
@@ -21,6 +36,21 @@ class Typer implements IFlxDestroyable
 	 * The ID of the typer.
 	 */
 	public var typerID:String;
+
+	/**
+	 * The offset position of the typer relative to a base position.
+	 */
+	public var typerOffset:FlxPoint = FlxPoint.get();
+
+	/**
+	 * Array of sounds associated with the typer.
+	 */
+	public var typerSounds:Array<TypingSound>;
+
+	/**
+	 * The amount of seconds between characters being typed.
+	 */
+	public var typerLPS:Float;
 
 	/**
 	 * The name of the font used by the typer.
@@ -38,16 +68,6 @@ class Typer implements IFlxDestroyable
 	public var fontSpacing:Null<Float>;
 
 	/**
-	 * Array of sounds associated with the typer.
-	 */
-	public var typerSounds:Array<TypingSound>;
-
-	/**
-	 * The amount of seconds between characters being typed.
-	 */
-	public var typerLPS:Float;
-
-	/**
 	 * Constructor to initialize the typer with specified ID.
 	 * @param typerID The ID of the typer.
 	 */
@@ -61,6 +81,7 @@ class Typer implements IFlxDestroyable
 	 */
 	public function destroy():Void
 	{
+		typerOffset = FlxDestroyUtil.put(typerOffset);
 		typerSounds = FlxArrayUtil.clearArray(typerSounds);
 	}
 
@@ -76,7 +97,7 @@ class Typer implements IFlxDestroyable
 			LabelValuePair.weak("Font Size", fontSize),
 			LabelValuePair.weak("Font Spacing", fontSpacing),
 			LabelValuePair.weak("Typer Sounds", typerSounds),
-			LabelValuePair.weak("Typer Latters Per Second", typerLPS)
+			LabelValuePair.weak("Typer Letters Per Second", typerLPS)
 		]);
 	}
 }
