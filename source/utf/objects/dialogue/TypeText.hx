@@ -191,14 +191,12 @@ class TypeText extends FlxText
 
 			if (typingSound != null)
 			{
-				/*final sound:FlxSound = FlxG.sound.load(typingSound.sound, typingSound.volume);
+				final sound:FlxSound = FlxG.sound.load(typingSound.sound, typingSound.volume);
 
 				if (typingSound.pitch != null)
 					sound.pitch = typingSound.pitch;
 
-				sound.play();*/
-
-				FlxG.sound.play(typingSound.sound, typingSound.volume);
+				sound.play();
 			}
 		}
 	}
