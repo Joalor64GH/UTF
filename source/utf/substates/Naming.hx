@@ -30,9 +30,11 @@ typedef SpecialDelta =
 
 class Naming extends FlxSubState
 {
-	static var curName:String = '';
+	@:noCompletion
+	private static var curName:String = '';
 
-	final characterNames:Map<Array<String>, Name> = [
+	@:noCompletion
+	private final characterNames:Map<Array<String>, Name> = [
 		[''] => {description: 'You must choose a name.', allow: false}, ['aaaaaa'] => {description: 'Not very creative...?', allow: true},
 		['asgore'] => {description: 'You cannot.', allow: false},
 		['toriel'] => {description: 'I think you should\nthink of your own\nname, my child.', allow: false}, ['sans'] => {description: 'nope.', allow: false},
@@ -51,23 +53,37 @@ class Naming extends FlxSubState
 		['jigsaw'] => {description: 'I want to play\na game.', allow: true}
 	];
 
-	final keyActions:Map<String, DeltaMap> = [
+	@:noCompletion
+	private final keyActions:Map<String, DeltaMap> = [
 		'RIGHT' => {delta: 1},
 		'LEFT' => {delta: -1},
 		'DOWN' => {delta: 7, special: [{start: 21, end: 25, delta: 5}, {start: 19, end: 20, delta: 12}]},
 		'UP' => {delta: -7, special: [{start: 26, end: 30, delta: -5}, {start: 31, end: 32, delta: -12}]}
 	];
 
-	var name:FlxText;
-	var letters:FlxTypedGroup<FlxText>;
-	var choices:FlxTypedGroup<FlxText>;
+	@:noCompletion
+	private var name:FlxText;
 
-	var selectedLetter:Int = 0;
-	var selectedChoice:Int = 0;
-	var writingLetters:Bool = true;
+	@:noCompletion
+	private var letters:FlxTypedGroup<FlxText>;
 
-	var prevPersistentDraw:Bool;
-	var prevPersistentUpdate:Bool;
+	@:noCompletion
+	private var choices:FlxTypedGroup<FlxText>;
+
+	@:noCompletion
+	private var selectedLetter:Int = 0;
+
+	@:noCompletion
+	private var selectedChoice:Int = 0;
+
+	@:noCompletion
+	private var writingLetters:Bool = true;
+
+	@:noCompletion
+	private var prevPersistentDraw:Bool;
+
+	@:noCompletion
+	private var prevPersistentUpdate:Bool;
 
 	@:noCompletion
 	private override function create():Void
@@ -78,12 +94,12 @@ class Naming extends FlxSubState
 		FlxG.state.persistentDraw = false;
 		FlxG.state.persistentUpdate = false;
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		final bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.screenCenter();
 		bg.active = false;
 		add(bg);
 
-		var namingText:FlxText = new FlxText(0, 60, 0, 'Name the fallen human.', 32);
+		final namingText:FlxText = new FlxText(0, 60, 0, 'Name the fallen human.', 32);
 		namingText.font = AssetPaths.font('DTM-Sans');
 		namingText.screenCenter(X);
 		namingText.scrollFactor.set();
@@ -105,7 +121,7 @@ class Naming extends FlxSubState
 
 		for (i in 0...upLetters.length)
 		{
-			var letter:FlxText = new FlxText(120 + line * 64, 150 + row * 28, 0, String.fromCharCode(upLetters[i]), 32);
+			final letter:FlxText = new FlxText(120 + line * 64, 150 + row * 28, 0, String.fromCharCode(upLetters[i]), 32);
 			letter.font = AssetPaths.font('DTM-Sans');
 			letter.ID = i;
 			letter.scrollFactor.set();
@@ -129,7 +145,7 @@ class Naming extends FlxSubState
 
 		for (i in 0...lowLetters.length)
 		{
-			var letter:FlxText = new FlxText(120 + line * 64, 270 + row * 28, 0, String.fromCharCode(lowLetters[i]), 32);
+			final letter:FlxText = new FlxText(120 + line * 64, 270 + row * 28, 0, String.fromCharCode(lowLetters[i]), 32);
 			letter.font = AssetPaths.font('DTM-Sans');
 			letter.ID = lowLetters.length + i;
 			letter.scrollFactor.set();
@@ -152,7 +168,7 @@ class Naming extends FlxSubState
 
 		for (i in 0...choiceNames.length)
 		{
-			var choice:FlxText = new FlxText(0, 0, 0, choiceNames[i], 32);
+			final choice:FlxText = new FlxText(0, 0, 0, choiceNames[i], 32);
 
 			switch (choiceNames[i])
 			{
@@ -259,12 +275,6 @@ class Naming extends FlxSubState
 		}
 
 		super.update(elapsed);
-
-		#if debug
-		FlxG.watch.addQuick('currentName', curName);
-		FlxG.watch.addQuick('selectedLetter', selectedLetter);
-		FlxG.watch.addQuick('selectedChoice', selectedChoice);
-		#end
 
 		if (name != null && name.text != curName)
 			name.text = curName;
