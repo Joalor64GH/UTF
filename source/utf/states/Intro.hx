@@ -28,14 +28,15 @@ enum Scroll
 class Intro extends FlxState
 {
 	@:noCompletion
-	var selected:Int = 0;
+	private var selected:Int = 0;
 
 	@:noCompletion
-	var choices:Array<String> = [];
+	private var choices:Array<String> = [];
 
 	@:noCompletion
-	var items:FlxTypedGroup<FlxText>;
+	private var items:FlxTypedGroup<FlxText>;
 
+	@:noCompletion
 	private override function create():Void
 	{
 		if (Global.flags[0] == 1)
@@ -175,6 +176,7 @@ class Intro extends FlxState
 		super.create();
 	}
 
+	@:noCompletion
 	private override function update(elapsed:Float):Void
 	{
 		if (Global.flags[0] == 1)
