@@ -45,7 +45,8 @@ class Chara extends FlxSprite
 		characterHitbox = new FlxObject(x + (this.width - width) / 2, y + this.height - height, width, height);
 	}
 
-	public override function setPosition(x:Float = 0.0, y:Float = 0.0):Void
+	@:noCompletion
+	private override function setPosition(x:Float = 0.0, y:Float = 0.0):Void
 	{
 		super.setPosition(x, y);
 
@@ -53,7 +54,8 @@ class Chara extends FlxSprite
 			characterHitbox.setPosition(x + (this.width - characterHitbox.width) / 2, y + this.height - characterHitbox.height);
 	}
 
-	public override function update(elapsed:Float):Void
+	@:noCompletion
+	private override function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 
@@ -66,7 +68,8 @@ class Chara extends FlxSprite
 		}
 	}
 
-	public override function draw():Void
+	@:noCompletion
+	private override function draw():Void
 	{
 		super.draw();
 
@@ -81,7 +84,8 @@ class Chara extends FlxSprite
 		}
 	}
 
-	public override function destroy():Void
+	@:noCompletion
+	private override function destroy():Void
 	{
 		super.destroy();
 

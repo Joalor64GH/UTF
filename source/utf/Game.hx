@@ -12,7 +12,8 @@ import flixel.FlxGame;
 @:access(openfl.events.UncaughtErrorEvents)
 class Game extends FlxGame
 {
-	public override function create(_):Void
+	@:noCompletion
+	private override function create(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
@@ -27,7 +28,8 @@ class Game extends FlxGame
 			super.create(_);
 	}
 
-	public override function onFocus(_):Void
+	@:noCompletion
+	private override function onFocus(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
@@ -42,7 +44,8 @@ class Game extends FlxGame
 			super.onFocus(_);
 	}
 
-	public override function onFocusLost(_):Void
+	@:noCompletion
+	private override function onFocusLost(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
@@ -57,7 +60,8 @@ class Game extends FlxGame
 			super.onFocusLost(_);
 	}
 
-	public override function onEnterFrame(_):Void
+	@:noCompletion
+	private override function onEnterFrame(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
@@ -72,7 +76,8 @@ class Game extends FlxGame
 			super.onEnterFrame(_);
 	}
 
-	public override function update():Void
+	@:noCompletion
+	private override function update():Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
@@ -87,7 +92,8 @@ class Game extends FlxGame
 			super.update();
 	}
 
-	public override function draw():Void
+	@:noCompletion
+	private override function draw():Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
@@ -102,8 +108,8 @@ class Game extends FlxGame
 			super.draw();
 	}
 
-	@:allow(flixel.FlxG)
-	public override function onResize(_):Void
+	@:noCompletion
+	private override function onResize(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{

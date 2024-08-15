@@ -69,7 +69,8 @@ class Naming extends FlxSubState
 	var prevPersistentDraw:Bool;
 	var prevPersistentUpdate:Bool;
 
-	override function create():Void
+	@:noCompletion
+	private override function create():Void
 	{
 		prevPersistentDraw = FlxG.state.persistentDraw;
 		prevPersistentUpdate = FlxG.state.persistentUpdate;
@@ -175,7 +176,8 @@ class Naming extends FlxSubState
 		super.create();
 	}
 
-	override function update(elapsed:Float):Void
+	@:noCompletion
+	private override function update(elapsed:Float):Void
 	{
 		if (writingLetters)
 		{
@@ -288,7 +290,8 @@ class Naming extends FlxSubState
 		});
 	}
 
-	public override function close():Void
+	@:noCompletion
+	private override function close():Void
 	{
 		FlxG.state.persistentDraw = prevPersistentDraw;
 		FlxG.state.persistentUpdate = prevPersistentUpdate;

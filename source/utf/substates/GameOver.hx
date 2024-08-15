@@ -10,10 +10,14 @@ import utf.objects.dialogue.Writer;
 
 class GameOver extends FlxSubState
 {
+	@:noCompletion
 	var gameoverbg:FlxSprite;
+
+	@:noCompletion
 	var writer:Writer;
 
-	override function create():Void
+	@:noCompletion
+	private override function create():Void
 	{
 		FlxG.sound.playMusic(AssetPaths.music('gameover'));
 
@@ -59,7 +63,8 @@ class GameOver extends FlxSubState
 		});
 	}
 
-	override function update(elapsed:Float):Void
+	@:noCompletion
+	private override function update(elapsed:Float):Void
 	{
 		if (Controls.justPressed('confirm') && !members.contains(writer) && gameoverbg.alpha == 1)
 		{

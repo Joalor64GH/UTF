@@ -33,7 +33,8 @@ class EnemyEncounter extends FlxSubState
 
 	var bullets:FlxTypedGroup<FlxSprite>;
 
-	override function create():Void
+	@:noCompletion
+	private override function create():Void
 	{
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.screenCenter();
@@ -121,7 +122,8 @@ class EnemyEncounter extends FlxSubState
 
 	var choiceSelected:Bool = false;
 
-	override function update(elapsed:Float):Void
+	@:noCompletion
+	private override function update(elapsed:Float):Void
 	{
 		if (Controls.justPressed('right') && !choiceSelected)
 			changeChoice(1);
