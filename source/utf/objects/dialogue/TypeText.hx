@@ -122,45 +122,37 @@ class TypeText extends FlxText
 	@:noCompletion
 	private function updateTextPos(timer:FlxTimer):Bool
 	{
-		switch (originalText.charAt(textPos))
+		final currentChar:String = originalText.charAt(textPos);
+
+		playSounds(currentChar);
+
+		textPos++;
+
+		switch (currentChar)
 		{
 			case ' ' | '\n':
-				textPos++;
-
 				return updateTextPos(timer);
+
 			case '^':
-				final waitTime:Null<Int> = Std.parseInt(originalText.charAt(textPos + 1));
+				final waitTime:Null<Int> = Std.parseInt(originalText.charAt(textPos));
 
 				if (waitTime != null)
 				{
-					originalText = originalText.substring(0, textPos) + originalText.substring(textPos + 2);
+					originalText = originalText.substring(0, textPos - 1) + originalText.substring(textPos + 1);
 
 					textPos--;
 
 					if (waitTime > 0)
 					{
 						timer.active = false;
-
 						FlxTimer.wait(1 / (waitTime * 10), () -> timer.active = true);
-
 						return false;
 					}
 				}
-				else
-				{
-					textPos++;
-
-					if (originalText.charAt(textPos) == ' ' || originalText.charAt(textPos) == '\n')
-						return updateTextPos(timer);
-				}
-			default:
-				textPos++;
 		}
 
 		if (textPos > originalText.length)
 			textPos = originalText.length;
-
-		playSounds(originalText.charAt(textPos));
 
 		return true;
 	}
