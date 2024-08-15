@@ -18,6 +18,8 @@ jobs:
         uses: actions/cache/restore@main
         with:
           path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
             .haxelib
             export/android/haxe
             export/android/obj
@@ -53,6 +55,8 @@ jobs:
         uses: actions/cache/save@main
         with:
           path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
             .haxelib
             export/android/haxe
             export/android/obj
