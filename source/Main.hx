@@ -12,7 +12,9 @@ import flixel.FlxG;
 import haxe.io.Path;
 import lime.ui.KeyCode;
 import lime.ui.KeyModifier;
+#if linux
 import lime.utils.Assets;
+#end
 import openfl.display.Sprite;
 import openfl.display.StageAlign;
 import openfl.display.StageScaleMode;
