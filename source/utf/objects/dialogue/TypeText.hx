@@ -116,6 +116,9 @@ class TypeText extends FlxText
 		if (typer.fontSpacing != null && letterSpacing != typer.fontSpacing)
 			letterSpacing = typer.fontSpacing;
 
+		if (offset != typer.typerOffset)
+			offset.copyFrom(typer.typerOffset);
+
 		this.typer = typer;
 	}
 
