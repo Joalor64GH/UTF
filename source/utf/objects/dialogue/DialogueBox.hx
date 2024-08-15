@@ -60,4 +60,13 @@ class DialogueBox extends FlxSpriteGroup
 		writer.scrollFactor.set();
 		add(writer);
 	}
+
+	/**
+	 * Starts the dialogue sequence with the provided list of dialogue data.
+	 * @param list The list of `WriterData` objects representing the dialogue pages.
+	 */
+	public function startDialogue(list:Array<DialogueData>):Void
+	{
+		writer.startDialogue(list);
+	}
 }
