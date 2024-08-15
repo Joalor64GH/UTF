@@ -11,7 +11,7 @@ class GameOverTyper extends Typer
 		fontName = AssetPaths.font('DTM-Mono', false);
 		fontSize = 32;
 		fontSpacing = 2;
-		typerSounds = [FlxG.sound.load(AssetPaths.sound('txt1', false), 1.0)];
+		typerSounds = [{sound: AssetPaths.sound('txt1', false), volume: 1}];
 		typerLPS = 0.5;
 	}
 }
