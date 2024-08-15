@@ -161,6 +161,9 @@ class Room extends FlxTransitionableState
 			{
 				if (obj != null && chara.characterControllable && chara.overlaps(obj))
 				{
+					if (dialogueBox != null && dialogueBox.active)
+						return;
+
 					if (Controls.justPressed('confirm') && obj.objectInteractable)
 						obj.interact();
 					else
@@ -253,10 +256,10 @@ class Room extends FlxTransitionableState
 		dialogueBox.scrollFactor.set();
 		dialogueBox.writer.finishCallback = function():Void
 		{
-			remove(dialogueBox);
-
 			if (finishCallback != null)
 				finishCallback();
+
+			remove(dialogueBox);
 		}
 		dialogueBox.writer.startDialogue(dialogue);
 		add(dialogueBox);
