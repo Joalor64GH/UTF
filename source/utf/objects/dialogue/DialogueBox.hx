@@ -7,6 +7,9 @@ import utf.objects.dialogue.Writer;
 
 class DialogueBox extends FlxSpriteGroup
 {
+	private static final BOX_WIDTH:Int = 576;
+	private static final BOX_HEIGHT:Int = 150;
+
 	public var writer(default, null):Writer;
 
 	@:noCompletion
@@ -16,13 +19,13 @@ class DialogueBox extends FlxSpriteGroup
 	{
 		super();
 
-		box = new FlxShapeBox(32, showOnTop ? 10 : 320, 576, 150, {thickness: 6, jointStyle: MITER, color: FlxColor.WHITE},
+		box = new FlxShapeBox(32, showOnTop ? 10 : 320, BOX_WIDTH, BOX_HEIGHT, {thickness: 6, jointStyle: MITER, color: FlxColor.WHITE},
 			FlxColor.BLACK);
 		box.scrollFactor.set();
 		box.active = false;
 		add(box);
 
-		writer = new Writer(box.x + 20, box.y + 10);
+		writer = new Writer(box.x - 12, box.y - 10);
 		writer.scrollFactor.set();
 		add(writer);
 	}
