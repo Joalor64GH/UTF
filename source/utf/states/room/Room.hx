@@ -181,7 +181,7 @@ class Room extends FlxTransitionableState
 			backgrounds = new FlxTypedGroup<FlxSprite>();
 
 		final bg:FlxSprite = new FlxSprite(x, y, AssetPaths.background(name));
-		bg.scrollFactor.set(0, 0);
+		bg.scrollFactor.set();
 		bg.active = false;
 		backgrounds.add(bg);
 		return bg;
@@ -201,7 +201,7 @@ class Room extends FlxTransitionableState
 			tiles = new FlxTypedGroup<FlxSprite>();
 
 		final tile:FlxSprite = new FlxSprite(x, y, FlxGraphicUtil.fromRegion(AssetPaths.background(name), rect));
-		tile.scrollFactor.set(0, 0);
+		tile.scrollFactor.set();
 		tile.active = false;
 		tiles.add(tile);
 		return tile;
@@ -248,7 +248,7 @@ class Room extends FlxTransitionableState
 	{
 		dialogueBox = new DialogueBox((chara != null && chara.y >= 260));
 		dialogueBox.camera = camHud;
-		dialogueBox.scrollFactor.set(0, 0);
+		dialogueBox.scrollFactor.set();
 		dialogueBox.writer.finishCallback = function():Void
 		{
 			remove(dialogueBox);
