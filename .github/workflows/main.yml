@@ -48,7 +48,7 @@ jobs:
       - name: Clear Previous Cache
         uses: actions/github-script@main
         with:
-          script: await require('./clear-cache.js')({github, context}, 'cache-android-build');
+          script: await require('./actions/cache/clear-cache.js')({github, context}, 'cache-android-build');
 
       - name: Save Current Cache
         id: cache-build-save
