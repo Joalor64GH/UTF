@@ -20,17 +20,6 @@ class TimerUtil
 	}
 
 	/**
-	 * Gets the elapsed time.
-	 * @param start  The start time.
-	 * @param end  The end time (optional).
-	 * @return The elapsed time.
-	 */
-	static function took(start:Float, ?end:Float):Float
-	{
-		return (end != null ? end : Timer.stamp()) - start;
-	}
-
-	/**
 	 * Gets the elapsed time in seconds as a string.
 	 * @param start  The start time.
 	 * @param end  The end time (optional).
@@ -51,5 +40,17 @@ class TimerUtil
 	public static function ms(start:Float, ?end:Float):String
 	{
 		return '${took(start, end) * 1000} ms';
+	}
+
+	/**
+	 * Gets the elapsed time.
+	 * @param start  The start time.
+	 * @param end  The end time (optional).
+	 * @return The elapsed time.
+	 */
+	@:noCompletion
+	private static function took(start:Float, ?end:Float):Float
+	{
+		return (end != null ? end : Timer.stamp()) - start;
 	}
 }
