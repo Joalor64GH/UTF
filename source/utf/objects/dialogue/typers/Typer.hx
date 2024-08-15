@@ -1,6 +1,7 @@
 package utf.objects.dialogue.typers;
 
 import flixel.util.FlxArrayUtil;
+import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxStringUtil;
 import openfl.media.Sound;
 
