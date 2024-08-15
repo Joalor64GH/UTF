@@ -1,6 +1,5 @@
 package utf;
 
-import flixel.FlxG;
 import flixel.FlxGame;
 
 /**
