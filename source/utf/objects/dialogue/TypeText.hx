@@ -192,12 +192,12 @@ class TypeText extends FlxText
 				for (sound in typer.typerSounds)
 					sound.stop();
 
-				FlxG.random.getObject(typer.typerSounds).play();
+				FlxG.random.getObject(typer.typerSounds).play(true);
 			}
 			else
 			{
 				typer.typerSounds[0].stop();
-				typer.typerSounds[0].play();
+				typer.typerSounds[0].play(true);
 			}
 		}
 	}
