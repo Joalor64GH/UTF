@@ -246,25 +246,12 @@ class Room extends FlxTransitionableState
 	 */
 	public function startDialogue(dialogue:Array<DialogueData>, ?finishCallback:Void->Void):Void
 	{
-		if (dialogue == null || dialogue.length <= 0)
-			return;
-
 		dialogueBox = new DialogueBox((chara != null && chara.y >= 260));
 		dialogueBox.camera = camHud;
+		dialogueBox.scrollFactor.set(0, 0);
 		dialogueBox.writer.finishCallback = function():Void
 		{
-			/*if (dialogueBox != null)
-			{
-				dialogueBox.active = dialogueBox.visible = false;
-
-				dialogueBox.kill();
-				remove(dialogueBox, true);
-				dialogueBox.destroy();
-
-				dialogueBox = null;
-			}
-			else*/
-				remove(dialogueBox);
+			remove(dialogueBox);
 
 			if (finishCallback != null)
 				finishCallback();
