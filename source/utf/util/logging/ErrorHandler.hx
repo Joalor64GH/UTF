@@ -79,7 +79,13 @@ class ErrorHandler
 	@:noCompletion
 	private static inline function onCriticalError(message:String):Void
 	{
-		throw message;
+		#if sys
+		saveLog(message, true);
+		#end
+
+		WindowUtil.showAlert('Critical Error', message);
+
+		System.exit(1);
 	}
 
 	#if sys
