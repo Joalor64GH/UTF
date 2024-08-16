@@ -81,8 +81,7 @@ class Chara extends FlxSprite
 		}
 	}
 
-	@:noCompletion
-	private override function destroy():Void
+	public override function destroy():Void
 	{
 		super.destroy();
 
