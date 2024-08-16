@@ -160,9 +160,6 @@ class Room extends FlxTransitionableState
 		{
 			FlxG.collide(chara.characterHitbox, objects);
 
-			if (dialogueBox != null && dialogueBox.alive && dialogueBox.exists)
-				return;
-
 			objects.forEach(function(obj:Object):Void
 			{
 				if (obj != null && chara.characterControllable && chara.overlaps(obj))
