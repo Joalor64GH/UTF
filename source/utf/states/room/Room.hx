@@ -12,7 +12,6 @@ import flixel.FlxState;
 import utf.registries.CharaRegistry;
 import utf.registries.ObjectRegistry;
 import utf.objects.dialogue.DialogueBox;
-import utf.objects.dialogue.Writer;
 import utf.objects.room.Chara;
 import utf.objects.room.Object;
 import utf.util.FlxGraphicUtil;
@@ -261,7 +260,7 @@ class Room extends FlxTransitionableState
 
 			remove(dialogueBox);
 		}
-		dialogueBox.writer.startDialogue(dialogue);
+		dialogueBox.startDialogue(dialogue);
 		add(dialogueBox);
 	}
 }
