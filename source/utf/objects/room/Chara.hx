@@ -66,8 +66,7 @@ class Chara extends FlxSprite
 		}
 	}
 
-	@:noCompletion
-	private override function draw():Void
+	public override function draw():Void
 	{
 		super.draw();
 
