@@ -39,8 +39,8 @@ class EnemyEncounter extends FlxSubState
 	public var heart:FlxSprite;
 	public var writer:Writer;
 
-	@:noCompletion
-	private override function create():Void
+
+	public override function create():Void
 	{
 		final bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.screenCenter();
@@ -123,8 +123,8 @@ class EnemyEncounter extends FlxSubState
 		super.create();
 	}
 
-	@:noCompletion
-	private override function update(elapsed:Float):Void
+
+	public override function update(elapsed:Float):Void
 	{
 		if (Controls.justPressed('right') && !choiceSelected)
 			changeChoice(1);

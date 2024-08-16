@@ -62,8 +62,8 @@ class Settings extends FlxState
 		holdTimer = new FlxTimer();
 	}
 
-	@:noCompletion
-	private override function create():Void
+
+	public override function create():Void
 	{
 		persistentUpdate = false;
 
@@ -189,8 +189,8 @@ class Settings extends FlxState
 		});
 	}
 
-	@:noCompletion
-	private override function update(elapsed:Float):Void
+
+	public override function update(elapsed:Float):Void
 	{
 		if (Controls.justPressed('up'))
 			changeOption(-1);

@@ -16,8 +16,8 @@ class GameOver extends FlxSubState
 	@:noCompletion
 	private var writer:Writer;
 
-	@:noCompletion
-	private override function create():Void
+
+	public override function create():Void
 	{
 		FlxG.sound.playMusic(AssetPaths.music('gameover'));
 
@@ -63,8 +63,8 @@ class GameOver extends FlxSubState
 		});
 	}
 
-	@:noCompletion
-	private override function update(elapsed:Float):Void
+
+	public override function update(elapsed:Float):Void
 	{
 		if (Controls.justPressed('confirm') && !members.contains(writer) && gameoverbg.alpha == 1)
 		{

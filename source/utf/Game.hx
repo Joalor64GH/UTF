@@ -11,8 +11,8 @@ import flixel.FlxGame;
 @:access(openfl.events.UncaughtErrorEvents)
 class Game extends FlxGame
 {
-	@:noCompletion
-	private override function create(_):Void
+
+	public override function create(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{
@@ -75,8 +75,8 @@ class Game extends FlxGame
 			super.onEnterFrame(_);
 	}
 
-	@:noCompletion
-	private override function update():Void
+
+	public override function update():Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
 		{

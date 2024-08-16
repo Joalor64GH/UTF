@@ -36,8 +36,8 @@ class Intro extends FlxState
 	@:noCompletion
 	private var items:FlxTypedGroup<FlxText>;
 
-	@:noCompletion
-	private override function create():Void
+
+	public override function create():Void
 	{
 		if (Global.flags[0] == 1)
 		{
@@ -176,8 +176,8 @@ class Intro extends FlxState
 		super.create();
 	}
 
-	@:noCompletion
-	private override function update(elapsed:Float):Void
+
+	public override function update(elapsed:Float):Void
 	{
 		if (Global.flags[0] == 1)
 		{
