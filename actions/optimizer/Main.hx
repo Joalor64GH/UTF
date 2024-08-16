@@ -36,8 +36,17 @@ class AssetsOptimizer
 				switch (Path.extension(path))
 				{
 					case 'ogg':
+						runCommand(['optivorbis', path, '-']);
 					case 'png':
-						runCommand(['oxipng', '-o', Std.string(OXIPNG_COMPRESSION), '--strip', 'safe', '--alpha', path]);
+						runCommand([
+							'oxipng',
+							'-o',
+							Std.string(OXIPNG_COMPRESSION),
+							'--strip',
+							'safe',
+							'--alpha',
+							path
+						]);
 				}
 			}
 		}
@@ -51,8 +60,15 @@ class AssetsOptimizer
 	{
 		final command:String = args.join(' ');
 
-		if (command != AnsiColors.yellow(command))
-			Sys.println(AnsiColors.yellow(command));
+		switch (args[0])
+		{
+			case 'optivorbis':
+				if (command != AnsiColors.cyan(command))
+					Sys.println(AnsiColors.cyan(command));
+			default:
+				if (command != AnsiColors.yellow(command))
+					Sys.println(AnsiColors.yellow(command));
+		}
 
 		Sys.command(args.shift(), args);
 	}
