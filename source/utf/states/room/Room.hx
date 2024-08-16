@@ -138,6 +138,12 @@ class Room extends FlxTransitionableState
 
 		FlxG.camera.follow(camFollow);
 
+		dialogueBox = new DialogueBox();
+		dialogueBox.camera = camHud;
+		dialogueBox.scrollFactor.set();
+		dialogueBox.kill();
+		add(dialogueBox);
+
 		FlxG.camera.setScrollBoundsRect(0, 0, roomWidth, roomHeight);
 
 		super.create();
@@ -154,13 +160,13 @@ class Room extends FlxTransitionableState
 		{
 			FlxG.collide(chara.characterHitbox, objects);
 
+			if (dialogueBox != null && dialogueBox.alive && dialogueBox.exists)
+				return;
+
 			objects.forEach(function(obj:Object):Void
 			{
 				if (obj != null && chara.characterControllable && chara.overlaps(obj))
 				{
-					if (dialogueBox != null && dialogueBox.active)
-						return;
-
 					if (Controls.justPressed('confirm') && obj.objectInteractable)
 						obj.interact();
 					else
@@ -248,17 +254,18 @@ class Room extends FlxTransitionableState
 	 */
 	public function startDialogue(dialogue:Array<DialogueData>, ?finishCallback:Void->Void):Void
 	{
-		dialogueBox = new DialogueBox((chara != null && chara.y >= 260));
-		dialogueBox.camera = camHud;
-		dialogueBox.scrollFactor.set();
+		if (dialogueBox == null)
+			return;
+
+		dialogueBox.setOnTop(chara != null && chara.y >= 260);
 		dialogueBox.writer.finishCallback = function():Void
 		{
 			if (finishCallback != null)
 				finishCallback();
 
-			remove(dialogueBox);
+			dialogueBox.kill();
 		}
+		dialogueBox.revive();
 		dialogueBox.startDialogue(dialogue);
-		add(dialogueBox);
 	}
 }
