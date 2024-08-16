@@ -6,6 +6,8 @@ import sys.FileSystem;
 
 class AssetsOptimizer
 {
+	private static final OXIPNG_COMPRESSION:Int = 4;
+
 	public static function main():Void
 	{
 		final args:Array<String> = Sys.args();
@@ -35,7 +37,7 @@ class AssetsOptimizer
 				{
 					case 'ogg':
 					case 'png':
-					default:
+						runCommand(['oxipng', '-o', Std.string(OXIPNG_COMPRESSION), '--strip', 'safe', '--alpha', path]);
 				}
 			}
 		}
