@@ -7,7 +7,6 @@ import utf.states.Title;
 
 class Startup extends FlxState
 {
-
 	public override function create():Void
 	{
 		FlxG.autoPause = false;

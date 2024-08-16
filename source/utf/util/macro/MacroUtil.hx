@@ -55,8 +55,7 @@ class MacroUtil
 					switch (c)
 					{
 						case CIdent(cn):
-							if (cn != 'null')
-								parts.unshift(cn);
+							if (cn != 'null') parts.unshift(cn);
 						default:
 					}
 				case EField(exp, field):

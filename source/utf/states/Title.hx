@@ -16,7 +16,6 @@ class Title extends FlxState
 	@:noCompletion
 	private var letters:String = '';
 
-
 	public override function create():Void
 	{
 		final titleImage:FlxSprite = new FlxSprite(0, 0, AssetPaths.sprite('titleimage'));
@@ -40,7 +39,6 @@ class Title extends FlxState
 
 		FlxG.sound.play(AssetPaths.music('intronoise'), () -> titleText.alpha = 1);
 	}
-
 
 	public override function update(elapsed:Float):Void
 	{

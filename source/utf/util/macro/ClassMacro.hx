@@ -135,7 +135,8 @@ class ClassMacro
 				else
 					return ~/^${targetPackage}(\.|$)/.match(classPackage);
 			case 'extend':
-				return MacroUtil.implementsInterface(classType, MacroUtil.getClassType(splitRequest[1])) || MacroUtil.isSubclassOf(classType, MacroUtil.getClassType(splitRequest[1]));
+				return MacroUtil.implementsInterface(classType, MacroUtil.getClassType(splitRequest[1]))
+					|| MacroUtil.isSubclassOf(classType, MacroUtil.getClassType(splitRequest[1]));
 			default:
 				throw 'Unknown request type: ${splitRequest[0]}';
 		}

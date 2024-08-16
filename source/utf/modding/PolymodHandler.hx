@@ -43,7 +43,7 @@ class PolymodHandler
 	public static function load():Void
 	{
 		Polymod.clearScripts();
-		
+
 		Polymod.onError = function(error:PolymodError):Void
 		{
 			final code:String = FlxStringUtil.toTitleCase(Std.string(error.code).split('_').join(' '));

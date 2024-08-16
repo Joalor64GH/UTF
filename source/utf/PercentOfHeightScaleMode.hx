@@ -24,7 +24,6 @@ class PercentOfHeightScaleMode extends RatioScaleMode
 		this.percent = percent;
 	}
 
-
 	public override function updateScaleOffset():Void
 	{
 		gameSize.scale(percent);

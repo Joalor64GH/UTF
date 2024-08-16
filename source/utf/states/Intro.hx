@@ -36,7 +36,6 @@ class Intro extends FlxState
 	@:noCompletion
 	private var items:FlxTypedGroup<FlxText>;
 
-
 	public override function create():Void
 	{
 		if (Global.flags[0] == 1)
@@ -175,7 +174,6 @@ class Intro extends FlxState
 
 		super.create();
 	}
-
 
 	public override function update(elapsed:Float):Void
 	{

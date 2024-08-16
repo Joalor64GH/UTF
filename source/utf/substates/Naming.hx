@@ -35,20 +35,30 @@ class Naming extends FlxSubState
 
 	@:noCompletion
 	private final characterNames:Map<Array<String>, Name> = [
-		[''] => {description: 'You must choose a name.', allow: false}, ['aaaaaa'] => {description: 'Not very creative...?', allow: true},
+		[''] => {description: 'You must choose a name.', allow: false},
+		['aaaaaa'] => {description: 'Not very creative...?', allow: true},
 		['asgore'] => {description: 'You cannot.', allow: false},
-		['toriel'] => {description: 'I think you should\nthink of your own\nname, my child.', allow: false}, ['sans'] => {description: 'nope.', allow: false},
-		['undyne'] => {description: 'Get your OWN name!', allow: false}, ['flowey'] => {description: 'I already CHOSE\nthat name.', allow: false},
-		['chara'] => {description: 'The true name.', allow: true}, ['alphys'] => {description: 'D-don\'t do that.', allow: false},
-		['alphy'] => {description: 'Uh.... OK?', allow: true}, ['papyru'] => {description: 'I\'LL ALLOW IT!!!!', allow: true},
+		['toriel'] => {description: 'I think you should\nthink of your own\nname, my child.', allow: false},
+		['sans'] => {description: 'nope.', allow: false},
+		['undyne'] => {description: 'Get your OWN name!', allow: false},
+		['flowey'] => {description: 'I already CHOSE\nthat name.', allow: false},
+		['chara'] => {description: 'The true name.', allow: true},
+		['alphys'] => {description: 'D-don\'t do that.', allow: false},
+		['alphy'] => {description: 'Uh.... OK?', allow: true},
+		['papyru'] => {description: 'I\'LL ALLOW IT!!!!', allow: true},
 		['napsta', 'blooky'] => {description: '............\n(They\'re powerless to\nstop you.)', allow: true},
-		['murder', 'mercy'] => {description: 'That\'s a little on-\nthe-nose, isn\'t it...?', allow: true}, ['asriel'] => {description: '...', allow: false},
+		['murder', 'mercy'] => {description: 'That\'s a little on-\nthe-nose, isn\'t it...?', allow: true},
+		['asriel'] => {description: '...', allow: false},
 		['frisk'] => {description: 'WARNING: This name will\nmake your life hell.\nProceed anyway?', allow: true},
-		['catty'] => {description: 'Bratty! Bratty!\nThat\'s MY name!', allow: true}, ['bratty'] => {description: 'Like, OK I guess.', allow: true},
+		['catty'] => {description: 'Bratty! Bratty!\nThat\'s MY name!', allow: true},
+		['bratty'] => {description: 'Like, OK I guess.', allow: true},
 		['MTT', 'metta', 'mett'] => {description: 'OOOOH!!! ARE YOU\nPROMOTING MY BRAND?', allow: true},
-		['gerson'] => {description: 'Wah ha ha! Why not?', allow: true}, ['shyren'] => {description: '...?', allow: true},
-		['aaron'] => {description: 'Is this name correct? ; )', allow: true}, ['temmie'] => {description: 'hOI!', allow: true},
-		['woshua'] => {description: 'Clean name.', allow: true}, ['jerry'] => {description: 'Jerry.', allow: true},
+		['gerson'] => {description: 'Wah ha ha! Why not?', allow: true},
+		['shyren'] => {description: '...?', allow: true},
+		['aaron'] => {description: 'Is this name correct? ; )', allow: true},
+		['temmie'] => {description: 'hOI!', allow: true},
+		['woshua'] => {description: 'Clean name.', allow: true},
+		['jerry'] => {description: 'Jerry.', allow: true},
 		['bpants'] => {description: 'You are really scraping the\nbottom of the barrel.', allow: true},
 		['jigsaw'] => {description: 'I want to play\na game.', allow: true}
 	];
@@ -84,7 +94,6 @@ class Naming extends FlxSubState
 
 	@:noCompletion
 	private var prevPersistentUpdate:Bool;
-
 
 	public override function create():Void
 	{
@@ -191,7 +200,6 @@ class Naming extends FlxSubState
 
 		super.create();
 	}
-
 
 	public override function update(elapsed:Float):Void
 	{

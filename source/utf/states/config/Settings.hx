@@ -62,7 +62,6 @@ class Settings extends FlxState
 		holdTimer = new FlxTimer();
 	}
 
-
 	public override function create():Void
 	{
 		persistentUpdate = false;
@@ -188,7 +187,6 @@ class Settings extends FlxState
 			}
 		});
 	}
-
 
 	public override function update(elapsed:Float):Void
 	{

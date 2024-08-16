@@ -77,7 +77,6 @@ class Writer extends TypeText
 		start(TyperRegistry.fetchTyper(dialogue.typer ?? 'default'), dialogue.text);
 	}
 
-
 	public override function update(elapsed:Float):Void
 	{
 		super.update(elapsed);

@@ -39,7 +39,6 @@ class EnemyEncounter extends FlxSubState
 	public var heart:FlxSprite;
 	public var writer:Writer;
 
-
 	public override function create():Void
 	{
 		final bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -112,9 +111,7 @@ class EnemyEncounter extends FlxSubState
 
 		writer = new Writer(box.x + 14, box.y + 14);
 		writer.skippable = false;
-		writer.startDialogue([
-			{typer: 'battle', text: FlxG.random.getObject(monster.monsterComments)}
-		]);
+		writer.startDialogue([{typer: 'battle', text: FlxG.random.getObject(monster.monsterComments)}]);
 		writer.scrollFactor.set();
 		add(writer);
 
@@ -122,7 +119,6 @@ class EnemyEncounter extends FlxSubState
 
 		super.create();
 	}
-
 
 	public override function update(elapsed:Float):Void
 	{
@@ -160,24 +156,18 @@ class EnemyEncounter extends FlxSubState
 				switch (choices[selected])
 				{
 					case 'Fight' | 'Talk':
-						writer.startDialogue([
-							{typer: 'battle', text: '* ${monster.monsterName}'}
-						]);
+						writer.startDialogue([{typer: 'battle', text: '* ${monster.monsterName}'}]);
 
-						/*var monsterHpBar:FlxBar = new FlxBar(box.x + 158 + (monster.monsterName.length * 16), writer.y, LEFT_TO_RIGHT,
+					/*var monsterHpBar:FlxBar = new FlxBar(box.x + 158 + (monster.monsterName.length * 16), writer.y, LEFT_TO_RIGHT,
 							Std.int(monster.monsterHp / monster.monsterMaxHp * 100), 16, monster, 'monsterHp', 0, monster.monsterMaxHp);
 						monsterHpBar.createFilledBar(FlxColor.RED, FlxColor.LIME);
 						monsterHpBar.emptyCallback = () -> FlxG.log.notice('YOU WON!');
 						monsterHpBar.scrollFactor.set();
-						add(monsterHpBar);*/
+						add(monsterHpBar); */
 					case 'Item':
-						writer.startDialogue([
-							{typer: 'battle', text: '* Item Selected...'}
-						]);
+						writer.startDialogue([{typer: 'battle', text: '* Item Selected...'}]);
 					case 'Spare':
-						writer.startDialogue([
-							{typer: 'battle', text: '* Mercy Selected...'}
-						]);
+						writer.startDialogue([{typer: 'battle', text: '* Mercy Selected...'}]);
 				}
 			}
 		}
@@ -187,9 +177,7 @@ class EnemyEncounter extends FlxSubState
 
 			writer.visible = true;
 
-			writer.startDialogue([
-				{typer: 'battle', text: '* You feel like you\'re going to\n  have a bad time.'}
-			]);
+			writer.startDialogue([{typer: 'battle', text: '* You feel like you\'re going to\n  have a bad time.'}]);
 		}
 
 		#if debug
