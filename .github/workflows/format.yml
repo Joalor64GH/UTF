@@ -2,7 +2,7 @@ name: Formatter
 on: workflow_dispatch
 jobs:
   Job:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@main
