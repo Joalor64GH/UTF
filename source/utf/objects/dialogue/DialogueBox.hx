@@ -47,7 +47,7 @@ class DialogueBox extends FlxSpriteGroup
 	 * Constructor for creating a `DialogueBox` instance.
 	 * @param showOnTop Determines whether the dialogue box should be shown at the top of the screen.
 	 */
-	public function new(showOnTop:Bool = false):Void
+	public function new(?showOnTop:Bool = false):Void
 	{
 		super();
 
@@ -59,6 +59,12 @@ class DialogueBox extends FlxSpriteGroup
 		writer = new Writer(box.x, box.y);
 		writer.scrollFactor.set();
 		add(writer);
+	}
+
+	public function setOnTop(?value:Bool = false):Void
+	{
+		box.setPosition(32, value ? 10 : 320);
+		writer.setPosition(box.x, box.y);
 	}
 
 	/**
