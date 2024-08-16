@@ -61,8 +61,7 @@ class TypeText extends FlxText
 		typingTimer = new FlxTimer();
 	}
 
-	@:noCompletion
-	private override function destroy():Void
+	public override function destroy():Void
 	{
 		super.destroy();
 
