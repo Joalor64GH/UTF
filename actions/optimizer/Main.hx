@@ -17,6 +17,8 @@ class AssetsOptimizer
 
 		if (!FileSystem.exists(directory) || !FileSystem.isDirectory(directory))
 			throw 'Directory not Found: $directory';
+
+		processDirectory(directory);
 	}
 
 	public static function processDirectory(directory:String):Void
