@@ -27,7 +27,6 @@ class Game extends FlxGame
 			super.create(_);
 	}
 
-	@:noCompletion
 	private override function onFocus(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
@@ -43,7 +42,6 @@ class Game extends FlxGame
 			super.onFocus(_);
 	}
 
-	@:noCompletion
 	private override function onFocusLost(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
@@ -59,7 +57,6 @@ class Game extends FlxGame
 			super.onFocusLost(_);
 	}
 
-	@:noCompletion
 	private override function onEnterFrame(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
@@ -91,7 +88,6 @@ class Game extends FlxGame
 			super.update();
 	}
 
-	@:noCompletion
 	private override function draw():Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
@@ -107,7 +103,6 @@ class Game extends FlxGame
 			super.draw();
 	}
 
-	@:noCompletion
 	private override function onResize(_):Void
 	{
 		if (stage.__uncaughtErrorEvents.__enabled)
