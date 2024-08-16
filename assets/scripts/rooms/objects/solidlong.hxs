@@ -11,6 +11,7 @@ class SolidLongObject extends Object
 		scale.set(800, 2);
 		updateHitbox();
 
+		active = false;
 		immovable = true;
 		solid = true;
 	}
