@@ -106,8 +106,7 @@ class Room extends FlxTransitionableState
 		this.roomNumber = roomNumber;
 	}
 
-	@:noCompletion
-	private override function create():Void
+	public override function create():Void
 	{
 		camGame = new FlxCamera();
 		FlxG.cameras.reset(camGame);
@@ -144,8 +143,7 @@ class Room extends FlxTransitionableState
 		super.create();
 	}
 
-	@:noCompletion
-	private override function update(elapsed:Float):Void
+	public override function update(elapsed:Float):Void
 	{
 		if (!camFollowControllable)
 			camFollow.setPosition(chara.getGraphicMidpoint().x, chara.getGraphicMidpoint().y);
