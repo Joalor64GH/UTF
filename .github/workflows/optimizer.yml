@@ -1,0 +1,29 @@
+name: Optimizer
+on: workflow_dispatch
+jobs:
+  Job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: latest
+
+      - name: Install OxiPNG & OptiVorbis
+        run: cargo install oxipng && cargo install optivorbis
+
+      - name: Optimizer
+        run: |
+          cd actions/optimizer
+          haxe -cp ./ -cpp export -D analyzer-optimize -main AssetsOptimizer
+          export/AssetsOptimizer ../../assets
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: optimizedAssets
+          path: assets
+          if-no-files-found: error
