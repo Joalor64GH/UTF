@@ -17,6 +17,7 @@ jobs:
 
       - name: Optimizer
         run: |
+          haxelib install hxcpp --quiet
           cd actions/optimizer
           haxe -cp ./ -cpp export -D analyzer-optimize -main AssetsOptimizer
           export/AssetsOptimizer ../../assets
