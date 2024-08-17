@@ -15,7 +15,7 @@ class AssetsOptimizer
 		if (args == null || args.length <= 0)
 			throw 'Usage: AssetsOptimizer <directory>';
 
-		final directory:String = args[0];
+		final directory:String = Path.normalize(FileSystem.absolutePath(args[0]));
 
 		if (!FileSystem.exists(directory) || !FileSystem.isDirectory(directory))
 			throw 'Directory not Found: $directory';
