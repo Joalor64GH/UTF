@@ -14,7 +14,6 @@ class RedactedAObject extends Object
 		scale.set(2, 2);
 		updateHitbox();
 
-		active = false;
 		immovable = true;
 		solid = true;
 	}
