@@ -64,7 +64,9 @@ class ErrorHandler
 			else
 				log.push(Std.string(event.error));
 
+			#if HXCPP_STACK_TRACE
 			log.push(CallStack.toString(CallStack.exceptionStack(true)));
+			#end
 
 			#if sys
 			saveLog(log.join('\n'));
@@ -84,7 +86,9 @@ class ErrorHandler
 		if (message != null && message.length > 0)
 			log.push(message);
 
+		#if HXCPP_STACK_TRACE
 		log.push(CallStack.toString(CallStack.exceptionStack(true)));
+		#end
 
 		#if sys
 		saveLog(log.join('\n'));
