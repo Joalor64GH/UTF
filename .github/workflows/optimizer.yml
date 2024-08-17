@@ -13,7 +13,7 @@ jobs:
           haxe-version: latest
 
       - name: Install OxiPNG & OptiVorbis
-        run: cargo install oxipng && cargo add optivorbis
+        run: cargo install oxipng
 
       - name: Optimizer
         run: |
