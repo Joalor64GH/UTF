@@ -173,6 +173,8 @@ class Intro extends FlxState
 		changeOption();
 
 		super.create();
+
+		lime.utils.Log.error('LOOKS LIKE YOU\'RE [[All Alone On A Late Night?]]');
 	}
 
 	public override function update(elapsed:Float):Void
