@@ -11,6 +11,6 @@ class DefaultTyper extends Typer
 		fontName = AssetPaths.font('DTM-Mono', false);
 		fontSize = 32;
 		typerSounds = [{sound: AssetPaths.sound('txt1', false), volume: 1}];
-		typerLPS = 0.5;
+		typerLPS = 0.25;
 	}
 }
