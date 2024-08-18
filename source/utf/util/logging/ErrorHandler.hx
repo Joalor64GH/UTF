@@ -91,7 +91,7 @@ class ErrorHandler
 		#end
 
 		#if sys
-		saveLog(log.join('\n'));
+		saveLog(log.join('\n'), true);
 		#end
 
 		WindowUtil.showAlert('Critical Error', log.join('\n'));
