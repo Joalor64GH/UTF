@@ -1,9 +1,12 @@
+import flixel.math.FlxMath;
 import flixel.FlxG;
 import utf.AssetPaths;
 import utf.objects.room.Object;
 
 class RedactedAObject extends Object
 {
+	private var dist:Int = 0;
+
 	public function new():Void
 	{
 		super('redacted_a');
@@ -16,6 +19,28 @@ class RedactedAObject extends Object
 
 		immovable = true;
 		solid = true;
+	}
+
+	public override function update(elapsed:Float):Void
+	{
+		if (FlxG.state.chara != null)
+		{
+			dist = FlxMath.distanceBetween(this, FlxG.state.chara);
+
+			if (dist < 120)
+			{
+				var disto:Float = 60 / (dist + 1);
+
+				if (disto > 1)
+					disto = 1;
+
+				this.alpha = disto;
+			}
+			else
+				this.alpha = 0;
+		}
+
+		super.update(elapsed);
 	}
 
 	public override function interact():Void
