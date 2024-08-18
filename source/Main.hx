@@ -88,6 +88,11 @@ class Main extends Sprite
 
 		ErrorHandler.init();
 
+		#if web
+		// https://github.com/ninjamuffin99/canabalt-hf/blob/a1f44cc39275474b644cea63b30a553c71f235fc/source/Main.hx#L27
+		Lib.application.window.element.style.setProperty('image-rendering', 'pixelated');
+		#end
+
 		#if desktop
 		Lib.application.window.onKeyDown.add(function(keyCode:KeyCode, keyModifier:KeyModifier):Void
 		{
