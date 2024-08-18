@@ -188,8 +188,7 @@ class Room extends FlxTransitionableState
 		final bg:FlxSprite = new FlxSprite(x, y, AssetPaths.background(name));
 		bg.scrollFactor.set();
 		bg.active = false;
-		backgrounds.add(bg);
-		return bg;
+		return backgrounds.add(bg);
 	}
 
 	/**
@@ -208,8 +207,7 @@ class Room extends FlxTransitionableState
 		final tile:FlxSprite = new FlxSprite(x, y, FlxGraphicUtil.fromRegion(AssetPaths.background(name), rect));
 		tile.scrollFactor.set();
 		tile.active = false;
-		tiles.add(tile);
-		return tile;
+		return tiles.add(tile);
 	}
 
 	/**
@@ -226,8 +224,7 @@ class Room extends FlxTransitionableState
 
 		final object:Object = ObjectRegistry.fetchObject(id);
 		object.setPosition(x, y);
-		objects.add(object);
-		return object;
+		return objects.add(object);
 	}
 
 	/**
