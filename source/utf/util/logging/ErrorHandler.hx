@@ -73,7 +73,11 @@ class ErrorHandler
 			#end
 		}
 
+		#if (windows && cpp)
+		WindowsAPI.showError('Uncaught Error', log.join('\n'))
+		#else
 		WindowUtil.showAlert('Uncaught Error', log.join('\n'));
+		#end
 
 		System.exit(1);
 	}
@@ -94,7 +98,11 @@ class ErrorHandler
 		saveLog(log.join('\n'), true);
 		#end
 
+		#if (windows && cpp)
+		WindowsAPI.showError('Critical Error', log.join('\n'))
+		#else
 		WindowUtil.showAlert('Critical Error', log.join('\n'));
+		#end
 
 		System.exit(1);
 	}
