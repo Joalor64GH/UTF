@@ -16,6 +16,9 @@ import utf.registries.ObjectRegistry;
 import utf.registries.RoomRegistry;
 import utf.registries.TyperRegistry;
 import utf.util.macro.ClassMacro;
+#if (windows && cpp)
+import utf.util.native.WindowsAPI;
+#end
 import utf.util.TimerUtil;
 import utf.util.WindowUtil;
 
@@ -54,10 +57,20 @@ class PolymodHandler
 					FlxG.log.notice('($code) ${error.message}');
 				case WARNING:
 					FlxG.log.warn('($code) ${error.message}');
+
+					#if (windows && debug && cpp)
+					WindowsAPI.showWarning(code, error.message)
+					#elseif debug
+					WindowUtil.showAlert(code, error.message);
+					#end
 				case ERROR:
 					FlxG.log.error('($code) ${error.message}');
 
+					#if (windows && cpp)
+					WindowsAPI.showError(code, error.message)
+					#else
 					WindowUtil.showAlert(code, error.message);
+					#end
 			}
 		}
 
