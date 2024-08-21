@@ -25,7 +25,8 @@ class RedactedAObject extends Object
 	{
 		if (FlxG.state.chara != null)
 		{
-			dist = FlxMath.distanceBetween(this, FlxG.state.chara);
+			// Use `super` instead of `this`?
+			dist = FlxMath.distanceBetween(super, FlxG.state.chara);
 
 			if (dist < 120)
 			{
