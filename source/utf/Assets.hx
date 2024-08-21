@@ -49,15 +49,9 @@ class Assets
 
 	public static function list(directory:String):Array<String>
 	{
-		final files:Array<String> = OpenFLAssets.list().filter(function(file:String):Bool
-		{
-			return Path.directory(file) == directory;
-		});
+		final files:Array<String> = OpenFLAssets.list().filter((file:String) -> return Path.directory(file) == directory);
 
-		files.sort(function(a:String, b:String):Int
-		{
-			return (a < b) ? -1 : (a > b) ? 1 : 0;
-		});
+		files.sort((a:String, b:String) -> return (a < b) ? -1 : (a > b) ? 1 : 0);
 
 		return files;
 	}
