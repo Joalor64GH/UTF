@@ -97,8 +97,6 @@ class PolymodHandler
 	@:noCompletion
 	private static function loadRegisteries():Void
 	{
-		FlxG.log.notice('Loading the registries.');
-
 		final registriesStart:Float = TimerUtil.start();
 
 		CharaRegistry.loadCharacters();
