@@ -2,7 +2,10 @@ package utf;
 
 import flixel.FlxG;
 import haxe.io.Path;
+import haxe.Exception;
+import openfl.media.Sound;
 import openfl.utils.Assets as OpenFLAssets;
+import openfl.utils.ByteArray;
 
 class Assets
 {
