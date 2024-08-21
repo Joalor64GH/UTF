@@ -142,7 +142,12 @@ class PolymodHandler
 
 		Polymod.blacklistImport('haxe.Serializer');
 		Polymod.blacklistImport('haxe.Unserializer');
-
+		Polymod.blacklistImport('lime.system.CFFI');
+		Polymod.blacklistImport('lime.system.System');
+		Polymod.blacklistImport('lime.system.JNI');
+		Polymod.blacklistImport('lime.utils.Assets');
+		Polymod.blacklistImport('openfl.desktop.NativeProcess');
+		Polymod.blacklistImport('openfl.utils.Assets');
 		Polymod.blacklistImport('Sys');
 		Polymod.blacklistImport('Reflect');
 		Polymod.blacklistImport('Type');
