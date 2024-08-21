@@ -140,6 +140,9 @@ class PolymodHandler
 		Polymod.addImportAlias('flixel.group.FlxSpriteGroup', flixel.group.FlxSpriteGroup);
 		Polymod.addImportAlias('flixel.math.FlxPoint', flixel.math.FlxPoint.FlxBasePoint);
 
+		#if cpp
+		Polymod.blacklistImport('cpp.Lib');
+		#end
 		Polymod.blacklistImport('haxe.Serializer');
 		Polymod.blacklistImport('haxe.Unserializer');
 		Polymod.blacklistImport('lime.system.CFFI');
@@ -151,10 +154,6 @@ class PolymodHandler
 		Polymod.blacklistImport('Sys');
 		Polymod.blacklistImport('Reflect');
 		Polymod.blacklistImport('Type');
-
-		#if cpp
-		Polymod.blacklistImport('cpp.Lib');
-		#end
 
 		for (cls in ClassMacro.listClassesInPackage('polymod'))
 		{
