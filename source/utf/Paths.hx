@@ -57,11 +57,14 @@ class Paths
 	/**
 	 * Retrieves a spritesheet in the appropriate format.
 	 * @param key The key identifying the spritesheet.
-	 * @param type The type of spritesheet (default is `SPARROW`).
+	 * @param type The type of spritesheet.
 	 * @return The spritesheet frames, or null if it doesn't exist.
 	 */
-	public static inline function spritesheet(key:String, ?type:SpriteSheetType = SPARROW):Null<FlxAtlasFrames>
+	public static inline function spritesheet(key:String, ?type:SpriteSheetType):Null<FlxAtlasFrames>
 	{
+		if (type == null)
+			type = SPARROW;
+
 		return switch (type)
 		{
 			case ASEPRITE: FlxAtlasFrames.fromAseprite(Paths.sprite(key), Paths.sprite(key).withExtension('json'));
