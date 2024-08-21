@@ -1,8 +1,5 @@
 package utf;
 
-import flixel.graphics.frames.FlxAtlasFrames;
-import openfl.media.Sound;
-
 using haxe.io.Path;
 
 /**
@@ -20,6 +17,7 @@ enum SpriteSheetType
 /**
  * Provides utility functions for constructing paths to various game assets.
  */
+@:nullSafety
 class Paths
 {
 	/**
@@ -34,17 +32,6 @@ class Paths
 	}
 
 	/**
-	 * Retrieves a sound effect as a `Sound` object.
-	 * @param key The key identifying the sound.
-	 * @param cache Whether to cache the sound (default is true).
-	 * @return The `Sound` object, or null if it doesn't exist.
-	 */
-	public static inline function sound(key:String, ?cache:Bool = true):Null<Sound>
-	{
-		return Assets.getSound('assets/sounds/$key.wav', cache);
-	}
-
-	/**
 	 * Constructs the path for a background image.
 	 * @param key The key identifying the background.
 	 * @return The path to the background image file.
@@ -52,17 +39,6 @@ class Paths
 	public static inline function background(key:String):String
 	{
 		return 'assets/images/backgrounds/$key.png';
-	}
-
-	/**
-	 * Retrieves a music asset as a `Sound` object.
-	 * @param key The key identifying the music.
-	 * @param cache Whether to cache the sound (default is true).
-	 * @return The `Sound` object, or null if it doesn't exist.
-	 */
-	public static inline function music(key:String, ?cache:Bool = true):Null<Sound>
-	{
-		return Assets.getSound('assets/music/$key.ogg', cache);
 	}
 
 	/**
@@ -76,6 +52,35 @@ class Paths
 	}
 
 	/**
+	 * Retrieves a spritesheet in the appropriate format.
+	 * @param key The key identifying the spritesheet.
+	 * @param type The type of spritesheet (default is `SPARROW`).
+	 * @return The spritesheet frames, or null if it doesn't exist.
+	 */
+	public static inline function spritesheet(key:String, ?type:SpriteSheetType = SPARROW):Null<flixel.graphics.frames.FlxAtlasFrames>
+	{
+		return switch (type)
+		{
+			case ASEPRITE: FlxAtlasFrames.fromAseprite(Paths.sprite(key), Paths.sprite(key).withExtension('json'));
+			case PACKER: FlxAtlasFrames.fromSpriteSheetPacker(Paths.sprite(key), Paths.sprite(key).withExtension('txt'));
+			case SPARROW: FlxAtlasFrames.fromSparrow(Paths.sprite(key), Paths.sprite(key).withExtension('xml'));
+			case TEXTURE_PATCHER_JSON: FlxAtlasFrames.fromTexturePackerJson(Paths.sprite(key), Paths.sprite(key).withExtension('json'));
+			case TEXTURE_PATCHER_XML: FlxAtlasFrames.fromTexturePackerXml(Paths.sprite(key), Paths.sprite(key).withExtension('xml'));
+		}
+	}
+
+	/**
+	 * Retrieves a music asset as a `Sound` object.
+	 * @param key The key identifying the music.
+	 * @param cache Whether to cache the sound (default is true).
+	 * @return The `Sound` object, or null if it doesn't exist.
+	 */
+	public static inline function music(key:String, ?cache:Bool = true):Null<openfl.media.Sound>
+	{
+		return Assets.getSound('assets/music/$key.ogg', cache);
+	}
+
+	/**
 	 * Constructs the path for a shader asset.
 	 * @param key The key identifying the shader.
 	 * @return The path to the shader file.
@@ -86,20 +91,13 @@ class Paths
 	}
 
 	/**
-	 * Retrieves a spritesheet in the appropriate format.
-	 * @param key The key identifying the spritesheet.
-	 * @param type The type of spritesheet (default is `SPARROW`).
-	 * @return The spritesheet frames, or null if it doesn't exist.
+	 * Retrieves a sound effect as a `Sound` object.
+	 * @param key The key identifying the sound.
+	 * @param cache Whether to cache the sound (default is true).
+	 * @return The `Sound` object, or null if it doesn't exist.
 	 */
-	public static inline function spritesheet(key:String, ?type:SpriteSheetType = SPARROW):FlxAtlasFrames
+	public static inline function sound(key:String, ?cache:Bool = true):Null<openfl.media.Sound>
 	{
-		return switch (type)
-		{
-			case ASEPRITE: FlxAtlasFrames.fromAseprite(Paths.sprite(key), Paths.sprite(key).withExtension('json'));
-			case PACKER: FlxAtlasFrames.fromSpriteSheetPacker(Paths.sprite(key), Paths.sprite(key).withExtension('txt'));
-			case SPARROW: FlxAtlasFrames.fromSparrow(Paths.sprite(key), Paths.sprite(key).withExtension('xml'));
-			case TEXTURE_PATCHER_JSON: FlxAtlasFrames.fromTexturePackerJson(Paths.sprite(key), Paths.sprite(key).withExtension('json'));
-			case TEXTURE_PATCHER_XML: FlxAtlasFrames.fromTexturePackerXml(Paths.sprite(key), Paths.sprite(key).withExtension('xml'));
-		}
+		return Assets.getSound('assets/sounds/$key.wav', cache);
 	}
 }
