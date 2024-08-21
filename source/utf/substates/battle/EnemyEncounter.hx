@@ -59,6 +59,9 @@ class EnemyEncounter extends FlxSubState
 
 	public override function create():Void
 	{
+		if (encounterMusic?.length > 0)
+			FlxG.sound.playMusic(Paths.music(encounterMusic));
+
 		final bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.screenCenter();
 		bg.active = false;
