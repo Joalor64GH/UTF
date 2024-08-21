@@ -1,5 +1,8 @@
 package utf;
 
+import flixel.graphics.frames.FlxAtlasFrames;
+import utf.Assets;
+
 using haxe.io.Path;
 
 /**
@@ -57,7 +60,7 @@ class Paths
 	 * @param type The type of spritesheet (default is `SPARROW`).
 	 * @return The spritesheet frames, or null if it doesn't exist.
 	 */
-	public static inline function spritesheet(key:String, ?type:SpriteSheetType = SPARROW):Null<flixel.graphics.frames.FlxAtlasFrames>
+	public static inline function spritesheet(key:String, ?type:SpriteSheetType = SPARROW):Null<FlxAtlasFrames>
 	{
 		return switch (type)
 		{
