@@ -69,17 +69,17 @@ class Settings extends FlxState
 		switch (DateUtil.getWeather())
 		{
 			case 1:
-				AssetPaths.music('options_winter');
+				Paths.music('options_winter');
 			case 3:
-				AssetPaths.music('options_summer');
+				Paths.music('options_summer');
 			default:
-				AssetPaths.music('options_fall');
+				Paths.music('options_fall');
 		}
 
 		if (DateUtil.getWeather() != 3)
 		{
 			final particles:FlxEmitter = new FlxEmitter(0, 0);
-			particles.loadParticles(AssetPaths.sprite(DateUtil.getWeather() == 1 ? 'christmasflake' : 'fallleaf'), 120);
+			particles.loadParticles(Paths.sprite(DateUtil.getWeather() == 1 ? 'christmasflake' : 'fallleaf'), 120);
 			particles.alpha.set(0.5, 0.5);
 			particles.scale.set(2, 2);
 
@@ -100,7 +100,7 @@ class Settings extends FlxState
 		}
 
 		final settings:FlxText = new FlxText(0, 20, 0, 'SETTINGS', 64);
-		settings.font = AssetPaths.font('DTM-Sans');
+		settings.font = Paths.font('DTM-Sans');
 		settings.screenCenter(X);
 		settings.scrollFactor.set();
 		settings.active = false;
@@ -111,7 +111,7 @@ class Settings extends FlxState
 		for (i in 0...options.length)
 		{
 			final opt:FlxText = new FlxText(40, i == 0 ? 80 : (120 + i * 32), 0, options[i].toString(), 32);
-			opt.font = AssetPaths.font('DTM-Sans');
+			opt.font = Paths.font('DTM-Sans');
 			opt.scrollFactor.set();
 			opt.active = false;
 			opt.ID = i;
@@ -125,17 +125,17 @@ class Settings extends FlxState
 		switch (DateUtil.getWeather())
 		{
 			case 1:
-				tobdogWeather.loadGraphic(AssetPaths.sprite('tobdog_winter'));
+				tobdogWeather.loadGraphic(Paths.sprite('tobdog_winter'));
 			case 2:
-				tobdogWeather.frames = AssetPaths.spritesheet('tobdog_spring');
+				tobdogWeather.frames = Paths.spritesheet('tobdog_spring');
 				tobdogWeather.animation.addByPrefix('spring', 'tobdog_spring', 2, true);
 				tobdogWeather.animation.play('spring');
 			case 3:
-				tobdogWeather.frames = AssetPaths.spritesheet('tobdog_summer');
+				tobdogWeather.frames = Paths.spritesheet('tobdog_summer');
 				tobdogWeather.animation.addByPrefix('summer', 'tobdog_summer', 2, true);
 				tobdogWeather.animation.play('summer');
 			case 4:
-				tobdogWeather.loadGraphic(AssetPaths.sprite('tobdog_autumn'));
+				tobdogWeather.loadGraphic(Paths.sprite('tobdog_autumn'));
 		}
 
 		tobdogWeather.scale.set(2, 2);
@@ -161,7 +161,7 @@ class Settings extends FlxState
 				tobdogLine.text = 'sweep a leaf\nsweep away a\ntroubles';
 		}
 
-		tobdogLine.font = AssetPaths.font('DTM-Sans');
+		tobdogLine.font = Paths.font('DTM-Sans');
 		tobdogLine.color = FlxColor.GRAY;
 		tobdogLine.angle = 20;
 		tobdogLine.scrollFactor.set();
@@ -170,7 +170,7 @@ class Settings extends FlxState
 
 		changeOption();
 
-		FlxG.sound.play(AssetPaths.music('harpnoise'));
+		FlxG.sound.play(Paths.music('harpnoise'));
 
 		super.create();
 
@@ -179,11 +179,11 @@ class Settings extends FlxState
 			switch (DateUtil.getWeather())
 			{
 				case 1:
-					FlxG.sound.playMusic(AssetPaths.music('options_winter'), 0.8);
+					FlxG.sound.playMusic(Paths.music('options_winter'), 0.8);
 				case 3:
-					FlxG.sound.playMusic(AssetPaths.music('options_summer'), 0.8);
+					FlxG.sound.playMusic(Paths.music('options_summer'), 0.8);
 				default:
-					FlxG.sound.playMusic(AssetPaths.music('options_fall'), 0.8);
+					FlxG.sound.playMusic(Paths.music('options_fall'), 0.8);
 			}
 		});
 	}

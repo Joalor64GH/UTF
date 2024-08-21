@@ -18,7 +18,7 @@ class Title extends FlxState
 
 	public override function create():Void
 	{
-		final titleImage:FlxSprite = new FlxSprite(0, 0, AssetPaths.sprite('titleimage'));
+		final titleImage:FlxSprite = new FlxSprite(0, 0, Paths.sprite('titleimage'));
 		titleImage.scale.set(2, 2);
 		titleImage.updateHitbox();
 		titleImage.screenCenter();
@@ -27,7 +27,7 @@ class Title extends FlxState
 		add(titleImage);
 
 		titleText = new FlxText(0, 355, 0, '[PRESS Z]', 16);
-		titleText.font = AssetPaths.font('Small');
+		titleText.font = Paths.font('Small');
 		titleText.color = FlxColor.GRAY;
 		titleText.alpha = 0.0001;
 		titleText.screenCenter(X);
@@ -37,7 +37,7 @@ class Title extends FlxState
 
 		super.create();
 
-		FlxG.sound.play(AssetPaths.music('intronoise'), () -> titleText.alpha = 1);
+		FlxG.sound.play(Paths.music('intronoise'), () -> titleText.alpha = 1);
 	}
 
 	public override function update(elapsed:Float):Void
@@ -56,7 +56,7 @@ class Title extends FlxState
 			letters += letter.toLowerCase();
 
 			if (letters.indexOf('ball') != -1)
-				FlxG.sound.play(AssetPaths.sound('ballchime'));
+				FlxG.sound.play(Paths.sound('ballchime'));
 		}
 
 		super.update(elapsed);

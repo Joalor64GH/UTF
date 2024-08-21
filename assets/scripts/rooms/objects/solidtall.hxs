@@ -1,4 +1,4 @@
-import utf.AssetPaths;
+import utf.Paths;
 import utf.objects.room.Object;
 
 class SolidTallObject extends Object
@@ -7,7 +7,7 @@ class SolidTallObject extends Object
 	{
 		super('solidtall');
 
-		loadGraphic(AssetPaths.sprite(objectID));
+		loadGraphic(Paths.sprite(objectID));
 		scale.set(2, 800);
 		updateHitbox();
 

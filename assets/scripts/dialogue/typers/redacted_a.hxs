@@ -1,5 +1,5 @@
 import flixel.FlxG;
-import utf.AssetPaths;
+import utf.Paths;
 import utf.objects.dialogue.typers.Typer;
 
 class RedactedATyper extends Typer
@@ -8,18 +8,18 @@ class RedactedATyper extends Typer
 	{
 		super('redacted_a');
 
-		fontName = AssetPaths.font('Wingdings', false);
+		fontName = Paths.font('Wingdings', false);
 		fontSize = 24;
 		fontSpacing = 1.6;
 		typerOffset.set(-20, -20);
 		typerSounds = [
-			{sound: AssetPaths.sound('wngdng7', false), volume: 0.9},
-			{sound: AssetPaths.sound('wngdng6', false), volume: 0.83},
-			{sound: AssetPaths.sound('wngdng5', false), volume: 0.85},
-			{sound: AssetPaths.sound('wngdng4', false), volume: 0.84},
-			{sound: AssetPaths.sound('wngdng3', false), volume: 0.81},
-			{sound: AssetPaths.sound('wngdng2', false), volume: 0.99},
-			{sound: AssetPaths.sound('wngdng1', false), volume: 1.0}
+			{sound: Paths.sound('wngdng7', false), volume: 0.9},
+			{sound: Paths.sound('wngdng6', false), volume: 0.83},
+			{sound: Paths.sound('wngdng5', false), volume: 0.85},
+			{sound: Paths.sound('wngdng4', false), volume: 0.84},
+			{sound: Paths.sound('wngdng3', false), volume: 0.81},
+			{sound: Paths.sound('wngdng2', false), volume: 0.99},
+			{sound: Paths.sound('wngdng1', false), volume: 1.0}
 		];
 		typerLPS = 0.16665;
 	}

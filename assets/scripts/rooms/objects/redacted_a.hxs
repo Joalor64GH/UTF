@@ -1,6 +1,6 @@
 import flixel.math.FlxMath;
 import flixel.FlxG;
-import utf.AssetPaths;
+import utf.Paths;
 import utf.objects.room.Object;
 
 class RedactedAObject extends Object
@@ -13,7 +13,7 @@ class RedactedAObject extends Object
 
 		objectInteractable = true;
 
-		loadGraphic(AssetPaths.sprite(objectID));
+		loadGraphic(Paths.sprite(objectID));
 		scale.set(2, 2);
 		updateHitbox();
 

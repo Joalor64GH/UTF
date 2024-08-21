@@ -1,5 +1,5 @@
 import flixel.FlxSprite;
-import utf.AssetPaths;
+import utf.Paths;
 import utf.objects.battle.Monster;
 import flixel.FlxG;
 
@@ -29,31 +29,31 @@ class UndyneExMonster extends Monster
 		monsterCheckMessage = '* UNDYNE THE UNDYING 99ATK 99DEF\n* Heroine reformed by her own\n  DETERMINATION to save Earth.';
 		monsterSpareable = false;
 
-		legs = new FlxSprite(78, 154, AssetPaths.sprite('undyne_anim/legs'));
+		legs = new FlxSprite(78, 154, Paths.sprite('undyne_anim/legs'));
 		add(legs);
 
-		pants = new FlxSprite(legs.x, legs.y - 34, AssetPaths.sprite('undyne_anim/pants'));
+		pants = new FlxSprite(legs.x, legs.y - 34, Paths.sprite('undyne_anim/pants'));
 		pants.origin.set(pants.frameWidth * 0.6, pants.frameHeight * 0.8);
 		add(pants);
 
-		torso = new FlxSprite(52, 56, AssetPaths.sprite('undyne_anim/torso'));
+		torso = new FlxSprite(52, 56, Paths.sprite('undyne_anim/torso'));
 		torso.origin.set(torso.frameWidth * 0.15, torso.frameHeight * 0.6);
 		add(torso);
 
-		larm = new FlxSprite(-58, -140, AssetPaths.sprite('undyne_anim/larm'));
+		larm = new FlxSprite(-58, -140, Paths.sprite('undyne_anim/larm'));
 		add(larm);
 
-		rarm = new FlxSprite(48, -175, AssetPaths.sprite('undyne_anim/rarm'));
+		rarm = new FlxSprite(48, -175, Paths.sprite('undyne_anim/rarm'));
 		add(rarm);
 
-		hair = new FlxSprite(-12, -182, AssetPaths.sprite('undyne_anim/hair'));
+		hair = new FlxSprite(-12, -182, Paths.sprite('undyne_anim/hair'));
 		hair.origin.set(hair.frameWidth * 0.92, hair.frameHeight * 0.02);
 		add(hair);
 
-		head = new FlxSprite(2, hair.y + 22, AssetPaths.sprite('undyne_anim/face'));
+		head = new FlxSprite(2, hair.y + 22, Paths.sprite('undyne_anim/face'));
 		add(head);
 
-		beam = new FlxSprite(9, 0, AssetPaths.sprite('undyne_anim/beam'));
+		beam = new FlxSprite(9, 0, Paths.sprite('undyne_anim/beam'));
 		beam.origin.set(beam.frameWidth * 0, beam.frameHeight * 0.5);
 		beam.alpha = 0;
 		add(beam);

@@ -1,5 +1,5 @@
 import flixel.FlxG;
-import utf.AssetPaths;
+import utf.Paths;
 import utf.objects.room.Object;
 import utf.states.Intro;
 
@@ -9,7 +9,7 @@ class DoorDObject extends Object
 	{
 		super('doorD');
 
-		loadGraphic(AssetPaths.sprite(objectID));
+		loadGraphic(Paths.sprite(objectID));
 		scale.set(2, 2);
 		updateHitbox();
 

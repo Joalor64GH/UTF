@@ -1,5 +1,5 @@
 import flixel.FlxG;
-import utf.AssetPaths;
+import utf.Paths;
 import utf.Global;
 import utf.input.Controls;
 import utf.objects.room.Chara;
@@ -10,7 +10,7 @@ class MainCharaCharacter extends Chara
 	{
 		super('mainchara');
 
-		frames = AssetPaths.spritesheet('f_mainchara');
+		frames = Paths.spritesheet('f_mainchara');
 		scale.set(2, 2);
 		updateHitbox();
 

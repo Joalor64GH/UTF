@@ -1,4 +1,4 @@
-import utf.AssetPaths;
+import utf.Paths;
 import utf.objects.room.Object;
 
 class EventObject extends Object
@@ -7,7 +7,7 @@ class EventObject extends Object
 	{
 		super('event');
 
-		loadGraphic(AssetPaths.sprite(objectID));
+		loadGraphic(Paths.sprite(objectID));
 		scale.set(2, 2);
 		updateHitbox();
 

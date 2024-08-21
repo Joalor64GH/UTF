@@ -18,14 +18,14 @@ class GameOver extends FlxSubState
 
 	public override function create():Void
 	{
-		FlxG.sound.playMusic(AssetPaths.music('gameover'));
+		FlxG.sound.playMusic(Paths.music('gameover'));
 
 		final bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.screenCenter();
 		bg.active = false;
 		add(bg);
 
-		gameoverbg = new FlxSprite(0, 30, AssetPaths.sprite('gameoverbg'));
+		gameoverbg = new FlxSprite(0, 30, Paths.sprite('gameoverbg'));
 		gameoverbg.alpha = 0;
 		gameoverbg.screenCenter(X);
 		gameoverbg.scrollFactor.set();

@@ -1,4 +1,4 @@
-import utf.AssetPaths;
+import utf.Paths;
 import utf.objects.room.Object;
 
 class DoorCObject extends Object
@@ -7,7 +7,7 @@ class DoorCObject extends Object
 	{
 		super('doorC');
 
-		loadGraphic(AssetPaths.sprite(objectID));
+		loadGraphic(Paths.sprite(objectID));
 		scale.set(2, 2);
 		updateHitbox();
 

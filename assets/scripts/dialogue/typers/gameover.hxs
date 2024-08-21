@@ -1,5 +1,5 @@
 import flixel.FlxG;
-import utf.AssetPaths;
+import utf.Paths;
 import utf.objects.dialogue.typers.Typer;
 
 class GameOverTyper extends Typer
@@ -8,10 +8,10 @@ class GameOverTyper extends Typer
 	{
 		super('gameover');
 
-		fontName = AssetPaths.font('DTM-Mono', false);
+		fontName = Paths.font('DTM-Mono', false);
 		fontSize = 32;
 		fontSpacing = 2;
-		typerSounds = [{sound: AssetPaths.sound('txt1', false), volume: 1}];
+		typerSounds = [{sound: Paths.sound('txt1', false), volume: 1}];
 		typerLPS = 0.25;
 	}
 }

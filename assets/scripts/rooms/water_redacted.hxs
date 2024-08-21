@@ -1,7 +1,7 @@
 import flixel.math.FlxRect;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import utf.AssetPaths;
+import utf.Paths;
 import utf.states.room.Room;
 
 class WaterRedactedRoom extends Room
@@ -17,7 +17,7 @@ class WaterRedactedRoom extends Room
 
 	public override function create():Void
 	{
-		FlxG.sound.playMusic(AssetPaths.music('mysteriousroom2'), 0.8);
+		FlxG.sound.playMusic(Paths.music('mysteriousroom2'), 0.8);
 
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.pitch = 0.5;

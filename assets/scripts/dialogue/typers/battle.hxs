@@ -1,5 +1,5 @@
 import flixel.FlxG;
-import utf.AssetPaths;
+import utf.Paths;
 import utf.objects.dialogue.typers.Typer;
 
 class BattleTyper extends Typer
@@ -8,9 +8,9 @@ class BattleTyper extends Typer
 	{
 		super('battle');
 
-		fontName = AssetPaths.font('DTM-Mono', false);
+		fontName = Paths.font('DTM-Mono', false);
 		fontSize = 32;
-		typerSounds = [{sound: AssetPaths.sound('txt2', false), volume: 0.86}];
+		typerSounds = [{sound: Paths.sound('txt2', false), volume: 0.86}];
 		typerLPS = 0.25;
 	}
 }

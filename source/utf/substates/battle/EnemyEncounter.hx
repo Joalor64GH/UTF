@@ -47,11 +47,11 @@ class EnemyEncounter extends FlxSubState
 		add(bg);
 
 		stats = new FlxText(30, 400, 0, Global.name + '   LV ' + Global.lv, 22);
-		stats.font = AssetPaths.font('Small');
+		stats.font = Paths.font('Small');
 		stats.scrollFactor.set();
 		add(stats);
 
-		hpName = new FlxSprite(stats.x + 210, stats.y + 5, AssetPaths.sprite('hpname'));
+		hpName = new FlxSprite(stats.x + 210, stats.y + 5, Paths.sprite('hpname'));
 		hpName.scrollFactor.set();
 		hpName.active = false;
 		add(hpName);
@@ -63,7 +63,7 @@ class EnemyEncounter extends FlxSubState
 		add(hpBar);
 
 		hpInfo = new FlxText((hpBar.x + 15) + hpBar.width, hpBar.y, 0, '${Global.hp} / ${Global.maxHp}', 22);
-		hpInfo.font = AssetPaths.font('Small');
+		hpInfo.font = Paths.font('Small');
 		hpInfo.scrollFactor.set();
 		add(hpInfo);
 
@@ -72,7 +72,7 @@ class EnemyEncounter extends FlxSubState
 		for (i in 0...choices.length)
 		{
 			var bt:FlxSprite = new FlxSprite(0, hpBar.y + 32);
-			bt.frames = AssetPaths.spritesheet(choices[i].toLowerCase() + 'bt');
+			bt.frames = Paths.spritesheet(choices[i].toLowerCase() + 'bt');
 			bt.animation.frameIndex = 1;
 
 			switch (choices[i])
@@ -103,7 +103,7 @@ class EnemyEncounter extends FlxSubState
 		box.active = false;
 		add(box);
 
-		heart = new FlxSprite(0, 0, AssetPaths.sprite('heart'));
+		heart = new FlxSprite(0, 0, Paths.sprite('heart'));
 		heart.color = FlxColor.RED;
 		heart.scrollFactor.set();
 		heart.active = false;
@@ -129,7 +129,7 @@ class EnemyEncounter extends FlxSubState
 
 		if (Controls.justPressed('confirm'))
 		{
-			FlxG.sound.play(AssetPaths.sound('menuconfirm'));
+			FlxG.sound.play(Paths.sound('menuconfirm'));
 
 			if (choiceSelected)
 			{
@@ -200,7 +200,7 @@ class EnemyEncounter extends FlxSubState
 	private function changeChoice(num:Int = 0):Void
 	{
 		if (num != 0)
-			FlxG.sound.play(AssetPaths.sound('menumove'));
+			FlxG.sound.play(Paths.sound('menumove'));
 
 		selected = FlxMath.wrap(selected + num, 0, choices.length - 1);
 

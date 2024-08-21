@@ -41,9 +41,9 @@ class Intro extends FlxState
 		if (Global.flags[0] == 1)
 		{
 			if (!(FlxG.sound.music?.playing ?? false))
-				FlxG.sound.playMusic(AssetPaths.music('menu1'));
+				FlxG.sound.playMusic(Paths.music('menu1'));
 
-			final bg:FlxSprite = new FlxSprite(0, -240, AssetPaths.background('floweyglow'));
+			final bg:FlxSprite = new FlxSprite(0, -240, Paths.background('floweyglow'));
 			bg.scale.set(2, 2);
 			bg.updateHitbox();
 			bg.scrollFactor.set();
@@ -51,7 +51,7 @@ class Intro extends FlxState
 			add(bg);
 
 			final flowey:FlxSprite = new FlxSprite(0, 348);
-			flowey.frames = AssetPaths.spritesheet('flowey');
+			flowey.frames = Paths.spritesheet('flowey');
 			flowey.animation.frameIndex = 1;
 			flowey.scale.set(2, 2);
 			flowey.updateHitbox();
@@ -60,27 +60,27 @@ class Intro extends FlxState
 			add(flowey);
 
 			final name:FlxText = new FlxText(145, 120, 0, Global.name, 32);
-			name.font = AssetPaths.font('DTM-Sans');
+			name.font = Paths.font('DTM-Sans');
 			name.scrollFactor.set();
 			name.active = false;
 			add(name);
 
 			final love:FlxText = new FlxText(285, 120, 0, 'LV ${Global.lv}', 32);
-			love.font = AssetPaths.font('DTM-Sans');
+			love.font = Paths.font('DTM-Sans');
 			love.scrollFactor.set();
 			love.active = false;
 			add(love);
 
 			// TODO
 			final time:FlxText = new FlxText(425, 120, 0, '0:0', 32);
-			time.font = AssetPaths.font('DTM-Sans');
+			time.font = Paths.font('DTM-Sans');
 			time.scrollFactor.set();
 			time.active = false;
 			add(time);
 
 			// TODO
 			final room:FlxText = new FlxText(145, 160, 0, '---', 32);
-			room.font = AssetPaths.font('DTM-Sans');
+			room.font = Paths.font('DTM-Sans');
 			room.scrollFactor.set();
 			room.active = false;
 			add(room);
@@ -90,10 +90,10 @@ class Intro extends FlxState
 		else
 		{
 			if (!(FlxG.sound.music?.playing ?? false))
-				FlxG.sound.playMusic(AssetPaths.music('menu0'));
+				FlxG.sound.playMusic(Paths.music('menu0'));
 
 			final instructions:FlxText = new FlxText(170, 40, 0, ' --- Instruction --- ', 32);
-			instructions.font = AssetPaths.font('DTM-Sans');
+			instructions.font = Paths.font('DTM-Sans');
 			instructions.color = 0xFFC0C0C0;
 			instructions.scrollFactor.set();
 			instructions.active = false;
@@ -109,7 +109,7 @@ class Intro extends FlxState
 			];
 
 			final instructionsList:FlxText = new FlxText(170, 100, 0, list.join('\n'), 32);
-			instructionsList.font = AssetPaths.font('DTM-Sans');
+			instructionsList.font = Paths.font('DTM-Sans');
 			instructionsList.color = 0xFFC0C0C0;
 			instructionsList.scrollFactor.set();
 			instructionsList.active = false;
@@ -147,7 +147,7 @@ class Intro extends FlxState
 				}
 			}
 
-			bt.font = AssetPaths.font('DTM-Sans');
+			bt.font = Paths.font('DTM-Sans');
 			bt.ID = i;
 			bt.scrollFactor.set();
 			bt.active = false;
@@ -163,7 +163,7 @@ class Intro extends FlxState
 		var info:FlxText = new FlxText(0, FlxG.height - 20, 0, 'UTF v${Lib.application.meta['version']} (c) MAJigsaw77 2023', 16);
 		#end
 		info.alignment = CENTER;
-		info.font = AssetPaths.font('Small');
+		info.font = Paths.font('Small');
 		info.color = FlxColor.GRAY;
 		info.screenCenter(X);
 		info.scrollFactor.set();

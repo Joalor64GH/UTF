@@ -109,14 +109,14 @@ class Naming extends FlxSubState
 		add(bg);
 
 		final namingText:FlxText = new FlxText(0, 60, 0, 'Name the fallen human.', 32);
-		namingText.font = AssetPaths.font('DTM-Sans');
+		namingText.font = Paths.font('DTM-Sans');
 		namingText.screenCenter(X);
 		namingText.scrollFactor.set();
 		namingText.active = false;
 		add(namingText);
 
 		name = new FlxText(280, 110, 0, curName, 32);
-		name.font = AssetPaths.font('DTM-Sans');
+		name.font = Paths.font('DTM-Sans');
 		name.scrollFactor.set();
 		add(name);
 
@@ -131,7 +131,7 @@ class Naming extends FlxSubState
 		for (i in 0...upLetters.length)
 		{
 			final letter:FlxText = new FlxText(120 + line * 64, 150 + row * 28, 0, String.fromCharCode(upLetters[i]), 32);
-			letter.font = AssetPaths.font('DTM-Sans');
+			letter.font = Paths.font('DTM-Sans');
 			letter.ID = i;
 			letter.scrollFactor.set();
 			letter.active = false;
@@ -155,7 +155,7 @@ class Naming extends FlxSubState
 		for (i in 0...lowLetters.length)
 		{
 			final letter:FlxText = new FlxText(120 + line * 64, 270 + row * 28, 0, String.fromCharCode(lowLetters[i]), 32);
-			letter.font = AssetPaths.font('DTM-Sans');
+			letter.font = Paths.font('DTM-Sans');
 			letter.ID = lowLetters.length + i;
 			letter.scrollFactor.set();
 			letter.active = false;
@@ -189,7 +189,7 @@ class Naming extends FlxSubState
 					choice.setPosition(440, 400);
 			}
 
-			choice.font = AssetPaths.font('DTM-Sans');
+			choice.font = Paths.font('DTM-Sans');
 			choice.ID = i;
 			choice.scrollFactor.set();
 			choice.active = false;

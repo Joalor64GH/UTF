@@ -14,7 +14,7 @@ import openfl.utils.ByteArray;
  * including scripts, data files, rooms, music, sounds, backgrounds, borders,
  * sprites, fonts, shaders, and spritesheets.
  */
-class AssetPaths
+class Paths
 {
 	/**
 	 * Constructs the path for a script asset.
@@ -151,14 +151,14 @@ class AssetPaths
 	 */
 	public static function spritesheet(key:String):FlxAtlasFrames
 	{
-		final path:String = Path.withoutExtension(AssetPaths.sprite(key));
+		final path:String = Path.withoutExtension(Paths.sprite(key));
 
 		try
 		{
 			if (Assets.exists(Path.withExtension(path, 'xml'), TEXT))
-				return FlxAtlasFrames.fromSparrow(AssetPaths.sprite(key), Path.withExtension(path, 'xml'));
+				return FlxAtlasFrames.fromSparrow(Paths.sprite(key), Path.withExtension(path, 'xml'));
 			else if (Assets.exists(Path.withExtension(path, 'json'), TEXT))
-				return FlxAtlasFrames.fromTexturePackerJson(AssetPaths.sprite(key), Path.withExtension(path, 'json'));
+				return FlxAtlasFrames.fromTexturePackerJson(Paths.sprite(key), Path.withExtension(path, 'json'));
 		}
 		catch (e:Exception)
 			FlxG.log.error(e.message);
