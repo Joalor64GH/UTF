@@ -36,7 +36,7 @@ class ErrorHandler
 		WindowsAPI.disableErrorReporting();
 		#end
 
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
+		// Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
 
 		#if cpp
 		untyped __global__.__hxcpp_set_critical_error_handler(onCriticalError);
