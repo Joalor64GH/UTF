@@ -1,0 +1,22 @@
+import flixel.math.FlxPoint;
+import utf.substates.battle.EnemyEncounter;
+import utf.Assets;
+import utf.Paths;
+
+class UndyneTheUndyingEncouter extends EnemyEncounter
+{
+	public function new():Void
+	{
+		super('undyne-the-undying');
+
+		encounterMusic = 'x_undyne';
+		encounterText = '* The heroine appears.';
+		encounterMonsters = ['undyne-ex'];
+		encounterMonstersPositions = [FlxPoint.weak(0, 0)];
+	}
+
+	public override function backgroundCreate():Void
+	{
+		trace('background create called!');
+	}
+}
