@@ -45,7 +45,6 @@ class Data
 
 	/**
 	 * Updates a setting and saves it.
-	 *
 	 * @param name The name of the setting to update.
 	 * @param value The new value for the setting.
 	 */
@@ -60,7 +59,6 @@ class Data
 
 	/**
 	 * Retrieves a setting's value.
-	 *
 	 * @param name The name of the setting.
 	 * @return The value of the setting, or null if it doesn't exist.
 	 */
