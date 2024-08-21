@@ -23,7 +23,7 @@
 		{
 			"name": "flixel",
 			"type": "git",
-			"ref": "dev",
+			"ref": "release6",
 			"url": "https://github.com/HaxeFlixel/flixel.git"
 		},
 		{
