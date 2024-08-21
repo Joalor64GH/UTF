@@ -16,6 +16,12 @@ import utf.substates.GameOver;
 
 class EnemyEncounter extends FlxSubState
 {
+	public var encounterID:String;
+	public var encounterMusic:String;
+	public var encounterText:String;
+	public var encounterMonsters:Array<String> = [];
+	public var encounterMonstersPositions:Array<FlxPoint> = [];
+
 	@:noCompletion
 	private var selected:Int = 0;
 
@@ -39,12 +45,26 @@ class EnemyEncounter extends FlxSubState
 	public var heart:FlxSprite;
 	public var writer:Writer;
 
+	public function new(encounterID:String):Void
+	{
+		super();
+
+		this.encounterID = encounterID;
+	}
+
+	public function backgroundCreate():Void
+	{
+		// Empty, must be called on scripts.
+	}
+
 	public override function create():Void
 	{
 		final bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.screenCenter();
 		bg.active = false;
 		add(bg);
+
+		backgroundCreate();
 
 		stats = new FlxText(30, 400, 0, Global.name + '   LV ' + Global.lv, 22);
 		stats.font = Paths.font('Small');
@@ -94,9 +114,20 @@ class EnemyEncounter extends FlxSubState
 
 		add(items);
 
-		monster = MonsterRegistry.fetchMonster('undyne-ex');
-		monster.scrollFactor.set();
-		add(monster);
+		for (i in 0...encounterMonsters.length)
+		{
+			monster = MonsterRegistry.fetchMonster(encounterMonsters[i]);
+
+			if (encounterMonstersPositions[i] != null)
+			{
+				monster.setPosition(encounterMonstersPositions[i].x, encounterMonstersPositions[i].y);
+
+				encounterMonstersPositions[i].put();
+			}
+
+			monster.scrollFactor.set();
+			add(monster);
+		}
 
 		box = new FlxShapeBox(32, 250, 570, 135, {thickness: 6, jointStyle: MITER, color: FlxColor.WHITE}, FlxColor.BLACK);
 		box.scrollFactor.set();
