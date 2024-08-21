@@ -3,6 +3,7 @@ package utf.substates.battle;
 import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
+import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
