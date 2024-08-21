@@ -12,7 +12,7 @@ import utf.registries.RoomRegistry;
 import utf.states.config.Settings;
 import utf.states.room.Room;
 #if debug
-import utf.substates.battle.EnemyEncounter;
+import utf.substates.battle.ScriptedEnemyEncounter;
 #end
 import utf.substates.Naming;
 #if debug
@@ -216,7 +216,7 @@ class Intro extends FlxState
 			if (FlxG.sound.music != null && FlxG.sound.music.playing)
 				FlxG.sound.music.stop();
 
-			openSubState(new EnemyEncounter());
+			openSubState(ScriptedEnemyEncounter.init('UndyneTheUndyingEncouter', 'undyne-the-undying'));
 		}
 		#end
 
