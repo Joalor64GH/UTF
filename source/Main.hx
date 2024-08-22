@@ -111,7 +111,8 @@ class Main extends Sprite
 		Lib.current.stage.quality = StageQuality.LOW;
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		#if linux
-		Lib.current.stage.window.setIcon(Assets.getBitmapData('icon.png', false).image);
+		if (Assets.exists('icon.png'))
+			Lib.current.stage.window.setIcon(Assets.getBitmapData('icon.png', false).image);
 		#end
 		Lib.current.addChild(new Main());
 	}
