@@ -11,6 +11,7 @@ import openfl.utils.ByteArray;
 /**
  * Provides utility functions for handling game assets, such as images, sounds, fonts, and text files.
  */
+@:nullSafety
 class Assets
 {
 	/**
