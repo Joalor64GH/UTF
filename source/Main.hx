@@ -12,9 +12,6 @@ import flixel.FlxG;
 import haxe.io.Path;
 import lime.ui.KeyCode;
 import lime.ui.KeyModifier;
-#if linux
-import lime.utils.Assets;
-#end
 import openfl.display.Sprite;
 import openfl.display.StageAlign;
 import openfl.display.StageScaleMode;
@@ -30,6 +27,7 @@ import utf.util.logging.ErrorHandler;
 import utf.util.CleanupUtil;
 import utf.util.FramerateUtil;
 import utf.util.ResizeUtil;
+import utf.Assets;
 import utf.Game;
 
 using StringTools;
@@ -113,7 +111,7 @@ class Main extends Sprite
 		Lib.current.stage.quality = StageQuality.LOW;
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		#if linux
-		Lib.current.stage.window.setIcon(Assets.getImage('icon.png', false));
+		Lib.current.stage.window.setIcon(Assets.getBitmapData('icon.png', false).image);
 		#end
 		Lib.current.addChild(new Main());
 	}
