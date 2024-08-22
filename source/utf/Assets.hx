@@ -104,7 +104,7 @@ class Assets
 	 * @param path The path to the text file.
 	 * @return The content of the file as a `String`, or null if the file does not exist or an error occurs.
 	 */
-	public static function getText(path:String):String
+	public static function getText(path:String):Null<String>
 	{
 		try
 		{
