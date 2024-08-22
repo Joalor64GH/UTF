@@ -12,6 +12,6 @@ class GameOverTyper extends Typer
 		fontSize = 32;
 		fontSpacing = 2;
 		typerSounds = [{sound: Paths.sound('txt1', false), volume: 1}];
-		typerLPS = 0.25;
+		typerLPS = 0.06;
 	}
 }

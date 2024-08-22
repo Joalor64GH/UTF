@@ -21,6 +21,6 @@ class RedactedATyper extends Typer
 			{sound: Paths.sound('wngdng2', false), volume: 0.99},
 			{sound: Paths.sound('wngdng1', false), volume: 1.0}
 		];
-		typerLPS = 0.16665;
+		typerLPS = 0.03;
 	}
 }
