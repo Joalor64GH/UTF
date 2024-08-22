@@ -11,6 +11,6 @@ class BattleTyper extends Typer
 		fontName = Paths.font('DTM-Mono', false);
 		fontSize = 32;
 		typerSounds = [{sound: Paths.sound('txt2', false), volume: 0.86}];
-		typerLPS = 0.06;
+		typerLPS = 0.03;
 	}
 }
