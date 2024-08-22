@@ -82,6 +82,7 @@ class ErrorHandler
 		System.exit(1);
 	}
 
+	#if cpp
 	@:noCompletion
 	private static inline function onCriticalError(message:String):Void
 	{
@@ -106,6 +107,7 @@ class ErrorHandler
 
 		System.exit(1);
 	}
+	#end
 
 	#if sys
 	@:noCompletion
