@@ -160,7 +160,7 @@ class GifPlayer implements IFlxDestroyable
 			cachedFrames.clear();
 
 		for (i in 0...Tools.framesCount(data))
-			cachedFrames.set(i, Tools.extractFullBGRA(data, i));
+			cachedFrames.set(i, Tools.extractBGRA(data, i));
 	}
 
 	@:noCompletion
@@ -190,7 +190,7 @@ class GifPlayer implements IFlxDestroyable
 
 				nextBlock();
 			case BExtension(EGraphicControl(gce)):
-				delay = gce.delay * 10;
+				delay = gce.delay / 100;
 
 				nextBlock(false);
 			case BEOF:
