@@ -51,7 +51,7 @@ class GifPlayer implements IFlxDestroyable
 		onEndOfFile = new Event<Void->Void>();
 	}
 
-	public function load(bytes:Bytes, preCacheFrames:Bool = false):Void
+	public function load(bytes:Bytes):Void
 	{
 		currentFrame = 0;
 		blockIndex = 0;
@@ -59,7 +59,8 @@ class GifPlayer implements IFlxDestroyable
 		timeCounter = 0;
 		data = new Reader(new BytesInput(bytes)).read();
 		blocks = [for (block in data.blocks) block];
-		cachedFrames = [];
+
+		cacheFrames();
 
 		if (pixels != null
 			&& (pixels.width != data.logicalScreenDescriptor.width || pixels.height != data.logicalScreenDescriptor.height))
@@ -153,6 +154,16 @@ class GifPlayer implements IFlxDestroyable
 	}
 
 	@:noCompletion
+	private function cacheFrames():Void
+	{
+		if (cachedFrames != null)
+			cachedFrames.clear();
+
+		for (i in 0...Tools.framesCount(data))
+			cachedFrames.set(i, Tools.extractFullBGRA(data, i));
+	}
+
+	@:noCompletion
 	private function processBlock():Void
 	{
 		if (!isPlaying)
@@ -174,9 +185,6 @@ class GifPlayer implements IFlxDestroyable
 		switch (blocks[blockIndex])
 		{
 			case BFrame(_):
-				if (!cachedFrames.exists(currentFrame))
-					cachedFrames.set(currentFrame, Tools.extractFullBGRA(data, currentFrame));
-
 				if (pixels != null)
 					pixels.setPixels(pixels.rect, cachedFrames.get(currentFrame));
 
