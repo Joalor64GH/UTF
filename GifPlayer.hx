@@ -19,17 +19,12 @@ class GifPlayer
 
 	private var data:Data;
 	private var blocks:Array<Block> = [];
-	private var frameCount:Int = 0;
 	private var currentFrame:Int = 0;
 	private var blockIndex:Int = 0;
 	private var cachedFrames:Map<Int, Bytes> = [];
-	private var useCache:Bool = true;
 
-	public function new(?useCache:Bool = true, ?preCache:Bool = false):Void
+	public function new(?useCache:Bool = true):Void
 	{
-		this.useCache = useCache;
-		this.preCache = preCache;
-
 		onPreProccessStart = new Event<Void->Void>();
 		onPreProccessFinish = new Event<Void->Void>();
 		onProccessBlock = new Event<Int->Void>();
