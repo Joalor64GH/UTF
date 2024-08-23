@@ -1,4 +1,4 @@
-package;
+package flxgif.format;
 
 import flixel.util.FlxDestroyUtil;
 import format.gif.Data;
