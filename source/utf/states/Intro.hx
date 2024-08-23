@@ -39,6 +39,9 @@ class Intro extends FlxState
 	@:noCompletion
 	private var items:FlxTypedGroup<FlxText>;
 
+	@:noCompletion
+	private var gitPlayer:GifPlayer;
+
 	public override function create():Void
 	{
 		if (Global.flags[0] == 1)
@@ -121,7 +124,7 @@ class Intro extends FlxState
 			choices = ['Begin Game', 'Settings'];
 		}
 
-		final gifPlayer:GifPlayer = new GifPlayer();
+		gitPlayer = new GifPlayer();
 		gifPlayer.onEndOfFile.add(gifPlayer.play);
 		gifPlayer.load(Assets.getBytes('asssets/images/update2022-dr-ch4-rainy.gif'));
 
@@ -190,6 +193,9 @@ class Intro extends FlxState
 
 	public override function update(elapsed:Float):Void
 	{
+		if (gifPlayer != null)
+			gifPlayer.update(elapsed);
+
 		if (Global.flags[0] == 1)
 		{
 			if (Controls.justPressed('right'))
