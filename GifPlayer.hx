@@ -17,31 +17,33 @@ class GifPlayer
 	public var onProccessBlock:Event<Int->Void>;
 	public var onEndOfFile:Event<Void->Void>;
 
-	private var data:Data;
-	private var blocks:Array<Block> = [];
-	private var currentFrame:Int = 0;
 	private var blockIndex:Int = 0;
-	private var cachedFrames:Map<Int, Bytes> = [];
+	private var blocks:Array<Block> = [];
 
-	public function new(?useCache:Bool = true):Void
+	private var cachedFrames:Map<Int, Bytes> = [];
+	private var cacheFrames:Bool = true;
+	private var currentFrame:Int = 0;
+
+	private var data:Data;
+
+	public function new():Void
 	{
-		onPreProccessStart = new Event<Void->Void>();
-		onPreProccessFinish = new Event<Void->Void>();
+		onGraphicLoaded = new Event<Void->Void>();
 		onProccessBlock = new Event<Int->Void>();
 		onEndOfFile = new Event<Void->Void>();
 	}
 
 	public function load(bytes:Bytes):Void
 	{
-		frameCount = 0;
 		currentFrame = 0;
 		blockIndex = 0;
 		blocks = [];
 		cachedFrames = [];
 
-		data = new Reader(new BytesInput(gifBytes)).read();
+		data = new Reader(new BytesInput(bytes)).read();
 
-		if (bitmapData != null && (bitmapData.width != data.logicalScreenDescriptor.width || bitmapData.height != data.logicalScreenDescriptor.height))
+		if (bitmapData != null
+			&& (bitmapData.width != data.logicalScreenDescriptor.width || bitmapData.height != data.logicalScreenDescriptor.height))
 		{
 			bitmapData.dispose();
 			bitmapData = null;
@@ -63,56 +65,67 @@ class GifPlayer
 	public function dispose():Void
 	{
 		blocks = null;
-		cachesFrames = null;
+		cachedFrames = null;
 	}
 
 	@:noCompletion
 	private function processBlock():Void
 	{
+		if (blockIndex >= data.blocks.length)
+		{
+			if (onEndOfFile != null)
+				onEndOfFile();
+
+			return;
+		}
+
 		if (onProccessBlock != null)
 			onProccessBlock.dispatch(blockIndex);
 
 		switch (data.blocks[blockIndex])
 		{
 			case BFrame(_):
-				var pixels:Bytes = null;
-
-				if (useCache && cachedFrames != null && cachedFrames.exists(currentFrame))
-					pixels = cachedFrames.get(currentFrame);
-
-				if (pixels == null)
-				{
-					pixels = Tools.extractFullRGBA(data, currentFrame);
-
-					if (useCache && cachedFrames != null)
-						cachedFrames.set(currentFrame, pixels);
-				}
-
-				if (bitmapData != null)
-					bitmapData.setPixels(bitmapData.rect, pixels);
-
-				nextBlock();
+				handleFrame();
 			case BExtension(EGraphicControl(gce)):
-				var delayMs:Float = gce.delay * 10;
-
-				if (frameRate != null)
-					delayMs = Std.int(1000 / frameRate);
-
-				if (currentFrame > 0)
-				{
-					Timer.delay(function():Void
-					{
-						nextBlock(false);
-					}, delayMs);
-				}
-				else
-					nextBlock(false);
+				handleGraphicControlExtension(gce);
 			case BEOF:
 				if (onEndOfFile != null)
 					onEndOfFile();
-			default:
-				nextBlock(false);
 		}
+	}
+
+	@:noCompletion
+	private function handleFrame():Void
+	{
+		if (cachedFrames != null)
+		{
+			if (!cachedFrames.exists(currentFrame))
+				cachedFrames.set(currentFrame, Tools.extractFullRGBA(data, currentFrame));
+
+			if (bitmapData != null)
+				bitmapData.setPixels(bitmapData.rect, cachedFrames.get(currentFrame));
+		}
+
+		nextBlock();
+	}
+
+	@:noCompletion
+	private function handleGraphicControlExtension(gce:GraphicControlExtension):Void
+	{
+		var delayMs:Float = gce.delay * 10;
+
+		if (frameRate != null)
+			delayMs = Std.int(1000 / frameRate);
+
+		if (currentFrame > 0)
+		{
+			Timer.delay(function():Void
+			{
+				nextBlock(false);
+			}, delayMs);
+		}
+		else
+			nextBlock(false);
 	}
 
 	@:noCompletion
