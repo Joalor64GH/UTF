@@ -42,6 +42,7 @@
 
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
+	<haxelib name="format" />
 	<haxelib name="hscript" />
 
 	<section if="cpp">
