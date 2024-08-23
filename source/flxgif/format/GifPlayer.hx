@@ -137,6 +137,7 @@ class GifPlayer implements IFlxDestroyable
 
 		data = null;
 		cachedFrames = null;
+		blocks = null;
 
 		if (onGraphicLoaded != null)
 			onGraphicLoaded.removeAll();
@@ -160,7 +161,7 @@ class GifPlayer implements IFlxDestroyable
 		if (!isPlaying)
 			return;
 
-		if (blockIndex >= data.blocks.length)
+		if (blockIndex >= blocks.length)
 		{
 			isPlaying = false;
 
@@ -173,7 +174,7 @@ class GifPlayer implements IFlxDestroyable
 		if (onProccessBlock != null)
 			onProccessBlock.dispatch(blockIndex);
 
-		switch (data.blocks[blockIndex])
+		switch (blocks[blockIndex])
 		{
 			case BFrame(_):
 				if (!cachedFrames.exists(currentFrame))
