@@ -126,7 +126,7 @@ class Intro extends FlxState
 		gifPlayer.load(Assets.getBytes('asssets/images/update2022-dr-ch4-rainy.gif'));
 
 		final gifLoader:FlxSprite = new FlxSprite(0, 0);
-		gifLoader.loadGroahic(FlxGraphic.fromBitmapData(gifPlayer.pixels, false, null, false));
+		gifLoader.loadGraphic(FlxGraphic.fromBitmapData(gifPlayer.pixels, false, null, false));
 		add(gifLoader);
 
 		FlxTimer.wait(0.0001, gifPlayer.play);
