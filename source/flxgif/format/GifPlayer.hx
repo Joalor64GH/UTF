@@ -23,8 +23,8 @@ class GifPlayer implements IFlxDestroyable
 	@:noCompletion
 	private var blocks:Array<Block> = [];
 
-	@:noCompletion
-	private var cachedFrames:Map<Int, Bytes> = [];
+	/*@:noCompletion
+	private var cachedFrames:Map<Int, Bytes> = [];*/
 
 	@:noCompletion
 	private var currentFrame:Int = 0;
@@ -55,12 +55,12 @@ class GifPlayer implements IFlxDestroyable
 	{
 		currentFrame = 0;
 		blockIndex = 0;
-		blocks = [];
 		timeCounter = 0;
+
 		data = new Reader(new BytesInput(bytes)).read();
 		blocks = [for (block in data.blocks) block];
 
-		cacheFrames();
+		// cacheFrames();
 
 		if (pixels != null
 			&& (pixels.width != data.logicalScreenDescriptor.width || pixels.height != data.logicalScreenDescriptor.height))
@@ -81,6 +81,7 @@ class GifPlayer implements IFlxDestroyable
 		{
 			isPlaying = true;
 			isPaused = false;
+
 			currentFrame = 0;
 			blockIndex = 0;
 			timeCounter = 0;
@@ -91,6 +92,7 @@ class GifPlayer implements IFlxDestroyable
 	{
 		isPlaying = false;
 		isPaused = false;
+
 		currentFrame = 0;
 		blockIndex = 0;
 		timeCounter = 0;
@@ -134,7 +136,7 @@ class GifPlayer implements IFlxDestroyable
 		}
 
 		data = null;
-		cachedFrames = null;
+		// cachedFrames = null;
 		blocks = null;
 
 		if (onGraphicLoaded != null)
@@ -153,7 +155,7 @@ class GifPlayer implements IFlxDestroyable
 		onEndOfFile = null;
 	}
 
-	@:noCompletion
+	/*@:noCompletion
 	private function cacheFrames():Void
 	{
 		if (cachedFrames != null)
@@ -161,7 +163,7 @@ class GifPlayer implements IFlxDestroyable
 
 		for (i in 0...Tools.framesCount(data))
 			cachedFrames.set(i, Tools.extractBGRA(data, i));
-	}
+	}*/
 
 	@:noCompletion
 	private function processBlock():Void
@@ -186,7 +188,7 @@ class GifPlayer implements IFlxDestroyable
 		{
 			case BFrame(_):
 				if (pixels != null)
-					pixels.setPixels(pixels.rect, cachedFrames.get(currentFrame));
+					pixels.setPixels(pixels.rect, Tools.extractBGRA(data, currentFrame));
 
 				nextBlock();
 			case BExtension(EGraphicControl(gce)):
