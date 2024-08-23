@@ -188,7 +188,7 @@ class GifPlayer implements IFlxDestroyable
 		{
 			case BFrame(_):
 				if (pixels != null)
-					pixels.setPixels(pixels.rect, Tools.extractBGRA(data, currentFrame));
+					pixels.setPixels(pixels.rect, Tools.extractFullBGRA(data, currentFrame));
 
 				nextBlock();
 			case BExtension(EGraphicControl(gce)):
