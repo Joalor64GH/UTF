@@ -177,7 +177,7 @@ class GifPlayer implements IFlxDestroyable
 		{
 			case BFrame(_):
 				if (!cachedFrames.exists(currentFrame))
-					cachedFrames.set(currentFrame, Tools.extractFullRGBA(data, currentFrame));
+					cachedFrames.set(currentFrame, Tools.extractFullBGRA(data, currentFrame));
 
 				if (pixels != null)
 					pixels.setPixels(pixels.rect, cachedFrames.get(currentFrame));
