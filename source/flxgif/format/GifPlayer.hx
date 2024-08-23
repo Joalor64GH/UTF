@@ -192,7 +192,7 @@ class GifPlayer implements IFlxDestroyable
 
 				nextBlock();
 			case BExtension(EGraphicControl(gce)):
-				delay = gce.delay;
+				delay = gce.delay / 1000;
 
 				nextBlock(false);
 			case BEOF:
