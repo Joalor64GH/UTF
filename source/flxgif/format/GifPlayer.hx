@@ -9,7 +9,6 @@ import haxe.io.BytesInput;
 import lime.app.Event;
 import openfl.display.BitmapData;
 
-@:nullSafety
 class GifPlayer implements IFlxDestroyable
 {
 	public var pixels:BitmapData;
