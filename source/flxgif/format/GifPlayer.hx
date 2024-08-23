@@ -22,6 +22,9 @@ class GifPlayer implements IFlxDestroyable
 	private var blockIndex:Int = 0;
 
 	@:noCompletion
+	private var blocks:Array<Block> = [];
+
+	@:noCompletion
 	private var cachedFrames:Map<Int, Bytes> = [];
 
 	@:noCompletion
@@ -49,12 +52,14 @@ class GifPlayer implements IFlxDestroyable
 		onEndOfFile = new Event<Void->Void>();
 	}
 
-	public function load(bytes:Bytes):Void
+	public function load(bytes:Bytes, preCacheFrames:Bool = false):Void
 	{
 		currentFrame = 0;
 		blockIndex = 0;
+		blocks = [];
 		timeCounter = 0;
 		data = new Reader(new BytesInput(bytes)).read();
+		blocks = [for (block in data.blocks) block];
 		cachedFrames = [];
 
 		if (pixels != null
@@ -180,11 +185,15 @@ class GifPlayer implements IFlxDestroyable
 				nextBlock();
 			case BExtension(EGraphicControl(gce)):
 				delay = gce.delay / 100;
+
+				nextBlock(false);
 			case BEOF:
 				isPlaying = false;
 
 				if (onEndOfFile != null)
 					onEndOfFile.dispatch();
+			default:
+				nextBlock(false);
 		}
 	}
 
