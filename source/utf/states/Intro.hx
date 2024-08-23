@@ -1,6 +1,6 @@
 package utf.states;
 
-import flixel.graphic.FlxGraphic;
+import flixel.graphics.FlxGraphic;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
