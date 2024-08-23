@@ -40,7 +40,7 @@ class Intro extends FlxState
 	private var items:FlxTypedGroup<FlxText>;
 
 	@:noCompletion
-	private var gitPlayer:GifPlayer;
+	private var gifPlayer:GifPlayer;
 
 	public override function create():Void
 	{
@@ -124,7 +124,7 @@ class Intro extends FlxState
 			choices = ['Begin Game', 'Settings'];
 		}
 
-		gitPlayer = new GifPlayer();
+		gifPlayer = new GifPlayer();
 		gifPlayer.onEndOfFile.add(gifPlayer.play);
 		gifPlayer.load(Assets.getBytes('asssets/images/update2022-dr-ch4-rainy.gif'));
 
