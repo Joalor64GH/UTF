@@ -1,12 +1,15 @@
 package utf.states;
 
+import flixel.graphic.FlxGraphic;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flxgif.format.GifPlayer;
 import openfl.Lib;
 import utf.registries.RoomRegistry;
 import utf.states.config.Settings;
@@ -117,6 +120,15 @@ class Intro extends FlxState
 
 			choices = ['Begin Game', 'Settings'];
 		}
+
+		final gifPlayer:GifPlayer = new GifPlayer();
+		gifPlayer.load(Assets.getBytes('asssets/images/update2022-dr-ch4-rainy.gif'));
+
+		final gifLoader:FlxSprite = new FlxSprite(0, 0);
+		gifLoader.loadGroahic(FlxGraphic.fromBitmapData(gifPlayer.pixels, false, null, false));
+		add(gifLoader);
+
+		FlxTimer.wait(0.0001, gifPlayer.play);
 
 		items = new FlxTypedGroup<FlxText>();
 
