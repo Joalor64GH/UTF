@@ -83,8 +83,6 @@ class GifPlayer implements IFlxDestroyable
 			currentFrame = 0;
 			blockIndex = 0;
 			timeCounter = 0;
-
-			processBlock();
 		}
 	}
 
@@ -116,7 +114,7 @@ class GifPlayer implements IFlxDestroyable
 
 		timeCounter += elapsed;
 
-		if (timeCounter >= delay)
+		while (timeCounter >= delay)
 		{
 			timeCounter -= delay;
 
