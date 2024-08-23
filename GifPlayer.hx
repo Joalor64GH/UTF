@@ -12,7 +12,7 @@ import openfl.display.BitmapData;
 @:nullSafety
 class GifPlayer implements IFlxDestroyable
 {
-	public var bitmapData:BitmapData;
+	public var pixels:BitmapData;
 
 	public var onGraphicLoaded:Event<Void->Void>;
 	public var onProccessBlock:Event<Int->Void>;
@@ -57,14 +57,14 @@ class GifPlayer implements IFlxDestroyable
 		data = new Reader(new BytesInput(bytes)).read();
 		cachedFrames = [];
 
-		if (bitmapData != null
-			&& (bitmapData.width != data.logicalScreenDescriptor.width || bitmapData.height != data.logicalScreenDescriptor.height))
+		if (pixels != null
+			&& (pixels.width != data.logicalScreenDescriptor.width || pixels.height != data.logicalScreenDescriptor.height))
 		{
-			bitmapData.dispose();
-			bitmapData = null;
+			pixels.dispose();
+			pixels = null;
 		}
 
-		bitmapData = new BitmapData(data.logicalScreenDescriptor.width, data.logicalScreenDescriptor.height, 0, true);
+		pixels = new BitmapData(data.logicalScreenDescriptor.width, data.logicalScreenDescriptor.height, 0, true);
 
 		if (onGraphicLoaded != null)
 			onGraphicLoaded.dispatch();
@@ -124,10 +124,10 @@ class GifPlayer implements IFlxDestroyable
 	{
 		stop();
 
-		if (bitmapData != null)
+		if (pixels != null)
 		{
-			bitmapData.dispose();
-			bitmapData = null;
+			pixels.dispose();
+			pixels = null;
 		}
 
 		data = null;
@@ -174,8 +174,8 @@ class GifPlayer implements IFlxDestroyable
 				if (!cachedFrames.exists(currentFrame))
 					cachedFrames.set(currentFrame, Tools.extractFullRGBA(data, currentFrame));
 
-				if (bitmapData != null)
-					bitmapData.setPixels(bitmapData.rect, cachedFrames.get(currentFrame));
+				if (pixels != null)
+					pixels.setPixels(pixels.rect, cachedFrames.get(currentFrame));
 
 				nextBlock();
 			case BExtension(EGraphicControl(gce)):
