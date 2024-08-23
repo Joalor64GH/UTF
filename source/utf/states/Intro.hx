@@ -1,15 +1,12 @@
 package utf.states;
 
-import flixel.graphics.FlxGraphic;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flxgif.format.GifPlayer;
 import openfl.Lib;
 import utf.registries.RoomRegistry;
 import utf.states.config.Settings;
@@ -38,9 +35,6 @@ class Intro extends FlxState
 
 	@:noCompletion
 	private var items:FlxTypedGroup<FlxText>;
-
-	@:noCompletion
-	private var gifPlayer:GifPlayer;
 
 	public override function create():Void
 	{
@@ -124,16 +118,6 @@ class Intro extends FlxState
 			choices = ['Begin Game', 'Settings'];
 		}
 
-		gifPlayer = new GifPlayer();
-		gifPlayer.onEndOfFile.add(gifPlayer.play);
-		gifPlayer.load(Assets.getBytes('assets/images/update2022-dr-ch4-rainy.gif'));
-
-		final gifLoader:FlxSprite = new FlxSprite(0, 0);
-		gifLoader.loadGraphic(FlxGraphic.fromBitmapData(gifPlayer.pixels, false, null, false));
-		add(gifLoader);
-
-		FlxTimer.wait(0.0001, gifPlayer.play);
-
 		items = new FlxTypedGroup<FlxText>();
 
 		for (i in 0...choices.length)
@@ -193,9 +177,6 @@ class Intro extends FlxState
 
 	public override function update(elapsed:Float):Void
 	{
-		if (gifPlayer != null)
-			gifPlayer.update(elapsed);
-
 		if (Global.flags[0] == 1)
 		{
 			if (Controls.justPressed('right'))
