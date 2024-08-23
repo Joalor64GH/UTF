@@ -64,7 +64,7 @@ class GifPlayer implements IFlxDestroyable
 			pixels = null;
 		}
 
-		pixels = new BitmapData(data.logicalScreenDescriptor.width, data.logicalScreenDescriptor.height, 0, true);
+		pixels = new BitmapData(data.logicalScreenDescriptor.width, data.logicalScreenDescriptor.height, true, 0);
 
 		if (onGraphicLoaded != null)
 			onGraphicLoaded.dispatch();
