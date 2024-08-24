@@ -8,6 +8,8 @@ import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxTimer;
 import flixel.FlxG;
 import utf.objects.dialogue.typers.Typer;
+import utf.util.dialogue.TextParser;
+import utf.util.FramerateTools;
 
 /**
  * Displays text with a typewriter effect, revealing characters one by one.
@@ -117,7 +119,7 @@ class TextTyper extends FlxText
 	@:noCompletion
 	private inline function setupTyper(typer:Typer):Void
 	{
-		if (this.typer != typer)
+		if (this.typer != null && this.typer != typer)
 			this.typer.destroy();
 
 		if (font != typer.fontName)
@@ -161,16 +163,24 @@ class TextTyper extends FlxText
 							case 'wait':
 								final waitTime:Null<Int> = Std.parseInt(action.value);
 
-								if (waitTime != null)
+								if (waitTime != null && waitTime > 0)
 								{
-									if (waitTime > 0)
-									{
-										timer.active = false;
+									timer.active = false;
 
-										FlxTimer.wait(waitTime, () -> timer.active = true);
+									FlxTimer.wait(FramerateTools.SINGLE_FRAME_TIMING * waitTime, () -> timer.active = true);
 
-										return false;
-									}
+									return false;
+								}
+							case 'w':
+								final waitTime:Null<Int> = Std.parseInt(action.value);
+
+								if (waitTime != null && waitTime > 0)
+								{
+									timer.active = false;
+
+									FlxTimer.wait(FramerateTools.SINGLE_FRAME_TIMING - (typer.typerLPS * waitTime), () -> timer.active = true);
+
+									return false;
 								}
 						}
 					}
