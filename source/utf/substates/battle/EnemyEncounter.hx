@@ -12,7 +12,7 @@ import flixel.FlxSprite;
 import flixel.FlxSubState;
 import utf.objects.battle.Monster;
 import utf.objects.dialogue.Writer;
-import utf.registries.MonsterRegistry;
+import utf.registries.battle.MonsterRegistry;
 import utf.substates.GameOver;
 
 class EnemyEncounter extends FlxSubState
