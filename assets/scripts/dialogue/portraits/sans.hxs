@@ -1,0 +1,22 @@
+import flixel.FlxG;
+import utf.objects.dialogue.portraits.Portrait;
+import utf.Assets;
+import utf.Paths;
+
+class SansPortrait extends Portrait
+{
+	public function new():Void
+	{
+		super('sans');
+
+		loadGraphic(Paths.sprite('portaits/face_sans'));
+
+		active = false;
+	}
+
+	public override function changeFace(name:String):Void
+	{
+		if (Assets.exists(Paths.sprite('portaits/face_sans$name')))
+			loadGraphic(Paths.sprite('portaits/face_sans$name'));
+	}
+}
