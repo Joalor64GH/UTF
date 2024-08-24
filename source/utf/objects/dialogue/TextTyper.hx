@@ -140,6 +140,15 @@ class TextTyper extends FlxText
 	@:noCompletion
 	private function updateTextPos(timer:FlxTimer):Bool
 	{
+		if (textPos >= originalText.length)
+			return false;
+
+		final currentChar:String = originalText.charAt(textPos);
+
+		playSounds(currentChar);
+
+		textPos++;
+
 		if (actions != null && actions.length > 0)
 		{
 			for (action in actions)
@@ -174,12 +183,6 @@ class TextTyper extends FlxText
 				}
 			}
 		}
-
-		final currentChar:String = originalText.charAt(textPos);
-
-		playSounds(currentChar);
-
-		textPos++;
 
 		if (IGNORE_CHARACTERS.contains(currentChar))
 			return updateTextPos(timer);
