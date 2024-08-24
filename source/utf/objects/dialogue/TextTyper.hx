@@ -9,7 +9,7 @@ import flixel.util.FlxTimer;
 import flixel.FlxG;
 import utf.objects.dialogue.typers.Typer;
 import utf.util.dialogue.TextParser;
-import utf.util.FramerateTools;
+import utf.util.FramerateUtil;
 
 /**
  * Displays text with a typewriter effect, revealing characters one by one.
@@ -162,7 +162,7 @@ class TextTyper extends FlxText
 						{
 							timer.active = false;
 
-							FlxTimer.wait(FramerateTools.SINGLE_FRAME_TIMING * waitTime, () -> timer.active = true);
+							FlxTimer.wait(FramerateUtil.SINGLE_FRAME_TIMING * waitTime, () -> timer.active = true);
 
 							return false;
 						}
@@ -173,7 +173,7 @@ class TextTyper extends FlxText
 						{
 							timer.active = false;
 
-							FlxTimer.wait(FramerateTools.SINGLE_FRAME_TIMING - (typer.typerLPS * waitTime), () -> timer.active = true);
+							FlxTimer.wait(FramerateUtil.SINGLE_FRAME_TIMING - (typer.typerLPS * waitTime), () -> timer.active = true);
 
 							return false;
 						}
