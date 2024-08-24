@@ -55,7 +55,7 @@ class GameOver extends FlxSubState
 
 					writer.startDialogue([
 						{typer: 'gameover', text: FlxG.random.getObject(lines)},
-						{typer: 'gameover', text: '  ${Global.name}!^1\n  Stay determined...'}
+						{typer: 'gameover', text: '  ${Global.name}!\n[w:15]  Stay determined...'}
 					]);
 				});
 			}
