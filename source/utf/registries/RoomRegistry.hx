@@ -12,7 +12,7 @@ class RoomRegistry
 	/**
 	 * Map to store associations between room numbers and their classes.
 	 */
-	private static final roomClasses:Map<Int, String> = [];
+	private static final roomScriptedClasses:Map<Int, String> = [];
 
 	/**
 	 * Loads and initializes room classes.
@@ -36,11 +36,11 @@ class RoomRegistry
 
 				FlxG.log.notice('Initialized room "${room.roomNumber}"!');
 
-				roomClasses.set(room.roomNumber, roomClass);
+				roomScriptedClasses.set(room.roomNumber, roomClass);
 			}
 		}
 
-		FlxG.log.notice('Successfully loaded ${Lambda.count(roomClasses)} room(s)!');
+		FlxG.log.notice('Successfully loaded ${Lambda.count(roomScriptedClasses)} room(s)!');
 	}
 
 	/**
@@ -50,14 +50,14 @@ class RoomRegistry
 	 */
 	public static function fetchRoom(roomNumber:Int):Null<Room>
 	{
-		if (!roomClasses.exists(roomNumber))
+		if (!roomScriptedClasses.exists(roomNumber))
 		{
 			FlxG.log.error('Unable to load room number "${roomNumber}", not found in cache');
 
 			return null;
 		}
 
-		final roomClass:String = roomClasses.get(roomNumber);
+		final roomClass:String = roomScriptedClasses.get(roomNumber);
 
 		if (roomClass != null)
 		{
@@ -81,7 +81,7 @@ class RoomRegistry
 	 */
 	public static function clearRooms():Void
 	{
-		if (roomClasses != null)
-			roomClasses.clear();
+		if (roomScriptedClasses != null)
+			roomScriptedClasses.clear();
 	}
 }
