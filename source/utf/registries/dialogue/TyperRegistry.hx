@@ -1,4 +1,4 @@
-package utf.registries;
+package utf.registries.dialogue;
 
 import flixel.FlxG;
 import utf.objects.dialogue.typers.ScriptedTyper;
