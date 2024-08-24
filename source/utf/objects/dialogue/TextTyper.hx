@@ -37,6 +37,9 @@ class TextTyper extends FlxText
 	@:noCompletion
 	private var originalText:String = '';
 
+	@:noCompletion
+	private var actions:Array<Action> = [];
+
 	/**
 	 * Current position in the text that has been revealed.
 	 */
@@ -85,7 +88,10 @@ class TextTyper extends FlxText
 	{
 		setupTyper(typer);
 
-		originalText = text;
+		final parsedText:ParsedText = TextParser.parse(text);
+
+		originalText = parsedText.cleanedText;
+		actions = parsedText.actions;
 		textPos = 1;
 		updateText();
 
@@ -112,7 +118,7 @@ class TextTyper extends FlxText
 	private inline function setupTyper(typer:Typer):Void
 	{
 		if (this.typer != typer)
-			this.typer?.destroy();
+			this.typer.destroy();
 
 		if (font != typer.fontName)
 			font = typer.fontName;
@@ -142,21 +148,31 @@ class TextTyper extends FlxText
 		{
 			case ' ' | '\n':
 				return updateTextPos(timer);
-
-			case '^':
-				final waitTime:Null<Int> = Std.parseInt(originalText.charAt(textPos));
-
-				if (waitTime != null)
+			default:
+				if (actions != null && actions.length > 0)
 				{
-					originalText = originalText.substring(0, textPos - 1) + originalText.substring(textPos + 1);
-
-					textPos--;
-
-					if (waitTime > 0)
+					for (action in actions)
 					{
-						timer.active = false;
-						FlxTimer.wait(1 / (waitTime * 10), () -> timer.active = true);
-						return false;
+						if (action.index != currentChar)
+							continue;
+
+						switch (action.type)
+						{
+							case 'wait':
+								final waitTime:Null<Int> = Std.parseInt(action.value);
+
+								if (waitTime != null)
+								{
+									if (waitTime > 0)
+									{
+										timer.active = false;
+
+										FlxTimer.wait(waitTime, () -> timer.active = true);
+
+										return false;
+									}
+								}
+						}
 					}
 				}
 		}
