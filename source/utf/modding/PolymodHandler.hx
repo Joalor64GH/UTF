@@ -1,7 +1,5 @@
 package utf.modding;
 
-import flixel.util.FlxSave;
-import flixel.util.FlxStringUtil;
 import flixel.FlxG;
 import polymod.backends.PolymodAssets;
 import polymod.format.ParseRules;
@@ -10,11 +8,6 @@ import polymod.util.VersionUtil;
 import polymod.Polymod;
 import openfl.Lib;
 import sys.FileSystem;
-import utf.registries.CharaRegistry;
-import utf.registries.MonsterRegistry;
-import utf.registries.ObjectRegistry;
-import utf.registries.RoomRegistry;
-import utf.registries.TyperRegistry;
 import utf.util.macro.ClassMacro;
 #if (windows && cpp)
 import utf.util.native.WindowsAPI;
@@ -49,7 +42,7 @@ class PolymodHandler
 
 		Polymod.onError = function(error:PolymodError):Void
 		{
-			final code:String = FlxStringUtil.toTitleCase(Std.string(error.code).split('_').join(' '));
+			final code:String = flixel.util.FlxStringUtil.toTitleCase(Std.string(error.code).split('_').join(' '));
 
 			switch (error.severity)
 			{
@@ -99,11 +92,16 @@ class PolymodHandler
 	{
 		final registriesStart:Float = TimerUtil.start();
 
-		CharaRegistry.loadCharacters();
-		MonsterRegistry.loadMonsters();
-		ObjectRegistry.loadObjects();
-		RoomRegistry.loadRooms();
-		TyperRegistry.loadTypers();
+		utf.registries.battle.MonsterRegistry.loadMonsters();
+
+		utf.registries.dialogue.TyperRegistry.loadTypers();
+		utf.registries.dialogue.PortraitRegistry.loadPortraits();
+
+		utf.registries.room.CharaRegistry.loadCharacters();
+		utf.registries.room.ObjectRegistry.loadObjects();
+
+		utf.registries.EmemyEncounterRegistry.loadEnemyEncounters();
+		utf.registries.RoomRegistry.loadRooms();
 
 		FlxG.log.notice('Registries loading took: ${TimerUtil.seconds(registriesStart)}');
 	}
