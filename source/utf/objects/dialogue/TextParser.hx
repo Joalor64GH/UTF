@@ -1,5 +1,11 @@
 package utf.objects.dialogue;
 
+typedef ParsedText =
+{
+	cleanedText:String,
+	actions:Array<Action>
+}
+
 typedef Action =
 {
 	index:Int,
@@ -7,11 +13,11 @@ typedef Action =
 	value:String
 }
 
-class TagParser
+class TextParser
 {
 	private static final regex:EReg = ~/(\[([a-zA-Z]+):([^\]]+)\])/;
 
-	public static function parse(text:String):{cleanedText:String, actions:Array<Action>}
+	public static function parse(text:String):ParsedText
 	{
 		final cleanedText:StringBuf = new StringBuf();
 		final actions:Array<Action> = new Array<Action>();
