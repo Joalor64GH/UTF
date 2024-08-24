@@ -165,7 +165,7 @@ class TextTyper extends FlxText
 						{
 							timer.active = false;
 
-							FlxTimer.wait(FramerateUtil.SINGLE_FRAME_TIMING * waitTime, () -> timer.active = true);
+							FlxTimer.wait(waitTime, () -> timer.active = true);
 
 							return false;
 						}
@@ -176,7 +176,11 @@ class TextTyper extends FlxText
 						{
 							timer.active = false;
 
-							FlxTimer.wait(FramerateUtil.SINGLE_FRAME_TIMING - (typer.typerLPS * waitTime), () -> timer.active = true);
+							final totalTime:Float = typer.typerLPS - (FramerateUtil.SINGLE_FRAME_TIMING * waitTime);
+
+							FlxG.log.notice('Waiting for $totalTime seconds.');
+
+							FlxTimer.wait(totalTime, () -> timer.active = true);
 
 							return false;
 						}
