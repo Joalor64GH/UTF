@@ -146,46 +146,43 @@ class TextTyper extends FlxText
 
 		textPos++;
 
-		switch (currentChar)
+		if (actions != null && actions.length > 0)
 		{
-			case ' ' | '\n':
-				return updateTextPos(timer);
-			default:
-				if (actions != null && actions.length > 0)
+			for (action in actions)
+			{
+				if (action.index != currentChar)
+					continue;
+
+				switch (action.type)
 				{
-					for (action in actions)
-					{
-						if (action.index != currentChar)
-							continue;
+					case 'wait':
+						final waitTime:Null<Float> = Std.parseFloat(action.value);
 
-						switch (action.type)
+						if (waitTime != null && waitTime > 0)
 						{
-							case 'wait':
-								final waitTime:Null<Int> = Std.parseInt(action.value);
+							timer.active = false;
 
-								if (waitTime != null && waitTime > 0)
-								{
-									timer.active = false;
+							FlxTimer.wait(FramerateTools.SINGLE_FRAME_TIMING * waitTime, () -> timer.active = true);
 
-									FlxTimer.wait(FramerateTools.SINGLE_FRAME_TIMING * waitTime, () -> timer.active = true);
-
-									return false;
-								}
-							case 'w':
-								final waitTime:Null<Int> = Std.parseInt(action.value);
-
-								if (waitTime != null && waitTime > 0)
-								{
-									timer.active = false;
-
-									FlxTimer.wait(FramerateTools.SINGLE_FRAME_TIMING - (typer.typerLPS * waitTime), () -> timer.active = true);
-
-									return false;
-								}
+							return false;
 						}
-					}
+					case 'w':
+						final waitTime:Null<Int> = Std.parseInt(action.value);
+
+						if (waitTime != null && waitTime > 0)
+						{
+							timer.active = false;
+
+							FlxTimer.wait(FramerateTools.SINGLE_FRAME_TIMING - (typer.typerLPS * waitTime), () -> timer.active = true);
+
+							return false;
+						}
 				}
+			}
 		}
+
+		if (IGNORE_CHARACTERS.contains(currentChar))
+			return updateTextPos(timer);
 
 		if (textPos > originalText.length)
 			textPos = originalText.length;
