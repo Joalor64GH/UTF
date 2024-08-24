@@ -140,9 +140,6 @@ class TextTyper extends FlxText
 	@:noCompletion
 	private function updateTextPos(timer:FlxTimer):Bool
 	{
-		if (textPos >= originalText.length)
-			return false;
-
 		final currentChar:String = originalText.charAt(textPos);
 
 		playSounds(currentChar);
@@ -158,6 +155,11 @@ class TextTyper extends FlxText
 
 				switch (action.type)
 				{
+					case 'speed':
+						final speed:Null<Float> = Std.parseFloat(action.value);
+
+						if (speed != null && speed > 0)
+							timer.time = FramerateUtil.SINGLE_FRAME_TIMING * speed;
 					case 'wait':
 						final waitTime:Null<Float> = Std.parseFloat(action.value);
 
