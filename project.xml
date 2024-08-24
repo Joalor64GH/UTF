@@ -40,9 +40,10 @@
 
 	<!--Libraries-->
 
+	<haxelib name="extension-androidtools" if="android" />
+
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
-	<haxelib name="format" />
 	<haxelib name="hscript" />
 
 	<section if="cpp">
@@ -50,8 +51,6 @@
 	</section>
 
 	<haxelib name="polymod" />
-
-	<haxelib name="extension-androidtools" if="android" />
 
 	<!--Libraries Settings-->
 
