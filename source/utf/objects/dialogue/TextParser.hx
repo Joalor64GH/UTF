@@ -11,10 +11,10 @@ class TagParser
 {
 	private static final regex:EReg = ~/(\[([a-zA-Z]+):([^\]]+)\])/;
 
-	public static function parse(text:String):{cleanedText:String, actions:Array<{index:Int, type:String, value:String}>}
+	public static function parse(text:String):{cleanedText:String, actions:Array<Action>}
 	{
 		final cleanedText:StringBuf = new StringBuf();
-		final actions:Array<Action> = new Array<{}>();
+		final actions:Array<Action> = new Array<Action>();
 
 		var lastPos:Int = 0;
 		var matchPos:Int = 0;
