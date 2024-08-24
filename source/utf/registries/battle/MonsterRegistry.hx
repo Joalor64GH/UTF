@@ -1,4 +1,4 @@
-package utf.registries;
+package utf.registries.battle;
 
 import flixel.FlxG;
 import utf.objects.battle.Monster;
