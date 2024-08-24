@@ -21,7 +21,7 @@ class TextTyper extends FlxText
 	 * Characters that will not trigger sound playback during the typing effect.
 	 */
 	@:noCompletion
-	private static final IGNORE_CHARACTERS:Array<String> = [' ', '\n', '^', '/', '\\'];
+	private static final IGNORE_CHARACTERS:Array<String> = [' ', '\n', '*', '^', '/', '\\'];
 
 	/**
 	 * Indicates whether the text has finished typing out.
@@ -94,8 +94,10 @@ class TextTyper extends FlxText
 
 		originalText = parsedText.cleanedText;
 		actions = parsedText.actions;
-		textPos = 1;
-		updateText();
+		textPos = 0;
+
+		if (updateTextPos(null))
+			updateText();
 
 		typingTimer.start(typer.typerLPS, function(timer:FlxTimer):Void
 		{
@@ -112,7 +114,9 @@ class TextTyper extends FlxText
 		if (typingTimer.active)
 		{
 			textPos = originalText.length;
-			updateText();
+
+			if (updateTextPos(null))
+				updateText();
 		}
 	}
 
