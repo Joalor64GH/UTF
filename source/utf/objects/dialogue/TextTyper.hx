@@ -13,7 +13,7 @@ import utf.objects.dialogue.typers.Typer;
  * Displays text with a typewriter effect, revealing characters one by one.
  * Optionally plays a sound for each character and supports skipping to the end.
  */
-class TypeText extends FlxText
+class TextTyper extends FlxText
 {
 	/**
 	 * Characters that will not trigger sound playback during the typing effect.
@@ -56,7 +56,7 @@ class TypeText extends FlxText
 	private var typingTimer:FlxTimer;
 
 	/**
-	 * Constructor for creating a `TypeText` instance.
+	 * Constructor for creating a `TextTyper` instance.
 	 * @param x The x-coordinate for the text display.
 	 * @param y The y-coordinate for the text display.
 	 */

@@ -6,7 +6,7 @@ import utf.Paths;
 import utf.input.Controls;
 import utf.Data;
 import utf.objects.dialogue.typers.Typer;
-import utf.objects.dialogue.TypeText;
+import utf.objects.dialogue.TextTyper;
 
 using flixel.util.FlxArrayUtil;
 
@@ -20,7 +20,7 @@ typedef WriterData =
  * Represents a dialogue writer that displays text sequentially, allowing the player to advance or skip through dialogue pages.
  * Handles the display of dialogue using different typers and invokes a callback when the dialogue is finished.
  */
-class Writer extends TypeText
+class Writer extends TextTyper
 {
 	/**
 	 * Determines whether the player can skip the dialogue text.
