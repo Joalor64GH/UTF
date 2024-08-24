@@ -29,7 +29,7 @@ class TextTyper extends FlxText
 	/**
 	 * A callback that is dispatched when the dialogue tries to call a function.
 	 */
-	public var onFunctionCall:FlxTypedSignal<String->Void>;
+	// public var onFunctionCall:FlxTypedSignal<String->Void>;
 
 	/**
 	 * Stores the original text that is being typed out.
@@ -71,7 +71,7 @@ class TextTyper extends FlxText
 	{
 		super.destroy();
 
-		onFunctionCall = FlxDestroyUtil.destroy(onFunctionCall);
+		// onFunctionCall = FlxDestroyUtil.destroy(onFunctionCall);
 		typingTimer = FlxDestroyUtil.destroy(typingTimer);
 		typer = FlxDestroyUtil.destroy(typer);
 	}
