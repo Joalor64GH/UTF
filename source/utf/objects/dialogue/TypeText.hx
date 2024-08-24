@@ -1,5 +1,6 @@
 package utf.objects.dialogue;
 
+import flixel.util.FlxSignal;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.sound.FlxSound;
@@ -24,6 +25,11 @@ class TypeText extends FlxText
 	 * Indicates whether the text has finished typing out.
 	 */
 	public var finished(get, null):Bool = false;
+
+	/**
+	 * A callback that is dispatched when the dialogue tries to call a function.
+	 */
+	public var onFunctionCall:FlxTypedSignal<String->Void>;
 
 	/**
 	 * Stores the original text that is being typed out.
@@ -65,6 +71,7 @@ class TypeText extends FlxText
 	{
 		super.destroy();
 
+		onFunctionCall = FlxDestroyUtil.destroy(onFunctionCall);
 		typingTimer = FlxDestroyUtil.destroy(typingTimer);
 		typer = FlxDestroyUtil.destroy(typer);
 	}
