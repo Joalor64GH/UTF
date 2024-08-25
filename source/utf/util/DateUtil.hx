@@ -14,7 +14,7 @@ class DateUtil
 	 */
 	public static function getWeather():Int
 	{
-		final curDate:Date = Date.now();
+		final curDate:Null<Date> = Date.now();
 
 		if (curDate != null)
 		{
@@ -39,9 +39,9 @@ class DateUtil
 	 *
 	 * @return The current date and time in the format "YYYY-MM-DD_HH-MM-SS", or null if the date cannot be retrieved.
 	 */
-	public static function getFormattedDateTimeForFile():String
+	public static function getFormattedDateTimeForFile():Null<String>
 	{
-		final curDate:Date = Date.now();
+		final curDate:Null<Date> = Date.now();
 
 		if (curDate != null)
 			return curDate.toString().replace(' ', '_').replace(':', '-');
