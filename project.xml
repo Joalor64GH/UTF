@@ -82,17 +82,13 @@
 
 	<!--Scripting Settings-->
 
-	<section if="polymod">
-		<haxeflag name="-dce" value="no" />
+	<haxeflag name="-dce" value="no" />
 
-		<haxeflag name="--macro" value="include('utf')" />
+	<haxeflag name="--macro" value="include('utf')" />
 
-		<haxeflag name="--macro" value="include('flixel', true, ['flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*'])" />
-	</section>
+	<haxeflag name="--macro" value="include('flixel', true, ['flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*'])" />
 
-	<section unless="polymod">
-		<haxeflag name="-dce" value="full" />
-	</section>
+	<haxeflag name="--macro" value="nullSafety('utf.registries')" />
 
 	<!--DPI Awareness-->
 
