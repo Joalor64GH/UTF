@@ -11,6 +11,7 @@ import utf.Assets;
 /**
  * Utility class for window-related functions.
  */
+@:nullSafety
 class WindowUtil
 {
 	/**
@@ -41,7 +42,7 @@ class WindowUtil
 
 		#if linux
 		if (Assets.exists('icon.png'))
-			Lib.current.stage.window.setIcon(Assets.getBitmapData('icon.png', false).image);
+			Lib.application.window.setIcon(Assets.getBitmapData('icon.png', false).image);
 		#end
 	}
 
