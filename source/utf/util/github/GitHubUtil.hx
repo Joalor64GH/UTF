@@ -68,9 +68,11 @@ class GitHubUtil
 			{
 				if (status >= 300 && status < 400)
 				{
-					if (http.responseHeaders.exists('Location'))
+					final responseLocation:Null<String> = http.responseHeaders.get('Location');
+
+					if (responseLocation != null)
 					{
-						http.url = http.responseHeaders.get('Location');
+						http.url = responseLocation;
 						http.request(false);
 					}
 					else
