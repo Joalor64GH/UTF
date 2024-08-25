@@ -9,11 +9,10 @@ import openfl.events.Event;
 import openfl.Lib;
 import utf.Game;
 
-using StringTools;
-
 /**
  * This class serves as the entry point for the application.
  */
+@:nullSafety
 class Main extends openfl.display.Sprite
 {
 	/**
