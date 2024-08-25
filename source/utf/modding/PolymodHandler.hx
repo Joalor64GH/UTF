@@ -100,7 +100,7 @@ class PolymodHandler
 		utf.registries.room.CharaRegistry.loadCharacters();
 		utf.registries.room.ObjectRegistry.loadObjects();
 
-		utf.registries.EmemyEncounterRegistry.loadEnemyEncounters();
+		utf.registries.EnemyEncounterRegistry.loadEnemyEncounters();
 		utf.registries.RoomRegistry.loadRooms();
 
 		FlxG.log.notice('Registries loading took: ${TimerUtil.seconds(registriesStart)}');
