@@ -37,6 +37,7 @@ class MemoryUtil
 	 * Runs garbage collection. Should be called from the main thread.
 	 * @param major Set to true to perform a major collection.
 	 */
+	@:nullSafety(Off)
 	public static inline function collect(?major:Bool = false):Void
 	{
 		#if (cpp || neko)
