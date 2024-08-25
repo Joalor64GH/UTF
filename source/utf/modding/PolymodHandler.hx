@@ -20,6 +20,7 @@ import utf.util.WindowUtil;
  *
  * @see https://github.com/FunkinCrew/Funkin/blob/main/source/funkin/modding/PolymodHandler.hx
  */
+@:nullSafety
 class PolymodHandler
 {
 	/**
