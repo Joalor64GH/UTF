@@ -91,6 +91,7 @@
 	<!--NullSafe Settings-->
 
 	<haxeflag name="--macro" value="nullSafety('utf.registries')" />
+	<haxeflag name="--macro" value="nullSafety('utf.util')" />
 
 	<!--DPI Awareness-->
 
