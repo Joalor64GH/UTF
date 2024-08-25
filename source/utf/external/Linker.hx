@@ -30,9 +30,16 @@ class Linker
 		sourcePath = Path.removeTrailingSlashes(Path.normalize(sourcePath));
 
 		final includeElement:Xml = Xml.createElement('include');
-		includeElement.set('name', Path.join([sourcePath, file_name?.length > 0 ? file_name : 'Build.xml']));
+
+		final fileToInclude:String = Path.join([sourcePath, file_name?.length > 0 ? file_name : 'Build.xml']);
+
+		if (!FileSystem.exists(fileToInclude))
+			Context.error('The specified file "$fileToInclude" could not be found at "$sourcePath".', pos);
+
+		includeElement.set('name', fileToInclude);
 
 		final printer:Printer = new Printer(true);
+
 		printer.writeNode(includeElement, '\n');
 
 		Context.getLocalClass().get().meta.add(':buildXml', [{expr: EConst(CString(printer.output.toString())), pos: pos}], pos);
