@@ -88,6 +88,10 @@
 
 	<haxeflag name="--macro" value="include('flixel', true, ['flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*'])" />
 
+	<!--NullSafe Settings-->
+
+	<haxeflag name="--macro" value="nullSafety('utf.input')" />
+	<haxeflag name="--macro" value="nullSafety('utf.modding')" />
 	<haxeflag name="--macro" value="nullSafety('utf.registries')" />
 
 	<!--DPI Awareness-->
