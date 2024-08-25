@@ -73,7 +73,7 @@ class PolymodHandler
 		if (!FileSystem.exists(MODS_ROOT))
 			FileSystem.createDirectory(MODS_ROOT);
 
-		Polymod.init({
+		final polymodParams:PolymodParams = {
 			modRoot: MODS_ROOT,
 			dirs: getModDirs(),
 			framework: OPENFL,
@@ -81,9 +81,15 @@ class PolymodHandler
 			extensionMap: ['frag' => TEXT, 'vert' => TEXT],
 			parseRules: buildParseRules(),
 			useScriptedClasses: true,
-			apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version')),
 			customFilesystem: buildFileSystem()
-		});
+		};
+
+		final appVersion:Null<String> = Lib.application.meta?.get('version');
+
+		if (appVersion != null)
+			polymodParams.apiVersionRule = VersionUtil.anyPatch(appVersion);
+
+		Polymod.init(polymodParams);
 
 		loadRegisteries();
 	}
@@ -113,18 +119,25 @@ class PolymodHandler
 		if (loadedMods != null && Lambda.count(loadedMods) > 0)
 			loadedMods.clear();
 
-		final packs:Array<String> = [];
+		final dirs:Array<String> = [];
 
-		for (pack in Polymod.scan({modRoot: MODS_ROOT, apiVersionRule: VersionUtil.anyPatch(Lib.application.meta.get('version'))}))
+		final scanParams:ScanParams = {modRoot: MODS_ROOT};
+
+		final appVersion:Null<String> = Lib.application.meta?.get('version');
+
+		if (appVersion != null)
+			scanParams.apiVersionRule = VersionUtil.anyPatch(appVersion);
+
+		for (pack in Polymod.scan(scanParams))
 		{
 			loadedMods.set(pack.id, pack);
 
 			// TODO: Adding the ability to disable mods.
 			if (true)
-				packs.push(pack.id);
+				dirs.push(pack.id);
 		}
 
-		return packs;
+		return dirs;
 	}
 
 	@:noCompletion
