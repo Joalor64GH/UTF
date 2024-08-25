@@ -69,7 +69,8 @@ class ErrorHandler
 			#end
 
 			#if sys
-			saveLog(log.join('\n'));
+			if (!saveLog(log.join('\n')))
+				log.push('The logging file hasn\'t been saved.');
 			#end
 		}
 
@@ -96,7 +97,8 @@ class ErrorHandler
 		#end
 
 		#if sys
-		saveLog(log.join('\n'), true);
+		if (!saveLog(log.join('\n')))
+			log.push('The logging file hasn\'t been saved.');
 		#end
 
 		#if (windows && cpp)
@@ -111,18 +113,25 @@ class ErrorHandler
 
 	#if sys
 	@:noCompletion
-	private static function saveLog(msg:String, ?critical:Bool = false):Bool
+	private static function saveLog(msg:String):Bool
 	{
 		try
 		{
 			if (!FileSystem.exists(LOGS_ROOT))
 				FileSystem.createDirectory(LOGS_ROOT);
 
-			final filename:String = critical ? 'critical-crash-${DateUtil.getFormattedDateTimeForFile()}.log' : 'crash-${DateUtil.getFormattedDateTimeForFile()}.log';
+			final formattedData:Null<String> = DateUtil.getFormattedDateTimeForFile();
 
-			File.saveContent('$LOGS_ROOT/$filename', msg);
+			if (formattedData != null)
+			{
+				final filename:String = 'crash-$formattedData.log';
+				
+				File.saveContent('$LOGS_ROOT/$filename', msg);
 
-			return true;
+				return true;
+			}
+
+			return false;
 		}
 		catch (e:Exception)
 			return false;
