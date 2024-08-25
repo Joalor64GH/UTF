@@ -57,7 +57,7 @@ class ObjectRegistry
 			return null;
 		}
 
-		final objectScriptedClass:String = objectScriptedClasses.get(objectID);
+		final objectScriptedClass:Null<String> = objectScriptedClasses.get(objectID);
 
 		if (objectScriptedClass != null)
 		{

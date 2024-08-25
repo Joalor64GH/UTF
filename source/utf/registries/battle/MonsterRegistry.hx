@@ -57,7 +57,7 @@ class MonsterRegistry
 			return null;
 		}
 
-		final monsterScriptedClass:String = monsterScriptedClasses.get(monsterID);
+		final monsterScriptedClass:Null<String> = monsterScriptedClasses.get(monsterID);
 
 		if (monsterScriptedClass != null)
 		{

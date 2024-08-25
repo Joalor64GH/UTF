@@ -57,7 +57,7 @@ class EnemyEncounterRegistry
 			return null;
 		}
 
-		final enemyEncounterClass:String = enemyEncounterScriptedClasses.get(encounterID);
+		final enemyEncounterClass:Null<String> = enemyEncounterScriptedClasses.get(encounterID);
 
 		if (enemyEncounterClass != null)
 		{

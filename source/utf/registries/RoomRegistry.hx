@@ -57,7 +57,7 @@ class RoomRegistry
 			return null;
 		}
 
-		final roomClass:String = roomScriptedClasses.get(roomNumber);
+		final roomClass:Null<String> = roomScriptedClasses.get(roomNumber);
 
 		if (roomClass != null)
 		{

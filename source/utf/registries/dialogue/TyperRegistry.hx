@@ -57,7 +57,7 @@ class TyperRegistry
 			return null;
 		}
 
-		final typerScriptedClass:String = typerScriptedClasses.get(typerID);
+		final typerScriptedClass:Null<String> = typerScriptedClasses.get(typerID);
 
 		if (typerScriptedClass != null)
 		{

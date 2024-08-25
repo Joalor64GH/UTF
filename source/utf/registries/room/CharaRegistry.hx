@@ -57,7 +57,7 @@ class CharaRegistry
 			return null;
 		}
 
-		final characterClass:String = characterClasses.get(characterID);
+		final characterClass:Null<String> = characterClasses.get(characterID);
 
 		if (characterClass != null)
 		{

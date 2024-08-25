@@ -57,7 +57,7 @@ class PortraitRegistry
 			return null;
 		}
 
-		final portraitScriptedClass:String = portraitScriptedClasses.get(portraitID);
+		final portraitScriptedClass:Null<String> = portraitScriptedClasses.get(portraitID);
 
 		if (portraitScriptedClass != null)
 		{
