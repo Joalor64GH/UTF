@@ -29,6 +29,7 @@ class FlxGraphicUtil
 
 		final key:String = '${graph.key}_Region:${region.x}_${region.y}_${region.width}_${region.height}';
 
+		@:nullSafety(Off)
 		if (!FlxG.bitmap.checkCache(key))
 		{
 			FlxG.log.notice('Creating "$key" from "${graph.key}"');
