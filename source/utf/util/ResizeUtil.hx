@@ -5,6 +5,7 @@ import flixel.FlxG;
 /**
  * Utility class for handling resizing events and managing cached bitmap data.
  */
+@:access(openfl.display.Sprite)
 class ResizeUtil
 {
 	/**
@@ -15,7 +16,7 @@ class ResizeUtil
 		FlxG.signals.gameResized.add(onResizeGame);
 	}
 
-	@:access(openfl.display.Sprite)
+	@:nullSafety(Off)
 	private static inline function onResizeGame(width:Int, height:Int):Void
 	{
 		if (FlxG.cameras?.list?.length > 0)
