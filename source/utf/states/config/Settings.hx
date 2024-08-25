@@ -219,7 +219,7 @@ class Settings extends FlxState
 
 		tobdogLine.centerOffsets();
 
-		tobdogLine.offset.add(Math.sin((FramerateUtil.SINGLE_FRAME_TIMING * FlxG.game.ticks) / 12), Math.cos((FramerateUtil.SINGLE_FRAME_TIMING * FlxG.game.ticks) / 12));
+		tobdogLine.offset.add(Math.sin(((FlxG.game.ticks * 100) * FramerateUtil.SINGLE_FRAME_TIMING) / 12), Math.cos(((FlxG.game.ticks * 100) * FramerateUtil.SINGLE_FRAME_TIMING) / 12));
 	}
 
 	@:noCompletion
