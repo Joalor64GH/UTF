@@ -21,7 +21,7 @@ class Linker
 
 		final includeElement:Xml = Xml.createElement('include');
 
-		includeElement.set('name', Path.join([sourcePath, file_name ?? 'Build.xml']));
+		includeElement.set('name', Path.join([sourcePath, file_name?.length > 0 ? file_name : 'Build.xml']));
 
 		final printer:Printer = new Printer(true);
 
