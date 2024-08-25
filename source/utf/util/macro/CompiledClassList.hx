@@ -50,7 +50,7 @@ class CompiledClassList
 	 * @param request The identifier for the requested class list.
 	 * @return A list of classes corresponding to the request identifier.
 	 */
-	public static function get(request:String):List<Class<Dynamic>>
+	public static function get(request:String):Null<List<Class<Dynamic>>>
 	{
 		if (classLists == null)
 			init();
