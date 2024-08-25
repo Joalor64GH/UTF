@@ -38,7 +38,11 @@ class Data
 		if (!save.isEmpty() && save.data.settings != null)
 		{
 			settings = save.data.settings;
-			FilterUtil.reloadGameFilter(settings.get('filter'));
+
+			final currentFilter:Null<String> = settings.get('filter');
+
+			if (currentFilter != null)
+				FilterUtil.reloadGameFilter(currentFilter);
 		}
 
 		save.destroy();
