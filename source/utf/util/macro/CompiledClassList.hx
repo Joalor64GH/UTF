@@ -12,11 +12,14 @@ import haxe.rtti.Meta;
  */
 class CompiledClassList
 {
-	private static var classLists:Map<String, List<Class<Dynamic>>>;
+	@:noCompletion
+	private static var classLists:Map<String, List<Class<Dynamic>>> = [];
 
+	@:noCompletion
 	private static function init():Void
 	{
-		classLists = [];
+		if (classLists != null && Lambda.count(classLists) > 0)
+			classLists.clear();
 
 		final metaData:Dynamic<Array<Dynamic>> = Meta.getType(CompiledClassList);
 
@@ -52,7 +55,7 @@ class CompiledClassList
 	 */
 	public static function get(request:String):Null<List<Class<Dynamic>>>
 	{
-		if (classLists == null)
+		if (classLists == null || Lambda.count(classLists) <= 0)
 			init();
 
 		if (!classLists.exists(request))
