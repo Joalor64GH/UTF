@@ -52,7 +52,7 @@ class PolymodHandler
 					FlxG.log.warn('($code) ${error.message}');
 
 					#if (windows && debug && cpp)
-					WindowsAPI.showWarning(code, error.message)
+					WindowsAPI.showWarning(code, error.message);
 					#elseif debug
 					WindowUtil.showAlert(code, error.message);
 					#end
@@ -60,7 +60,7 @@ class PolymodHandler
 					FlxG.log.error('($code) ${error.message}');
 
 					#if (windows && cpp)
-					WindowsAPI.showError(code, error.message)
+					WindowsAPI.showError(code, error.message);
 					#else
 					WindowUtil.showAlert(code, error.message);
 					#end
