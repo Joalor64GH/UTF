@@ -26,6 +26,7 @@ class TimerUtil
 	 * @param precision  The number of decimal places (optional, default is 2).
 	 * @return The elapsed time in seconds.
 	 */
+	@:nullSafety(Off)
 	public static function seconds(start:Float, ?end:Float, ?precision:Int = 2):String
 	{
 		return '${FlxMath.roundDecimal(took(start, end), precision)} seconds';
