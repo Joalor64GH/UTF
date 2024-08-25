@@ -1,33 +1,12 @@
 package;
 
-#if android
-import android.content.Context;
-import android.os.Build;
-#end
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
 import flixel.util.typeLimit.NextState;
 import flixel.util.FlxColor;
 import flixel.FlxG;
-import haxe.io.Path;
-import lime.ui.KeyCode;
-import lime.ui.KeyModifier;
-import openfl.display.Sprite;
-import openfl.display.StageAlign;
-import openfl.display.StageScaleMode;
-import openfl.display.StageQuality;
 import openfl.events.Event;
-import openfl.filesystem.File;
 import openfl.Lib;
-import utf.states.Startup;
-#if hxdiscord_rpc
-import utf.util.discord.DiscordUtil;
-#end
-import utf.util.logging.ErrorHandler;
-import utf.util.CleanupUtil;
-import utf.util.FramerateUtil;
-import utf.util.ResizeUtil;
-import utf.Assets;
 import utf.Game;
 
 using StringTools;
@@ -35,7 +14,7 @@ using StringTools;
 /**
  * This class serves as the entry point for the application.
  */
-class Main extends Sprite
+class Main extends openfl.display.Sprite
 {
 	/**
 	 * The width of the game window in pixels.
@@ -59,7 +38,7 @@ class Main extends Sprite
 	 * The initial state of the game.
 	 */
 	@:noCompletion
-	private static final GAME_INITIAL_STATE:InitialState = () -> new Startup();
+	private static final GAME_INITIAL_STATE:InitialState = () -> new utf.states.Startup();
 
 	/**
 	 * Whether to skip the splash screen on startup.
@@ -79,41 +58,18 @@ class Main extends Sprite
 	public static function main():Void
 	{
 		#if android
-		Sys.setCwd(Path.addTrailingSlash(VERSION.SDK_INT > 30 ? Context.getObbDir() : Context.getExternalFilesDir()));
+		Sys.setCwd(haxe.io.Path.addTrailingSlash(android.os.Build.VERSION.SDK_INT > 30 ? android.content.Context.getObbDir() : android.content.Context.getExternalFilesDir()));
 		#elseif (ios || switch)
-		Sys.setCwd(Path.addTrailingSlash(File.applicationStorageDirectory.nativePath));
+		Sys.setCwd(haxe.io.Path.addTrailingSlash(openfl.filesystem.File.applicationStorageDirectory.nativePath));
 		#end
 
-		ErrorHandler.init();
+		utf.util.logging.ErrorHandler.init();
 
-		#if web
-		// https://github.com/ninjamuffin99/canabalt-hf/blob/a1f44cc39275474b644cea63b30a553c71f235fc/source/Main.hx#L27
-		Lib.application.window.element.style.setProperty('image-rendering', 'pixelated');
-		#end
+		utf.util.WindowUtil.init();
 
-		#if desktop
-		Lib.application.window.onKeyDown.add(function(keyCode:KeyCode, keyModifier:KeyModifier):Void
-		{
-			#if (windows || linux)
-			if (keyCode == KeyCode.RETURN && keyModifier.altKey && (!keyModifier.ctrlKey && !keyModifier.shiftKey && !keyModifier.metaKey))
-				Lib.application.window.onKeyDown.cancel();
-			#elseif mac
-			if (keyCode == KeyCode.F && (keyModifier.ctrlKey && keyModifier.metaKey) && (!keyModifier.altKey && !keyModifier.shiftKey))
-				Lib.application.window.onKeyDown.cancel();
-			#end
-
-			if (keyCode == KeyCode.F4 && (!keyModifier.altKey && !keyModifier.ctrlKey && !keyModifier.shiftKey && !keyModifier.metaKey))
-				FlxG.fullscreen = !FlxG.fullscreen;
-		});
-		#end
-
-		Lib.current.stage.align = StageAlign.TOP_LEFT;
-		Lib.current.stage.quality = StageQuality.LOW;
-		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		#if linux
-		if (Assets.exists('icon.png'))
-			Lib.current.stage.window.setIcon(Assets.getBitmapData('icon.png', false).image);
-		#end
+		Lib.current.stage.align = openfl.display.StageAlign.TOP_LEFT;
+		Lib.current.stage.quality = openfl.display.StageQuality.LOW;
+		Lib.current.stage.scaleMode = openfl.display.StageScaleMode.NO_SCALE;
 		Lib.current.addChild(new Main());
 	}
 
@@ -137,12 +93,11 @@ class Main extends Sprite
 			removeEventListener(Event.ADDED_TO_STAGE, setupGame);
 
 		#if hxdiscord_rpc
-		DiscordUtil.init();
+		utf.util.discord.DiscordUtil.init();
 		#end
 
-		CleanupUtil.init();
-
-		ResizeUtil.init();
+		utf.util.CleanupUtil.init();
+		utf.util.ResizeUtil.init();
 
 		final game:Game = new Game(GAME_WIDTH, GAME_HEIGHT, GAME_INITIAL_STATE, GAME_FRAMERATE, GAME_FRAMERATE, GAME_SKIP_SPLASH, GAME_START_FULLSCREEN);
 
@@ -169,6 +124,6 @@ class Main extends Sprite
 
 		addChild(game);
 
-		FramerateUtil.adjustStageFramerate();
+		utf.util.FramerateUtil.adjustStageFramerate();
 	}
 }
