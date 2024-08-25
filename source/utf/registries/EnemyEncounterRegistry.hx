@@ -29,7 +29,7 @@ class EnemyEncounterRegistry
 
 			for (enemyEncounterClass in enemyEncounterList)
 			{
-				final enemyEncounter:EnemyEncounter = ScriptedEnemyEncounter.init(enemyEncounterClass, 0);
+				final enemyEncounter:EnemyEncounter = ScriptedEnemyEncounter.init(enemyEncounterClass, 'unknown');
 
 				if (enemyEncounter == null)
 					continue;
