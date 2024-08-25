@@ -11,6 +11,7 @@ import sys.FileSystem;
  * The file must be located relative to the directory of the Haxe class that uses this macro.
  */
 @:access(haxe.xml.Printer)
+@:nullSafety
 class Linker
 {
 	/**
