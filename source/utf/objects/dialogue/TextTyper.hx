@@ -99,7 +99,7 @@ class TextTyper extends FlxText
 		if (updateTextPos(null))
 			updateText();
 
-		typingTimer.start(typer.typerFPS, function(timer:FlxTimer):Void
+		typingTimer.start(FramerateUtil.SINGLE_FRAME_TIMING * typer.typerFPS, function(timer:FlxTimer):Void
 		{
 			if (updateTextPos(timer))
 				updateText();
