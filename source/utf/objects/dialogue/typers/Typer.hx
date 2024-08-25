@@ -50,7 +50,7 @@ class Typer implements IFlxDestroyable
 	/**
 	 * The amount of seconds between characters being typed.
 	 */
-	public var typerLPS:Float;
+	public var typerFPS:Float;
 
 	/**
 	 * The name of the font used by the typer.
@@ -97,7 +97,7 @@ class Typer implements IFlxDestroyable
 			LabelValuePair.weak("Font Size", fontSize),
 			LabelValuePair.weak("Font Spacing", fontSpacing),
 			LabelValuePair.weak("Typer Sounds", typerSounds),
-			LabelValuePair.weak("Typer Letters Per Second", typerLPS)
+			LabelValuePair.weak("Typer Letters Per Second", typerFPS)
 		]);
 	}
 }
