@@ -5,6 +5,7 @@ import flixel.system.scaleModes.RatioScaleMode;
 /**
  * Custom scale mode that scales the game size based on a specified percentage of the original size.
  */
+@:nullSafety
 class PercentOfHeightScaleMode extends RatioScaleMode
 {
 	/**
@@ -26,7 +27,7 @@ class PercentOfHeightScaleMode extends RatioScaleMode
 
 	public override function updateScaleOffset():Void
 	{
-		gameSize.scale(percent);
+		gameSize?.scale(percent);
 
 		super.updateScaleOffset();
 	}
