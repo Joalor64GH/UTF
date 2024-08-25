@@ -47,6 +47,7 @@ enum OptionType
 /**
  * Represents a configurable option within the settings.
  */
+@:nullSafety
 class Option
 {
 	/**
