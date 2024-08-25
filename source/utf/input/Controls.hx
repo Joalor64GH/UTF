@@ -27,6 +27,7 @@ typedef Bind =
 /**
  * Provides static methods to handle input actions for both keyboard and gamepad.
  */
+@:nullSafety
 class Controls
 {
 	/**
