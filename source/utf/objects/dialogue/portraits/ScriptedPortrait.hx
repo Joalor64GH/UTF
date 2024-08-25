@@ -1,4 +1,4 @@
-package utf.objects.dialogue.typers;
+package utf.objects.dialogue.portraits;
 
 import polymod.hscript.HScriptedClass;
 import utf.objects.dialogue.portraits.Portrait;
