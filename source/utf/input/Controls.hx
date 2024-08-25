@@ -51,7 +51,7 @@ class Controls
 	{
 		if (binds.exists(tag))
 		{
-			final bind:Bind = binds.get(tag);
+			final bind:Null<Bind> = binds.get(tag);
 
 			if (bind == null)
 				return false;
@@ -79,7 +79,7 @@ class Controls
 	{
 		if (binds.exists(tag))
 		{
-			final bind:Bind = binds.get(tag);
+			final bind:Null<Bind> = binds.get(tag);
 
 			if (bind == null)
 				return false;
@@ -107,7 +107,7 @@ class Controls
 	{
 		if (binds.exists(tag))
 		{
-			final bind:Bind = binds.get(tag);
+			final bind:Null<Bind> = binds.get(tag);
 
 			if (bind == null)
 				return false;
@@ -141,7 +141,7 @@ class Controls
 			if (!binds.exists(tag))
 				continue;
 
-			final bind:Bind = binds.get(tag);
+			final bind:Null<Bind> = binds.get(tag);
 
 			if (bind == null)
 				continue;
@@ -175,7 +175,7 @@ class Controls
 			if (!binds.exists(tag))
 				continue;
 
-			final bind:Bind = binds.get(tag);
+			final bind:Null<Bind> = binds.get(tag);
 
 			if (bind == null)
 				continue;
@@ -209,7 +209,7 @@ class Controls
 			if (!binds.exists(tag))
 				continue;
 
-			final bind:Bind = binds.get(tag);
+			final bind:Null<Bind> = binds.get(tag);
 
 			if (bind == null)
 				continue;
