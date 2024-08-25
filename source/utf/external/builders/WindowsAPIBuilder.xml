@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+	<target id="haxe">
+		<section if="mingw">
+			<lib name="-lpsapi" />
+		</section>
+
+		<section if="windows" unless="mingw">
+			<lib name="psapi.lib" />
+		</section>
+	</target>
+</xml>
