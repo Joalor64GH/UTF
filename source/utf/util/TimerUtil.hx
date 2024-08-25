@@ -8,7 +8,6 @@ import haxe.Timer;
  *
  * @see https://github.com/FunkinCrew/Funkin/blob/main/source/funkin/util/TimerUtil.hx
  */
-@:nullSafety
 class TimerUtil
 {
 	/**
