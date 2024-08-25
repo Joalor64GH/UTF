@@ -13,7 +13,8 @@ import utf.states.config.Option;
 import utf.states.Intro;
 import utf.util.DateUtil;
 import utf.util.FilterUtil;
-import utf.util.FramerateUtil;
+
+using flixel.util.FlxSpriteUtil;
 
 /**
  * Manages the settings menu, allowing users to configure various options.
@@ -37,6 +38,18 @@ class Settings extends FlxState
 
 	@:noCompletion
 	private var tobdogLine:FlxText;
+
+	@:noCompletion
+	private var siner:Float = 0;
+
+	@:noCompletion
+	private var extreme:Float = 0;
+
+	@:noCompletion
+	private var extreme2:Float = 0;
+
+	@:noCompletion
+	private var sun:FlxSprite;
 
 	public function new():Void
 	{
@@ -121,6 +134,13 @@ class Settings extends FlxState
 
 		add(items);
 
+		if (DateUtil.getWeather() == 3)
+		{
+			sun = new FlxSprite(0, 0);
+			sun.active = false;
+			add(sun);
+		}
+
 		final tobdogWeather:FlxSprite = new FlxSprite(500, 436);
 
 		switch (DateUtil.getWeather())
@@ -191,6 +211,18 @@ class Settings extends FlxState
 
 	public override function update(elapsed:Float):Void
 	{
+		extreme2++;
+
+		if (extreme2 >= 240)
+		{
+			extreme++;
+
+			if (extreme >= 1100 && Math.abs(Math.sin(siner / 15)) > 0.1)
+				extreme = extreme2 = 0;
+		}
+
+		siner++;
+
 		if (Controls.justPressed('up'))
 			changeOption(-1);
 		else if (Controls.justPressed('down'))
@@ -217,9 +249,12 @@ class Settings extends FlxState
 
 		super.update(elapsed);
 
+		if (sun != null)
+			sun.drawCircle(258 + Math.cos(siner / 18) * 6, 40 + Math.sin(siner / 18) * 6, 28 + Math.sin(siner / 6) * 4);
+
 		tobdogLine.centerOffsets();
 
-		tobdogLine.offset.add(Math.sin(((FlxG.game.ticks * 100) * FramerateUtil.SINGLE_FRAME_TIMING) / 12), Math.cos(((FlxG.game.ticks * 100) * FramerateUtil.SINGLE_FRAME_TIMING) / 12));
+		tobdogLine.offset.add(Math.sin(siner / 12), Math.cos(siner / 12));
 	}
 
 	@:noCompletion
