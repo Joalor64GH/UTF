@@ -13,6 +13,7 @@ import utf.states.config.Option;
 import utf.states.Intro;
 import utf.util.DateUtil;
 import utf.util.FilterUtil;
+import utf.util.FramerateUtil;
 
 /**
  * Manages the settings menu, allowing users to configure various options.
