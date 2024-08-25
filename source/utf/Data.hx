@@ -8,6 +8,7 @@ import utf.util.FilterUtil;
 /**
  * Handles saving and loading game settings.
  */
+@:nullSafety
 class Data
 {
 	/**
