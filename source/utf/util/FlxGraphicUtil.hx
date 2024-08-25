@@ -34,6 +34,7 @@ class FlxGraphicUtil
 			FlxG.log.notice('Creating "$key" from "${graph.key}"');
 
 			final portion:BitmapData = new BitmapData(Math.floor(region.width), Math.floor(region.height), true, 0);
+
 			portion.copyPixels(graph.bitmap, new Rectangle(region.x, region.y, region.width, region.height), new Point(0, 0));
 
 			region.put();
