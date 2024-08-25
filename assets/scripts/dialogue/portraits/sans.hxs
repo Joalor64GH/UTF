@@ -9,14 +9,14 @@ class SansPortrait extends Portrait
 	{
 		super('sans');
 
-		loadGraphic(Paths.sprite('portaits/face_sans'));
+		loadGraphic(Paths.sprite('portraits/face_sans'));
 
 		active = false;
 	}
 
 	public override function changeFace(name:String):Void
 	{
-		if (Assets.exists(Paths.sprite('portaits/face_sans$name')))
-			loadGraphic(Paths.sprite('portaits/face_sans$name'));
+		if (Assets.exists(Paths.sprite('portraits/face_sans$name')))
+			loadGraphic(Paths.sprite('portraits/face_sans$name'));
 	}
 }
