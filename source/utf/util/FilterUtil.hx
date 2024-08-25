@@ -64,7 +64,6 @@ class FilterUtil
 
 	/**
 	 * Retrieves a ColorMatrixFilter based on the provided filter name.
-	 *
 	 * @param name The name of the filter (e.g., 'deuteranopia', 'protanopia').
 	 * @return A ColorMatrixFilter instance representing the color transformation for the specified color blindness type, or null if the filter does not exist.
 	 */
@@ -98,7 +97,6 @@ class FilterUtil
 
 	/**
 	 * Reloads and applies a specified color filter to the game.
-	 *
 	 * @param filter The name of the filter to apply.
 	 */
 	public static function reloadGameFilter(filter:String):Void

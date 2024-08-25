@@ -50,7 +50,6 @@ class TextParser
 
 	/**
 	 * Parses the text, removing tags and returning the cleaned text and actions.
-	 *
 	 * @param text The input text with potential tags.
 	 * @return A ParsedText object with the cleaned text and extracted actions.
 	 */

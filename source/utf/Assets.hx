@@ -17,7 +17,6 @@ class Assets
 {
 	/**
 	 * Checks if an asset exists at the given path.
-	 *
 	 * @param path The path to the asset.
 	 * @return `true` if the asset exists, `false` otherwise.
 	 */
@@ -28,7 +27,6 @@ class Assets
 
 	/**
 	 * Retrieves a bitmap image asset.
-	 *
 	 * @param path The path to the image file.
 	 * @param cache Whether to cache the bitmap data (default is true).
 	 * @return The `BitmapData` object, or null if the file does not exist or an error occurs.
@@ -47,7 +45,6 @@ class Assets
 
 	/**
 	 * Retrieves a sound asset.
-	 *
 	 * @param path The path to the sound file.
 	 * @param cache Whether to cache the sound data (default is true).
 	 * @return The `Sound` object, or null if the file does not exist or an error occurs.
@@ -66,7 +63,6 @@ class Assets
 
 	/**
 	 * Retrieves a font asset.
-	 *
 	 * @param path The path to the font file.
 	 * @param cache Whether to cache the font data (default is true).
 	 * @return The `Font` object, or null if the file does not exist or an error occurs.
@@ -85,7 +81,6 @@ class Assets
 
 	/**
 	 * Lists all files in a directory.
-	 *
 	 * @param directory The directory to list files from.
 	 * @return An array of file paths sorted alphabetically.
 	 */
@@ -100,7 +95,6 @@ class Assets
 
 	/**
 	 * Retrieves the text content of a file.
-	 *
 	 * @param path The path to the text file.
 	 * @return The content of the file as a `String`, or null if the file does not exist or an error occurs.
 	 */
@@ -118,7 +112,6 @@ class Assets
 
 	/**
 	 * Retrieves the raw byte data of a file.
-	 *
 	 * @param path The path to the file.
 	 * @return A `ByteArray` containing the file's bytes, or null if the file does not exist or an error occurs.
 	 */
