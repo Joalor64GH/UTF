@@ -34,9 +34,9 @@ class EnemyEncounterRegistry
 				if (enemyEncounter == null)
 					continue;
 
-				FlxG.log.notice('Initialized enemy encounter "${enemyEncounter.enemyEncounterID}"!');
+				FlxG.log.notice('Initialized enemy encounter "${enemyEncounter.encounterID}"!');
 
-				enemyEncounterScriptedClasses.set(enemyEncounter.enemyEncounterID, enemyEncounterClass);
+				enemyEncounterScriptedClasses.set(enemyEncounter.encounterID, enemyEncounterClass);
 			}
 		}
 
@@ -45,27 +45,27 @@ class EnemyEncounterRegistry
 
 	/**
 	 * Fetches a enemy encounter by its number.
-	 * @param enemyEncounterID The ID of the enemy encounter.
+	 * @param encounterID The ID of the enemy encounter.
 	 * @return The enemy encounter or null if not found.
 	 */
-	public static function fetchEnemyEncounter(enemyEncounterID:String):Null<EnemyEncounter>
+	public static function fetchEnemyEncounter(encounterID:String):Null<EnemyEncounter>
 	{
-		if (!enemyEncounterScriptedClasses.exists(enemyEncounterID))
+		if (!enemyEncounterScriptedClasses.exists(encounterID))
 		{
-			FlxG.log.error('Unable to load enemy encounter "${enemyEncounterID}", not found in cache');
+			FlxG.log.error('Unable to load enemy encounter "${encounterID}", not found in cache');
 
 			return null;
 		}
 
-		final enemyEncounterClass:String = enemyEncounterScriptedClasses.get(enemyEncounterID);
+		final enemyEncounterClass:String = enemyEncounterScriptedClasses.get(encounterID);
 
 		if (enemyEncounterClass != null)
 		{
-			final enemyEncounter:EnemyEncounter = ScriptedEnemyEncounter.init(enemyEncounterClass, enemyEncounterID);
+			final enemyEncounter:EnemyEncounter = ScriptedEnemyEncounter.init(enemyEncounterClass, encounterID);
 
 			if (enemyEncounter == null)
 			{
-				FlxG.log.error('Unable to initiate enemy encounter "${enemyEncounterID}"');
+				FlxG.log.error('Unable to initiate enemy encounter "${encounterID}"');
 
 				return null;
 			}
