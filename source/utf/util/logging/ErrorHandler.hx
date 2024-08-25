@@ -74,7 +74,7 @@ class ErrorHandler
 		}
 
 		#if (windows && cpp)
-		WindowsAPI.showError('Uncaught Error', log.join('\n'))
+		WindowsAPI.showError('Uncaught Error', log.join('\n'));
 		#else
 		WindowUtil.showAlert('Uncaught Error', log.join('\n'));
 		#end
@@ -100,7 +100,7 @@ class ErrorHandler
 		#end
 
 		#if (windows && cpp)
-		WindowsAPI.showError('Critical Error', log.join('\n'))
+		WindowsAPI.showError('Critical Error', log.join('\n'));
 		#else
 		WindowUtil.showAlert('Critical Error', log.join('\n'));
 		#end

@@ -90,8 +90,8 @@ class WindowsAPI
 		final pcm:PROCESS_MEMORY_COUNTERS_EX = PROCESS_MEMORY_COUNTERS_EX.alloc();
 
 		if (untyped GetProcessMemoryInfo(untyped GetCurrentProcess(), untyped __cpp__('(PROCESS_MEMORY_COUNTERS *) {0}', cpp.RawPointer.addressOf(pcm)),
-			untyped sizeof(pmc)))
-			return pmc.WorkingSetSize;
+			untyped sizeof(pcm)))
+			return pcm.WorkingSetSize;
 		else
 			Sys.println('Failed to get memory usage information.');
 
@@ -108,8 +108,8 @@ class WindowsAPI
 		final pcm:PROCESS_MEMORY_COUNTERS_EX = PROCESS_MEMORY_COUNTERS_EX.alloc();
 
 		if (untyped GetProcessMemoryInfo(untyped GetCurrentProcess(), untyped __cpp__('(PROCESS_MEMORY_COUNTERS *) {0}', cpp.RawPointer.addressOf(pcm)),
-			untyped sizeof(pmc)))
-			return pmc.PeakWorkingSetSize;
+			untyped sizeof(pcm)))
+			return pcm.PeakWorkingSetSize;
 		else
 			Sys.println('Failed to get peak working set size information.');
 

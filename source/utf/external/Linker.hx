@@ -2,6 +2,7 @@ package utf.external;
 
 import haxe.io.Path;
 import haxe.macro.Context;
+import haxe.macro.Expr;
 import haxe.xml.Printer;
 import sys.FileSystem;
 

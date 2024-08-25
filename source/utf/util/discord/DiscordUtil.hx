@@ -102,7 +102,7 @@ class DiscordUtil
 	@:noCompletion
 	private static function shutdown(exitCode:Int):Void
 	{
-		updateThread = null;
+		deamonThread = null;
 		Discord.Shutdown();
 		initialized = false;
 	}
