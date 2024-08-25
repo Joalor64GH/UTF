@@ -69,7 +69,7 @@ class FilterUtil
 	 */
 	public static function getFilter(name:String):Null<BitmapFilter>
 	{
-		final matrix:Array<Float> = filters.get(name);
+		final matrix:Null<Array<Float>> = filters.get(name);
 
 		if (matrix != null && matrix.length > 0)
 			return new ColorMatrixFilter(matrix);
@@ -101,14 +101,22 @@ class FilterUtil
 	 */
 	public static function reloadGameFilter(filter:String):Void
 	{
+		if (filter == null || filter.length <= 0)
+			return;
+
 		Data.updateSetting('filter', filter);
 
 		if (getFiltersKeys().contains(filter))
 		{
-			final bitmapFilter:Null<BitmapFilter> = getFilter(Data.settings.get('filter'));
+			final filterName:Null<String> = Data.settings.get('filter');
 
-			if (bitmapFilter != null)
-				FlxG.game.setFilters([bitmapFilter]);
+			if (filterName != null)
+			{
+				final bitmapFilter:Null<BitmapFilter> = getFilter(filterName);
+
+				if (bitmapFilter != null)
+					FlxG.game.setFilters([bitmapFilter]);
+			}
 		}
 		else
 			FlxG.game.setFilters([]);
