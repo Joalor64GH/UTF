@@ -3,7 +3,7 @@ package utf.util;
 #if cpp
 import cpp.vm.Gc;
 #elseif neko
-import cpp.vm.Gc;
+import neko.vm.Gc;
 #elseif hl
 import hl.Gc;
 #end
