@@ -59,7 +59,7 @@ jobs:
           path: export/windows/bin
           if-no-files-found: warn
   MacOS:
-    runs-on: macos-latest
+    runs-on: macos-13
     permissions: write-all
     steps:
       - name: Checkout
