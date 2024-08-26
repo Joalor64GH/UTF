@@ -23,7 +23,13 @@ using flixel.util.FlxSpriteUtil;
 class Settings extends FlxState
 {
 	@:noCompletion
-	private static final CIRCLE_RADIUS:Float = 56;
+	private static final SUN_X:Float = 516;
+
+	@:noCompletion
+	private static final SUN_Y:Float = 80;
+
+	@:noCompletion
+	private static final SUN_RADIUS:Float = 56;
 
 	@:noCompletion
 	private var selected:Int = 0;
@@ -140,7 +146,9 @@ class Settings extends FlxState
 
 		if (DateUtil.getWeather() == 3)
 		{
-			sun = new FlxShapeCircle(516, 80, CIRCLE_RADIUS, {thickness: 0}, FlxColor.YELLOW);
+			sun = new FlxSprite(0, 0);
+			sun.makeGraphic(SUN_RADIUS * 2, SUN_RADIUS * 2, FlxColor.YELLOW);
+			sun.drawCircle(SUN_X + Math.cos(siner / 18) * 6, SUN_Y + Math.sin(siner / 18) * 6, SUN_RADIUS + Math.sin(siner / 6) * 4, FlxColor.YELLOW, {thickness: 0});
 			sun.active = false;
 			add(sun);
 		}
@@ -254,14 +262,10 @@ class Settings extends FlxState
 		super.update(elapsed);
 
 		if (sun != null)
-		{
-			sun.centerOffsets();
-			sun.offset.add(Math.cos(siner / 18) * 6, Math.sin(siner / 18) * 6);
-			sun.radius = CIRCLE_RADIUS + Math.sin(siner / 6) * 4;
-		}
+			sun.drawCircle(SUN_X + Math.cos(siner / 18) * 6, SUN_Y + Math.sin(siner / 18) * 6, SUN_RADIUS + Math.sin(siner / 6) * 4, FlxColor.YELLOW, {thickness: 0});
 
 		tobdogLine.centerOffsets();
-		tobdogLine.offset.add(Math.sin(siner / 12), Math.cos(siner / 12));
+		tobdogLine.offset.add(-Math.sin(siner / 12), -Math.cos(siner / 12));
 	}
 
 	@:noCompletion
