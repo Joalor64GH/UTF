@@ -3,6 +3,7 @@ package utf.util;
 #if android
 import android.Tools;
 #end
+import flixel.FlxG;
 import lime.ui.KeyCode;
 import lime.ui.KeyModifier;
 import openfl.Lib;
