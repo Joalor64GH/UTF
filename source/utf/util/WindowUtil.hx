@@ -1,13 +1,6 @@
 package utf.util;
 
-#if android
-import android.Tools;
-#end
-import flixel.FlxG;
-import lime.ui.KeyCode;
-import lime.ui.KeyModifier;
 import openfl.Lib;
-import utf.Assets;
 
 /**
  * Utility class for window-related functions.
@@ -26,7 +19,7 @@ class WindowUtil
 		#end
 
 		#if desktop
-		Lib.application.window.onKeyDown.add(function(keyCode:KeyCode, keyModifier:KeyModifier):Void
+		Lib.application.window.onKeyDown.add(function(keyCode:lime.ui.KeyCode, keyModifier:lime.ui.KeyModifier):Void
 		{
 			#if (windows || linux)
 			if (keyCode == KeyCode.RETURN && keyModifier.altKey && (!keyModifier.ctrlKey && !keyModifier.shiftKey && !keyModifier.metaKey))
@@ -37,12 +30,12 @@ class WindowUtil
 			#end
 
 			if (keyCode == KeyCode.F4 && (!keyModifier.altKey && !keyModifier.ctrlKey && !keyModifier.shiftKey && !keyModifier.metaKey))
-				FlxG.fullscreen = !FlxG.fullscreen;
+				flixel.FlxG.fullscreen = !flixel.FlxG.fullscreen;
 		});
 		#end
 
 		#if linux
-		if (Assets.exists('icon.png'))
+		if (utf.Assets.exists('icon.png'))
 			Lib.application.window.setIcon(Assets.getBitmapData('icon.png', false).image);
 		#end
 	}
@@ -57,7 +50,7 @@ class WindowUtil
 		#if !android
 		Lib.application.window.alert(desc, name);
 		#else
-		Tools.showAlertDialog(name, desc, {name: 'Ok', func: null});
+		android.Tools.showAlertDialog(name, desc, {name: 'Ok', func: null});
 		#end
 	}
 
