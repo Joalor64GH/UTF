@@ -1,5 +1,6 @@
 package utf.states.config;
 
+import flixel.addons.display.shapes.FlxShapeCircle;
 import flixel.effects.particles.FlxEmitter;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
@@ -22,13 +23,7 @@ using flixel.util.FlxSpriteUtil;
 class Settings extends FlxState
 {
 	@:noCompletion
-	private static final SUN_X:Float = 516;
-
-	@:noCompletion
-	private static final SUN_Y:Float = 80;
-
-	@:noCompletion
-	private static final SUN_RADIUS:Float = 56;
+	private static final CIRCLE_RADIUS:Float = 56;
 
 	@:noCompletion
 	private var selected:Int = 0;
@@ -43,7 +38,13 @@ class Settings extends FlxState
 	private var holdTimer:FlxTimer;
 
 	@:noCompletion
+	private var weather:Int = 0;
+
+	@:noCompletion
 	private var holdDirection:Int = 0;
+
+	@:noCompletion
+	private var tobdogWeather:FlxSprite;
 
 	@:noCompletion
 	private var tobdogLine:FlxText;
@@ -58,11 +59,13 @@ class Settings extends FlxState
 	private var extreme2:Float = 0;
 
 	@:noCompletion
-	private var sun:FlxSprite;
+	private var sun:FlxShapeCircle;
 
 	public function new():Void
 	{
 		super();
+
+		weather = DateUtil.getWeather();
 
 		options.push(new Option('Exit', OptionType.Function, function():Void
 		{
@@ -89,7 +92,7 @@ class Settings extends FlxState
 	{
 		persistentUpdate = false;
 
-		switch (DateUtil.getWeather())
+		switch (weather)
 		{
 			case 1:
 				Paths.music('options_winter');
@@ -99,14 +102,14 @@ class Settings extends FlxState
 				Paths.music('options_fall');
 		}
 
-		if (DateUtil.getWeather() != 3)
+		if (weather != 3)
 		{
 			final particles:FlxEmitter = new FlxEmitter(0, 0);
-			particles.loadParticles(Paths.sprite(DateUtil.getWeather() == 1 ? 'christmasflake' : 'fallleaf'), 120);
+			particles.loadParticles(Paths.sprite(weather == 1 ? 'christmasflake' : 'fallleaf'), 120);
 			particles.alpha.set(0.5, 0.5);
 			particles.scale.set(2, 2);
 
-			switch (DateUtil.getWeather())
+			switch (weather)
 			{
 				case 2:
 					particles.color.set(FlxColor.interpolate(FlxColor.RED, FlxColor.WHITE, 0.5));
@@ -143,18 +146,16 @@ class Settings extends FlxState
 
 		add(items);
 
-		if (DateUtil.getWeather() == 3)
+		if (weather == 3)
 		{
-			sun = new FlxSprite(0, 0);
-			sun.makeGraphic(Math.floor(SUN_RADIUS * 2), Math.floor(SUN_RADIUS * 2), FlxColor.YELLOW);
-			sun.drawCircle(SUN_X + Math.cos(siner / 18) * 6, SUN_Y + Math.sin(siner / 18) * 6, SUN_RADIUS + Math.sin(siner / 6) * 4, FlxColor.YELLOW, {thickness: 0});
+			sun = new FlxShapeCircle(516, 80, CIRCLE_RADIUS, {thickness: 0}, FlxColor.YELLOW);
 			sun.active = false;
 			add(sun);
 		}
 
-		final tobdogWeather:FlxSprite = new FlxSprite(500, 436);
+		tobdogWeather = new FlxSprite(weather == 3 ? 250 : 500, weather == 3 ? 225 : 436);
 
-		switch (DateUtil.getWeather())
+		switch (weather)
 		{
 			case 1:
 				tobdogWeather.loadGraphic(Paths.sprite('tobdog_winter'));
@@ -174,14 +175,14 @@ class Settings extends FlxState
 		tobdogWeather.updateHitbox();
 		tobdogWeather.scrollFactor.set();
 
-		if (DateUtil.getWeather() != 2 && DateUtil.getWeather() != 3)
+		if (weather != 2 && weather != 3)
 			tobdogWeather.active = false;
 
 		add(tobdogWeather);
 
 		tobdogLine = new FlxText(420, 260, 0, '', 32);
 
-		switch (DateUtil.getWeather())
+		switch (weather)
 		{
 			case 1:
 				tobdogLine.text = 'cold outside\nbut stay warm\ninside of you';
@@ -208,7 +209,7 @@ class Settings extends FlxState
 
 		FlxTimer.wait(1.5, function():Void
 		{
-			switch (DateUtil.getWeather())
+			switch (weather)
 			{
 				case 1:
 					FlxG.sound.playMusic(Paths.music('options_winter'), 0.8);
@@ -222,6 +223,8 @@ class Settings extends FlxState
 
 	public override function update(elapsed:Float):Void
 	{
+		if (weather == 3)
+		{
 		extreme2++;
 
 		if (extreme2 >= 240)
@@ -230,6 +233,7 @@ class Settings extends FlxState
 
 			if (extreme >= 1100 && Math.abs(Math.sin(siner / 15)) > 0.1)
 				extreme = extreme2 = 0;
+		}
 		}
 
 		siner++;
@@ -261,11 +265,20 @@ class Settings extends FlxState
 		super.update(elapsed);
 
 		if (sun != null)
-			sun.drawCircle(SUN_X + Math.cos(siner / 18) * 6, SUN_Y + Math.sin(siner / 18) * 6, SUN_RADIUS + Math.sin(siner / 6) * 4, FlxColor.YELLOW, {thickness: 0});
+		{
+			sun.radius = CIRCLE_RADIUS + Math.sin(siner / 6) * 4;
+			sun.centerOffsets();
+			sun.offset.add(Math.cos(siner / 18) * 6, Math.sin(siner / 18) * 6);
+		}
+
+		if (weather == 3)
+		{
+			tobdogWeather.scale.set(4 + Math.sin(siner / 15) * (0.2 + extreme / 900), 4 - Math.sin(siner / 15) * (0.2 + extreme / 900));
+			tobdogWeather.updateHitbox();
+		}
 
 		tobdogLine.centerOffsets();
-
-		tobdogLine.offset.add(-Math.sin(siner / 12), -Math.cos(siner / 12));
+		tobdogLine.offset.add(Math.sin(siner / 12), Math.cos(siner / 12));
 	}
 
 	@:noCompletion
