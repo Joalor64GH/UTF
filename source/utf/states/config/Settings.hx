@@ -236,6 +236,9 @@ class Settings extends FlxState
 		}
 		}
 
+		if (siner >= FlxMath.MAX_VALUE_INT)
+			siner = 0;
+
 		siner++;
 
 		if (Controls.justPressed('up'))
