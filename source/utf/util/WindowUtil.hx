@@ -1,5 +1,6 @@
 package utf.util;
 
+import lime.ui.KeyCode;
 import openfl.Lib;
 
 /**
@@ -19,7 +20,7 @@ class WindowUtil
 		#end
 
 		#if desktop
-		Lib.application.window.onKeyDown.add(function(keyCode:lime.ui.KeyCode, keyModifier:lime.ui.KeyModifier):Void
+		Lib.application.window.onKeyDown.add(function(keyCode:KeyCode, keyModifier:lime.ui.KeyModifier):Void
 		{
 			#if (windows || linux)
 			if (keyCode == KeyCode.RETURN && keyModifier.altKey && (!keyModifier.ctrlKey && !keyModifier.shiftKey && !keyModifier.metaKey))
