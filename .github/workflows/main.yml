@@ -33,7 +33,6 @@ jobs:
       - name: Setup hxcpp
         if: env.CACHE_HIT != 'true'
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
-        shell
 
       - name: Building
         run: haxelib run lime build windows -debug
