@@ -23,6 +23,9 @@ using flixel.util.FlxSpriteUtil;
 class Settings extends FlxState
 {
 	@:noCompletion
+	private static final CIRCLE_RADIUS:Float = 56;
+
+	@:noCompletion
 	private var selected:Int = 0;
 
 	@:noCompletion
@@ -137,7 +140,7 @@ class Settings extends FlxState
 
 		if (DateUtil.getWeather() == 3)
 		{
-			sun = new FlxShapeCircle(516, 80, 56, {thickness: 0}, FlxColor.YELLOW);
+			sun = new FlxShapeCircle(516, 80, CIRCLE_RADIUS, {thickness: 0}, FlxColor.YELLOW);
 			sun.active = false;
 			add(sun);
 		}
@@ -254,7 +257,7 @@ class Settings extends FlxState
 		{
 			sun.centerOffsets();
 			sun.offset.add(Math.cos(siner / 18) * 6, Math.sin(siner / 18) * 6);
-			sun.scale.set(Math.sin(siner / 6) * 4, Math.sin(siner / 6) * 4);
+			sun.radius = CIRCLE_RADIUS + Math.sin(siner / 6) * 4;
 		}
 
 		tobdogLine.centerOffsets();
