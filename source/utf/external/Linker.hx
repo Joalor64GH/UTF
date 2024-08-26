@@ -10,7 +10,6 @@ import sys.FileSystem;
  * This class provides a macro to include an XML build file in the metadata of a Haxe class.
  * The file must be located relative to the directory of the Haxe class that uses this macro.
  */
-@:access(haxe.xml.Printer)
 @:nullSafety
 class Linker
 {
@@ -39,11 +38,7 @@ class Linker
 
 		includeElement.set('name', fileToInclude);
 
-		final printer:Printer = new Printer(true);
-
-		printer.writeNode(includeElement, '\n');
-
-		Context.getLocalClass().get().meta.add(':buildXml', [{expr: EConst(CString(printer.output.toString())), pos: pos}], pos);
+		Context.getLocalClass().get().meta.add(':buildXml', [{expr: EConst(CString(Printer.print(includeElement, true))), pos: pos}], pos);
 
 		return Context.getBuildFields();
 	}
