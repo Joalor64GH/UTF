@@ -11,6 +11,7 @@ import utf.Data;
 /**
  * Utility class for handling Discord Rich Presence integration.
  */
+@:nullSafety(Off)
 class DiscordUtil
 {
 	/**
@@ -59,7 +60,12 @@ class DiscordUtil
 
 					Discord.RunCallbacks();
 
-					Sys.sleep(Data.settings.get('low-quality') ? 5 : 2);
+					final lowQuality:Null<Bool> = Data.settings.get('low-quality');
+
+					if (lowQuality != null)
+						Sys.sleep(lowQuality ? 5 : 2);
+					else
+						Sys.sleep(2);
 				}
 			});
 		}
@@ -102,7 +108,9 @@ class DiscordUtil
 	@:noCompletion
 	private static function shutdown(exitCode:Int):Void
 	{
-		deamonThread = null;
+		if (deamonThread != null)
+			deamonThread = null;
+
 		Discord.Shutdown();
 		initialized = false;
 	}
