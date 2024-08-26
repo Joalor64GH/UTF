@@ -2,7 +2,7 @@ name: Compiling
 on: workflow_dispatch
 jobs:
   Windows:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions: write-all
     steps:
       - name: Checkout
@@ -59,7 +59,7 @@ jobs:
           path: export/windows/bin
           if-no-files-found: warn
   MacOS:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     permissions: write-all
     steps:
       - name: Checkout
