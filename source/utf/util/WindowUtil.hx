@@ -2,6 +2,9 @@ package utf.util;
 
 import lime.ui.KeyCode;
 import openfl.Lib;
+#if linux
+import utf.Assets;
+#end
 
 /**
  * Utility class for window-related functions.
@@ -36,8 +39,13 @@ class WindowUtil
 		#end
 
 		#if linux
-		if (utf.Assets.exists('icon.png'))
-			Lib.application.window.setIcon(Assets.getBitmapData('icon.png', false).image);
+		if (Assets.exists('icon.png'))
+		{
+			final icon:Null<openfl.display.BitmapData> = Assets.getBitmapData('icon.png', false);
+
+			if (icon != null)
+				Lib.application.window.setIcon(icon.image);
+		}
 		#end
 	}
 
