@@ -153,7 +153,7 @@ class Settings extends FlxState
 			add(sun);
 		}
 
-		tobdogWeather = new FlxSprite(500, weather == 3 ? 450 : 436);
+		tobdogWeather = new FlxSprite(weather == 3 ? 450 : 500, weather == 3 ? 400 : 436);
 
 		switch (weather)
 		{
