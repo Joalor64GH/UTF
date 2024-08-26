@@ -225,15 +225,15 @@ class Settings extends FlxState
 	{
 		if (weather == 3)
 		{
-		extreme2++;
+			extreme2++;
 
-		if (extreme2 >= 240)
-		{
-			extreme++;
+			if (extreme2 >= 240)
+			{
+				extreme++;
 
-			if (extreme >= 1100 && Math.abs(Math.sin(siner / 15)) > 0.1)
-				extreme = extreme2 = 0;
-		}
+				if (extreme >= 1100 && Math.abs(Math.sin(siner / 15)) > 0.1)
+					extreme = extreme2 = 0;
+			}
 		}
 
 		if (siner >= FlxMath.MAX_VALUE_INT)
