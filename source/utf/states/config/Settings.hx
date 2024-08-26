@@ -1,6 +1,5 @@
 package utf.states.config;
 
-import flixel.addons.display.shapes.FlxShapeCircle;
 import flixel.effects.particles.FlxEmitter;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
@@ -59,7 +58,7 @@ class Settings extends FlxState
 	private var extreme2:Float = 0;
 
 	@:noCompletion
-	private var sun:FlxShapeCircle;
+	private var sun:FlxSprite;
 
 	public function new():Void
 	{
@@ -147,7 +146,7 @@ class Settings extends FlxState
 		if (DateUtil.getWeather() == 3)
 		{
 			sun = new FlxSprite(0, 0);
-			sun.makeGraphic(SUN_RADIUS * 2, SUN_RADIUS * 2, FlxColor.YELLOW);
+			sun.makeGraphic(Math.floor(SUN_RADIUS * 2), Math.floor(SUN_RADIUS * 2), FlxColor.YELLOW);
 			sun.drawCircle(SUN_X + Math.cos(siner / 18) * 6, SUN_Y + Math.sin(siner / 18) * 6, SUN_RADIUS + Math.sin(siner / 6) * 4, FlxColor.YELLOW, {thickness: 0});
 			sun.active = false;
 			add(sun);
@@ -265,6 +264,7 @@ class Settings extends FlxState
 			sun.drawCircle(SUN_X + Math.cos(siner / 18) * 6, SUN_Y + Math.sin(siner / 18) * 6, SUN_RADIUS + Math.sin(siner / 6) * 4, FlxColor.YELLOW, {thickness: 0});
 
 		tobdogLine.centerOffsets();
+
 		tobdogLine.offset.add(-Math.sin(siner / 12), -Math.cos(siner / 12));
 	}
 
