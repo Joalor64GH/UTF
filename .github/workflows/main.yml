@@ -92,7 +92,7 @@ jobs:
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
 
       - name: Building
-        run: haxelib run lime build mac -debug && tar -zcvf build.tar.gz
+        run: haxelib run lime build mac -debug && tar -zcvf build.tar.gz -C export/macos/bin .
 
       - name: Clear Previous Cache
         uses: actions/github-script@main
@@ -149,7 +149,7 @@ jobs:
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
 
       - name: Building
-        run: haxelib run lime build linux -debug && tar -zcvf build.tar.gz -C export/macos/bin
+        run: haxelib run lime build linux -debug && tar -zcvf build.tar.gz -C export/linux/bin .
 
       - name: Clear Previous Cache
         uses: actions/github-script@main
