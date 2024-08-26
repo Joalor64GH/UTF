@@ -1,6 +1,177 @@
 name: Compiling
 on: workflow_dispatch
 jobs:
+  Windows:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: 4.3.6
+
+      - name: Restore Previous Cache
+        id: cache-build-restore
+        uses: actions/cache/restore@main
+        with:
+          path: |
+            .haxelib
+            export/windows/haxe
+            export/windows/obj
+          key: cache-windows-build
+
+      - name: Set Cache Status
+        id: cache-status
+        run: echo "CACHE_HIT=${{ steps.cache-build-restore.outputs.cache-hit }}" >> $GITHUB_ENV
+
+      - name: Installing Libraries
+        run: haxe --interp -cp ./actions/libs-installer -D analyzer-optimize -main Main
+
+      - name: Setup hxcpp
+        if: env.CACHE_HIT != 'true'
+        run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
+
+      - name: Building
+        run: haxelib run lime build windows -debug
+
+      - name: Clear Previous Cache
+        uses: actions/github-script@main
+        with:
+          script: await require('./actions/cache/clear-cache.js')({github, context}, 'cache-windows-build');
+
+      - name: Save Current Cache
+        id: cache-build-save
+        uses: actions/cache/save@main
+        with:
+          path: |
+            .haxelib
+            export/windows/haxe
+            export/windows/obj
+          key: cache-windows-build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: windowsBuild
+          path: export/windows/bin
+          if-no-files-found: warn
+  MacOS:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: 4.3.6
+
+      - name: Restore Previous Cache
+        id: cache-build-restore
+        uses: actions/cache/restore@main
+        with:
+          path: |
+            .haxelib
+            export/macos/haxe
+            export/macos/obj
+          key: cache-macos-build
+
+      - name: Set Cache Status
+        id: cache-status
+        run: echo "CACHE_HIT=${{ steps.cache-build-restore.outputs.cache-hit }}" >> $GITHUB_ENV
+
+      - name: Installing Libraries
+        run: haxe --interp -cp ./actions/libs-installer -D analyzer-optimize -main Main
+
+      - name: Setup hxcpp
+        if: env.CACHE_HIT != 'true'
+        run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
+
+      - name: Building
+        run: haxelib run lime build mac -debug && tar -zcvf build.tar.gz
+
+      - name: Clear Previous Cache
+        uses: actions/github-script@main
+        with:
+          script: await require('./actions/cache/clear-cache.js')({github, context}, 'cache-macos-build');
+
+      - name: Save Current Cache
+        id: cache-build-save
+        uses: actions/cache/save@main
+        with:
+          path: |
+            .haxelib
+            export/macos/haxe
+            export/macos/obj
+          key: cache-macos-build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: macosBuild
+          path: build.tar.gz
+          if-no-files-found: warn
+  Linux:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: 4.3.6
+
+      - name: Restore Previous Cache
+        id: cache-build-restore
+        uses: actions/cache/restore@main
+        with:
+          path: |
+            .haxelib
+            export/linux/haxe
+            export/linux/obj
+          key: cache-linux-build
+
+      - name: Set Cache Status
+        id: cache-status
+        run: echo "CACHE_HIT=${{ steps.cache-build-restore.outputs.cache-hit }}" >> $GITHUB_ENV
+
+      - name: Installing Libraries
+        run: haxe --interp -cp ./actions/libs-installer -D analyzer-optimize -main Main
+
+      - name: Setup hxcpp
+        if: env.CACHE_HIT != 'true'
+        run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
+
+      - name: Building
+        run: haxelib run lime build linux -debug && tar -zcvf build.tar.gz -C export/macos/bin
+
+      - name: Clear Previous Cache
+        uses: actions/github-script@main
+        with:
+          script: await require('./actions/cache/clear-cache.js')({github, context}, 'cache-linux-build');
+
+      - name: Save Current Cache
+        id: cache-build-save
+        uses: actions/cache/save@main
+        with:
+          path: |
+            .haxelib
+            export/linux/haxe
+            export/linux/obj
+          key: cache-linux-build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: linuxBuild
+          path: build.tar.gz
+          if-no-files-found: warn
   Android:
     runs-on: ubuntu-latest
     permissions: write-all
