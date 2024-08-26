@@ -267,18 +267,19 @@ class Settings extends FlxState
 		if (sun != null)
 		{
 			sun.radius = CIRCLE_RADIUS + Math.sin(siner / 6) * 4;
-			sun.centerOffsets();
-			sun.offset.add(Math.cos(siner / 18) * 6, Math.sin(siner / 18) * 6);
+			sun.offset.set(sun.getStrokeOffsetX(), sun.getStrokeOffsetY());
+			sun.offset.add(-Math.cos(siner / 18) * 6, -Math.sin(siner / 18) * 6);
 		}
 
 		if (weather == 3)
 		{
-			tobdogWeather.scale.set(4 + Math.sin(siner / 15) * (0.2 + extreme / 900), 4 - Math.sin(siner / 15) * (0.2 + extreme / 900));
+			tobdogWeather.scale.set(-(4 + Math.sin(siner / 15) * (0.2 + extreme / 900)), -(4 - Math.sin(siner / 15) * (0.2 + extreme / 900)));
 			tobdogWeather.updateHitbox();
 		}
 
 		tobdogLine.centerOffsets();
-		tobdogLine.offset.add(Math.sin(siner / 12), Math.cos(siner / 12));
+
+		tobdogLine.offset.add(-Math.sin(siner / 12), -Math.cos(siner / 12));
 	}
 
 	@:noCompletion
