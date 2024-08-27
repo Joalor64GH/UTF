@@ -22,8 +22,6 @@
 
 	<window width="640" height="480" fps="60" orientation="landscape" background="#000000" hardware="true" vsync="false" resizable="false" />
 
-	<window allow-high-dpi="true" unless="web" />
-
 	<window fullscreen="true" if="mobile || switch" />
 
 	<!--Path Settings-->
@@ -93,10 +91,6 @@
 
 	<haxeflag name="--macro" value="nullSafety('utf.registries')" />
 	<haxeflag name="--macro" value="nullSafety('utf.util')" />
-
-	<!--DPI Awareness-->
-
-	<haxedef name="openfl_dpi_aware" unless="web" />
 
 	<!--Enable Handle Error-->
 
