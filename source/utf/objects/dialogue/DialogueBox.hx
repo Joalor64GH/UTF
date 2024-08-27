@@ -3,15 +3,9 @@ package utf.objects.dialogue;
 import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
+import flixel.FlxSprite;
+import utf.objects.portraits.Portrait;
 import utf.objects.dialogue.Writer;
-
-typedef DialogueData =
-{
-	> WriterData,
-
-	portrait:String,
-	?face:String
-}
 
 /**
  * A dialogue box that displays text in a defined area on the screen.
@@ -33,15 +27,17 @@ class DialogueBox extends FlxSpriteGroup
 	private static final BOX_HEIGHT:Int = 150;
 
 	/**
-	 * The writer responsible for displaying text within the dialogue box.
-	 */
-	public var writer(default, null):Writer;
-
-	/**
 	 * The background box of the dialogue, rendered as a `FlxShapeBox`.
 	 */
 	@:noCompletion
 	private var box:FlxShapeBox;
+
+	public var portrait(default, null):Portrait;
+
+	/**
+	 * The writer responsible for displaying text within the dialogue box.
+	 */
+	public var writer(default, null):Writer;
 
 	/**
 	 * Constructor for creating a `DialogueBox` instance.
@@ -56,7 +52,31 @@ class DialogueBox extends FlxSpriteGroup
 		box.active = false;
 		add(box);
 
+		portrait = new Portrait('unknown');
+		portrait.scrollFactor.set();
+		add(portrait);
+
 		writer = new Writer(box.x, box.y);
+		writer.onPortraitChange(function(portrait:String):Void
+		{
+			switch (portrait)
+			{
+				case '':
+					writer.setPosition(box.x, box.y);
+				default:
+					portrait = PortraitRegistry.fetchPortrait(portrait);
+					portrait.setPosition(box.x, box.y);
+					portrait.scrollFactor.set();
+					add(portrait);
+
+					writer.setPosition(box.x + 104, box.y);
+			}
+		});
+		writer.onFaceChange.add(function(expression:String):Void
+		{
+			if (portrait != null)
+				portrait.changeFace(expression);
+		});
 		writer.scrollFactor.set();
 		add(writer);
 	}
@@ -64,6 +84,7 @@ class DialogueBox extends FlxSpriteGroup
 	public function setOnTop(?value:Bool = false):Void
 	{
 		box.setPosition(32, value ? 10 : 320);
+		portrait?.setPosition(box.x, box.y);
 		writer.setPosition(box.x, box.y);
 	}
 
@@ -71,7 +92,7 @@ class DialogueBox extends FlxSpriteGroup
 	 * Starts the dialogue sequence with the provided list of dialogue data.
 	 * @param list The list of `WriterData` objects representing the dialogue pages.
 	 */
-	public function startDialogue(list:Array<DialogueData>):Void
+	public inline function startDialogue(list:Array<WriterData>):Void
 	{
 		writer.startDialogue(list);
 	}
