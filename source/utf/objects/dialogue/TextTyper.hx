@@ -26,12 +26,12 @@ class TextTyper extends FlxText
 	/**
 	 * A callback that is dispatched when the dialogue tries to call a function.
 	 */
-	public var onFunctionCall:FlxTypedSignal<String->Void>;
+	public var onFunctionCall:FlxTypedSignal<String->Void> = new FlxTypedSignal<String->Void>();
 
 	/**
-	 * A callback that is dispatched when the dialogue tries to call a function.
+	 * A callback that is dispatched when the dialogue tries to change the face.
 	 */
-	public var onFaceChange:FlxTypedSignal<String->Void>;
+	public var onFaceChange:FlxTypedSignal<String->Void> = new FlxTypedSignal<String->Void>();
 
 	/**
 	 * Stores the original text that is being typed out.
