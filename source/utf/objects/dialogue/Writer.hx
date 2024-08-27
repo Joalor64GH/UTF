@@ -1,5 +1,6 @@
 package utf.objects.dialogue;
 
+import flixel.util.FlxSignal;
 import flixel.FlxG;
 import utf.registries.dialogue.TyperRegistry;
 import utf.Paths;
@@ -13,6 +14,7 @@ using flixel.util.FlxArrayUtil;
 typedef WriterData =
 {
 	typer:String,
+	?portrait:String,
 	text:String
 }
 
@@ -31,6 +33,8 @@ class Writer extends TextTyper
 	 * Callback function to be executed when all dialogue pages are completed.
 	 */
 	public var finishCallback:Void->Void = null;
+
+	public var onPortraitChange:FlxTypedSignal<String->Void> = new FlxTypedSignal<String->Void>();
 
 	/**
 	 * Indicates whether the dialogue has been completed.
@@ -57,6 +61,8 @@ class Writer extends TextTyper
 	public function startDialogue(list:Array<WriterData>):Void
 	{
 		this.list = list ?? [{typer: 'default', text: 'Error!'}];
+
+
 		page = 0;
 
 		if (list[page] != null)
@@ -71,6 +77,8 @@ class Writer extends TextTyper
 	{
 		if (dialogue == null)
 			dialogue = {typer: 'default', text: 'Error!'};
+
+		onPortraitChange.dispatch(dialogue.portrait ?? '');
 
 		done = false;
 
