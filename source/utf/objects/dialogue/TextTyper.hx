@@ -26,7 +26,12 @@ class TextTyper extends FlxText
 	/**
 	 * A callback that is dispatched when the dialogue tries to call a function.
 	 */
-	// public var onFunctionCall:FlxTypedSignal<String->Void>;
+	public var onFunctionCall:FlxTypedSignal<String->Void>;
+
+	/**
+	 * A callback that is dispatched when the dialogue tries to call a function.
+	 */
+	public var onFaceChange:FlxTypedSignal<String->Void>;
 
 	/**
 	 * Stores the original text that is being typed out.
@@ -225,6 +230,8 @@ class TextTyper extends FlxText
 
 						if (speed != null && speed > 0)
 							delay = FramerateUtil.SINGLE_FRAME_TIMING * speed;
+
+						return false;
 					case 'wait':
 						final waitTime:Null<Float> = Std.parseFloat(action.value);
 
@@ -247,6 +254,16 @@ class TextTyper extends FlxText
 
 							return false;
 						}
+					case 'function':
+						if (onFunctionCall != null)
+							onFunctionCall.dispatch(action.value);
+
+						return false;
+					case 'face':
+						if (onFaceChange != null)
+							onFaceChange.dispatch(action.value);
+
+						return false;
 				}
 			}
 		}
