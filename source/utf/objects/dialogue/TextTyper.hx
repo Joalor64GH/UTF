@@ -24,11 +24,6 @@ class TextTyper extends FlxText
 	private static final IGNORE_CHARACTERS:Array<String> = [' ', '\n', '*', '^', '/', '\\'];
 
 	/**
-	 * Indicates whether the text has finished typing out.
-	 */
-	public var finished(get, null):Bool = false;
-
-	/**
 	 * A callback that is dispatched when the dialogue tries to call a function.
 	 */
 	// public var onFunctionCall:FlxTypedSignal<String->Void>;
@@ -54,11 +49,20 @@ class TextTyper extends FlxText
 	@:noCompletion
 	private var typer:Typer;
 
-	/**
-	 * Timer used to control the speed of the typing effect.
-	 */
 	@:noCompletion
-	private var typingTimer:FlxTimer;
+	private var delay:Float = 0;
+
+	@:noCompletion
+	private var counter:Float = 0;
+
+	@:noCompletion
+	private var typing:Bool = false;
+
+	@:noCompletion
+	private var waiting:Bool = false;
+
+	@:noCompletion
+	private var finished:Bool = false;
 
 	/**
 	 * Constructor for creating a `TextTyper` instance.
@@ -68,16 +72,33 @@ class TextTyper extends FlxText
 	public function new(x:Float, y:Float):Void
 	{
 		super(x, y, 0, '', 8, true);
+	}
 
-		typingTimer = new FlxTimer();
+	public override function update(elapsed:Float):Void
+	{
+		if (typing && !waiting && !finished)
+		{
+			counter += elapsed;
+
+			while (counter >= delay)
+			{
+				counter -= delay;
+
+				processText();
+			}
+		}
+
+		super.update(elapsed);
 	}
 
 	public override function destroy():Void
 	{
 		super.destroy();
 
-		// onFunctionCall = FlxDestroyUtil.destroy(onFunctionCall);
-		typingTimer = FlxDestroyUtil.destroy(typingTimer);
+		counter = 0;
+		typing = false;
+		finished = true;
+		waiting = false;
 		typer = FlxDestroyUtil.destroy(typer);
 	}
 
@@ -90,20 +111,18 @@ class TextTyper extends FlxText
 	{
 		setupTyper(typer);
 
+		counter = 0;
+		waiting = finished = false;
+		textPos = 0;
+
 		final parsedText:ParsedText = TextParser.parse(text);
 
 		originalText = parsedText.cleanedText;
 		actions = parsedText.actions;
-		textPos = 0;
 
-		if (updateTextPos(null))
-			updateText();
+		processText();
 
-		typingTimer.start(FramerateUtil.SINGLE_FRAME_TIMING * typer.typerFPS, function(timer:FlxTimer):Void
-		{
-			if (updateTextPos(timer))
-				updateText();
-		}, 0);
+		typing = true;
 	}
 
 	/**
@@ -111,11 +130,11 @@ class TextTyper extends FlxText
 	 */
 	public function skip():Void
 	{
-		if (typingTimer.active)
+		if (typing && !waiting && !finished)
 		{
 			textPos = originalText.length;
 
-			if (updateTextPos(null))
+			if (updateTextPos())
 				updateText();
 		}
 	}
@@ -138,11 +157,20 @@ class TextTyper extends FlxText
 		if (offset != typer.typerOffset)
 			offset.copyFrom(typer.typerOffset);
 
+		delay = FramerateUtil.SINGLE_FRAME_TIMING * typer.typerFPS;
+
 		this.typer = typer;
 	}
 
 	@:noCompletion
-	private function updateTextPos(timer:FlxTimer):Bool
+	private function processText():Void
+	{
+		if (processActions() && updateTextPos())
+			updateText();
+	}
+
+	@:noCompletion
+	private function updateTextPos():Bool
 	{
 		final currentChar:String = originalText.charAt(textPos);
 
@@ -150,48 +178,8 @@ class TextTyper extends FlxText
 
 		textPos++;
 
-		if (actions != null && actions.length > 0)
-		{
-			for (action in actions)
-			{
-				if (action.index != textPos)
-					continue;
-
-				switch (action.type)
-				{
-					case 'speed':
-						final speed:Null<Float> = Std.parseFloat(action.value);
-
-						if (speed != null && speed > 0)
-							timer.time = FramerateUtil.SINGLE_FRAME_TIMING * speed;
-					case 'wait':
-						final waitTime:Null<Float> = Std.parseFloat(action.value);
-
-						if (waitTime != null && waitTime > 0)
-						{
-							timer.active = false;
-
-							FlxTimer.wait(waitTime, () -> timer.active = true);
-
-							return false;
-						}
-					case 'w':
-						final waitTime:Null<Int> = Std.parseInt(action.value);
-
-						if (waitTime != null && waitTime > 0)
-						{
-							timer.active = false;
-
-							FlxTimer.wait(FramerateUtil.SINGLE_FRAME_TIMING * waitTime, () -> timer.active = true);
-
-							return false;
-						}
-				}
-			}
-		}
-
 		if (IGNORE_CHARACTERS.contains(currentChar))
-			return updateTextPos(timer);
+			return updateTextPos();
 
 		if (textPos > originalText.length)
 			textPos = originalText.length;
@@ -210,10 +198,58 @@ class TextTyper extends FlxText
 
 			if (textPos >= originalText.length)
 			{
-				if (typingTimer.active)
-					typingTimer.cancel();
+				counter = 0;
+				typing = false;
+				finished = true;
+				waiting = false;
 			}
 		}
+	}
+
+	@:noCompletion
+	private function processActions():Bool
+	{
+		if (actions != null && actions.length > 0)
+		{
+			for (action in actions)
+			{
+				if (action.index != textPos)
+					continue;
+
+				switch (action.type)
+				{
+					case 'speed':
+						final speed:Null<Float> = Std.parseFloat(action.value);
+
+						if (speed != null && speed > 0)
+							delay = FramerateUtil.SINGLE_FRAME_TIMING * speed;
+					case 'wait':
+						final waitTime:Null<Float> = Std.parseFloat(action.value);
+
+						if (waitTime != null && waitTime > 0)
+						{
+							waiting = true;
+
+							FlxTimer.wait(waitTime, () -> waiting = false);
+
+							return false;
+						}
+					case 'w':
+						final waitTime:Null<Int> = Std.parseInt(action.value);
+
+						if (waitTime != null && waitTime > 0)
+						{
+							waiting = true;
+
+							FlxTimer.wait(FramerateUtil.SINGLE_FRAME_TIMING * waitTime, () -> waiting = false);
+
+							return false;
+						}
+				}
+			}
+		}
+
+		return true;
 	}
 
 	@:noCompletion
@@ -233,11 +269,5 @@ class TextTyper extends FlxText
 				sound.play();
 			}
 		}
-	}
-
-	@:noCompletion
-	private function get_finished():Bool
-	{
-		return typingTimer.finished && textPos >= originalText.length;
 	}
 }
