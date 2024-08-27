@@ -134,8 +134,7 @@ class TextTyper extends FlxText
 		{
 			textPos = originalText.length;
 
-			if (updateTextPos())
-				updateText();
+			processText();
 		}
 	}
 
@@ -165,8 +164,11 @@ class TextTyper extends FlxText
 	@:noCompletion
 	private function processText():Void
 	{
-		if (processActions() && updateTextPos())
-			updateText();
+		if (processActions())
+		{
+			if (updateTextPos())
+				updateText();
+		}
 	}
 
 	@:noCompletion
