@@ -23,13 +23,13 @@
 		{
 			"name": "flixel",
 			"type": "git",
-			"ref": "release6",
+			"ref": "dev",
 			"url": "https://github.com/HaxeFlixel/flixel.git"
 		},
 		{
 			"name": "flixel-addons",
 			"type": "git",
-			"ref": "patch-1",
+			"ref": "runtime-shader-fixes",
 			"url": "https://github.com/MAJigsaw77/flixel-addons.git"
 		},
 		{
