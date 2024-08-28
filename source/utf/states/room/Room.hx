@@ -12,6 +12,7 @@ import flixel.FlxState;
 import utf.registries.room.CharaRegistry;
 import utf.registries.room.ObjectRegistry;
 import utf.objects.dialogue.DialogueBox;
+import utf.objects.dialogue.Writer;
 import utf.objects.room.Chara;
 import utf.objects.room.Object;
 import utf.util.FlxGraphicUtil;
@@ -246,7 +247,7 @@ class Room extends FlxTransitionableState
 	 * @param dialogue The array of `DialogueData` to display during the dialogue sequence.
 	 * @param finishCallback An optional callback function to execute once the dialogue finishes.
 	 */
-	public function startDialogue(dialogue:Array<DialogueData>, ?finishCallback:Void->Void):Void
+	public function startDialogue(dialogue:Array<WriterData>, ?finishCallback:Void->Void):Void
 	{
 		if (dialogueBox == null)
 			return;
