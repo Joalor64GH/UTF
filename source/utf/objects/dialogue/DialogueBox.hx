@@ -58,7 +58,7 @@ class DialogueBox extends FlxSpriteGroup
 		add(portrait);
 
 		writer = new Writer(box.x, box.y);
-		writer.onPortraitChange(function(portrait:String):Void
+		writer.onPortraitChange.add(function(portrait:String):Void
 		{
 			switch (portrait)
 			{
