@@ -6,6 +6,7 @@ import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import utf.objects.dialogue.portraits.Portrait;
 import utf.objects.dialogue.Writer;
+import utf.registries.dialogue.PortraitRegistry;
 
 /**
  * A dialogue box that displays text in a defined area on the screen.
