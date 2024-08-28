@@ -1,5 +1,6 @@
 package utf.states;
 
+import flixel.addons.display.FlxRuntimeShader;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -18,6 +19,7 @@ import utf.substates.Naming;
 #if debug
 import utf.util.macro.git.GitUtil;
 #end
+import utf.Assets;
 
 enum Scroll
 {
@@ -49,6 +51,12 @@ class Intro extends FlxState
 			bg.scrollFactor.set();
 			bg.active = false;
 			add(bg);
+
+			final chrome:FlxRuntimeShader = new FlxRuntimeShader(Assets.getText('assets/shaders/chrome.frag'));
+			chrome.setFloat('rOffset', 0.1);
+			chrome.setFloat('gOffset', 0.2);
+			chrome.setFloat('bOffset', 0.3);
+			bg.shader = chrome;
 
 			final flowey:FlxSprite = new FlxSprite(0, 348);
 			flowey.frames = Paths.spritesheet('flowey');
