@@ -4,7 +4,7 @@ import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
-import utf.objects.portraits.Portrait;
+import utf.objects.dialogue.portraits.Portrait;
 import utf.objects.dialogue.Writer;
 
 /**
