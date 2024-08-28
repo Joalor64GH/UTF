@@ -65,10 +65,10 @@ class DialogueBox extends FlxSpriteGroup
 				case '':
 					writer.setPosition(box.x, box.y);
 				default:
-					portrait = PortraitRegistry.fetchPortrait(portrait);
-					portrait.setPosition(box.x, box.y);
-					portrait.scrollFactor.set();
-					add(portrait);
+					this.portrait = PortraitRegistry.fetchPortrait(portrait);
+					this.portrait.setPosition(box.x, box.y);
+					this.portrait.scrollFactor.set();
+					add(this.portrait);
 
 					writer.setPosition(box.x + 104, box.y);
 			}
