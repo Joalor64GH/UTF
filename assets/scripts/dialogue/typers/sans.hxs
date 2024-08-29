@@ -10,6 +10,8 @@ class SansTyper extends Typer
 
 		fontName = Paths.font('ComicSans', false);
 		fontSize = 32;
+
+		typerOffset.set(-20, -20);
 		typerSounds = [{sound: Paths.sound('txtsans', false), volume: 1}];
 		typerFPS = 1;
 	}
