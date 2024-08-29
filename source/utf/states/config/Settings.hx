@@ -271,7 +271,7 @@ class Settings extends FlxState
 		{
 			@:privateAccess
 			sun.offset.set(sun.getStrokeOffsetX(), sun.getStrokeOffsetY());
-			sun.offset.add(-Math.cos(siner / 18) * 6, -Math.sin(siner / 18) * 6);
+			sun.offset.add(-(Math.cos(siner / 18) * 6), -(Math.sin(siner / 18) * 6));
 			sun.radius = CIRCLE_RADIUS + Math.sin(siner / 6) * 4;
 		}
 
