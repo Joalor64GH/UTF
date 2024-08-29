@@ -85,12 +85,10 @@ class TextTyper extends FlxText
 		{
 			counter += elapsed;
 
-			if (counter >= delay)
-			{
-				counter %= delay;
+			while (counter >= delay)
+				counter -= delay;
 
-				processText();
-			}
+			processText();
 		}
 
 		super.update(elapsed);
