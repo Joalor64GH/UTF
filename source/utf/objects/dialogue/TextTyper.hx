@@ -213,7 +213,7 @@ class TextTyper extends FlxText
 	}
 
 	@:noCompletion
-	private function processActions():Bool
+	private function processActions():Void
 	{
 		if (actions != null && actions.length > 0)
 		{
