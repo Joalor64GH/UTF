@@ -10,6 +10,10 @@ class SansPortrait extends Portrait
 		super('sans');
 
 		loadGraphic(Paths.sprite('portraits/face_sans'));
+		scale.set(2, 2);
+		updateHitbox();
+
+		offset.set(-20, -20);
 
 		active = false;
 	}
