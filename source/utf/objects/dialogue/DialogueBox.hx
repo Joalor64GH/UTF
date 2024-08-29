@@ -58,19 +58,20 @@ class DialogueBox extends FlxSpriteGroup
 		add(portrait);
 
 		writer = new Writer(box.x, box.y);
-		writer.onPortraitChange.add(function(portrait:String):Void
+		writer.onPortraitChange.add(function(id:String):Void
 		{
-			switch (portrait)
+			if (id == null || id.length <= 0)
+				writer.setPosition(box.x, box.y);
+			else if (portrait != null && portrait.portraitID != id)
 			{
-				case '':
-					writer.setPosition(box.x, box.y);
-				default:
-					this.portrait = PortraitRegistry.fetchPortrait(portrait);
-					this.portrait.setPosition(box.x, box.y);
-					this.portrait.scrollFactor.set();
-					add(this.portrait);
+				remove(portrait);
 
-					writer.setPosition(box.x + 104, box.y);
+				portrait = PortraitRegistry.fetchPortrait(id);
+				portrait.setPosition(box.x, box.y);
+				portrait.scrollFactor.set();
+				insert(members.indexOf(box), portrait);
+
+				writer.setPosition(box.x + 104, box.y);
 			}
 		});
 		writer.onFaceChange.add(function(expression:String):Void
