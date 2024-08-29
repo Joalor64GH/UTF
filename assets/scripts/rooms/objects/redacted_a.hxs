@@ -51,7 +51,19 @@ class RedactedAObject extends Object
 
 		objectInteractable = false;
 
-		FlxG.state.startDialogue([{typer: 'redacted_a', text: '* [redacted]'}], function():Void
+		var dialogueData = [
+			{typer: 'sans', portrait: 'sans', text: '[face:chuckle]* hmmm...'},
+			{typer: 'sans', portrait: 'sans', text: '[face:wink]* guess we didn\'t need\n  your help to have a\n  good time after all.'},
+			{typer: 'sans', portrait: 'sans', text: '[face:blink]* ...'},
+			{typer: 'sans', portrait: 'sans', text: '[face:wink]* say^1, i\'ve been\n  thinking.'},
+			{typer: 'sans', portrait: 'sans', text: '[face:chuckle]* seems like you\'re\n  gonna fight my brother\n  pretty soon.'},
+			{typer: 'sans', portrait: 'sans', text: '[face:wink]* here\'s some friendly\n  advice.'},
+			{typer: 'sans', portrait: 'sans', text: '[face:blink]* if you keep going the\n  way you are now...'},
+			{typer: 'sans', portrait: 'sans', text: '* ...'},
+			{typer: 'sans', portrait: 'sans', text: '[face:noeyes]* you\'re gonna have a\n  bad time.'}
+		];
+
+		FlxG.state.startDialogue(dialogueData, function():Void
 		{
 			if (FlxG.state.chara != null)
 				FlxG.state.chara.characterControllable = true;
