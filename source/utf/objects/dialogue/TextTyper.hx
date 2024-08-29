@@ -81,13 +81,13 @@ class TextTyper extends FlxText
 
 	public override function update(elapsed:Float):Void
 	{
-		if (typing && !finished)
+		if (typing && !waiting && !finished)
 		{
 			counter += elapsed;
 
-			while (counter >= delay && !waiting)
+			if (counter >= delay)
 			{
-				counter -= delay;
+				counter %= delay;
 
 				processText();
 			}
