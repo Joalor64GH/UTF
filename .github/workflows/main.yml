@@ -33,7 +33,7 @@ jobs:
 
       - name: Setup hxcpp
         if: env.CACHE_HIT != 'true'
-        run: haxelib git hxcpp https://github.com/MAJigsaw77/hxcpp.git patch-1 --quiet && haxelib run lime rebuild hxcpp -verbose
+        run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
         shell: cmd
 
       - name: Building
@@ -91,7 +91,7 @@ jobs:
 
       - name: Setup hxcpp
         if: env.CACHE_HIT != 'true'
-        run: haxelib git hxcpp https://github.com/MAJigsaw77/hxcpp.git patch-1 --quiet && haxelib run lime rebuild hxcpp -verbose
+        run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
 
       - name: Building
         run: haxelib run lime build mac -debug && tar -zcvf build.tar.gz -C export/macos/bin .
@@ -148,7 +148,7 @@ jobs:
 
       - name: Setup hxcpp
         if: env.CACHE_HIT != 'true'
-        run: haxelib git hxcpp https://github.com/MAJigsaw77/hxcpp.git patch-1 --quiet && haxelib run lime rebuild hxcpp -verbose
+        run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
 
       - name: Building
         run: haxelib run lime build linux -debug && tar -zcvf build.tar.gz -C export/linux/bin .
@@ -205,7 +205,7 @@ jobs:
 
       - name: Setup hxcpp
         if: env.CACHE_HIT != 'true'
-        run: haxelib git hxcpp https://github.com/MAJigsaw77/hxcpp.git patch-1 --quiet && haxelib run lime rebuild hxcpp -verbose
+        run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
 
       - name: Rebuild tools
         run: cp -f -v tools/platforms/AndroidPlatform.hx $(haxelib libpath lime)tools/platforms/AndroidPlatform.hx && haxelib run lime rebuild tools -verbose
