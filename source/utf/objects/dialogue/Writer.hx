@@ -62,7 +62,6 @@ class Writer extends TextTyper
 	{
 		this.list = list ?? [{typer: 'default', text: 'Error!'}];
 
-
 		page = 0;
 
 		if (list[page] != null)
