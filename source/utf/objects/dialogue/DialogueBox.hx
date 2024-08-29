@@ -69,7 +69,7 @@ class DialogueBox extends FlxSpriteGroup
 				portrait = PortraitRegistry.fetchPortrait(id);
 				portrait.setPosition(box.x, box.y);
 				portrait.scrollFactor.set();
-				insert(members.indexOf(box), portrait);
+				insert(members.indexOf(box) +1, portrait);
 
 				writer.setPosition(box.x + 104, box.y);
 			}
