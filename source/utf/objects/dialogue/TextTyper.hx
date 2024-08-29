@@ -169,11 +169,10 @@ class TextTyper extends FlxText
 	@:noCompletion
 	private function processText():Void
 	{
-		if (processActions())
-		{
-			if (updateTextPos())
-				updateText();
-		}
+		processActions();
+
+		if (updateTextPos())
+			updateText();
 	}
 
 	@:noCompletion
@@ -230,8 +229,6 @@ class TextTyper extends FlxText
 
 						if (speed != null && speed > 0)
 							delay = FramerateUtil.SINGLE_FRAME_TIMING * speed;
-
-						return false;
 					case 'wait':
 						final waitTime:Null<Float> = Std.parseFloat(action.value);
 
@@ -240,8 +237,6 @@ class TextTyper extends FlxText
 							waiting = true;
 
 							FlxTimer.wait(waitTime, () -> waiting = false);
-
-							return false;
 						}
 					case 'w':
 						final waitTime:Null<Int> = Std.parseInt(action.value);
@@ -251,24 +246,16 @@ class TextTyper extends FlxText
 							waiting = true;
 
 							FlxTimer.wait(FramerateUtil.SINGLE_FRAME_TIMING * waitTime, () -> waiting = false);
-
-							return false;
 						}
 					case 'function':
 						if (onFunctionCall != null)
 							onFunctionCall.dispatch(action.value);
-
-						return false;
 					case 'face':
 						if (onFaceChange != null)
 							onFaceChange.dispatch(action.value);
-
-						return false;
 				}
 			}
 		}
-
-		return true;
 	}
 
 	@:noCompletion
