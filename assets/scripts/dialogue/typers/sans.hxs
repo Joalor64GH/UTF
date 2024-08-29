@@ -1,0 +1,16 @@
+import flixel.FlxG;
+import utf.Paths;
+import utf.objects.dialogue.typers.Typer;
+
+class SansTyper extends Typer
+{
+	public function new():Void
+	{
+		super('sans');
+
+		fontName = Paths.font('ComicSans', false);
+		fontSize = 32;
+		typerSounds = [{sound: Paths.sound('txtsans', false), volume: 1}];
+		typerFPS = 1;
+	}
+}
