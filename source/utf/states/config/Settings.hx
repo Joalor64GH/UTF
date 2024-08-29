@@ -1,6 +1,5 @@
 package utf.states.config;
 
-import flixel.addons.display.shapes.FlxShapeCircle;
 import flixel.effects.particles.FlxEmitter;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
@@ -10,6 +9,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.util.FlxTimer;
+import utf.objects.config.Sun;
 import utf.states.config.Option;
 import utf.states.Intro;
 import utf.util.DateUtil;
@@ -59,7 +59,7 @@ class Settings extends FlxState
 	private var extreme2:Float = 0;
 
 	@:noCompletion
-	private var sun:FlxShapeCircle;
+	private var sun:Sun;
 
 	public function new():Void
 	{
@@ -148,7 +148,7 @@ class Settings extends FlxState
 
 		if (weather == 3)
 		{
-			sun = new FlxShapeCircle(516, 80, CIRCLE_RADIUS, {thickness: 0}, FlxColor.YELLOW);
+			sun = new Sun(516, 80, CIRCLE_RADIUS, {thickness: 0}, FlxColor.YELLOW);
 			sun.active = false;
 			add(sun);
 		}
