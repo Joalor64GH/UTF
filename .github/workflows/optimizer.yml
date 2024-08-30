@@ -12,9 +12,6 @@ jobs:
         with:
           haxe-version: latest
 
-      - name: Colors supported?
-        run: tput colors
-
       - name: Install OxiPNG & OptiVorbis
         run: cargo install oxipng
 
