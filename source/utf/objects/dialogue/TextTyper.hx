@@ -166,7 +166,7 @@ class TextTyper extends FlxText
 
 		for (typingSound in typer.typerSounds)
 		{
-			if (sound == null)
+			if (typingSound == null)
 				continue;
 
 			final sound:FlxSound = FlxG.sound.load(typingSound.sound, typingSound.volume);
