@@ -69,6 +69,9 @@ class TextTyper extends FlxText
 	@:noCompletion
 	private var finished:Bool = false;
 
+	@:noCompletion
+	private var sounds:Array<FlxSound> = [];
+
 	/**
 	 * Constructor for creating a `TextTyper` instance.
 	 * @param x The x-coordinate for the text display.
@@ -160,6 +163,19 @@ class TextTyper extends FlxText
 
 		if (offset != typer.typerOffset)
 			offset.copyFrom(typer.typerOffset);
+
+		for (typingSound in typer.typerSounds)
+		{
+			if (sound == null)
+				continue;
+
+			final sound:FlxSound = FlxG.sound.load(typingSound.sound, typingSound.volume);
+
+			if (typingSound.pitch != null)
+				sound.pitch = typingSound.pitch;
+
+			sounds.push(sound);
+		}
 
 		delay = FramerateUtil.SINGLE_FRAME_TIMING * typer.typerFPS;
 
@@ -261,19 +277,12 @@ class TextTyper extends FlxText
 	@:noCompletion
 	private function playSounds(currentChar:String):Void
 	{
-		if (typer?.typerSounds != null && typer?.typerSounds?.length > 0 && !IGNORE_CHARACTERS.contains(currentChar))
+		if (sounds?.length > 0 && !IGNORE_CHARACTERS.contains(currentChar))
 		{
-			final typingSound:TypingSound = typer.typerSounds[FlxG.random.int(0, typer.typerSounds.length - 1)];
+			for (sound in sounds)
+				sound.stop();
 
-			if (typingSound != null)
-			{
-				final sound:FlxSound = FlxG.sound.load(typingSound.sound, typingSound.volume);
-
-				if (typingSound.pitch != null)
-					sound.pitch = typingSound.pitch;
-
-				sound.play();
-			}
+			sound[FlxG.random.int(0, sounds.length - 1)].play();
 		}
 	}
 }
