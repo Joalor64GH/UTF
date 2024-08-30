@@ -282,7 +282,7 @@ class TextTyper extends FlxText
 			for (sound in sounds)
 				sound.stop();
 
-			sound[FlxG.random.int(0, sounds.length - 1)].play();
+			sounds[FlxG.random.int(0, sounds.length - 1)].play();
 		}
 	}
 }
