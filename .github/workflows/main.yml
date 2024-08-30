@@ -89,6 +89,9 @@ jobs:
       - name: Installing Libraries
         run: haxe --interp -cp ./actions/libs-installer -D analyzer-optimize -main Main
 
+      - name: Set up terminal for colour output
+        run: echo "TERM=xterm-256color" >> $GITHUB_ENV
+
       - name: Setup hxcpp
         if: env.CACHE_HIT != 'true'
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
@@ -146,6 +149,9 @@ jobs:
       - name: Installing Libraries
         run: haxe --interp -cp ./actions/libs-installer -D analyzer-optimize -main Main
 
+      - name: Set up terminal for colour output
+        run: echo "TERM=xterm-256color" >> $GITHUB_ENV
+
       - name: Setup hxcpp
         if: env.CACHE_HIT != 'true'
         run: haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet && haxelib run lime rebuild hxcpp -verbose
@@ -202,6 +208,9 @@ jobs:
 
       - name: Installing Libraries
         run: haxe --interp -cp ./actions/libs-installer -D analyzer-optimize -main Main
+
+      - name: Set up terminal for colour output
+        run: echo "TERM=xterm-256color" >> $GITHUB_ENV
 
       - name: Setup hxcpp
         if: env.CACHE_HIT != 'true'
