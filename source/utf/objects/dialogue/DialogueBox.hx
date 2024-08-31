@@ -33,12 +33,17 @@ class DialogueBox extends FlxSpriteGroup
 	@:noCompletion
 	private var box:FlxShapeBox;
 
-	public var portrait(default, null):Portrait;
+	/**
+	 * The portrait displayed in the dialogue box, representing the speaker.
+	 */
+	@:noCompletion
+	private var portrait:Portrait;
 
 	/**
 	 * The writer responsible for displaying text within the dialogue box.
 	 */
-	public var writer(default, null):Writer;
+	@:noCompletion
+	private var writer(default, null):Writer;
 
 	/**
 	 * Constructor for creating a `DialogueBox` instance.
@@ -52,10 +57,6 @@ class DialogueBox extends FlxSpriteGroup
 		box.scrollFactor.set();
 		box.active = false;
 		add(box);
-
-		portrait = new Portrait('unknown');
-		portrait.scrollFactor.set();
-		add(portrait);
 
 		writer = new Writer(box.x, box.y);
 		writer.onPortraitChange.add(function(id:String):Void
@@ -86,8 +87,14 @@ class DialogueBox extends FlxSpriteGroup
 	public function setOnTop(?value:Bool = false):Void
 	{
 		box.setPosition(32, value ? 10 : 320);
-		portrait?.setPosition(box.x, box.y);
-		writer.setPosition(box.x, box.y);
+
+		if (portrait != null)
+		{
+			portrait.setPosition(box.x, box.y);
+			writer.setPosition(box.x + 104, box.y);
+		}
+		else
+			writer.setPosition(box.x, box.y);
 	}
 
 	/**
