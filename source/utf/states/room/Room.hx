@@ -140,6 +140,13 @@ class Room extends FlxTransitionableState
 		FlxG.camera.follow(camFollow);
 
 		dialogueBox = new DialogueBox();
+		dialogueBox.finishCallback = function():Void
+		{
+			if (finishCallback != null)
+				finishCallback();
+
+			dialogueBox.kill();
+		}
 		dialogueBox.camera = camHud;
 		dialogueBox.scrollFactor.set();
 		dialogueBox.kill();
@@ -253,13 +260,6 @@ class Room extends FlxTransitionableState
 			return;
 
 		dialogueBox.setOnTop(chara != null && chara.y >= 260);
-		dialogueBox.writer.finishCallback = function():Void
-		{
-			if (finishCallback != null)
-				finishCallback();
-
-			dialogueBox.kill();
-		}
 		dialogueBox.revive();
 		dialogueBox.startDialogue(dialogue);
 	}
