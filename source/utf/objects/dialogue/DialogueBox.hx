@@ -66,9 +66,10 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			if (id == null || id.length <= 0)
 				writer.setPosition(box.x, box.y);
-			else if (portrait != null && portrait.portraitID != id)
+			else if (portrait == null || portrait.portraitID != id)
 			{
-				remove(portrait);
+				if (portrait != null)
+					remove(portrait);
 
 				portrait = PortraitRegistry.fetchPortrait(id);
 				portrait.setPosition(box.x, box.y);
