@@ -14,13 +14,11 @@ class SansPortrait extends Portrait
 		updateHitbox();
 
 		offset.set(-20, -20);
-
-		active = false;
 	}
 
 	public override function changeFace(name:String):Void
 	{
-		if (Assets.exists(Paths.sprite('portraits/face_sans$name')))
-			loadGraphic(Paths.sprite('portraits/face_sans$name'));
+		if (Assets.exists(Paths.sprite('portraits/face_sans' + name)))
+			loadGraphic(Paths.sprite('portraits/face_sans' + name));
 	}
 }
