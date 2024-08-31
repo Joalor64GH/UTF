@@ -238,6 +238,8 @@ class TextTyper extends FlxText
 				if (action.index != textPos)
 					continue;
 
+				FlxG.log.notice('Currently trying to dispatch ${action.type} event.');
+
 				switch (action.type)
 				{
 					case 'speed':
