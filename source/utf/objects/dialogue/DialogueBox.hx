@@ -10,8 +10,6 @@ import utf.registries.dialogue.PortraitRegistry;
 
 /**
  * A dialogue box that displays text in a defined area on the screen.
- * This class is responsible for creating and managing the visual representation
- * of the dialogue box, including the background box and the writer that displays text.
  */
 class DialogueBox extends FlxSpriteGroup
 {
@@ -26,6 +24,11 @@ class DialogueBox extends FlxSpriteGroup
 	 */
 	@:noCompletion
 	private static final BOX_HEIGHT:Int = 150;
+
+	/**
+	 * A callback function that is triggered when the dialogue sequence finishes.
+	 */
+	public var finishCallback:Void->Void;
 
 	/**
 	 * The background box of the dialogue, rendered as a `FlxShapeBox`.
@@ -70,7 +73,7 @@ class DialogueBox extends FlxSpriteGroup
 				portrait = PortraitRegistry.fetchPortrait(id);
 				portrait.setPosition(box.x, box.y);
 				portrait.scrollFactor.set();
-				insert(members.indexOf(box) +1, portrait);
+				insert(members.indexOf(box) + 1, portrait);
 
 				writer.setPosition(box.x + 104, box.y);
 			}
