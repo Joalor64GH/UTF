@@ -55,7 +55,7 @@ class RedactedAObject extends Object
 			{typer: 'sans', portrait: 'sans', text: '[face:chuckle]* hmmm...'},
 			{typer: 'sans', portrait: 'sans', text: '[face:wink]* guess we didn\'t need\n  your help to have a\n  good time after all.'},
 			{typer: 'sans', portrait: 'sans', text: '[face:blink]* ...'},
-			{typer: 'sans', portrait: 'sans', text: '[face:wink]* say^1, i\'ve been\n  thinking.'},
+			{typer: 'sans', portrait: 'sans', text: '[face:wink]* say[wait:1], i\'ve been\n  thinking.'},
 			{typer: 'sans', portrait: 'sans', text: '[face:chuckle]* seems like you\'re\n  gonna fight my brother\n  pretty soon.'},
 			{typer: 'sans', portrait: 'sans', text: '[face:wink]* here\'s some friendly\n  advice.'},
 			{typer: 'sans', portrait: 'sans', text: '[face:blink]* if you keep going the\n  way you are now...'},
