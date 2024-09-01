@@ -13,7 +13,7 @@ class SansPortrait extends Portrait
 		scale.set(2, 2);
 		updateHitbox();
 
-		offset.set(-20, -20);
+		offset.set(-45, -45);
 
 		active = false;
 	}
