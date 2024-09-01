@@ -62,7 +62,11 @@ class DialogueBox extends FlxSpriteGroup
 		add(box);
 
 		writer = new Writer(box.x, box.y);
-		writer.finishCallback = finishCallback;
+		writer.finishCallback = function():Void
+		{
+			if (finishCallback != null)
+				finishCallback();
+		}
 		writer.onPortraitChange.add(function(id:String):Void
 		{
 			if (id == null || id.length <= 0)
