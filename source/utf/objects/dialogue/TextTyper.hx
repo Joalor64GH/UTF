@@ -88,7 +88,7 @@ class TextTyper extends FlxText
 		{
 			counter += elapsed;
 
-			while (counter >= delay && !waiting)
+			while (counter >= delay)
 			{
 				counter -= delay;
 
@@ -194,6 +194,9 @@ class TextTyper extends FlxText
 	@:noCompletion
 	private function updateTextPos():Bool
 	{
+		if (waiting)
+			return false;
+
 		final currentChar:String = originalText.charAt(textPos);
 
 		playSounds(currentChar);
@@ -233,10 +236,9 @@ class TextTyper extends FlxText
 	{
 		if (actions != null && actions.length > 0)
 		{
-			for (action in actions)
+			while (actions.length > 0 && actions[0].index == textPos)
 			{
-				if (action.index != textPos)
-					continue;
+				final action:Action = actions.shift();
 
 				FlxG.log.notice('Currently trying to dispatch ${action.type} event.');
 
@@ -253,8 +255,8 @@ class TextTyper extends FlxText
 						if (waitTime != null && waitTime > 0)
 						{
 							waiting = true;
-
 							FlxTimer.wait(waitTime, () -> waiting = false);
+							break;
 						}
 					case 'w':
 						final waitTime:Null<Int> = Std.parseInt(action.value);
@@ -262,8 +264,8 @@ class TextTyper extends FlxText
 						if (waitTime != null && waitTime > 0)
 						{
 							waiting = true;
-
 							FlxTimer.wait(FramerateUtil.SINGLE_FRAME_TIMING * waitTime, () -> waiting = false);
+							break;
 						}
 					case 'function':
 						if (onFunctionCall != null)
