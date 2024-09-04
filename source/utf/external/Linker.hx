@@ -23,7 +23,7 @@ class Linker
 		final sourcePath:String = Path.removeTrailingSlashes(Context.resolvePath(Path.directory(Context.getPosInfos(pos).file)));
 		final fileToInclude:String = Path.join([sourcePath, file_name?.length > 0 ? file_name : 'Build.xml']);
 
-		if (!FileSystem.exists(fileToInclude))
+		if (!sys.FileSystem.exists(fileToInclude))
 			Context.error('The specified file "$fileToInclude" could not be found at "$sourcePath".', pos);
 
 		final includeElement:Xml = Xml.createElement('include');
