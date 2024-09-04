@@ -1,9 +1,11 @@
 package utf.external;
 
-import haxe.io.Path;
 import haxe.macro.Context;
 import haxe.macro.Expr;
 import haxe.xml.Printer;
+import sys.FileSystem;
+
+using haxe.io.Path;
 
 /**
  * This class provides a macro to include an XML build file in the metadata of a Haxe class.
@@ -20,10 +22,10 @@ class Linker
 	public static macro function xml(?file_name:String = 'Build.xml'):Array<Field>
 	{
 		final pos:Position = Context.currentPos();
-		final sourcePath:String = Path.removeTrailingSlashes(Context.resolvePath(Path.directory(Context.getPosInfos(pos).file)));
+		final sourcePath:String = FileSystem.absolutePath(Context.getPosInfos(pos).file.directory()).removeTrailingSlashes();
 		final fileToInclude:String = Path.join([sourcePath, file_name?.length > 0 ? file_name : 'Build.xml']);
 
-		if (!sys.FileSystem.exists(fileToInclude))
+		if (!FileSystem.exists(fileToInclude))
 			Context.error('The specified file "$fileToInclude" could not be found at "$sourcePath".', pos);
 
 		final includeElement:Xml = Xml.createElement('include');
