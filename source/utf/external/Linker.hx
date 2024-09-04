@@ -4,7 +4,6 @@ import haxe.io.Path;
 import haxe.macro.Context;
 import haxe.macro.Expr;
 import haxe.xml.Printer;
-import sys.FileSystem;
 
 /**
  * This class provides a macro to include an XML build file in the metadata of a Haxe class.
@@ -21,23 +20,14 @@ class Linker
 	public static macro function xml(?file_name:String = 'Build.xml'):Array<Field>
 	{
 		final pos:Position = Context.currentPos();
-
-		var sourcePath:String = Path.directory(Context.getPosInfos(pos).file);
-
-		if (!Path.isAbsolute(sourcePath))
-			sourcePath = FileSystem.absolutePath(sourcePath);
-
-		sourcePath = Path.removeTrailingSlashes(Path.normalize(sourcePath));
-
-		final includeElement:Xml = Xml.createElement('include');
-
+		final sourcePath:String = Path.removeTrailingSlashes(Context.resolvePath(Path.directory(Context.getPosInfos(pos).file)));
 		final fileToInclude:String = Path.join([sourcePath, file_name?.length > 0 ? file_name : 'Build.xml']);
 
 		if (!FileSystem.exists(fileToInclude))
 			Context.error('The specified file "$fileToInclude" could not be found at "$sourcePath".', pos);
 
+		final includeElement:Xml = Xml.createElement('include');
 		includeElement.set('name', fileToInclude);
-
 		Context.getLocalClass().get().meta.add(':buildXml', [{expr: EConst(CString(Printer.print(includeElement, true))), pos: pos}], pos);
 
 		return Context.getBuildFields();
