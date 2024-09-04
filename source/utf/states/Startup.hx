@@ -10,7 +10,6 @@ class Startup extends FlxState
 	public override function create():Void
 	{
 		FlxG.autoPause = false;
-		FlxG.fixedTimestep = false;
 
 		Data.load();
 		Global.load();
