@@ -162,7 +162,7 @@ class Intro extends FlxState
 
 		final info:FlxText = new FlxText(0, FlxG.height - 20, 0, 'UTF v${Lib.application.meta['version']} (c) MAJigsaw77 2023', 16);
 		#if debug
-		info.text += '\nCommit (${utf.util.macro.git.GitUtil.getCommitHash()})', 16);
+		info.text += '\nCommit (${utf.util.macro.git.GitUtil.getCommitHash()})';
 		info.y -= 20;
 		#end
 		info.alignment = CENTER;
