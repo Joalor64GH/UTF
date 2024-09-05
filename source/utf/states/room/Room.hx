@@ -249,7 +249,7 @@ class Room extends FlxTransitionableState
 	 */
 	public function startDialogue(dialogue:Array<WriterData>, ?finishCallback:Void->Void):Void
 	{
-		if (dialogueBox == null)
+		if (dialogueBox == null || dialogueBox.alive)
 			return;
 
 		dialogueBox.finishCallback = function():Void
