@@ -30,7 +30,6 @@
 	<assets path="assets/images" />
 	<assets path="assets/music" />
 	<assets path="assets/scripts" />
-	<assets path="assets/shaders" />
 	<assets path="assets/sounds" />
 
 	<assets path="icon.png" embed="true" if="linux" />
