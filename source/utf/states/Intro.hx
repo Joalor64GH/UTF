@@ -48,12 +48,6 @@ class Intro extends FlxState
 			bg.active = false;
 			add(bg);
 
-			final chrome:FlxRuntimeShader = new FlxRuntimeShader(Assets.getText('assets/shaders/chrome.frag'));
-			chrome.setFloat('rOffset', 0.1);
-			chrome.setFloat('gOffset', 0.2);
-			chrome.setFloat('bOffset', 0.3);
-			bg.shader = chrome;
-
 			final flowey:FlxSprite = new FlxSprite(0, 348);
 			flowey.frames = Paths.spritesheet('flowey');
 			flowey.animation.frameIndex = 1;
