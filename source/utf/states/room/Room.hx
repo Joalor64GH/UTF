@@ -166,7 +166,10 @@ class Room extends FlxTransitionableState
 				if (obj != null && chara.characterControllable && chara.overlaps(obj))
 				{
 					if (Controls.justPressed('confirm') && obj.objectInteractable)
-						obj.interact();
+					{
+						if (dialogueBox != null && !dialogueBox.alive)
+							obj.interact();
+					}
 					else
 						obj.overlap();
 				}
