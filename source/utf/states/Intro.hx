@@ -1,6 +1,5 @@
 package utf.states;
 
-import flixel.addons.display.FlxRuntimeShader;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -16,9 +15,6 @@ import utf.states.room.Room;
 import utf.substates.battle.ScriptedEnemyEncounter;
 #end
 import utf.substates.Naming;
-#if debug
-import utf.util.macro.git.GitUtil;
-#end
 import utf.Assets;
 
 enum Scroll
@@ -164,11 +160,10 @@ class Intro extends FlxState
 
 		add(items);
 
+		final info:FlxText = new FlxText(0, FlxG.height - 20, 0, 'UTF v${Lib.application.meta['version']} (c) MAJigsaw77 2023', 16);
 		#if debug
-		var info:FlxText = new FlxText(0, FlxG.height - 40, 0,
-			'UTF v${Lib.application.meta['version']} (c) MAJigsaw77 2023\nCommit (${GitUtil.getCommitHash()})', 16);
-		#else
-		var info:FlxText = new FlxText(0, FlxG.height - 20, 0, 'UTF v${Lib.application.meta['version']} (c) MAJigsaw77 2023', 16);
+		info.text += '\nCommit (${utf.util.macro.git.GitUtil.getCommitHash()})', 16);
+		info.y -= 20;
 		#end
 		info.alignment = CENTER;
 		info.font = Paths.font('Small');
