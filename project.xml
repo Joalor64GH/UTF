@@ -68,6 +68,7 @@
 		<haxedef name="HXCPP_GC_CHECK_POINTER" />
 		<haxedef name="HXCPP_STACK_LINE" />
 		<haxedef name="HXCPP_STACK_TRACE" />
+		<haxedef name="HXCPP_CATCH_SEGV" />
 	</section>
 
 	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="hxdiscord_rpc" />
