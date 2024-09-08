@@ -79,10 +79,11 @@ class DiscordUtil
 	@:noCompletion
 	private static function onReady(request:cpp.RawConstPointer<DiscordUser>):Void
 	{
-		final discriminator:String = request[0].discriminator;
 		final username:String = request[0].username;
 
-		if (Std.parseInt(discriminator) != 0)
+		final discriminator:Int = Std.parseInt(request[0].discriminator);
+
+		if (discriminator != 0)
 			FlxG.log.notice('(Discord) Connected to User "$username#$discriminator"');
 		else
 			FlxG.log.notice('(Discord) Connected to User "$username"');
@@ -108,10 +109,13 @@ class DiscordUtil
 	@:noCompletion
 	private static function shutdown(exitCode:Int):Void
 	{
+		Discord.ClearPresence();
+
 		if (deamonThread != null)
 			deamonThread = null;
 
 		Discord.Shutdown();
+
 		initialized = false;
 	}
 }
