@@ -30,13 +30,19 @@ class ErrorHandler
 	/**
 	 * Initializes the error handler by setting up the necessary error listeners.
 	 */
-	public static function init():Void
+	public static function initUncaughtErrorHandler():Void
+	{
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
+	}
+
+	/**
+	 * Initializes the error handler by setting up the necessary error listeners.
+	 */
+	public static function initCriticalErrorHandler():Void
 	{
 		#if (windows && cpp)
 		WindowsAPI.disableErrorReporting();
 		#end
-
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
 
 		#if cpp
 		untyped __global__.__hxcpp_set_critical_error_handler(onCriticalError);
