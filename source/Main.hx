@@ -60,12 +60,6 @@ class Main extends openfl.display.Sprite
 	@:noCompletion
 	private static function __init__():Void
 	{
-		#if android
-		Sys.setCwd(haxe.io.Path.addTrailingSlash(android.os.Build.VERSION.SDK_INT > 30 ? android.content.Context.getObbDir() : android.content.Context.getExternalFilesDir()));
-		#elseif ios
-		Sys.setCwd(haxe.io.Path.addTrailingSlash(openfl.filesystem.File.documentsDirectory.nativePath));
-		#end
-
 		utf.util.logging.ErrorHandler.initCriticalErrorHandler();
 
 		#if hxgamemode
@@ -81,6 +75,12 @@ class Main extends openfl.display.Sprite
 	 */
 	public static function main():Void
 	{
+		#if android
+		Sys.setCwd(haxe.io.Path.addTrailingSlash(android.os.Build.VERSION.SDK_INT > 30 ? android.content.Context.getObbDir() : android.content.Context.getExternalFilesDir()));
+		#elseif ios
+		Sys.setCwd(haxe.io.Path.addTrailingSlash(openfl.filesystem.File.documentsDirectory.nativePath));
+		#end
+
 		utf.util.logging.ErrorHandler.initUncaughtErrorHandler();
 
 		utf.util.WindowUtil.init();
