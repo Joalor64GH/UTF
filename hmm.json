@@ -37,6 +37,10 @@
 			"type": "haxelib"
 		},
 		{
+			"name": "hxgamemode",
+			"type": "haxelib"
+		},
+		{
 			"name": "hscript",
 			"type": "git",
 			"ref": "master",
