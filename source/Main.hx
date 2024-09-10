@@ -66,6 +66,8 @@ class Main extends openfl.display.Sprite
 		Sys.setCwd(haxe.io.Path.addTrailingSlash(openfl.filesystem.File.documentsDirectory.nativePath));
 		#end
 
+		utf.util.logging.ErrorHandler.initCriticalErrorHandler();
+
 		if (GamemodeClient.request_start() != 0)
 			Sys.println('Failed to request gamemode start: ${GamemodeClient.error_string()}...');
 		else
@@ -77,7 +79,7 @@ class Main extends openfl.display.Sprite
 	 */
 	public static function main():Void
 	{
-		utf.util.logging.ErrorHandler.init();
+		utf.util.logging.ErrorHandler.initUncaughtErrorHandler();
 
 		utf.util.WindowUtil.init();
 
