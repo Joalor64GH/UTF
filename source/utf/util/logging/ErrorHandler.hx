@@ -10,6 +10,7 @@ import openfl.Lib;
 import sys.io.File;
 import sys.FileSystem;
 #end
+import utf.util.logging.ANSI;
 #if (windows && cpp)
 import utf.util.native.WindowsAPI;
 #end
@@ -80,6 +81,8 @@ class ErrorHandler
 			#end
 		}
 
+		Sys.println(ANSI.apply(log.join('\n'), [Bold, Red]));
+
 		#if (windows && cpp)
 		WindowsAPI.showError('Uncaught Error', log.join('\n'));
 		#else
@@ -106,6 +109,8 @@ class ErrorHandler
 		if (!saveLog(log.join('\n')))
 			log.push('The logging file hasn\'t been saved.');
 		#end
+
+		Sys.println(ANSI.apply(log.join('\n'), [Bold, Red]));
 
 		#if (windows && cpp)
 		WindowsAPI.showError('Critical Error', log.join('\n'));
