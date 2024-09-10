@@ -68,10 +68,12 @@ class Main extends openfl.display.Sprite
 
 		utf.util.logging.ErrorHandler.initCriticalErrorHandler();
 
+		#if hxgamemode
 		if (GamemodeClient.request_start() != 0)
 			Sys.println('Failed to request gamemode start: ${GamemodeClient.error_string()}...');
 		else
 			Sys.println('Succesfully requested gamemode to start...');
+		#end
 	}
 
 	/**
