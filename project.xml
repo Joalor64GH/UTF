@@ -46,6 +46,7 @@
 
 	<section if="cpp">
 		<haxelib name="hxdiscord_rpc" if="desktop" />
+		<haxelib name="hxgamemode" if="linux" />
 	</section>
 
 	<haxelib name="polymod" />
