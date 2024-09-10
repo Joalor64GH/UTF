@@ -5,6 +5,9 @@ import flixel.addons.transition.TransitionData;
 import flixel.util.typeLimit.NextState;
 import flixel.util.FlxColor;
 import flixel.FlxG;
+#if hxgamemode
+import hxgamemode.GamemodeClient;
+#end
 import openfl.events.Event;
 import openfl.Lib;
 import utf.Game;
@@ -52,9 +55,10 @@ class Main extends openfl.display.Sprite
 	private static final GAME_START_FULLSCREEN:Bool = false;
 
 	/**
-	 * The entry point of the application.
+	 * This will make it so it is runned right at program startup.
 	 */
-	public static function main():Void
+	@:noCompletion
+	private static function __init__():Void
 	{
 		#if android
 		Sys.setCwd(haxe.io.Path.addTrailingSlash(android.os.Build.VERSION.SDK_INT > 30 ? android.content.Context.getObbDir() : android.content.Context.getExternalFilesDir()));
@@ -62,6 +66,17 @@ class Main extends openfl.display.Sprite
 		Sys.setCwd(haxe.io.Path.addTrailingSlash(openfl.filesystem.File.applicationStorageDirectory.nativePath));
 		#end
 
+		if (GamemodeClient.request_start() != 0)
+			Sys.println('Failed to request gamemode start: ${GamemodeClient.error_string()}...');
+		else
+			Sys.println('Succesfully requested gamemode to start...');
+	}
+
+	/**
+	 * The entry point of the application.
+	 */
+	public static function main():Void
+	{
 		utf.util.logging.ErrorHandler.init();
 
 		utf.util.WindowUtil.init();
