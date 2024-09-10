@@ -62,8 +62,8 @@ class Main extends openfl.display.Sprite
 	{
 		#if android
 		Sys.setCwd(haxe.io.Path.addTrailingSlash(android.os.Build.VERSION.SDK_INT > 30 ? android.content.Context.getObbDir() : android.content.Context.getExternalFilesDir()));
-		#elseif (ios || switch)
-		Sys.setCwd(haxe.io.Path.addTrailingSlash(openfl.filesystem.File.applicationStorageDirectory.nativePath));
+		#elseif ios
+		Sys.setCwd(haxe.io.Path.addTrailingSlash(openfl.filesystem.File.documentsDirectory.nativePath));
 		#end
 
 		if (GamemodeClient.request_start() != 0)
