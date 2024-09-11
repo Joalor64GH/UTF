@@ -2,10 +2,10 @@ package utf.util.discord;
 
 #if hxdiscord_rpc
 import flixel.FlxG;
+import haxe.EntryPoint;
 import hxdiscord_rpc.Discord;
 import hxdiscord_rpc.Types;
 import openfl.Lib;
-import sys.thread.Thread;
 import utf.Data;
 
 /**
@@ -21,10 +21,10 @@ class DiscordUtil
 	private static final APPLICATION_ID:String = '1140307809167220836';
 
 	/**
-	 * Deamon Thread.
+	 * Whether the thread is running or not;
 	 */
 	@:noCompletion
-	private static var deamonThread:Thread;
+	private static var deamonThreadRunning:Bool = false;
 
 	/**
 	 * Indicates if Discord Rich Presence is initialized.
@@ -48,11 +48,13 @@ class DiscordUtil
 		handlers.errored = cpp.Function.fromStaticFunction(onError);
 		Discord.Initialize(APPLICATION_ID, cpp.RawPointer.addressOf(handlers), 1, null);
 
-		if (deamonThread == null)
+		if (!deamonThreadRunning)
 		{
-			deamonThread = Thread.create(function():Void
+			deamonThreadRunning = true;
+
+			EntryPoint.addThread(function():Void
 			{
-				while (true)
+				while (deamonThreadRunning)
 				{
 					#if DISCORD_DISABLE_IO_THREAD
 					Discord.UpdateConnection();
@@ -109,13 +111,8 @@ class DiscordUtil
 	@:noCompletion
 	private static function shutdown(exitCode:Int):Void
 	{
-		Discord.ClearPresence();
-
-		if (deamonThread != null)
-			deamonThread = null;
-
+		deamonThreadRunning = false;
 		Discord.Shutdown();
-
 		initialized = false;
 	}
 }
